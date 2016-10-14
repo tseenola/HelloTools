@@ -1,4 +1,4 @@
-package tools.com.hellotools.hello_adapter;
+package tools.com.hellolibrary.hello_com_adapter;
 
 import android.content.Context;
 import android.view.LayoutInflater;
@@ -7,8 +7,6 @@ import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 
 import java.util.List;
-
-import helloadapter.CommonViewHolder;
 
 /**
  * Created by lenovo on 2016/10/15.
@@ -41,10 +39,10 @@ public abstract class CommonAdapter<T> extends BaseAdapter {
     }
 
     public View getView(int position, View convertView, ViewGroup parent) {
-        CommonViewHolder viewHolder = CommonViewHolder.getCommonViewHolder(this.mContext, convertView, parent, this.mItemLayoutId, position);
+        tools.com.hellolibrary.hello_com_adapter.CommonViewHolder viewHolder = tools.com.hellolibrary.hello_com_adapter.CommonViewHolder.getCommonViewHolder(this.mContext, convertView, parent, this.mItemLayoutId, position);
         this.convert(viewHolder, this.getItem(position));
         return viewHolder.getConvertView();
     }
 
-    public abstract void convert(CommonViewHolder var1, T var2);
+    public abstract void convert(tools.com.hellolibrary.hello_com_adapter.CommonViewHolder var1, T var2);
 }
