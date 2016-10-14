@@ -1,4 +1,4 @@
-package utils.hello_adapter;
+package tools.com.hellotools.hello_adapter;
 
 import android.content.Context;
 import android.view.LayoutInflater;
