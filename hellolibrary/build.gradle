@@ -28,4 +28,5 @@ dependencies {
     })
     testCompile 'junit:junit:4.12'
     compile files('libs/hello_adapter_16_04_19.jar')
+    compile files('libs/hello_thread_16_07_04.jar')
 }
