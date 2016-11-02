@@ -1,10 +1,10 @@
 package tools.com.hellolibrary.hello_string;
 
-import android.text.TextUtils;
-
 import java.text.DecimalFormat;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
+
+import static android.text.TextUtils.isEmpty;
 
 /**
  * Created by lenovo on 2016/6/17.
@@ -41,7 +41,7 @@ public class StringUtils {
      * @return
      */
     public static boolean isTextRight(String pS, int len) {
-        if (!TextUtils.isEmpty(pS)) {
+        if (!isEmpty(pS)) {
             if (pS.length() == len) {
                 return true;
             }
@@ -117,5 +117,51 @@ public class StringUtils {
     public static String formatStr(double value) {
         DecimalFormat df = new DecimalFormat("#.00");
         return df.format(value);
+    }
+
+    /**
+     * 首字母大写
+     *
+     * @param s 待转字符串
+     * @return 首字母大写字符串
+     */
+    public static String upperFirstLetter(String s) {
+        if (isEmpty(s) || !Character.isLowerCase(s.charAt(0))) {
+            return s;
+        }
+        return String.valueOf((char) (s.charAt(0) - 32)) + s.substring(1);
+    }
+
+    /**
+     * 首字母小写
+     *
+     * @param s 待转字符串
+     * @return 首字母小写字符串
+     */
+    public static String lowerFirstLetter(String s) {
+        if (isEmpty(s) || !Character.isUpperCase(s.charAt(0))) {
+            return s;
+        }
+        return String.valueOf((char) (s.charAt(0) + 32)) + s.substring(1);
+    }
+
+    /**
+     * 反转字符串
+     *
+     * @param s 待反转字符串
+     * @return 反转字符串
+     */
+    public static String reverse(String s) {
+        int len = s.length();
+        if (len <= 1) return s;
+        int mid = len >> 1;
+        char[] chars = s.toCharArray();
+        char c;
+        for (int i = 0; i < mid; ++i) {
+            c = chars[i];
+            chars[i] = chars[len - i - 1];
+            chars[len - i - 1] = c;
+        }
+        return new String(chars);
     }
 }
