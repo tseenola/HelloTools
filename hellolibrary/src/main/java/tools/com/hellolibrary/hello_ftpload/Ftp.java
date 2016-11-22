@@ -1,4 +1,4 @@
-package tools.com.hellolibrary.hello.ftp;
+package tools.com.hellolibrary.hello_ftpload;
 
 import org.apache.commons.net.ftp.FTPClient;
 import org.apache.commons.net.ftp.FTPReply;
@@ -8,7 +8,7 @@ import java.io.IOException;
 
 /**
  * Created by lenovo on 2016/10/25.
- * 描述：
+ * 描述：建立ftp连接，这里有个坑，url地址好像是不需要加ftp://的，否则连接错误
  */
 
 public class Ftp {
