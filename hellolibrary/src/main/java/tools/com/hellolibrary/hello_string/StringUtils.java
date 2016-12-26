@@ -164,4 +164,36 @@ public class StringUtils {
         }
         return new String(chars);
     }
+
+    /**
+     * 对指定数据进行填充，直到达到需要的长度
+     *
+     * @param dir     在左或者右填充
+     * @param fill    长度不足用什么填充
+     * @param content 被填充的内容
+     * @param mastLen 需要达到的长度
+     * @return
+     */
+    public static String fillContentBy(Dir dir,String fill,String content,int mastLen){
+        if(fill.length()!=1){
+            return "fill 参数错误！";
+        }
+        String x = fill;
+        int contentLen = content.length();
+        int needAddLen = mastLen - contentLen;
+
+        while(fill.length()<needAddLen){
+            fill+=x;
+        }
+        if(dir==Dir.left){
+            content = fill+content;
+        }else{
+            content = content+fill;
+        }
+        return content;
+    }
+    public static enum Dir{
+        left,right
+    }
+
 }
