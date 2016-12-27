@@ -1,5 +1,8 @@
 package tools.com.hellolibrary.hello_date;
 
+import android.support.annotation.NonNull;
+import android.support.annotation.Nullable;
+
 import java.text.DateFormat;
 import java.text.DecimalFormat;
 import java.text.SimpleDateFormat;
@@ -11,11 +14,13 @@ import java.util.Date;
  */
 public class DateUtil {
     private static Calendar cl = Calendar.getInstance();
+    @NonNull
     private static DecimalFormat mFormat = new DecimalFormat("00");
 
     /**
      * @return 获取年
      */
+    @NonNull
     public static String getCurYear() {
         return "" + cl.get(Calendar.YEAR);
     }
@@ -65,6 +70,7 @@ public class DateUtil {
      * @param timePattern
      * @return
      */
+    @NonNull
     public static String getCurDateTimeByPattern(String datePattern,
                                                  String middlePattern, String timePattern) {
         return getCurDateByPattern(datePattern) + middlePattern + getCurTimeByPattern(timePattern);
@@ -78,6 +84,7 @@ public class DateUtil {
      * @param datePattern
      * @return
      */
+    @NonNull
     public static String getCurDateByPattern(String datePattern) {
         return "" + getCurYear() + datePattern + getCurMonth() + datePattern
                 + getCurDay();
@@ -91,6 +98,7 @@ public class DateUtil {
      * @param timePattern
      * @return
      */
+    @NonNull
     public static String getCurTimeByPattern(String timePattern) {
         return "" + getCurHour() + timePattern + getCurMinue() + timePattern + getCurSeconds();
     }
@@ -141,6 +149,7 @@ public class DateUtil {
         return date.getTime();
     }
 
+    @NonNull
     public static int[] getTimeByMilli(long pTimeMilli) {
         Calendar lCalendar = Calendar.getInstance();
         lCalendar.setTimeInMillis(pTimeMilli);
@@ -174,7 +183,7 @@ public class DateUtil {
      *            String 格式
      * @return 返回字符型日期
      */
-    public static String format(Date date, String format) {
+    public static String format(@Nullable Date date, @NonNull String format) {
         String result = "";
         try {
             if (date != null) {

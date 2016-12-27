@@ -1,5 +1,7 @@
 package tools.com.hellolibrary.hello_string;
 
+import android.support.annotation.NonNull;
+
 import java.text.DecimalFormat;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -40,7 +42,7 @@ public class StringUtils {
      * @param len
      * @return
      */
-    public static boolean isTextRight(String pS, int len) {
+    public static boolean isTextRight(@NonNull String pS, int len) {
         if (!isEmpty(pS)) {
             if (pS.length() == len) {
                 return true;
@@ -54,7 +56,7 @@ public class StringUtils {
      *
      * @param pS
      */
-    public static String clearAllBlank(String pS) {
+    public static String clearAllBlank(@NonNull String pS) {
         return pS.replace(" ", "");
     }
 
@@ -63,7 +65,8 @@ public class StringUtils {
      *
      * @param pS
      */
-    public static String clearLeftTargetChar(String pS, char pTarget) {
+    @NonNull
+    public static String clearLeftTargetChar(@NonNull String pS, char pTarget) {
         if (pS.startsWith(pTarget + "")) {
             pS = pS.substring(1, pS.length());
             return clearLeftTargetChar(pS, pTarget);
@@ -79,7 +82,8 @@ public class StringUtils {
      * @param target
      * @return
      */
-    public static String clearRightTargetChart(String pS, char target) {
+    @NonNull
+    public static String clearRightTargetChart(@NonNull String pS, char target) {
         if (pS.endsWith(target + "")) {
             pS = pS.substring(0, pS.length() - 1);
             return clearRightTargetChart(pS, target);
@@ -94,11 +98,11 @@ public class StringUtils {
      * @param pS
      * @return
      */
-    public static String clearLeftRightChar(String pS) {
+    public static String clearLeftRightChar(@NonNull String pS) {
         return pS.trim();
     }
 
-    public static boolean isNumber(String str) {
+    public static boolean isNumber(@NonNull String str) {
         Pattern pattern = Pattern.compile("[0-9]*");
         Matcher isNum = pattern.matcher(str);
         if (isNum.matches()) {
@@ -125,7 +129,8 @@ public class StringUtils {
      * @param s 待转字符串
      * @return 首字母大写字符串
      */
-    public static String upperFirstLetter(String s) {
+    @NonNull
+    public static String upperFirstLetter(@NonNull String s) {
         if (isEmpty(s) || !Character.isLowerCase(s.charAt(0))) {
             return s;
         }
@@ -138,7 +143,8 @@ public class StringUtils {
      * @param s 待转字符串
      * @return 首字母小写字符串
      */
-    public static String lowerFirstLetter(String s) {
+    @NonNull
+    public static String lowerFirstLetter(@NonNull String s) {
         if (isEmpty(s) || !Character.isUpperCase(s.charAt(0))) {
             return s;
         }
@@ -151,7 +157,8 @@ public class StringUtils {
      * @param s 待反转字符串
      * @return 反转字符串
      */
-    public static String reverse(String s) {
+    @NonNull
+    public static String reverse(@NonNull String s) {
         int len = s.length();
         if (len <= 1) return s;
         int mid = len >> 1;
@@ -174,7 +181,8 @@ public class StringUtils {
      * @param mastLen 需要达到的长度
      * @return
      */
-    public static String fillContentBy(Dir dir,String fill,String content,int mastLen){
+    @NonNull
+    public static String fillContentBy(Dir dir, @NonNull String fill, @NonNull String content, int mastLen){
         if(fill.length()!=1){
             return "fill 参数错误！";
         }

@@ -2,6 +2,8 @@ package tools.com.hellolibrary.hello_thread;
 
 import android.os.Handler;
 import android.os.Process;
+import android.support.annotation.NonNull;
+import android.support.annotation.Nullable;
 
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
@@ -23,8 +25,7 @@ public class ThreadUtil {
     private static long mMainThread;
     private static Handler mHandler;
 
-    public ThreadUtil() {
-    }
+    private ThreadUtil(){}
 
     /**
      * 这个函数要放在入口Application中执行，用于初始化ThreadUtil
@@ -34,25 +35,26 @@ public class ThreadUtil {
         mMainThread = (long) Process.myTid();
     }
 
-    public static ExecutorService runCachedService(Runnable runnable) {
+    public static ExecutorService runCachedService(@NonNull Runnable runnable) {
         mCachedService = ThreadFactory(mCachedService, new int[]{0});
         mCachedService.execute(runnable);
         return mCachedService;
     }
 
-    public static ExecutorService runFixedService(Runnable runnable, int nThread) {
+    public static ExecutorService runFixedService(@NonNull Runnable runnable, int nThread) {
         mFixedService = ThreadFactory(mFixedService, new int[]{1, nThread == 0?1:nThread});
         mFixedService.execute(runnable);
         return mFixedService;
     }
 
-    public static ScheduledExecutorService runSingleScheduledService(Runnable runnable, long initialDelay, long delay, TimeUnit unit) {
+    public static ScheduledExecutorService runSingleScheduledService(@NonNull Runnable runnable, long initialDelay, long delay, @NonNull TimeUnit unit) {
         mSingleScheduledService = (ScheduledExecutorService)ThreadFactory(mSingleScheduledService, new int[]{2});
         mSingleScheduledService.scheduleWithFixedDelay(runnable, initialDelay, delay, unit);
         return mSingleScheduledService;
     }
 
-    private static ExecutorService ThreadFactory(ExecutorService service, int... params) {
+    @NonNull
+    private static ExecutorService ThreadFactory(@Nullable ExecutorService service, int... params) {
         if(service == null) {
             Class var2 = com.android.signaturepad.utils.ThreadUtil.class;
             synchronized(com.android.signaturepad.utils.ThreadUtil.class) {
@@ -74,7 +76,7 @@ public class ThreadUtil {
         return (ExecutorService)service;
     }
 
-    public static boolean runOnUiThread(Runnable runnable) {
+    public static boolean runOnUiThread(@NonNull Runnable runnable) {
         long curThreadId = (long)Process.myTid();
         if(curThreadId == mMainThread) {
             runnable.run();
@@ -84,7 +86,7 @@ public class ThreadUtil {
         }
     }
 
-    public static boolean runOnUiThreadAtTime(Runnable runnable, long runAtTime) {
+    public static boolean runOnUiThreadAtTime(@NonNull Runnable runnable, long runAtTime) {
         long curThreadId = (long)Process.myTid();
         if(curThreadId == mMainThread) {
             runnable.run();
@@ -94,7 +96,7 @@ public class ThreadUtil {
         }
     }
 
-    public static boolean runOnUiThreadDelay(Runnable runnable, long delay) {
+    public static boolean runOnUiThreadDelay(@NonNull Runnable runnable, long delay) {
         long curThreadId = (long)Process.myTid();
         if(curThreadId == mMainThread) {
             runnable.run();

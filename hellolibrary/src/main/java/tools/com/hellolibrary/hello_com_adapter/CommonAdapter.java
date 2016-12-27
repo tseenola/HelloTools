@@ -1,6 +1,7 @@
 package tools.com.hellolibrary.hello_com_adapter;
 
 import android.content.Context;
+import android.support.annotation.Nullable;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -30,6 +31,7 @@ public abstract class CommonAdapter<T> extends BaseAdapter {
         return this.mDatas == null?0:this.mDatas.size();
     }
 
+    @Nullable
     public T getItem(int position) {
         return this.mDatas == null?null:this.mDatas.get(position);
     }

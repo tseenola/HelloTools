@@ -7,6 +7,8 @@ import android.content.DialogInterface;
 import android.os.Handler;
 import android.os.Message;
 import android.os.SystemClock;
+import android.support.annotation.NonNull;
+import android.support.annotation.Nullable;
 import android.text.InputFilter;
 import android.text.TextUtils;
 import android.view.Gravity;
@@ -40,7 +42,7 @@ public class DialogUtil {
      *                  window ..........is your activity running）
      * @param textSize  字体大小（20-40）
      */
-    public static void showProgressDialog(final Activity ctx, final Boolean canCancle, final int style, final String message, final int textSize) {
+    public static void showProgressDialog(@NonNull final Activity ctx, final Boolean canCancle, final int style, final String message, final int textSize) {
         ctx.runOnUiThread(new Runnable() {
             @Override
             public void run() {
@@ -88,7 +90,7 @@ public class DialogUtil {
      * @param msg      消息
      * @param showTime 显示时间
      */
-    public static void showAutoHideProgress(Activity aty, String msg,
+    public static void showAutoHideProgress(@NonNull Activity aty, String msg,
                                             final int showTime, int textSize) {
         if (mHandler == null) {
             mHandler = new Handler(aty.getMainLooper()) {
@@ -116,7 +118,7 @@ public class DialogUtil {
      * @param v
      * @param size
      */
-    private static void setDialogTextSize(View v, int size) {
+    private static void setDialogTextSize(@Nullable View v, int size) {
         if (v == null || size <= 19 || size >= 41) {
             return;
         }
@@ -138,7 +140,7 @@ public class DialogUtil {
      * @param activity
      * @param text     显示的文本
      */
-    public static void showSafeToast(final Activity activity, final String text, final int showTime) {
+    public static void showSafeToast(@NonNull final Activity activity, final String text, final int showTime) {
         activity.runOnUiThread(new Runnable() {
             @Override
             public void run() {
@@ -159,7 +161,7 @@ public class DialogUtil {
      * @param listener
      */
 
-    private static void build1ChooseDialog(final Activity ctx, final String title, final String msg, final String positiveMsg, final On1DialogChoseListener listener) {
+    private static void build1ChooseDialog(final Activity ctx, final String title, final String msg, final String positiveMsg, @NonNull final On1DialogChoseListener listener) {
 
         mBuilder = new AlertDialog.Builder(ctx);
         if (!TextUtils.isEmpty(title)) {
@@ -188,7 +190,7 @@ public class DialogUtil {
      * @param negativeMsg
      * @param listener
      */
-    private static void build2ChooseDialog(final Activity ctx, final String title, final String msg, final String positiveMsg, final String negativeMsg, final On2DialogChoseListener listener) {
+    private static void build2ChooseDialog(final Activity ctx, final String title, final String msg, final String positiveMsg, final String negativeMsg, @NonNull final On2DialogChoseListener listener) {
 
         build1ChooseDialog(ctx, title, msg, positiveMsg, listener);
         if (!TextUtils.isEmpty(negativeMsg)) {
@@ -211,7 +213,7 @@ public class DialogUtil {
      * @param positiveMsg
      * @param listener
      */
-    public static void show1ChooseDialog(final Activity ctx, final String title, final String msg, final String positiveMsg, final On1DialogChoseListener listener) {
+    public static void show1ChooseDialog(final Activity ctx, final String title, final String msg, final String positiveMsg, @NonNull final On1DialogChoseListener listener) {
         build1ChooseDialog(ctx, title, msg, positiveMsg, listener);
         mBuilder.show();
     }
@@ -226,7 +228,7 @@ public class DialogUtil {
      * @param negativeMsg
      * @param listener
      */
-    public static void show2ChooseDialog(final Activity ctx, final String title, final String msg, final String positiveMsg, final String negativeMsg, final On2DialogChoseListener listener) {
+    public static void show2ChooseDialog(final Activity ctx, final String title, final String msg, final String positiveMsg, final String negativeMsg, @NonNull final On2DialogChoseListener listener) {
         build1ChooseDialog(ctx, title, msg, positiveMsg, listener);
         build2ChooseDialog(ctx, title, msg, positiveMsg, negativeMsg, listener);
         mBuilder.show();
@@ -244,7 +246,7 @@ public class DialogUtil {
      * @param neutralMsg
      * @param listener
      */
-    public static void show3ChooseDialog(final Activity ctx, final String title, final String msg, final String positiveMsg, final String negativeMsg, final String neutralMsg, final On3DialogChoseListener listener) {
+    public static void show3ChooseDialog(final Activity ctx, final String title, final String msg, final String positiveMsg, final String negativeMsg, final String neutralMsg, @NonNull final On3DialogChoseListener listener) {
 
         build1ChooseDialog(ctx, title, msg, positiveMsg, listener);
         build2ChooseDialog(ctx, title, msg, positiveMsg, negativeMsg, listener);
@@ -268,7 +270,7 @@ public class DialogUtil {
      * @param items
      * @return
      */
-    public static void showSingleChooseDialog(final Activity ctx, String title, final String[] items, String positiveMsg, final OnSingleDailogChooice chooice) {
+    public static void showSingleChooseDialog(final Activity ctx, String title, final String[] items, String positiveMsg, @NonNull final OnSingleDailogChooice chooice) {
 
         AlertDialog.Builder builder = new AlertDialog.Builder(ctx);
         builder.setTitle(title);
@@ -282,7 +284,7 @@ public class DialogUtil {
     }
 
 
-    public static void showHave1EditDailog(final Activity ctx, final String title, final String msg, final String positiveMsg, String hint, boolean singleLine, int maxLength, final On1EditDailogPositiveListner listener) {
+    public static void showHave1EditDailog(final Activity ctx, final String title, final String msg, final String positiveMsg, String hint, boolean singleLine, int maxLength, @NonNull final On1EditDailogPositiveListner listener) {
 
         final EditText et = new EditText(ctx);
         build1EditDialog(ctx, title, msg, positiveMsg, et, listener);
@@ -296,8 +298,8 @@ public class DialogUtil {
 
     private static void build1EditDialog(final Activity ctx, final String title, final String msg,
                                          final String positiveMsg,
-                                         final EditText et,
-                                         final On1EditDailogPositiveListner listener) {
+                                         @NonNull final EditText et,
+                                         @NonNull final On1EditDailogPositiveListner listener) {
 
         mBuilder = new AlertDialog.Builder(ctx);
         if (!TextUtils.isEmpty(title)) {
@@ -309,7 +311,7 @@ public class DialogUtil {
         if (!TextUtils.isEmpty(positiveMsg)) {
             mBuilder.setPositiveButton(positiveMsg, new DialogInterface.OnClickListener() {
                 @Override
-                public void onClick(DialogInterface dialog, int which) {
+                public void onClick(@NonNull DialogInterface dialog, int which) {
                     try {
                         Field field = dialog
                                 .getClass()

@@ -1,5 +1,6 @@
 package tools.com.hellolibrary.hello_listener;
 
+import android.support.annotation.NonNull;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.widget.EditText;
@@ -10,6 +11,7 @@ import android.widget.EditText;
 public class MyEditChangeListener implements TextWatcher {
     private boolean status = true;
     private EditText et3;
+    @NonNull
     private StringBuffer sb = new StringBuffer();
 
     public MyEditChangeListener(EditText et) {
@@ -28,7 +30,7 @@ public class MyEditChangeListener implements TextWatcher {
     }
 
     @Override
-    public void afterTextChanged(Editable s) {
+    public void afterTextChanged(@NonNull Editable s) {
         // TODO Auto-generated method stub
         if (status) {
             status = false;
@@ -39,7 +41,8 @@ public class MyEditChangeListener implements TextWatcher {
         }
     }
 
-    private String dealString(String arg1) {
+    @NonNull
+    private String dealString(@NonNull String arg1) {
         if (sb.length() != 0) {
             sb.delete(0, sb.length());
         }

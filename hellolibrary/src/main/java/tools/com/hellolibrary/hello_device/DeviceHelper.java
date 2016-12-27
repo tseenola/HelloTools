@@ -9,6 +9,7 @@ import android.net.NetworkInfo;
 import android.net.Uri;
 import android.net.wifi.WifiManager;
 import android.os.Environment;
+import android.support.annotation.NonNull;
 import android.widget.Toast;
 
 import java.io.File;
@@ -28,7 +29,7 @@ public class DeviceHelper{
      *
      * @return
      */
-    public static boolean isNetworkConnected(Context pContext) {
+    public static boolean isNetworkConnected(@NonNull Context pContext) {
         ConnectivityManager cm = (ConnectivityManager) pContext
                 .getSystemService(Context.CONNECTIVITY_SERVICE);
         NetworkInfo ni = cm.getActiveNetworkInfo();
@@ -40,7 +41,7 @@ public class DeviceHelper{
      * @param wifiManager
      * @param isEnable
      */
-    public static void setWIFIEnable(WifiManager wifiManager, boolean isEnable) {
+    public static void setWIFIEnable(@NonNull WifiManager wifiManager, boolean isEnable) {
         wifiManager.setWifiEnabled(isEnable);
     }
 
@@ -49,7 +50,7 @@ public class DeviceHelper{
      *
      * @return
      */
-    public static boolean isWifiConnected(Context pContext) {
+    public static boolean isWifiConnected(@NonNull Context pContext) {
         ConnectivityManager cm = (ConnectivityManager) pContext
                 .getSystemService(Context.CONNECTIVITY_SERVICE);
         NetworkInfo ni = cm.getNetworkInfo(ConnectivityManager.TYPE_WIFI);
@@ -62,7 +63,7 @@ public class DeviceHelper{
      * @param isEnable
      */
     @SuppressWarnings({"rawtypes", "unchecked"})
-    public static void setGPRSEnable(ConnectivityManager connectivityManager, boolean isEnable) {
+    public static void setGPRSEnable(@NonNull ConnectivityManager connectivityManager, boolean isEnable) {
         Class cmClass = connectivityManager.getClass();
         Class[] argClasses = new Class[1];
         argClasses[0] = boolean.class;
@@ -81,7 +82,7 @@ public class DeviceHelper{
      * @return
      */
     @SuppressWarnings("unchecked")
-    public static boolean isGPRSOpened(ConnectivityManager connectivityManager) {
+    public static boolean isGPRSOpened(@NonNull ConnectivityManager connectivityManager) {
         Class cmClass = connectivityManager.getClass();
         Class[] argClasses = null;
         Object[] argObject = null;
@@ -102,7 +103,7 @@ public class DeviceHelper{
      * @param packageName
      * @return
      */
-    public static boolean isAppInstall(Context context, String packageName) {
+    public static boolean isAppInstall(@NonNull Context context, String packageName) {
         PackageInfo packageInfo;
         try {
             packageInfo = context.getPackageManager().getPackageInfo(packageName, 0);
@@ -123,7 +124,8 @@ public class DeviceHelper{
      * @param pPackageName
      * @return
      */
-    public static String[] getPosAppInfo(Context context,String pPackageName) {
+    @NonNull
+    public static String[] getPosAppInfo(@NonNull Context context, String pPackageName) {
         int versionCode = 0;
         String versionName = "";
         try {
@@ -144,7 +146,7 @@ public class DeviceHelper{
      * @param context
      * @param apkFile
      */
-    public static void installApp(Context context, File apkFile) {
+    public static void installApp(@NonNull Context context, File apkFile) {
         Intent intent = new Intent(Intent.ACTION_VIEW);
         intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
         intent.setDataAndType(Uri.fromFile(apkFile), "application/vnd.android.package-archive");
@@ -155,7 +157,7 @@ public class DeviceHelper{
     /**
      * 复制Asset的pos文件到终端
      */
-    public static void copyPosAppToSdAndInstall(Context pContext,String apkName) {
+    public static void copyPosAppToSdAndInstall(@NonNull Context pContext, @NonNull String apkName) {
         try{
             if(!Environment.getExternalStorageState().equals(Environment.MEDIA_MOUNTED)){
                 Toast.makeText(pContext, "SD卡未挂载，无法安装！", Toast.LENGTH_SHORT).show();

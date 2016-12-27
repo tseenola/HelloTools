@@ -1,5 +1,7 @@
 package tools.com.hellolibrary.hello_ftpload;
 
+import android.support.annotation.NonNull;
+
 import org.apache.commons.net.ftp.FTPClient;
 import org.apache.commons.net.ftp.FTPReply;
 
@@ -13,7 +15,8 @@ import java.io.IOException;
 
 public class Ftp {
 
-    public String ftpUpload(String url, String port, String username,String password, String remotePath, String fileNamePath,String fileName) {
+    @NonNull
+    public String ftpUpload(String url, String port, String username, String password, String remotePath, String fileNamePath, String fileName) {
         FTPClient ftpClient = new FTPClient();
         FileInputStream fis = null;
         String returnMessage = "0";

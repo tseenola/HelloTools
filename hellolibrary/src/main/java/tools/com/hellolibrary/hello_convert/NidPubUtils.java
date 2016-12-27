@@ -1,5 +1,7 @@
 package tools.com.hellolibrary.hello_convert;
 
+import android.support.annotation.NonNull;
+
 /**
  * Created by lenovo on 2016/11/20.
  * 描述：
@@ -19,7 +21,7 @@ public class NidPubUtils {
      * @param bArray
      * @return
      */
-        public static  String bytesToHexString(byte[] bArray)
+        public static  String bytesToHexString(@NonNull byte[] bArray)
         {
             StringBuffer sb = new StringBuffer(bArray.length);
             String sTemp;
@@ -42,7 +44,8 @@ public class NidPubUtils {
      * @param hex
      * @return
      */
-    public static byte[] hexStringToByte(String hex) {
+    @NonNull
+    public static byte[] hexStringToByte(@NonNull String hex) {
             int len = (hex.length() / 2);
             byte[] result = new byte[len];
             char[] achar = hex.toCharArray();

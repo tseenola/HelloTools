@@ -3,6 +3,7 @@ package tools.com.hellolibrary.hello_base;
 import android.app.Activity;
 import android.app.Application;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
 
 import java.util.List;
 
@@ -66,7 +67,7 @@ public  abstract class BaseApplication extends Application implements Applicatio
     }
 
     @Override
-    public void exitAllActivity(List<Activity> pActivityList) {
+    public void exitAllActivity(@NonNull List<Activity> pActivityList) {
         for (int i = 0;i<pActivityList.size();i++){
             if(!pActivityList.get(i).isFinishing()){
                 pActivityList.get(i).finish();

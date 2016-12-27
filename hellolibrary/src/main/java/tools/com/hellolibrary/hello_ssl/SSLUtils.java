@@ -1,6 +1,8 @@
 package tools.com.hellolibrary.hello_ssl;
 
 import android.content.Context;
+import android.support.annotation.NonNull;
+import android.support.annotation.Nullable;
 import android.util.Log;
 
 import java.io.DataOutputStream;
@@ -48,6 +50,7 @@ public class SSLUtils {
     }
 
 
+    @Nullable
     public static SSLSocket mSocket;
 
     /**
@@ -56,7 +59,7 @@ public class SSLUtils {
      * @param pContext
      * @return
      */
-    public static int getSocket(Context pContext,String pIp,int pPort) {
+    public static int getSocket(@NonNull Context pContext, String pIp, int pPort) {
         try {
             //（1）通过指定协议（一般是TLS）获取SSL上下文（SSLContext）实例。
             SSLContext sslContext = SSLContext.getInstance("TLS");
@@ -98,7 +101,8 @@ public class SSLUtils {
      * @param
      */
 
-    public static String[] sendMsg(Context pContext ,String pIp,int pPort,byte[] paramArrayOfByte) {
+    @NonNull
+    public static String[] sendMsg(@NonNull Context pContext , String pIp, int pPort, @NonNull byte[] paramArrayOfByte) {
         if(getSocket(pContext,pIp,pPort)!=0){
             closeSocket();
             return new String[]{"-1","建立socket失败"};

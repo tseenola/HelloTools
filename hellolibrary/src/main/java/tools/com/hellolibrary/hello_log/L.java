@@ -7,7 +7,7 @@ import android.util.Log;
  * 描述：
  */
 
-public class SysLog {
+public class L {
     public static final boolean IS_LOG_ON = true;
     public static final String TAG = "happy";
     public static void e(String pMsg) {

@@ -1,5 +1,8 @@
 package tools.com.hellolibrary.hello_rsa;
 
+import android.support.annotation.NonNull;
+import android.support.annotation.Nullable;
+
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStream;
@@ -51,6 +54,7 @@ import javax.crypto.Cipher;
  *
  */
 public final class RSAUtils {
+    @NonNull
     private static String RSA = "RSA";
 
     /**
@@ -58,6 +62,7 @@ public final class RSAUtils {
      *
      * @return
      */
+    @Nullable
     public static KeyPair generateRSAKeyPair() {
         return generateRSAKeyPair(1024);
     }
@@ -197,6 +202,7 @@ public final class RSAUtils {
      * @param publicKeyStr 公钥数据字符串
      * @throws Exception 加载公钥时产生的异常
      */
+    @NonNull
     public static PublicKey loadPublicKey(String publicKeyStr) throws Exception {
         try {
             byte[] buffer = Base64Utils.decode(publicKeyStr);
@@ -220,6 +226,7 @@ public final class RSAUtils {
      * @return
      * @throws Exception
      */
+    @NonNull
     public static PrivateKey loadPrivateKey(String privateKeyStr) throws Exception {
         try {
             byte[] buffer = Base64Utils.decode(privateKeyStr);
@@ -242,7 +249,8 @@ public final class RSAUtils {
      * @param in 公钥输入流
      * @throws Exception 加载公钥时产生的异常
      */
-    public static PublicKey loadPublicKey(InputStream in) throws Exception {
+    @NonNull
+    public static PublicKey loadPublicKey(@NonNull InputStream in) throws Exception {
         try {
             return loadPublicKey(readKey(in));
         } catch (IOException e) {
@@ -259,7 +267,8 @@ public final class RSAUtils {
      * @return 是否成功
      * @throws Exception
      */
-    public static PrivateKey loadPrivateKey(InputStream in) throws Exception {
+    @NonNull
+    public static PrivateKey loadPrivateKey(@NonNull InputStream in) throws Exception {
         try {
             return loadPrivateKey(readKey(in));
         } catch (IOException e) {
@@ -276,7 +285,7 @@ public final class RSAUtils {
      * @return
      * @throws IOException
      */
-    private static String readKey(InputStream in) throws IOException {
+    private static String readKey(@NonNull InputStream in) throws IOException {
         BufferedReader br = new BufferedReader(new InputStreamReader(in));
         String readLine = null;
         StringBuilder sb = new StringBuilder();

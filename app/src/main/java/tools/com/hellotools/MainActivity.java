@@ -1,6 +1,7 @@
 package tools.com.hellotools;
 
 import tools.com.hellolibrary.hello_base.BaseActivity;
+import tools.com.hellolibrary.hello_spref.SPUtils;
 
 public class MainActivity extends BaseActivity {
 
@@ -11,7 +12,7 @@ public class MainActivity extends BaseActivity {
 
     @Override
     public void initData() {
-
+        SPUtils.putString(null,"");
     }
 
     @Override

@@ -1,6 +1,7 @@
 package tools.com.hellolibrary.hello_anim;
 
 import android.content.Context;
+import android.support.annotation.NonNull;
 import android.view.animation.TranslateAnimation;
 import android.widget.EditText;
 
@@ -15,7 +16,7 @@ public class AnimUtil {
     /*
 * @des:当EditText输入不合法提示动画
 */
-    public static void showEtErrorAnim(Context ctx,EditText editView, String msg) {
+    public static void showEtErrorAnim(Context ctx, @NonNull EditText editView, String msg) {
         TranslateAnimation ta = new TranslateAnimation(
                 TranslateAnimation.RELATIVE_TO_SELF, -0.05f,
                 TranslateAnimation.RELATIVE_TO_SELF, 0.05f,

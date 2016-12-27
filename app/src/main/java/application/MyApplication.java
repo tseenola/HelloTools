@@ -6,7 +6,7 @@ import android.app.Application;
 import java.util.LinkedList;
 
 import tools.com.hellolibrary.hello_base.BaseApplication;
-import tools.com.hellolibrary.hello_log.SysLog;
+import tools.com.hellolibrary.hello_log.L;
 
 /**
  * Created by lenovo on 2016/10/15.
@@ -21,7 +21,7 @@ public class MyApplication extends BaseApplication{
     }
     @Override
     public void initEnviroment() {
-        SysLog.i("initEnviroment started");
+        L.e("initEnviroment started");
         mApp = this;
         mAtyList = new LinkedList<Activity>();
     }
@@ -31,7 +31,7 @@ public class MyApplication extends BaseApplication{
      */
     @Override
     public void initLogRecUtil() {
-        SysLog.i("initLogRecUtil started");
+        L.e("initLogRecUtil started");
     }
 
     /**
@@ -39,7 +39,7 @@ public class MyApplication extends BaseApplication{
      */
     @Override
     public void initUncaughtException() {
-        SysLog.i("initUncaughtException started");
+        L.e("initUncaughtException started");
     }
 
     /**
@@ -47,7 +47,7 @@ public class MyApplication extends BaseApplication{
      */
     @Override
     public void initThreadUtil() {
-        SysLog.i("initThreadUtil started");
+        L.e("initThreadUtil started");
     }
 
     /**
@@ -55,7 +55,7 @@ public class MyApplication extends BaseApplication{
      */
     @Override
     public void initSharedSpUtil() {
-        SysLog.i("initSharedSpUtil started");
+        L.e("initSharedSpUtil started");
     }
 
     /**
@@ -63,7 +63,7 @@ public class MyApplication extends BaseApplication{
      */
     @Override
     public void initDbUtil() {
-        SysLog.i("initDbUtil started");
+        L.e("initDbUtil started");
     }
 
     /**
@@ -72,7 +72,7 @@ public class MyApplication extends BaseApplication{
      */
     @Override
     public void CallSystemGc() {
-        SysLog.i("CallSystemGc started");
+        L.e("CallSystemGc started");
     }
 
     /**
@@ -81,7 +81,7 @@ public class MyApplication extends BaseApplication{
      */
     @Override
     public void killAppReleaseResource() {
-        SysLog.i("killAppReleaseResource started");
+        L.e("killAppReleaseResource started");
         exitAllActivity(mAtyList);
     }
 
@@ -91,7 +91,7 @@ public class MyApplication extends BaseApplication{
      */
     @Override
     public void onActivityCreate(Activity pActivity) {
-        SysLog.i("onActivityCreate started");
+        L.e("onActivityCreate started");
         mAtyList.add(pActivity);
     }
 
@@ -101,7 +101,7 @@ public class MyApplication extends BaseApplication{
      */
     @Override
     public void onActivityDestory(Activity pActivity) {
-        SysLog.i("onActivityDestory started");
+        L.e("onActivityDestory started");
     }
 
 }

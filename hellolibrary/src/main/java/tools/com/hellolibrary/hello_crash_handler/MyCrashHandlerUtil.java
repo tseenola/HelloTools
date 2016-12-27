@@ -7,6 +7,8 @@ import android.content.pm.PackageManager;
 import android.os.Build;
 import android.os.Environment;
 import android.os.Looper;
+import android.support.annotation.NonNull;
+import android.support.annotation.Nullable;
 import android.util.Log;
 import android.widget.Toast;
 
@@ -38,17 +40,21 @@ interface CrashListner {
 
 public class MyCrashHandlerUtil implements Thread.UncaughtExceptionHandler {
     private static final String TAG = "CrashHandler";
+    @NonNull
     private static MyCrashHandlerUtil INSTANCE = new MyCrashHandlerUtil();
     private Thread.UncaughtExceptionHandler mDefaultHandler;
     private Context mContext;
     private CrashListner mCallback;
+    @NonNull
     private Map<String, String> infos = new HashMap();
+    @NonNull
     private DateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
     private Class mCls;
 
     private MyCrashHandlerUtil() {
     }
 
+    @NonNull
     public static MyCrashHandlerUtil getInstance() {
         return INSTANCE;
     }
@@ -78,7 +84,7 @@ public class MyCrashHandlerUtil implements Thread.UncaughtExceptionHandler {
         this.mCallback.onSystemCrash();
     }
 
-    private boolean handleException(Throwable ex) {
+    private boolean handleException(@Nullable Throwable ex) {
         if (ex == null) {
             return false;
         } else {
@@ -96,7 +102,7 @@ public class MyCrashHandlerUtil implements Thread.UncaughtExceptionHandler {
         }
     }
 
-    public void collectDeviceInfo(Context ctx) {
+    public void collectDeviceInfo(@NonNull Context ctx) {
         try {
             PackageManager fields = ctx.getPackageManager();
             PackageInfo pi = fields.getPackageInfo(ctx.getPackageName(), PackageManager.GET_PERMISSIONS);
@@ -128,7 +134,7 @@ public class MyCrashHandlerUtil implements Thread.UncaughtExceptionHandler {
 
     }
 
-    private String saveCrashInfo2File(Throwable ex) {
+    private String saveCrashInfo2File(@NonNull Throwable ex) {
         StringBuffer sb = new StringBuffer();
         Iterator writer = this.infos.entrySet().iterator();
 
