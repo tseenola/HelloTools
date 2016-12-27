@@ -6,8 +6,5 @@ package tools.com.hellolibrary.hello_enviroment;
  */
 
 public class Constant {
-    public static final class Log{
-        public static final boolean IS_LOG_ON = true;
-        public static final String TAG = "vbvb";
-    }
+
 }

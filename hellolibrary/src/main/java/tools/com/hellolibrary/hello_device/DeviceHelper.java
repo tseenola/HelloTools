@@ -35,6 +35,11 @@ public class DeviceHelper{
         return ni != null && ni.isConnected();
     }
 
+    /**
+     * 设置wifi是否可用
+     * @param wifiManager
+     * @param isEnable
+     */
     public static void setWIFIEnable(WifiManager wifiManager, boolean isEnable) {
         wifiManager.setWifiEnabled(isEnable);
     }
@@ -51,6 +56,11 @@ public class DeviceHelper{
         return ni != null && ni.isConnected();
     }
 
+    /**
+     * 设置
+     * @param connectivityManager
+     * @param isEnable
+     */
     @SuppressWarnings({"rawtypes", "unchecked"})
     public static void setGPRSEnable(ConnectivityManager connectivityManager, boolean isEnable) {
         Class cmClass = connectivityManager.getClass();
@@ -65,7 +75,11 @@ public class DeviceHelper{
         }
     }
 
-    //检测GPRS是否打开
+    /**
+     * 检测GPRS是否打开
+     * @param connectivityManager
+     * @return
+     */
     @SuppressWarnings("unchecked")
     public static boolean isGPRSOpened(ConnectivityManager connectivityManager) {
         Class cmClass = connectivityManager.getClass();
@@ -82,9 +96,12 @@ public class DeviceHelper{
         return isOpen;
     }
 
-    /*
-   * @des:判断app是否安装
-   */
+    /**
+     * 判断app是否安装
+     * @param context
+     * @param packageName
+     * @return
+     */
     public static boolean isAppInstall(Context context, String packageName) {
         PackageInfo packageInfo;
         try {
@@ -100,6 +117,12 @@ public class DeviceHelper{
         }
     }
 
+    /**
+     * 获得版本号，版本名称
+     * @param context
+     * @param pPackageName
+     * @return
+     */
     public static String[] getPosAppInfo(Context context,String pPackageName) {
         int versionCode = 0;
         String versionName = "";

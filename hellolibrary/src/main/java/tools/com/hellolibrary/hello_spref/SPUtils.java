@@ -20,9 +20,12 @@ public class SPUtils {
     private static SharedPreferences mSp;
     private static SharedPreferences.Editor mEditor;
 
-    /*
-    * @des:如果要使用这个工具类，必须在application的入口中调用这个方法,传入第一个参数即可。
-    */
+    /**
+     * 如果要使用这个工具类，必须在application的入口中调用这个方法,传入第一个参数即可。
+     * @param ctx
+     * @param SPConfig
+     * @return
+     */
     public static boolean initSp(Application ctx, String... SPConfig) {
         if (mEditor == null) {//如果sp没有初始化，进行初始化
             mSp = ctx.getSharedPreferences(

@@ -26,6 +26,9 @@ public class ThreadUtil {
     public ThreadUtil() {
     }
 
+    /**
+     * 这个函数要放在入口Application中执行，用于初始化ThreadUtil
+     */
     public static void initRunOnUiThreadHandler() {
         mHandler = new Handler();
         mMainThread = (long) Process.myTid();
