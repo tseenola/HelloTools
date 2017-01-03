@@ -6,7 +6,7 @@ import android.os.Bundle;
 
 /**
  * Created by lenovo on 2016/9/12.
- * 描述：
+ * 描述：管理Activity生命周期
  */
 public abstract class MyActivityLifecycleCallbacks implements Application.ActivityLifecycleCallbacks {
 

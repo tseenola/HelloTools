@@ -1,7 +1,6 @@
 package application;
 
 import android.app.Activity;
-import android.app.Application;
 
 import java.util.LinkedList;
 
@@ -14,9 +13,9 @@ import tools.com.hellolibrary.hello_log.L;
  */
 
 public class MyApplication extends BaseApplication{
-    private static Application mApp;
+    private static MyApplication mApp;
     private LinkedList<Activity> mAtyList;
-    public static Application getApp(){
+    public static MyApplication getApp(){
         return mApp;
     }
     @Override

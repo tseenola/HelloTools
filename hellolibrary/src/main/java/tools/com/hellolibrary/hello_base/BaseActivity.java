@@ -20,8 +20,8 @@ public abstract class BaseActivity extends Activity implements ActivityTemplate{
         super.onCreate(savedInstanceState);
         initBaseView();
         initPresenter();
-        initView();
         initData();
+        initView();
         initListener();
     }
     private void initBaseView() {

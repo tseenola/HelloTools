@@ -33,5 +33,4 @@ public interface ApplicationTemplate {
     void onActivityDestory(Activity pActivity);
 
     void exitAllActivity(List<Activity> pActivityList);
-
 }

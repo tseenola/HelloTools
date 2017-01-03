@@ -9,7 +9,7 @@
         android:supportsRtl="true"
         android:name="application.MyApplication"
         android:theme="@style/AppTheme">
-        <activity android:name=".MainActivity">
+        <activity android:name="activity.user_entry.view.UserEntryAty">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN"/>
 

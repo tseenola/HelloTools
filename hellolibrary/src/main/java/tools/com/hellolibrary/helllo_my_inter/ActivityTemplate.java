@@ -6,9 +6,9 @@ package tools.com.hellolibrary.helllo_my_inter;
  */
 public interface ActivityTemplate {
 
-    void initView();//初始化View
-
     void initData();//初始化Data
+
+    void initView();//初始化View
 
     void initListener();//初始化控件
 

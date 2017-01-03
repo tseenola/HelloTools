@@ -1,0 +1,70 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="#55ffffff"
+    >
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_centerInParent="true"
+        android:layout_marginLeft="35dp"
+        android:layout_marginRight="35dp"
+        android:orientation="vertical">
+
+        <EditText
+            android:id="@+id/et_UserId"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="16dp"
+            android:layout_marginTop="10dp"
+            android:hint="id"
+            android:inputType="textEmailAddress"
+            android:maxLength="10"
+            android:textColor="#212121"
+            android:textColorHint="#727272"/>
+
+        <EditText
+            android:id="@+id/et_Pwd"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="16dp"
+            android:hint="pwd"
+            android:inputType="textPassword"
+            android:maxLength="10"
+            android:textColor="#212121"
+            android:textColorHint="#727272"/>
+
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+
+            <Button
+                android:id="@+id/bt_Exit"
+                style="@style/MyNormalButton"
+                android:layout_width="0dp"
+                android:layout_height="48dp"
+                android:layout_marginBottom="16dp"
+                android:layout_weight="4"
+                android:text="退出"/>
+
+            <View
+                android:layout_width="0dp"
+                android:layout_height="48dp"
+                android:layout_weight="1"/>
+
+            <Button
+                android:id="@+id/bt_SignIn"
+                style="@style/MyNormalButton"
+                android:layout_width="0dp"
+                android:layout_height="48dp"
+                android:layout_marginBottom="16dp"
+                android:layout_weight="4"
+                android:text="登录"/>
+
+        </LinearLayout>
+    </LinearLayout>
+
+</RelativeLayout>
