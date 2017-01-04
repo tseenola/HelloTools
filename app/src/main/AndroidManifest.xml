@@ -9,12 +9,19 @@
         android:supportsRtl="true"
         android:name="application.MyApplication"
         android:theme="@style/AppTheme">
-        <activity android:name="activity.user_entry.view.UserEntryAty">
+        <activity
+            android:name="activity.user_entry.view.UserEntryAty">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN"/>
 
                 <category android:name="android.intent.category.LAUNCHER"/>
             </intent-filter>
+        </activity>
+        <activity
+            android:name="activity.main_menu.view.MainMenuAty">
+        </activity>
+        <activity
+            android:name="activity.sign_in.view.SignInAty">
         </activity>
     </application>
 

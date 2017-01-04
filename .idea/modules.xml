@@ -5,6 +5,7 @@
       <module fileurl="file://$PROJECT_DIR$/HelloTools.iml" filepath="$PROJECT_DIR$/HelloTools.iml" />
       <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" />
       <module fileurl="file://$PROJECT_DIR$/hellolibrary/hellolibrary.iml" filepath="$PROJECT_DIR$/hellolibrary/hellolibrary.iml" />
+      <module fileurl="file://$PROJECT_DIR$/validatorlibrary/validatorlibrary.iml" filepath="$PROJECT_DIR$/validatorlibrary/validatorlibrary.iml" />
     </modules>
   </component>
 </project>

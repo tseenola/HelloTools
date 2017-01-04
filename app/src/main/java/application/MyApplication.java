@@ -30,7 +30,7 @@ public class MyApplication extends BaseApplication{
      */
     @Override
     public void initLogRecUtil() {
-        L.e("initLogRecUtil started");
+        L.e("initLogRecUtil  ");
     }
 
     /**
@@ -38,7 +38,7 @@ public class MyApplication extends BaseApplication{
      */
     @Override
     public void initUncaughtException() {
-        L.e("initUncaughtException started");
+        L.e("initUncaughtException  ");
     }
 
     /**
@@ -46,7 +46,7 @@ public class MyApplication extends BaseApplication{
      */
     @Override
     public void initThreadUtil() {
-        L.e("initThreadUtil started");
+        L.e("initThreadUtil  ");
     }
 
     /**
@@ -54,7 +54,7 @@ public class MyApplication extends BaseApplication{
      */
     @Override
     public void initSharedSpUtil() {
-        L.e("initSharedSpUtil started");
+        L.e("initSharedSpUtil  ");
     }
 
     /**
@@ -62,7 +62,7 @@ public class MyApplication extends BaseApplication{
      */
     @Override
     public void initDbUtil() {
-        L.e("initDbUtil started");
+        L.e("initDbUtil  ");
     }
 
     /**
@@ -71,7 +71,7 @@ public class MyApplication extends BaseApplication{
      */
     @Override
     public void CallSystemGc() {
-        L.e("CallSystemGc started");
+        L.e("CallSystemGc  ");
     }
 
     /**
@@ -80,7 +80,7 @@ public class MyApplication extends BaseApplication{
      */
     @Override
     public void killAppReleaseResource() {
-        L.e("killAppReleaseResource started");
+        L.e("killAppReleaseResource  ");
         exitAllActivity(mAtyList);
     }
 
@@ -90,7 +90,7 @@ public class MyApplication extends BaseApplication{
      */
     @Override
     public void onActivityCreate(Activity pActivity) {
-        L.e("onActivityCreate started");
+        L.e("onActivityCreate  ");
         mAtyList.add(pActivity);
     }
 
@@ -100,7 +100,8 @@ public class MyApplication extends BaseApplication{
      */
     @Override
     public void onActivityDestory(Activity pActivity) {
-        L.e("onActivityDestory started");
+        L.e("onActivityDestory  ");
+        pActivity.finish();
     }
 
 }

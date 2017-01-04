@@ -189,7 +189,9 @@ public class StringUtils {
         String x = fill;
         int contentLen = content.length();
         int needAddLen = mastLen - contentLen;
-
+        if(needAddLen<=0){
+            return content;
+        }
         while(fill.length()<needAddLen){
             fill+=x;
         }

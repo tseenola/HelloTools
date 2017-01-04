@@ -13,23 +13,23 @@
         android:orientation="vertical">
 
         <EditText
+            android:text="01"
             android:id="@+id/et_UserId"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginBottom="16dp"
             android:layout_marginTop="10dp"
-            android:hint="id"
             android:inputType="textEmailAddress"
             android:maxLength="10"
             android:textColor="#212121"
             android:textColorHint="#727272"/>
 
         <EditText
+            android:text="0000"
             android:id="@+id/et_Pwd"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginBottom="16dp"
-            android:hint="pwd"
             android:inputType="textPassword"
             android:maxLength="10"
             android:textColor="#212121"

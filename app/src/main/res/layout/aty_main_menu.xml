@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              android:orientation="vertical"
+              android:layout_width="match_parent"
+              android:layout_height="match_parent">
+    <Button
+        android:id="@+id/bt_MainKeyDown"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="主密钥下载"/>
+
+    <Button
+        android:id="@+id/bt_IcParaDown"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="IC卡参数下载"/>
+
+    <Button
+        android:id="@+id/bt_SignIn"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="签到"/>
+
+    <Button
+        android:id="@+id/bt_Sale"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="消费"/>
+
+    <Button
+        android:id="@+id/bt_SaleVoid"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="撤销"/>
+
+    <Button
+        android:id="@+id/bt_SaleRefund"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="退货"/>
+
+    <Button
+        android:id="@+id/bt_Settle"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="结算"/>
+    <Button
+        android:id="@+id/bt_SignOut"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="签退"/>
+</LinearLayout>

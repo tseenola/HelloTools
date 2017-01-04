@@ -3,7 +3,11 @@ package activity.user_entry.view;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.Toast;
 
+import activity.main_menu.view.MainMenuAty;
+import activity.user_entry.model.UserEntryModel;
+import activity.user_entry.presenter.UserEntryPrt;
 import application.MyApplication;
 import butterknife.Bind;
 import butterknife.ButterKnife;
@@ -15,7 +19,7 @@ import tools.com.hellotools.R;
  * 描述：
  */
 
-public class UserEntryAty extends BaseActivity {
+public class UserEntryAty extends BaseActivity implements IUserEntryAty{
     @Bind(R.id.et_UserId)
     EditText mEtUserId;
     @Bind(R.id.et_Pwd)
@@ -24,6 +28,7 @@ public class UserEntryAty extends BaseActivity {
     Button mBtExit;
     @Bind(R.id.bt_SignIn)
     Button mBtSignIn;
+    private UserEntryPrt mPresenter;
 
     @Override
     public void initData() {
@@ -38,19 +43,8 @@ public class UserEntryAty extends BaseActivity {
 
     @Override
     public void initListener() {
-        mBtExit.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                MyApplication.getApp().killAppReleaseResource();
-            }
-        });
-
-        mBtSignIn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-
-            }
-        });
+        mBtExit.setOnClickListener(this);
+        mBtSignIn.setOnClickListener(this);
     }
 
     @Override
@@ -60,6 +54,32 @@ public class UserEntryAty extends BaseActivity {
 
     @Override
     public void initPresenter() {
+        mPresenter = new UserEntryPrt(this);
+    }
 
+    @Override
+    public void onClick(View v) {
+       switch (v.getId()){
+           case R.id.bt_Exit:
+               MyApplication.getApp().killAppReleaseResource();
+           break;
+           case R.id.bt_SignIn:
+               UserEntryModel user = new UserEntryModel();
+               user.setName(mEtUserId.getText().toString().trim());
+               user.setPwd(mEtPwd.getText().toString().trim());
+               mPresenter.actionEntry(user);
+           break;
+       }
+    }
+
+    @Override
+    public void onUserLoginSucc(UserEntryModel pUserEntryModel) {
+        Toast.makeText(this,"欢迎"+pUserEntryModel.getName()+"登陆",Toast.LENGTH_LONG).show();
+        MainMenuAty.launch(this);
+    }
+
+    @Override
+    public void onUserLoginFail(String pFailMsg) {
+        Toast.makeText(this,pFailMsg,Toast.LENGTH_LONG).show();
     }
 }
