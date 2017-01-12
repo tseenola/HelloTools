@@ -1,12 +1,11 @@
-package activity.sign_in.view;
+package activity.key_download.view;
 
 import android.content.Context;
 import android.content.Intent;
-import android.util.Log;
 import android.view.View;
 import android.widget.Toast;
 
-import activity.sign_in.presenter.SignInPrt;
+import activity.key_download.present.KeyDownLoadPrt;
 import tools.com.hellolibrary.hello_base.BaseActivity;
 import tools.com.hellotools.R;
 
@@ -15,19 +14,17 @@ import tools.com.hellotools.R;
  * 描述：
  */
 
-public class SignInAty extends BaseActivity implements ISignInAty{
-    private SignInPrt mPresenter;
+public class KeyDownLoadAty extends BaseActivity implements IKeyDownLoadAty {
+    private KeyDownLoadPrt mPresenter;
 
     @Override
     public void onSignInSucc(String pMsg) {
         Toast.makeText(this,pMsg,Toast.LENGTH_LONG);
-        Log.i("vbvb","签到成功:"+pMsg);
     }
 
     @Override
     public void onSignInFail(String pMsg) {
         Toast.makeText(this,pMsg,Toast.LENGTH_LONG);
-        Log.i("vbvb","签到失败："+pMsg);
     }
 
     @Override
@@ -42,12 +39,12 @@ public class SignInAty extends BaseActivity implements ISignInAty{
 
     @Override
     public void initView() {
-        setContentView(R.layout.aty_sign_in);
+        setContentView(R.layout.aty_key_download);
     }
 
     @Override
     public void initListener() {
-        mPresenter.actionSign();
+        mPresenter.actionKeyDown();
     }
 
     @Override
@@ -57,10 +54,10 @@ public class SignInAty extends BaseActivity implements ISignInAty{
 
     @Override
     public void initPresenter() {
-        mPresenter = new SignInPrt(this);
+        mPresenter = new KeyDownLoadPrt(this);
     }
 
     public static void launch(Context pContext){
-        pContext.startActivity(new Intent(pContext,SignInAty.class));
+        pContext.startActivity(new Intent(pContext,KeyDownLoadAty.class));
     }
 }

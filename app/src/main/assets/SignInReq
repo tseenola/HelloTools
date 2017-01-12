@@ -1,0 +1,102 @@
+{
+    "h1": {
+		"length": 4,
+		"name": "报文长度",
+		"lengtype": "fix",
+		"content": "bcd",
+		"align": "right",
+		"fill": "0",
+		"value":"",
+		"haveToExist":true
+	},
+	"h2": {
+        "length": 10,
+        "name": "TPDU",
+        "lengtype": "fix",
+        "content": "bcd",
+        "align": "right",
+        "fill": "0",
+        "value":"",
+        "haveToExist":true
+    },
+    "h3": {
+        "length": 12,
+        "name": "报文头",
+        "lengtype": "fix",
+        "content": "bcd",
+        "align": "right",
+        "fill": "0",
+        "value":"",
+        "haveToExist":false
+    },
+	"f0": {
+		"length": 4,
+		"name": "消息类型",
+		"lengtype": "fix",
+		"content": "bcd",
+		"align": "right",
+		"fill": "0",
+		"value":"0800",
+		"haveToExist":true
+	},
+	"f1": {
+		"length": 64,
+		"name": "位图",
+		"lengtype": "fix",
+		"content": "bitmap",
+		"align": "right",
+		"fill": "0",
+		"value":"03,25,41,42,60",
+		"haveToExist":true
+	},
+	"f3": {
+		"length": 6,
+		"name": "交易处理码",
+		"lengtype": "fix",
+		"content": "bcd",
+		"align": "right",
+		"fill": "0",
+		"value":"940000",
+		"haveToExist":true
+	},
+	"f25": {
+		"length": 2,
+		"name": "服务点条件码",
+		"lengtype": "fix",
+		"content": "bcd",
+		"align": "right",
+		"fill": " ",
+		"value":"14",
+		"haveToExist":true
+	},
+	"f41": {
+		"length": 8,
+		"name": "受卡机终端标识码",
+		"lengtype": "fix",
+		"content": "asc",
+		"align": "left",
+		"fill": " ",
+		"value":"",
+		"haveToExist":true
+	},
+	"f42": {
+		"length": 15,
+		"name": "受卡方标识码",
+		"lengtype": "fix",
+		"content": "asc",
+		"align": "left",
+		"fill": " ",
+		"value":"",
+		"haveToExist":true
+	},
+	"f60": {
+		"length": 17,
+		"name": "自定义域",
+		"lengtype": "lllvar",
+		"align": "left",
+		"content": "hex",
+		"fill": "0",
+		"value":"A00199",
+		"haveToExist":true
+	}
+}

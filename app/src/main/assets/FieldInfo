@@ -1,0 +1,392 @@
+{
+    "h1": {
+		"length": 4,
+		"name": "报文长度",
+		"lengtype": "fix",
+		"content": "bcd",
+		"align": "right",
+		"fill": "0",
+		"value":"",
+		"haveToExist":false
+	},
+	"h2": {
+        "length": 10,
+        "name": "TPDU",
+        "lengtype": "fix",
+        "content": "bcd",
+        "align": "right",
+        "fill": "0",
+        "value":"",
+        "haveToExist":false
+    },
+    "h3": {
+        "length": 12,
+        "name": "报文头",
+        "lengtype": "fix",
+        "content": "bcd",
+        "align": "right",
+        "fill": "0",
+        "value":"",
+        "haveToExist":false
+    },
+	"f0": {
+		"length": 4,
+		"name": "消息类型",
+		"lengtype": "fix",
+		"content": "bcd",
+		"align": "right",
+		"fill": "0",
+		"value":"",
+		"haveToExist":false
+	},
+	"f1": {
+		"length": 64,
+		"name": "位图",
+		"lengtype": "fix",
+		"content": "bcd",
+		"align": "right",
+		"fill": "0",
+		"value":"",
+		"haveToExist":false
+	},
+	"f2": {
+		"length": 19,
+		"name": "主账号",
+		"lengtype": "llvar",
+		"align": "left",
+		"content": "bcd",
+		"fill": "0",
+		"value":"",
+		"haveToExist":false
+	},
+	"f3": {
+		"length": 6,
+		"name": "交易处理码",
+		"lengtype": "fix",
+		"content": "bcd",
+		"align": "right",
+		"fill": "0",
+		"value":"",
+		"haveToExist":false
+	},
+	"f4": {
+		"length": 12,
+		"name": "交易金额",
+		"lengtype": "fix",
+		"content": "bcd",
+		"align": "right",
+		"fill": "0",
+		"value":"",
+		"haveToExist":false
+	},
+	"f11": {
+		"length": 6,
+		"name": "受卡方系统跟踪号",
+		"lengtype": "fix",
+		"content": "bcd",
+		"align": "right",
+		"fill": "0",
+		"value":"",
+		"haveToExist":false
+	},
+	"f12": {
+		"length": 6,
+		"name": "受卡方所在地时间",
+		"lengtype": "fix",
+		"content": "bcd",
+		"align": "right",
+		"fill": "0",
+		"value":"",
+		"haveToExist":false
+	},
+	"f13": {
+		"length": 4,
+		"name": "受卡方所在地日期",
+		"lengtype": "fix",
+		"content": "bcd",
+		"align": "right",
+		"fill": "0",
+		"value":"",
+		"haveToExist":false
+	},
+	"f14": {
+		"length": 4,
+		"name": "卡有效期",
+		"lengtype": "fix",
+		"content": "bcd",
+		"align": "right",
+		"fill": "0",
+		"value":"",
+		"haveToExist":false
+	},
+	"f15": {
+		"length": 4,
+		"name": "清算日期",
+		"lengtype": "fix",
+		"content": "bcd",
+		"align": "right",
+		"fill": "0",
+		"value":"",
+		"haveToExist":false
+	},
+	"f22": {
+		"length": 3,
+		"name": "服务点输入方式码",
+		"lengtype": "fix",
+		"align": "left",
+		"content": "bcd",
+		"fill": "0",
+		"value":"",
+		"haveToExist":false
+	},
+	"f23": {
+		"length": 3,
+		"name": "卡序列号",
+		"lengtype": "fix",
+		"align": "right",
+		"content": "bcd",
+		"fill": "0",
+		"value":"",
+		"haveToExist":false
+	},
+	"f25": {
+		"length": 2,
+		"name": "服务点条件码",
+		"lengtype": "fix",
+		"content": "bcd",
+		"align": "right",
+		"fill": " ",
+		"value":"",
+		"haveToExist":false
+	},
+	"f26": {
+		"length": 2,
+		"name": "域 26 服务点 PIN 获取码",
+		"lengtype": "fix",
+		"content": "bcd",
+		"align": "right",
+		"fill": "0",
+		"value":"",
+		"haveToExist":false
+	},
+	"f32": {
+		"length": 11,
+		"name": "受理机构标识码",
+		"lengtype": "llvar",
+		"align": "left",
+		"content": "bcd",
+		"fill": "0",
+		"value":"",
+		"haveToExist":false
+	},
+	"f35": {
+		"length": 37,
+		"name": "2 磁道数据",
+		"lengtype": "llvar",
+		"align": "left",
+		"content": "asc",
+		"fill": "0",
+		"value":"",
+		"haveToExist":false
+	},
+	"f36": {
+		"length": 104,
+		"name": "3 磁道数据",
+		"lengtype": "lllvar",
+		"align": "left",
+		"content": "asc",
+		"fill": "0",
+		"value":"",
+		"haveToExist":false
+	},
+	"f37": {
+		"length": 12,
+		"name": "检索参考号",
+		"lengtype": "fix",
+		"content": "asc",
+		"align": "left",
+		"fill": " ",
+		"value":"",
+		"haveToExist":false
+	},
+	"f38": {
+		"length": 6,
+		"name": "授权标识应答码",
+		"lengtype": "fix",
+		"content": "asc",
+		"align": "left",
+		"fill": " ",
+		"value":"",
+		"haveToExist":false
+	},
+	"f39": {
+		"length": 2,
+		"name": "应答码",
+		"lengtype": "fix",
+		"content": "asc",
+		"align": "left",
+		"fill": " ",
+		"value":"",
+		"haveToExist":false
+	},
+	"f40": {
+		"length": 95,
+		"name": "应答码描述",
+		"lengtype": "ans",
+		"content": "asc",
+		"align": "left",
+		"fill": " ",
+		"value":"",
+		"haveToExist":false
+	},
+	"f41": {
+		"length": 8,
+		"name": "受卡机终端标识码",
+		"lengtype": "fix",
+		"content": "asc",
+		"align": "left",
+		"fill": " ",
+		"value":"",
+		"haveToExist":false
+	},
+	"f42": {
+		"length": 15,
+		"name": "受卡方标识码",
+		"lengtype": "fix",
+		"content": "asc",
+		"align": "left",
+		"fill": " ",
+		"value":"",
+		"haveToExist":false
+	},
+	"f44": {
+		"length": 25,
+		"name": "附加响应数据",
+		"lengtype": "lllvar",
+		"content": "asc",
+		"align": "left",
+		"fill": " ",
+		"value":"",
+		"haveToExist":false
+	},
+	"f48": {
+		"length": 512,
+		"name": "附加数据 - 私有",
+		"lengtype": "lllvar",
+		"content": "bcd",
+		"align": "left",
+		"fill": "0",
+		"value":"",
+		"haveToExist":false
+	},
+	"f49": {
+		"length": 3,
+		"name": "交易货币代码",
+		"lengtype": "fix",
+		"content": "asc",
+		"align": "left",
+		"fill": " ",
+		"value":"",
+		"haveToExist":false
+	},
+	"f52": {
+		"length": 8,
+		"name": "个人标识码数据",
+		"lengtype": "fix",
+		"content": "asc",
+		"align": "left",
+		"fill": "0",
+		"value":"",
+		"haveToExist":false
+	},
+	"f53": {
+		"length": 16,
+		"name": "安全控制信息",
+		"lengtype": "fix",
+		"content": "bcd",
+		"align": "right",
+		"fill": "0",
+		"value":"",
+		"haveToExist":false
+	},
+	"f54": {
+		"length": 20,
+		"name": "余额",
+		"lengtype": "lllvar",
+		"content": "asc",
+		"align": "left",
+		"fill": " ",
+		"value":"",
+		"haveToExist":false
+	},
+	"f55": {
+		"length": 255,
+		"name": " IC 卡数据域",
+		"lengtype": "lllvar",
+		"content": "hex",
+		"align": "left",
+		"fill": "0",
+		"value":"",
+		"haveToExist":false
+	},
+	"f58": {
+		"length": 100,
+		"name": "电子钱包标准的交易信息",
+		"lengtype": "lllvar",
+		"content": "hex",
+		"align": "left",
+		"fill": "0",
+		"value":"",
+		"haveToExist":false
+	},
+	"f60": {
+		"length": 17,
+		"name": "自定义域",
+		"lengtype": "lllvar",
+		"align": "left",
+		"content": "hex",
+		"fill": "0",
+		"value":"",
+		"haveToExist":false
+	},
+	"f61": {
+		"length": 29,
+		"name": "原始信息域",
+		"lengtype": "lllvar",
+		"align": "left",
+		"content": "bcd",
+		"fill": " ",
+		"value":"",
+		"haveToExist":false
+	},
+	"f62": {
+		"length": 512,
+		"name": "自定义域",
+		"lengtype": "lllvar",
+		"content": "bcd",
+		"align": "left",
+		"fill": "0",
+		"value":"",
+		"haveToExist":false
+	},
+	"f63": {
+		"length": 512,
+		"name": "自定义域",
+		"lengtype": "lllvar",
+		"content": "b",
+		"align": "left",
+		"fill": "0",
+		"value":"",
+		"haveToExist":false
+	},
+	"f64": {
+		"length": 64,
+		"name": "报文鉴别码",
+		"lengtype": "fix",
+		"align": "left",
+		"content": "b",
+		"fill": "0",
+		"value":"",
+		"haveToExist":false
+	}
+}

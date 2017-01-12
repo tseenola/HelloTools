@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.view.View;
 import android.widget.Button;
 
+import activity.key_download.view.KeyDownLoadAty;
 import activity.sign_in.view.SignInAty;
 import butterknife.Bind;
 import butterknife.ButterKnife;
@@ -38,6 +39,7 @@ public class MainMenuAty extends BaseActivity{
     public void onClick(View v) {
         switch (v.getId()){
             case R.id.bt_MainKeyDown:
+                KeyDownLoadAty.launch(this);
             break;
             case R.id.bt_IcParaDown:
             break;
@@ -70,6 +72,7 @@ public class MainMenuAty extends BaseActivity{
 
     @Override
     public void initListener() {
+        mBtMainKeyDown.setOnClickListener(this);
         mBtSignIn.setOnClickListener(this);
     }
 

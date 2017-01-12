@@ -6,6 +6,7 @@ import java.util.LinkedList;
 
 import tools.com.hellolibrary.hello_base.BaseApplication;
 import tools.com.hellolibrary.hello_log.L;
+import tools.com.hellolibrary.hello_thread.ThreadUtil;
 
 /**
  * Created by lenovo on 2016/10/15.
@@ -46,6 +47,7 @@ public class MyApplication extends BaseApplication{
      */
     @Override
     public void initThreadUtil() {
+        ThreadUtil.initRunOnUiThreadHandler();
         L.e("initThreadUtil  ");
     }
 

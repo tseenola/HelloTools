@@ -66,11 +66,9 @@ public class ConvertUtils {
         String target = "";
         for (int i = 0; i < binaryString.length() / 4; i++) {
             String str = binaryString.substring(i * 4, i * 4 + 4);
-            System.out.println("str:" + str);
             target += Integer.toString(Integer.parseInt(str, 2), 16);
-            System.out.println("target:" + target);
         }
-        return target;
+        return target.toUpperCase();
     }
 
     /**
@@ -89,6 +87,23 @@ public class ConvertUtils {
             bString += tmp.substring(tmp.length() - 4);
         }
         return bString;
+    }
+
+
+    /**
+     * 字符串转16进制字符串
+     * @param
+     * @return
+     */
+    public static String StrToHexString(String pOrg) {
+        String lTarget = "";
+        for (int i = 0; i < pOrg.length(); i++) {
+            int ch = (int) pOrg.charAt(i);
+            String s4 = Integer.toHexString(ch);
+            lTarget = lTarget + s4;
+        }
+        return lTarget.toUpperCase();
+
     }
 
 }

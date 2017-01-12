@@ -56,8 +56,7 @@ public class ThreadUtil {
     @NonNull
     private static ExecutorService ThreadFactory(@Nullable ExecutorService service, int... params) {
         if(service == null) {
-            Class var2 = com.android.signaturepad.utils.ThreadUtil.class;
-            synchronized(com.android.signaturepad.utils.ThreadUtil.class) {
+            synchronized(ThreadUtil.class) {
                 if(service == null) {
                     switch(params[0]) {
                         case 0:
