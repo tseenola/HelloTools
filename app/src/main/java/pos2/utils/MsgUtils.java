@@ -32,6 +32,9 @@ public class MsgUtils {
 		List<Method> headMethodList = getRightMethodList(headerMethods,"setmF");//从方法列表中获取带有setmF的方法名
 		int curPosition = 0;
 		for (int i = 1; i <= 5; i++) {
+			if(i==3){
+				continue;//陕西农行没有报文头所以跳过
+			}
 			Class filedClass = Class.forName("pos2.fields.F_" + StringUtils.formatStr(i, "00"));
 			Object filedObj = filedClass.newInstance();
 			String desciption = filedClass.getField("DES").get(filedObj).toString();// 获取域的描述信息

@@ -3,6 +3,7 @@ package pos2.model;
 
 import pos2.fields.F_01;
 import pos2.fields.F_02;
+import pos2.fields.F_03;
 import pos2.fields.F_04;
 import pos2.fields.F_05;
 import pos2.utils.Converter;
@@ -16,7 +17,7 @@ import pos2.utils.Converter;
 public class Header_STD {
 	private F_01 mF01;
 	private F_02 mF02;
-	//private F_03 mF03;
+	private F_03 mF03;
 	private F_04 mF04;
 	private F_05 mF05;
 	private int headerLen;//����
@@ -32,12 +33,12 @@ public class Header_STD {
 	public void setmF02(F_02 mF2) {
 		this.mF02 = mF2;
 	}
-/*	public F_03 getmF03() {
+	public F_03 getmF03() {
 		return mF03;
 	}
 	public void setmF03(F_03 mF3) {
 		this.mF03 = mF3;
-	}*/
+	}
 	public F_04 getmF04() {
 		return mF04;
 	}
