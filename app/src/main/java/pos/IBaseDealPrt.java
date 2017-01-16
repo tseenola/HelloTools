@@ -1,5 +1,7 @@
 package pos;
 
+import android.content.Context;
+
 /**
  * Created by lenovo on 2017/1/11.
  * 描述：
@@ -20,7 +22,7 @@ public interface IBaseDealPrt {
      * @param pTimeOut
      * @return
      */
-    void sendAndRcvMsg(byte [] lSendMsg,String pIp,int pPort,int pTimeOut,OnSendAndRcvFinish pListner);
+    void sendAndRcvMsg(Context pContexts,byte [] lSendMsg, String pIp, int pPort, int pTimeOut, OnSendAndRcvFinish pListner);
 
     /**
      * 建立SocketL连接
@@ -44,8 +46,8 @@ public interface IBaseDealPrt {
 
     /**
      * 解包
-     * @param rcvHexStr
+     * @param rcvdMsg
      * @param
      */
-    void unPackRcvHexStr(String rcvHexStr);
+    void unPackRcvHexStr(Context pContext,byte rcvdMsg []);
 }

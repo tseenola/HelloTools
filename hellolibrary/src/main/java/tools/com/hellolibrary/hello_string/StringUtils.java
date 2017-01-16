@@ -7,6 +7,8 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.text.DecimalFormat;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -240,5 +242,31 @@ public class StringUtils {
         return sb.toString();
     }
 
+    /**
+     * 对字符串进行分割，每？个一组
+     * eg:SlipContentByNum("abcd", 2);返回{ab,cd}
+     * @param pData
+     * @param pNum
+     * @return
+     */
+    public static List<String> SlipContentByNum(String pData, int pNum){
+        List<String> slipedList = new ArrayList<String>();
+        int befor = 0;
+        int after = befor+pNum;
+        for(;;){
+            if(after>=pData.length()){
+                after = pData.length();
+                slipedList.add(pData.substring(befor,after));
+                befor+=pNum;
+                after+=pNum;
+                break;
+            }else{
+                slipedList.add(pData.substring(befor,after));
+                befor+=pNum;
+                after+=pNum;
+            }
+        }
+        return slipedList;
+    }
 
 }

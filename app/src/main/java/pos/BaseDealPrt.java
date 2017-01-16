@@ -1,5 +1,10 @@
 package pos;
 
+import android.content.Context;
+
+import java.io.IOException;
+
+import factory.FieldFactory;
 import tools.com.hellolibrary.hello_convert.ConvertUtils;
 import tools.com.hellolibrary.hello_socket.SocketUtils;
 import tools.com.hellolibrary.hello_thread.ThreadUtil;
@@ -12,7 +17,7 @@ import tools.com.hellolibrary.hello_thread.ThreadUtil;
 public class BaseDealPrt implements IBaseDealPrt {
 
     @Override
-    public void sendAndRcvMsg(final byte [] lSendMsg, final String pIp, final int pPort, final int pTimeOut, final OnSendAndRcvFinish pListner) {
+    public void sendAndRcvMsg(final Context pContext, final byte [] lSendMsg, final String pIp, final int pPort, final int pTimeOut, final OnSendAndRcvFinish pListner) {
 
         ThreadUtil.runCachedService(new Runnable() {
             @Override
@@ -24,16 +29,16 @@ public class BaseDealPrt implements IBaseDealPrt {
 
                 byte pRevMsgByte[] = revMsg(pTimeOut);
 
+                unPackRcvHexStr(pContext,pRevMsgByte);
 
 
-                final String revMsgHexStr  = ConvertUtils.bytesToHexString(pRevMsgByte);
 
-                ThreadUtil.runOnUiThread(new Runnable() {
+             /*   ThreadUtil.runOnUiThread(new Runnable() {
                     @Override
                     public void run() {
                         pListner.onSendAndRcvSucc(revMsgHexStr);
                     }
-                });
+                });*/
             }
         });
     }
@@ -64,7 +69,14 @@ public class BaseDealPrt implements IBaseDealPrt {
     }
 
     @Override
-    public void unPackRcvHexStr(String rcvHexStr) {
+    public void unPackRcvHexStr(Context pContexts,byte[] rcvdMsg) {
+        Field lField = null;
+        try {
+            lField = FieldFactory.getField(pContexts, FieldFactory.DearType.unpack);
+        } catch (IOException pE) {
+            pE.printStackTrace();
+        }
+        String revMsgHexStr  = ConvertUtils.bytesToHexString(rcvdMsg);
 
     }
 }

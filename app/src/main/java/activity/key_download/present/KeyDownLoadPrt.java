@@ -30,7 +30,7 @@ public class KeyDownLoadPrt extends BaseDealPrt implements IKeyDownLoadPrt {
             lField.getF41().setValue("1201QZ8Q");
             lField.getF42().setValue("103100048141347");
             byte lSendMsg[] = lField.pack();
-            sendAndRcvMsg(lSendMsg, "49.4.175.10", 5005, 50, new OnSendAndRcvFinish() {
+            sendAndRcvMsg(mContext,lSendMsg, "49.4.175.10", 5005, 50, new OnSendAndRcvFinish() {
                 @Override
                 public void onSendAndRcvSucc(String pRcvMsg) {
                     mView.onSignInSucc(pRcvMsg);

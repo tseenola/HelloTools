@@ -17,16 +17,18 @@ import tools.com.hellolibrary.hello_string.StringUtils;
 
 public class FieldFactory {
 
-
     public static Field getField(Context pContext,DearType pDealType) throws IOException {
         InputStream lIs = null;
         switch (pDealType){
+            case unpack:
+                lIs = pContext.getAssets().open("FieldInfo");
+                break;
             case keyDownload:
                 lIs = pContext.getAssets().open("KeyDownLoadReq");
-            break;
+                break;
             case signIn:
                 lIs = pContext.getAssets().open("SignInReq");
-            break;
+                break;
         }
         String lReq = StringUtils.streamToString(lIs);
         Gson lGson = new Gson();
@@ -35,7 +37,7 @@ public class FieldFactory {
     }
 
     public static enum DearType{
-        keyDownload,signIn
+        keyDownload,signIn,unpack
     }
 
 }
