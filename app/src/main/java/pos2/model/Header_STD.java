@@ -77,12 +77,12 @@ public class Header_STD {
 				Converter.hexString2BinaryString(mF05.getValue()).substring(56,64)+"\r\n";*/
 		return "mF1" + mF01.DES+"="+mF01.getValue() +
 				"\r\nmF2" + mF02.DES+"="+mF02.getValue() +
-				/*"\r\nmF3" + mF03.DES+"=" + mF03.getValue() +
+				"\r\nmF3" + mF03.DES+"=" + mF03.getValue() +
 				"(应用类别：" + mF03.getValue().substring(0,2) +
 				"软件总版本号：" +mF03.getValue().substring(2,4) +";"+
 				"终端状态："+mF03.getValue().substring(4,5)+ ";"+
 				"处理要求:"+mF03.getValue().substring(5,6)+";"+
-				"软件分版本号:"+mF03.getValue().substring(6,12)+")"+*/
+				"软件分版本号:"+mF03.getValue().substring(6,12)+")"+
 				"\r\nmF4" + mF04.DES+"="+mF04.getValue() +
 				"\r\nmF5" + mF05.DES+"="+mF05.getValue() + "\r\n"+
 				Converter.hexString2BinaryString(mF05.getValue()).substring(0,8)+"\r\n"+

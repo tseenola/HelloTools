@@ -95,7 +95,7 @@ public class ConvertUtils {
      * @param
      * @return
      */
-    public static String StrToHexString(String pOrg) {
+    public static String strToHexString(String pOrg) {
         String lTarget = "";
         for (int i = 0; i < pOrg.length(); i++) {
             int ch = (int) pOrg.charAt(i);
@@ -103,7 +103,14 @@ public class ConvertUtils {
             lTarget = lTarget + s4;
         }
         return lTarget.toUpperCase();
+    }
 
+    /**
+     * 16进制字符串转为字符串
+     * @return
+     */
+    public static String hexStringToStr(String pHexString){
+        return new String(ConvertUtils.hexStringToByte(pHexString));
     }
 
 }

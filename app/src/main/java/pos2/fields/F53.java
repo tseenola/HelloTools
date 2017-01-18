@@ -11,10 +11,10 @@ import pos2.model.BaseField;
  */
 public class F53 extends BaseField {
 	public static final String lengtype = "fix";
-	public static final String DES = "��ȫ������Ϣ";
-	public static boolean IS_VAR_LEN = false;//�Ƿ�Ϊ�߳�����
-	public static final Constant.FieldType FILED_TYPE = Constant.FieldType.N;//����Ϊ_����
-	public static final int NORMAL_LEN = 8;//������С
+	public static final String DES = "安全控制信息";
+	public static boolean IS_VAR_LEN = false;
+	public static final Constant.FieldType FILED_TYPE = Constant.FieldType.N;
+	public static final int NORMAL_LEN = 8;
 	public static final String FIELD_INFO = 
 			"DES:"+DES + "\r\n"+
 			"IS_VAR_LEN:"+IS_VAR_LEN + "\r\n"+

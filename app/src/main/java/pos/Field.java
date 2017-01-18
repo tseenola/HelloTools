@@ -3872,7 +3872,7 @@ public class Field {
                 target = org;
                 break;
             case "asc":
-                target = ConvertUtils.StrToHexString(org);
+                target = ConvertUtils.strToHexString(org);
                 break;
             case "hex":
                 target = org;

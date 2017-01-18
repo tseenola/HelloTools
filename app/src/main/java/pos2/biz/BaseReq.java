@@ -32,11 +32,11 @@ public abstract class  BaseReq implements IPosTempTemplet{
 		ThreadUtil.runCachedService(new Runnable() {
 			@Override
 			public void run() {
-				//byte sendMsgByte [] = pack(pTpdu,pDealType,pBitMapStr,pDealReq);//组包
-				//sendPack(pContext, sendMsgByte, pIp, pPort, pTime);//发包
-				//String rcvedHexMsg = rcvPack();//收包
-				//unPack(rcvedHexMsg);
-				unPack("002F600008000008002000008000C000109400001431323031515A38513130333130303034383134313334370003A00199");//解包
+				byte sendMsgByte [] = pack(pTpdu,pDealType,pBitMapStr,pDealReq);//组包
+				sendPack(pContext, sendMsgByte, pIp, pPort, pTime);//发包
+				String rcvedHexMsg = rcvPack();//收包
+				unPack(rcvedHexMsg);
+				//unPack("002F600008000008002000008000C000109400001431323031515A38513130333130303034383134313334370003A00199");//解包
 				chkPack();//检包
 			}
 		});
@@ -65,7 +65,7 @@ public abstract class  BaseReq implements IPosTempTemplet{
 						switch (fieldType){
 							case AN:
 							case ANS:
-								value = ConvertUtils.StrToHexString(value);
+								value = ConvertUtils.strToHexString(value);
 								break;
 							case N:
 							case B:
@@ -124,7 +124,7 @@ public abstract class  BaseReq implements IPosTempTemplet{
 		try {
 			Header_STD lHeader_std = MsgUtils.parse8583MsgHeader(pRcvedHexMsg);
 			Body_STD lBody_std = MsgUtils.parse8583MsgBody(lHeader_std,pRcvedHexMsg);
-
+			lBody_std.show();
 		} catch (Exception pE) {
 			pE.printStackTrace();
 		}
