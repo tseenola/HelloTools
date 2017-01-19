@@ -1,10 +1,11 @@
-package pos;
+package base;
 
 import android.content.Context;
 
 import java.io.IOException;
 
 import factory.FieldFactory;
+import pos.Field;
 import tools.com.hellolibrary.hello_convert.ConvertUtils;
 import tools.com.hellolibrary.hello_socket.SocketUtils;
 import tools.com.hellolibrary.hello_thread.ThreadUtil;

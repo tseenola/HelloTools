@@ -11,11 +11,11 @@ import pos2.model.BaseField;
  */
 public class F02 extends BaseField {
 	public static final String lengtype = "llvar";
-	public static final String DES = "主账号";
-	public static boolean IS_VAR_LEN = true;
-	public static final Constant.FieldType FILED_TYPE =  Constant.FieldType.N;
-	public static final int VAR_LEN = 1;
-	public static final int CONTENT_MAX_LEN = 10;
+	public static final String DES = "主账号";//域名称
+	public static boolean IS_VAR_LEN = true;//是否为变长
+	public static final Constant.FieldType FILED_TYPE =  Constant.FieldType.N;//类型为数字
+	public static final int VAR_LEN = 1;//1个字节表示长度
+	public static final int CONTENT_MAX_LEN = 10;//最大10个字节
 	public static final String FIELD_INFO = 
 			"DES:"+DES + "\r\n"+
 			"IS_VAR_LEN:"+IS_VAR_LEN + "\r\n"+

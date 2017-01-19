@@ -1,5 +1,6 @@
 package pos2.utils;
 
+import java.io.UnsupportedEncodingException;
 import java.lang.reflect.Method;
 import java.util.ArrayList;
 import java.util.List;
@@ -77,65 +78,6 @@ public class MsgUtils {
         // 根据有数据的域分别获取数据。
         int currentCursorIndex = header.getHeaderLen();
         for (int i = 1; i < fieldChars.length; i++) {
-            /*if (fieldChars[i] != '0') {
-                try {
-                    Class filedClass = Class.forName("pos2.fields.F" + StringUtils.formatStr(i + 1, "00"));
-                    FieldInfo lFieldInfo = getFieldInfoByPath("pos2.fields.F" + StringUtils.formatStr(i + 1, "00"));
-                    Object filedObj = filedClass.newInstance();
-                    String desciption = filedClass.getField("DES").get(filedObj)
-                            .toString();// 获取域的描述信息
-                    boolean isVarLen = (boolean) filedClass.getField("IS_VAR_LEN")
-                            .get(filedObj);// 获得域数据是否变长
-                    Constant.FieldType fieldType = (Constant.FieldType) filedClass.getField("FILED_TYPE").get(filedObj);
-                    filedInfo = (String) filedClass.getField("FIELD_INFO").get(filedObj);
-                    int fieldLen = 0;
-                    if (isVarLen) {// 如果是变长
-                        // 获取该域长度值占用长度
-                        int llvarUseLen = (int) filedClass.getField("VAR_LEN")
-                                .get(filedObj);
-                        llvarUseLen *= 2;
-                        fieldLen = Integer.valueOf(msgData.substring(
-                                currentCursorIndex,
-                                currentCursorIndex += llvarUseLen));
-                        switch (fieldType) {
-                            case AN:
-                            case ANS:
-                            case HEX:
-                                fieldLen *= 2;
-                                break;
-                            case N:
-                                if (fieldLen % 2 != 0) {
-                                    fieldLen += 1;
-                                }
-                                break;
-                            default:
-                                throw new NullPointerException("变长域长度解析错误！");
-                        }
-                    } else {// 定长
-                        // 获取该域的长度
-                        int normalLen = (int) filedClass.getField("NORMAL_LEN")
-                                .get(filedObj);
-                        normalLen *= 2;
-                        fieldLen = normalLen;
-                    }
-                    String fieldHexContent = msgData.substring(currentCursorIndex,
-                            currentCursorIndex += fieldLen);//域的16进制值
-                    String fieldValue = getValueByConvertHexStr(fieldHexContent, fieldType);
-                    Method setValueMethod = filedClass.getMethod("setValue", String.class);
-                    setValueMethod.invoke(filedObj, fieldValue);
-                    for (int z = 0; z < bodyMethodList.size(); z++) {
-                        if (bodyMethodList.get(z).getName().contains(StringUtils.formatStr(i + 1, "00"))) {
-                            bodyMethodList.get(z).invoke(bodyObject, filedObj);
-                            break;
-                        }
-                    }
-                } catch (Exception e) {
-                    e.printStackTrace();
-                    System.out.println("处理第：" + (i + 1) + "域时，发生异常");
-                    System.out.println(filedInfo);
-                }
-            }*/
-
             if (fieldChars[i] != '0') {
                 try {
                     Class filedClass = Class.forName("pos2.fields.F" + StringUtils.formatStr(i + 1, "00"));
@@ -214,12 +156,14 @@ public class MsgUtils {
      * @param pFieldType
      * @return
      */
-    public static String getValueByConvertHexStr(String pHexString, Constant.FieldType pFieldType) {
+    public static String getValueByConvertHexStr(String pHexString, Constant.FieldType pFieldType) throws UnsupportedEncodingException {
         String target = "";
         switch (pFieldType) {
             case AN://如果域本身是ASC那么需要进行 16进制转ASC
             case ANS:
-                target = ConvertUtils.hexStringToStr(pHexString);
+                String str = ConvertUtils.hexStringToStr(pHexString);
+                String str2 = new String(ConvertUtils.hexStringToByte(str.toUpperCase()),"gbk");//这个是针对农行的44域，44域为汉字农行对汉字做了两次16进制转换 eg(交易成功-->BDBBD2D7B3C9B9A6-->bdbbd2d7b3c9b9a6-->62646262643264376233633962396136),另外农行汉字编码为gbk，一般我们用utf-8这个看情况而定
+                target = pHexString+"-->"+ConvertUtils.hexStringToStr(pHexString)+"-->"+str2;
                 break;
             case HEX://域本身的值要求是N或者HEX直接返回即可
             case N:

@@ -10,7 +10,7 @@ import pos2.model.BaseField;
  * for��
  */
 public class F48 extends BaseField {
-	public static final String lengtype = "llvar";
+	public static final String lengtype = "lllvar";
 	public static final String DES = "附加数据－私有";
 	public static boolean IS_VAR_LEN = true;
 	public static final Constant.FieldType FILED_TYPE = Constant.FieldType.ANS;

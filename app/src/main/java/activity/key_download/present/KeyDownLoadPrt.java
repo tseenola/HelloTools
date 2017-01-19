@@ -6,7 +6,7 @@ import java.io.IOException;
 
 import activity.key_download.view.IKeyDownLoadAty;
 import factory.FieldFactory;
-import pos.BaseDealPrt;
+import base.BaseDealPrt;
 import pos.Field;
 
 /**

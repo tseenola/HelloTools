@@ -13,7 +13,7 @@ public class F44 extends BaseField {
 	public static final String lengtype = "llvar";
 	public static final String DES = "附加响应数据";
 	public static boolean IS_VAR_LEN = true;
-	public static final Constant.FieldType FILED_TYPE = Constant.FieldType.AN;
+	public static final Constant.FieldType FILED_TYPE = Constant.FieldType.ANS;
 	public static final int VAR_LEN = 1;
 	public static final int CONTENT_MAX_LEN = 25;
 	public static final String FIELD_INFO = 

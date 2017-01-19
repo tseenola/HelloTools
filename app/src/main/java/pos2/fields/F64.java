@@ -13,7 +13,7 @@ public class F64 extends BaseField {
 	public static final String lengtype = "fix";
 	public static final String DES = "报文鉴别码";
 	public static boolean IS_VAR_LEN = false;
-	public static final Constant.FieldType FILED_TYPE = Constant.FieldType.B;
+	public static final Constant.FieldType FILED_TYPE = Constant.FieldType.ANS;
 	public static final int NORMAL_LEN = 8;
 	public static final String FIELD_INFO = 
 			"DES:"+DES + "\r\n"+

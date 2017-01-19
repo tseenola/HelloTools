@@ -8,7 +8,7 @@ import android.widget.Toast;
 import activity.main_menu.view.MainMenuAty;
 import activity.user_entry.model.UserEntryModel;
 import activity.user_entry.presenter.UserEntryPrt;
-import application.MyApplication;
+import base.MyApplication;
 import butterknife.Bind;
 import butterknife.ButterKnife;
 import tools.com.hellolibrary.hello_base.BaseActivity;

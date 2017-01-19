@@ -3,7 +3,7 @@ package activity.sign_in.presenter;
 import android.content.Context;
 
 import activity.sign_in.view.ISignInAty;
-import pos.BaseDealPrt;
+import base.BaseDealPrt;
 import pos2.biz.SignInReq;
 import pos2.fields.F03;
 import pos2.fields.F25;

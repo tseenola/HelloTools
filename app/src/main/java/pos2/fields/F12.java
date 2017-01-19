@@ -11,7 +11,7 @@ import pos2.model.BaseField;
  */
 public class F12 extends BaseField {
 	public static final String lengtype = "fix";
-	public static final String DES = "受卡方所在地时间";
+	public static final String DES = "交易时间";
 	public static boolean IS_VAR_LEN = false;
 	public static final Constant.FieldType FILED_TYPE = Constant.FieldType.N;
 	public static final int NORMAL_LEN = 3;

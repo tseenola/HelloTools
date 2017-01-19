@@ -16,7 +16,7 @@
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
         android:supportsRtl="true"
-        android:name="application.MyApplication"
+        android:name="base.MyApplication"
         android:theme="@style/AppTheme">
         <!--用户登录-->
         <activity

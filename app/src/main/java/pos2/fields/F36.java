@@ -10,10 +10,10 @@ import pos2.model.BaseField;
  * for��
  */
 public class F36 extends BaseField {
-	public static final String lengtype = "llvar";
+	public static final String lengtype = "lllvar";
 	public static final String DES = "3磁道数据";
 	public static boolean IS_VAR_LEN = true;
-	public static final Constant.FieldType FILED_TYPE = Constant.FieldType.N;
+	public static final Constant.FieldType FILED_TYPE = Constant.FieldType.ANS;
 	public static final int VAR_LEN = 2;
 	public static final int CONTENT_MAX_LEN = 52;
 	public static final String FIELD_INFO = 

@@ -11,7 +11,7 @@ import pos2.model.BaseField;
  */
 public class F11 extends BaseField {
 	public static final String lengtype = "fix";
-	public static final String DES = "受卡方系统跟踪号";
+	public static final String DES = "pos流水号";
 	public static boolean IS_VAR_LEN = false;//�Ƿ�Ϊ�߳�����
 	public static final Constant.FieldType FILED_TYPE = Constant.FieldType.N;
 	public static final int NORMAL_LEN = 3;
