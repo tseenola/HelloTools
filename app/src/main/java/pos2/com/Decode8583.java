@@ -1,6 +1,6 @@
 package pos2.com;
 
-import pos2.biz.SignInReq;
+import activity.sign_in.model.SignInReq;
 import pos2.fields.F03;
 import pos2.fields.F25;
 import pos2.fields.F41;

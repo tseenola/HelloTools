@@ -1,4 +1,4 @@
-package pos2.biz;
+package base;
 
 
 import android.content.Context;
@@ -28,16 +28,27 @@ public abstract class  BaseReq implements IPosTempTemplet{
 	public String mBitMap;
 
 	@Override
-	public void actionDeal(final Context pContext,final String pIp,final int pPort,final int pTime, final String pTpdu, final String pDealType, final String pBitMapStr, final BaseReq pDealReq) {
+	public void actionDeal(final Context pContext, final String pIp, final int pPort, final int pTime, final String pTpdu, final String pDealType, final String pBitMapStr, final BaseReq pDealReq, final ResultListener pResultListener) {
 		ThreadUtil.runCachedService(new Runnable() {
 			@Override
 			public void run() {
-				///byte sendMsgByte [] = pack(pTpdu,pDealType,pBitMapStr,pDealReq);//组包
-				//sendPack(pContext, sendMsgByte, pIp, pPort, pTime);//发包
-				//String rcvedHexMsg = rcvPack();//收包
-				//unPack(rcvedHexMsg);
-				unPack("010F600000000808102038000002D0000E9400000000001813590122303031323031515A38513130333130303034383134313334371662646262643264376233633962396136003301179600641C1ADA22BEF375639B45E7F2BEF375639B45E7F2BEF375639B45E7F200123130303030303230303030300152313131313131202020203232323232322020202033333333333320202020202020202020202020202020202020202020202020202020202020202020B9ABD6F7B7D8B4E4CEA2B4F3CFC3202020202020202020202020202020202020202020202020202037333932FF00FF50FF50FF50FCC0FF00FE50FE508000BF5000000000000303031003000099999999000001000000010100000000");//解包
-				chkPack();//检包
+				byte sendMsgByte [] = pack(pTpdu,pDealType,pBitMapStr,pDealReq);//组包
+				sendPack(pContext, sendMsgByte, pIp, pPort, pTime);//发包
+				String rcvedHexMsg = rcvPack();//收包
+				final Object [] unPackResult = unPack(rcvedHexMsg);//解包
+				//unPack("010F600000000808102038000002D0000E9400000000001813590122303031323031515A38513130333130303034383134313334371662646262643264376233633962396136003301179600641C1ADA22BEF375639B45E7F2BEF375639B45E7F2BEF375639B45E7F200123130303030303230303030300152313131313131202020203232323232322020202033333333333320202020202020202020202020202020202020202020202020202020202020202020B9ABD6F7B7D8B4E4CEA2B4F3CFC3202020202020202020202020202020202020202020202020202037333932FF00FF50FF50FF50FCC0FF00FE50FE508000BF5000000000000303031003000099999999000001000000010100000000");//签到收到的成功报文
+				//unPack("005E600000000808102000000002D10000900000303031323031515A3851313033313030303438313431333437166264626264326437623363396239613600323635354541363238434636323538354636353545413632384346363235383546");//主密钥下载收到的成功报文
+				final boolean isDealSucc = chkPack(unPackResult);//检包
+				ThreadUtil.runOnUiThread(new Runnable() {
+					@Override
+					public void run() {
+						if (isDealSucc){
+							pResultListener.succ((Body_STD) unPackResult[1]);
+						}else{
+							pResultListener.fail((Body_STD) unPackResult[1]);
+						}
+					}
+				});
 			}
 		});
 	}
@@ -120,15 +131,18 @@ public abstract class  BaseReq implements IPosTempTemplet{
 	}
 
 	@Override
-	public void unPack(String pRcvedHexMsg) {
+	public Object [] unPack(String pRcvedHexMsg) {
 		try {
+			Object unPackResult [] = new Object[2];
 			Header_STD lHeader_std = MsgUtils.parse8583MsgHeader(pRcvedHexMsg);
 			Body_STD lBody_std = MsgUtils.parse8583MsgBody(lHeader_std,pRcvedHexMsg);
-			lBody_std.show();
+			unPackResult[0] = lHeader_std;
+			unPackResult[1] = lBody_std;
+			return unPackResult;
 		} catch (Exception pE) {
 			pE.printStackTrace();
 		}
-
+		return null;
 	}
 
 	@Override
@@ -138,8 +152,12 @@ public abstract class  BaseReq implements IPosTempTemplet{
 	}
 
 	@Override
-	public void chkPack() {
-
+	public boolean chkPack(Object [] pUnPackResult) {
+		String retCode = ((Body_STD)pUnPackResult[1]).getmF39().getValue();
+		if(retCode.contains("3030-->00")){
+			return true;
+		}
+		return false;
 	}
 
 
@@ -162,5 +180,11 @@ public abstract class  BaseReq implements IPosTempTemplet{
 			}
 		}
 		return ConvertUtils.binaryStringToHexString(str);
+	}
+
+
+	public interface ResultListener {
+		void succ(Body_STD pBody_std);
+		void fail(Body_STD pBody_std);
 	}
 }

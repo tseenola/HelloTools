@@ -32,14 +32,6 @@ public class BaseDealPrt implements IBaseDealPrt {
 
                 unPackRcvHexStr(pContext,pRevMsgByte);
 
-
-
-             /*   ThreadUtil.runOnUiThread(new Runnable() {
-                    @Override
-                    public void run() {
-                        pListner.onSendAndRcvSucc(revMsgHexStr);
-                    }
-                });*/
             }
         });
     }

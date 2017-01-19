@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.view.View;
 import android.widget.Button;
 
+import activity.init_para.view.InitParamAty;
 import activity.key_download.view.KeyDownLoadAty;
 import activity.sign_in.view.SignInAty;
 import butterknife.Bind;
@@ -20,8 +21,8 @@ import tools.com.hellotools.R;
 public class MainMenuAty extends BaseActivity{
     @Bind(R.id.bt_MainKeyDown)
     Button mBtMainKeyDown;
-    @Bind(R.id.bt_IcParaDown)
-    Button mBtIcParaDown;
+    @Bind(R.id.bt_InitParaDown)
+    Button mBtInitParaDown;
     @Bind(R.id.bt_SignIn)
     Button mBtSignIn;
     @Bind(R.id.bt_Sale)
@@ -41,7 +42,8 @@ public class MainMenuAty extends BaseActivity{
             case R.id.bt_MainKeyDown:
                 KeyDownLoadAty.launch(this);
             break;
-            case R.id.bt_IcParaDown:
+            case R.id.bt_InitParaDown:
+                InitParamAty.launch(this);
             break;
             case R.id.bt_SignIn:
                 SignInAty.launch(this);
@@ -73,6 +75,7 @@ public class MainMenuAty extends BaseActivity{
     @Override
     public void initListener() {
         mBtMainKeyDown.setOnClickListener(this);
+        mBtInitParaDown.setOnClickListener(this);
         mBtSignIn.setOnClickListener(this);
     }
 

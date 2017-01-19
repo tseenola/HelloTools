@@ -275,9 +275,7 @@ public class Body_STD {
 	}
   
 	public void show(){
-		
-		
-		Log.i("vbvb",
+		Log.i("vbvb","解包结果\r\n"+
 				  (mF02==null?"mF02"+mF02.DES+"=\r\n":("mF02"+mF02.DES+"="+ mF02.value +"\r\n"))+ (mF03==null?"mF03"+mF03.DES+"=\r\n":("mF03"+mF03.DES+"="+ mF03.value+"\r\n")) + (mF04==null?"mF04"+mF04.DES+"=\r\n":"mF04"+mF04.DES +"=" + mF04.value+"\r\n")
 				+ (mF11==null?"mF11"+mF11.DES+"=\r\n":("mF11"+mF11.DES+"="+ mF11.value +"\r\n"))+ (mF12==null?"mF12"+mF12.DES+"=\r\n":("mF12"+mF12.DES+"="+ mF12.value+"\r\n")) + (mF13==null?"mF13"+mF13.DES+"=\r\n":"mF13"+mF13.DES +"=" + mF13.value+"\r\n")
 				+ (mF14==null?"mF14"+mF14.DES+"=\r\n":("mF14"+mF14.DES+"="+ mF14.value +"\r\n"))+ (mF15==null?"mF15"+mF15.DES+"=\r\n":("mF15"+mF15.DES+"="+ mF15.value+"\r\n")) + (mF22==null?"mF22"+mF22.DES+"=\r\n":"mF22"+mF22.DES +"=" + mF22.value+"\r\n")

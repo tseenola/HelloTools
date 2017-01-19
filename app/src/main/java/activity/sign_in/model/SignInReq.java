@@ -1,4 +1,5 @@
-package pos2.biz;
+package activity.sign_in.model;
+import base.BaseReq;
 import pos2.fields.F03;
 import pos2.fields.F25;
 import pos2.fields.F41;
@@ -9,7 +10,7 @@ import pos2.fields.F60;
 /**
  * 2016年9月18日 by lee for：签到请求报文
  */
-public class SignInReq extends BaseReq{
+public class SignInReq extends BaseReq {
 
 	// 签到真实报文：003C600401000060310031000108000020000000C00012000029363239363930303233303133313030343839393030303100110000013200300003303031
 
