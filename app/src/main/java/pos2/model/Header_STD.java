@@ -1,6 +1,8 @@
 package pos2.model;
 
 
+import android.util.Log;
+
 import pos2.fields.F_01;
 import pos2.fields.F_02;
 import pos2.fields.F_03;
@@ -52,50 +54,34 @@ public class Header_STD {
 		this.mF05 = mF5;
 	}
 	public int getHeaderLen() {
-		//return (mF01.NORMAL_LEN+mF02.NORMAL_LEN+mF03.NORMAL_LEN+mF04.NORMAL_LEN+mF05.NORMAL_LEN) * 2;
-		return (mF01.NORMAL_LEN+mF02.NORMAL_LEN+mF04.NORMAL_LEN+mF05.NORMAL_LEN) * 2;
+		int f01len = mF01!=null?mF01.NORMAL_LEN:0;
+		int f02len = mF02!=null?mF02.NORMAL_LEN:0;
+		int f03len = mF03!=null?mF03.NORMAL_LEN:0;
+		int f04len = mF04!=null?mF04.NORMAL_LEN:0;
+		int f05len = mF05!=null?mF05.NORMAL_LEN:0;
+		return (f01len+f02len+f03len+f04len+f05len) * 2;
 	}
-	@Override
-	public String toString() {
-		/*return "mF1" + mF01.DES+"="+mF01.getValue() +
-				"\r\nmF2" + mF02.DES+"="+mF02.getValue() +
-				"\r\nmF3" + mF03.DES+"=" + mF03.getValue() +
-				"(应用类别：" + mF03.getValue().substring(0,2) +
-				"软件总版本号：" +mF03.getValue().substring(2,4) +";"+
-				"终端状态："+mF03.getValue().substring(4,5)+ ";"+
-				"处理要求:"+mF03.getValue().substring(5,6)+";"+
-				"软件分版本号:"+mF03.getValue().substring(6,12)+")"+
-				"\r\nmF4" + mF04.DES+"="+mF04.getValue() +
-				"\r\nmF5" + mF05.DES+"="+mF05.getValue() + "\r\n"+
-				Converter.hexString2BinaryString(mF05.getValue()).substring(0,8)+"\r\n"+
-				Converter.hexString2BinaryString(mF05.getValue()).substring(8,16)+"\r\n"+
-				Converter.hexString2BinaryString(mF05.getValue()).substring(16,24)+"\r\n"+
-				Converter.hexString2BinaryString(mF05.getValue()).substring(24,32)+"\r\n"+
-				Converter.hexString2BinaryString(mF05.getValue()).substring(32,40)+"\r\n"+
-				Converter.hexString2BinaryString(mF05.getValue()).substring(40,48)+"\r\n"+
-				Converter.hexString2BinaryString(mF05.getValue()).substring(48,56)+"\r\n"+
-				Converter.hexString2BinaryString(mF05.getValue()).substring(56,64)+"\r\n";*/
-		return "mF1" + mF01.DES+"="+mF01.getValue() +
-				"\r\nmF2" + mF02.DES+"="+mF02.getValue() +
-				"\r\nmF3" + mF03.DES+"=" + mF03.getValue() +
-				"(应用类别：" + mF03.getValue().substring(0,2) +
-				"软件总版本号：" +mF03.getValue().substring(2,4) +";"+
-				"终端状态："+mF03.getValue().substring(4,5)+ ";"+
-				"处理要求:"+mF03.getValue().substring(5,6)+";"+
-				"软件分版本号:"+mF03.getValue().substring(6,12)+")"+
-				"\r\nmF4" + mF04.DES+"="+mF04.getValue() +
-				"\r\nmF5" + mF05.DES+"="+mF05.getValue() + "\r\n"+
-				Converter.hexString2BinaryString(mF05.getValue()).substring(0,8)+"\r\n"+
-				Converter.hexString2BinaryString(mF05.getValue()).substring(8,16)+"\r\n"+
-				Converter.hexString2BinaryString(mF05.getValue()).substring(16,24)+"\r\n"+
-				Converter.hexString2BinaryString(mF05.getValue()).substring(24,32)+"\r\n"+
-				Converter.hexString2BinaryString(mF05.getValue()).substring(32,40)+"\r\n"+
-				Converter.hexString2BinaryString(mF05.getValue()).substring(40,48)+"\r\n"+
-				Converter.hexString2BinaryString(mF05.getValue()).substring(48,56)+"\r\n"+
-				Converter.hexString2BinaryString(mF05.getValue()).substring(56,64)+"\r\n";
-	}
+
 	public void show() {
-		System.out.println(toString());
+		String f01 = mF01!=null ? "mF1" + mF01.DES + "=" + mF01.getValue():"" ;
+		String f02 = mF02 != null ? "\r\nmF2" + mF02.DES+"="+mF02.getValue():"" ;
+		String f03 = mF03 !=null ? "\r\nmF3" + mF03.DES+"=" + mF03.getValue() +
+				"(应用类别：" + mF03.getValue().substring(0,2) +
+				"软件总版本号：" +mF03.getValue().substring(2,4) +";"+
+				"终端状态："+mF03.getValue().substring(4,5)+ ";"+
+				"处理要求:"+mF03.getValue().substring(5,6)+";"+
+				"软件分版本号:"+mF03.getValue().substring(6,12)+")" :"";
+		String f04 = mF04!=null? "\r\nmF4" + mF04.DES+"="+mF04.getValue():"" ;
+		String f05 = mF05!=null? "\r\nmF5" + mF05.DES+"="+mF05.getValue() + "\r\n"+
+				Converter.hexString2BinaryString(mF05.getValue()).substring(0,8)+"\r\n"+
+				Converter.hexString2BinaryString(mF05.getValue()).substring(8,16)+"\r\n"+
+				Converter.hexString2BinaryString(mF05.getValue()).substring(16,24)+"\r\n"+
+				Converter.hexString2BinaryString(mF05.getValue()).substring(24,32)+"\r\n"+
+				Converter.hexString2BinaryString(mF05.getValue()).substring(32,40)+"\r\n"+
+				Converter.hexString2BinaryString(mF05.getValue()).substring(40,48)+"\r\n"+
+				Converter.hexString2BinaryString(mF05.getValue()).substring(48,56)+"\r\n"+
+				Converter.hexString2BinaryString(mF05.getValue()).substring(56,64)+"\r\n":"";
+		Log.i("vbvb","头报文解包结果\r\n"+f01+f02+f03+f04+f05);
 	}
 	
 }

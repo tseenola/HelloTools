@@ -22,6 +22,8 @@ public interface ApplicationTemplate {
 
     void initDbUtil();//初始化数据库
 
+    void initStetho();//初始化facebook调试工具
+
     void CallSystemGc();//gc
 
     void killAppReleaseResource();//关闭程序

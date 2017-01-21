@@ -1,1 +1,1 @@
-include ':app', ':hellolibrary', ':validatorlibrary'
+include ':app', ':hellolibrary', ':validatorlibrary', ':litepal'

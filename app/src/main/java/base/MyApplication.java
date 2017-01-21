@@ -2,8 +2,11 @@ package base;
 
 import android.app.Activity;
 
+import com.facebook.stetho.Stetho;
+
 import java.util.LinkedList;
 
+import db.table.DBUser;
 import tools.com.hellolibrary.hello_base.BaseApplication;
 import tools.com.hellolibrary.hello_log.L;
 import tools.com.hellolibrary.hello_thread.ThreadUtil;
@@ -19,6 +22,7 @@ public class MyApplication extends BaseApplication{
     public static MyApplication getApp(){
         return mApp;
     }
+
     @Override
     public void initEnviroment() {
         L.e("initEnviroment started");
@@ -64,7 +68,16 @@ public class MyApplication extends BaseApplication{
      */
     @Override
     public void initDbUtil() {
+        new DBUser("00","123456","0");
         L.e("initDbUtil  ");
+    }
+
+    /**
+     * facebook调试工具
+     */
+    @Override
+    public void initStetho() {
+        Stetho.initializeWithDefaults(this);
     }
 
     /**

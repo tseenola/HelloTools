@@ -4,8 +4,6 @@ import android.content.Context;
 import android.util.Log;
 
 import activity.init_para.model.AidDownLoadReq;
-import activity.init_para.model.CAPKDownReq;
-import activity.init_para.model.IcParamReq;
 import activity.init_para.view.IInitParamAty;
 import base.BaseDealPrt;
 import base.BaseReq;
@@ -62,7 +60,7 @@ public class InitParamPrt extends BaseDealPrt implements IInitParamPrt {
         /**
          * ic卡参数下载
          */
-        IcParamReq lIcParamReq = new IcParamReq(
+        /*IcParamReq lIcParamReq = new IcParamReq(
                 new F03("920000"),
                 new F11(""),
                 new F25("14"),
@@ -85,9 +83,9 @@ public class InitParamPrt extends BaseDealPrt implements IInitParamPrt {
             }
         });
 
-        /**
+        *//**
          * 认证中心公钥下载
-         */
+         *//*
         CAPKDownReq lCAPKDownReq = new CAPKDownReq(
                 new F03("930000"),
                 new F11(""),
@@ -110,7 +108,7 @@ public class InitParamPrt extends BaseDealPrt implements IInitParamPrt {
                 Log.i("vbvb","公钥下载失败");
                 pBody_std.show();
             }
-        });
+        });*/
 
     }
 }

@@ -34,4 +34,5 @@ dependencies {
     compile 'com.android.support:support-annotations:24.0.0-beta1'
     compile files('libs/butterknife-7.0.1.jar')
     compile files('libs/gson-2.6.2.jar')
+    compile project(path: ':litepal')
 }

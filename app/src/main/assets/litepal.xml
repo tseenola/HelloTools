@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<litepal>
+    <dbname value="POSDB" />
+    <version value="1" />
+    <list>
+        <mapping class="db.table.DBAppParas" />
+        <mapping class="db.table.DBCapk" />
+        <mapping class="db.table.DBReversal" />
+        <mapping class="db.table.DBScriptResult" />
+        <mapping class="db.table.DBTrans" />
+        <mapping class="db.table.DBTransBackup" />
+        <mapping class="db.table.DBUser" />
+        <mapping class="db.table.DBSettle" />
+        <mapping class="db.table.DBPosSetting" />
+        <mapping class="db.table.DBDealManager" />
+        <mapping class="db.table.DBCardBin" />
+        <mapping class="db.table.DBTcValueResult"/>
+    </list>
+
+</litepal>

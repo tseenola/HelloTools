@@ -1,9 +1,10 @@
 package tools.com.hellolibrary.hello_base;
 
 import android.app.Activity;
-import android.app.Application;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
+
+import org.litepal.LitePalApplication;
 
 import java.util.List;
 
@@ -15,7 +16,7 @@ import tools.com.hellolibrary.helllo_my_inter.MyActivityLifecycleCallbacks;
  * Created by lenovo on 2016/6/4.
  * 描述：
  */
-public  abstract class BaseApplication extends Application implements ApplicationTemplate {
+public  abstract class BaseApplication extends LitePalApplication implements ApplicationTemplate {
 
     private MyActivityLifecycleCallbacks mAtyLifeListner;
 
@@ -28,6 +29,7 @@ public  abstract class BaseApplication extends Application implements Applicatio
         initThreadUtil();//初始化线程池工具
         initSharedSpUtil();//初始化SharedPre......
         initDbUtil();//初始化数据库工具
+        initStetho();//facebook调试工具
         monitorAcitivtyLife();
     }
 
