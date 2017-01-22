@@ -68,7 +68,7 @@ public class MyApplication extends BaseApplication{
      */
     @Override
     public void initDbUtil() {
-        new DBUser("00","123456","0");
+        new DBUser("00","123456","0").save();
         L.e("initDbUtil  ");
     }
 
