@@ -1,6 +1,7 @@
 package pos2.utils;
 
 import android.device.MaxqManager;
+import android.util.Log;
 
 import java.util.Arrays;
 
@@ -125,9 +126,10 @@ public class Ped {
         else
             kt = (byte) KeyType;
 
-        for (int i = 1; i <= 7; i++)
+        for (int i = 1; i <= 7; i++){
             iRet = mMaxqManager.deleteKey(i, key_no, response, reslen);
-
+            Log.i("vbvb","delete:"+iRet);
+        }
         iRet = mMaxqManager.loadKey(kt, key_no, 0, key_data, key_len, response, reslen);
         return iRet;
     }

@@ -7,12 +7,12 @@ import activity.key_download.model.KeyDownReq;
 import activity.key_download.view.IKeyDownLoadAty;
 import base.BaseDealPrt;
 import base.BaseReq;
+import base.MasterKeyWriter;
 import pos2.fields.F03;
 import pos2.fields.F41;
 import pos2.fields.F42;
 import pos2.fields.F60;
 import pos2.model.Body_STD;
-import pos2.utils.Ped;
 import tools.com.hellolibrary.hello_convert.ConvertUtils;
 
 /**
@@ -44,13 +44,11 @@ public class KeyDownLoadPrt extends BaseDealPrt implements IKeyDownLoadPrt {
         lKeyDownReq.actionDeal(mContext, "49.4.175.10", 5005, 100, "6000080000", "0800", "03,41,42,60", lKeyDownReq, new BaseReq.ResultListener() {
             @Override
             public void succ(Body_STD pBody_std) {
-                //pBody_std.show();
                 writeMasterKey(pBody_std);
             }
 
             @Override
             public void fail(Body_STD pBody_std) {
-                //pBody_std.show();
                 mView.onKeyDownFail("主密钥下载失败："+pBody_std.getmF44().getValue());
             }
         });
@@ -66,8 +64,10 @@ public class KeyDownLoadPrt extends BaseDealPrt implements IKeyDownLoadPrt {
         byte[] bcdKEK = ConvertUtils.hexStringToByte(strKEK);
         String strMstSec = pBody_std.getmF48().getValue().split("-->")[1];
         byte[] bcdMstSec = ConvertUtils.hexStringToByte(strMstSec);
-        int iRet = Ped.writeMasterKeyByKEK(1, bcdKEK.length, bcdKEK, bcdMstSec.length, bcdMstSec);
-        if(iRet == 0) {
+
+        boolean iRet = MasterKeyWriter.actionMasterKeyWrite(1,bcdKEK,bcdMstSec);
+
+        if(iRet) {
             Log.i("vbvb","写入主密钥成功");
             mView.onKeyDownSucc("主密钥下载成功写入成功");
         } else {
