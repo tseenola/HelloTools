@@ -11,7 +11,7 @@ import pos2.model.BaseField;
  */
 public class F61 extends BaseField {
 	public static final String lengtype = "lllvar";
-	public static final String DES = "原始信息域";
+	public static final String DES = "工作密钥";
 	public static boolean IS_VAR_LEN = true;
 	public static final Constant.FieldType FILED_TYPE = Constant.FieldType.HEX;
 	public static final int VAR_LEN = 2;

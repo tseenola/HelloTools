@@ -7,6 +7,7 @@ import activity.sign_in.model.SignInReq;
 import activity.sign_in.view.ISignInAty;
 import base.BaseDealPrt;
 import base.BaseReq;
+import core.WorkingKeyWriter;
 import db.bill.DBPosSettingBill;
 import pos2.fields.F03;
 import pos2.fields.F25;
@@ -66,6 +67,28 @@ public class SignInPrt extends BaseDealPrt implements ISignInPrt {
         String lTrace = f63.substring(0,6);
         DBPosSettingBill.syncBatchAndTrace(lBatch,lTrace);
         //写入工作密钥
-        mView.onSignInSucc("签到成功");
+        /* 天下汇工作密钥的数据长度33个字节。
+         * 第1字节MAC类型，目前只支持0x01，采用ECB进行运算。
+         * 第2-17字节PIN Key的密文。
+         * 第18-33字节MAC Key的密文。
+         */
+        String workKeySec = pBody_std.getmF61().getValue();
+
+        if(workKeySec == null) {
+            throw new IllegalArgumentException("工作密钥获取失败");
+        }else if(workKeySec.length()/2 != 33) {
+            throw new IllegalArgumentException("工作密钥长度和文档不符");
+        }
+
+        if(!workKeySec.startsWith("01")) {
+            throw new IllegalArgumentException("不支持的工作密钥加密类型");
+        }
+        boolean succ = WorkingKeyWriter.doWriteWorkKey();
+        if(succ){
+            mView.onSignInSucc("签到写入工作密钥成功");
+        }else {
+            mView.onSignInFail("签到写入工作密钥失败");
+        }
+
     }
 }

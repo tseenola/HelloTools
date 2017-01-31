@@ -2,7 +2,7 @@ package tools.com.hellolibrary.helllo_my_inter;
 
 /**
  * Created by lenovo on 2017/1/31.
- * 描述：写入主密钥模板
+ * 描述：写入主密钥模板（模板方法模式）
  * 1.解密主密钥
  * 2.
  * 3.写入主密钥
@@ -57,10 +57,8 @@ public abstract class  MasterKeyWriteTemplate extends MaxqManagerHelper{
     public abstract boolean closeMaxqManager();
     /**
      * 写入主密钥
-     * @
-     * @
      */
-    public boolean writeMasterKeyByKEK(int masterKeyIndex,byte[] kekData,byte[] masterSecData){
+    public boolean doWriteMasterKeyByKEK(int masterKeyIndex, byte[] kekData, byte[] masterSecData){
         byte[] ResponseData = new byte[kekData.length];
         byte[] ResLen = new byte[1];
         byte[] DecryResponseData = new byte[16];
@@ -73,7 +71,8 @@ public abstract class  MasterKeyWriteTemplate extends MaxqManagerHelper{
                 writeKEK(KeyUsage._MASTKEY,masterKeyIndex,ParentKeyNo,kekData,kekData.length,ResponseData,ResLen)&&//写入主密钥解密密钥明文到安全芯片
                 decryMasterKey(KeyUsage._MASTKEY,masterKeyIndex,Algorithm._ECB,StartValueLen,StartValueLen.length,0x00,masterSecData,masterSecData.length,DecryResponseData,DecryResLen)&&//对主密钥密文解密
                 clearAllMasterKeyByIndex(masterKeyIndex)&&//清除指定密钥索引所有主密钥
-                writeMasterKey(KeyUsage._MASTKEY,masterKeyIndex,ParentKeyNo,DecryResponseData,DecryResponseData.length,ResponseData,ResLen);//写入主密钥明文到安全芯片
+                writeMasterKey(KeyUsage._MASTKEY,masterKeyIndex,ParentKeyNo,DecryResponseData,DecryResponseData.length,ResponseData,ResLen)&&//写入主密钥明文到安全芯片
+                closeMaxqManager();
     }
 
 

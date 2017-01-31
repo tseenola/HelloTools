@@ -7,7 +7,7 @@ import activity.key_download.model.KeyDownReq;
 import activity.key_download.view.IKeyDownLoadAty;
 import base.BaseDealPrt;
 import base.BaseReq;
-import base.MasterKeyWriter;
+import core.MasterKeyWriter;
 import pos2.fields.F03;
 import pos2.fields.F41;
 import pos2.fields.F42;
@@ -71,7 +71,7 @@ public class KeyDownLoadPrt extends BaseDealPrt implements IKeyDownLoadPrt {
             Log.i("vbvb","写入主密钥成功");
             mView.onKeyDownSucc("主密钥下载成功写入成功");
         } else {
-            mView.onKeyDownFail("主密钥下载成功写入失败，返回值:"+iRet);
+            mView.onKeyDownFail("主密钥下载成功写入失败:");
         }
     }
 }

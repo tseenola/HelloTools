@@ -1,4 +1,4 @@
-package base;
+package core;
 
 import tools.com.hellolibrary.helllo_my_inter.MasterKeyWriteTemplate;
 
@@ -13,7 +13,7 @@ public class MasterKeyWriter extends MasterKeyWriteTemplate {
 
 
     public static boolean actionMasterKeyWrite(int masterKeyIndex,byte[] kekData,byte[] masterSecData){
-        return new MasterKeyWriter().writeMasterKeyByKEK(masterKeyIndex,kekData,masterSecData);
+        return new MasterKeyWriter().doWriteMasterKeyByKEK(masterKeyIndex,kekData,masterSecData);
     }
 
     @Override
