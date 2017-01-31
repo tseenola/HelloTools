@@ -6,9 +6,11 @@ import com.facebook.stetho.Stetho;
 
 import java.util.LinkedList;
 
-import db.table.DBUser;
+import db.bill.DBPosSettingBill;
+import db.bill.DBUserBill;
 import tools.com.hellolibrary.hello_base.BaseApplication;
 import tools.com.hellolibrary.hello_log.L;
+import tools.com.hellolibrary.hello_spref.SPUtils;
 import tools.com.hellolibrary.hello_thread.ThreadUtil;
 
 /**
@@ -60,6 +62,7 @@ public class MyApplication extends BaseApplication{
      */
     @Override
     public void initSharedSpUtil() {
+        SPUtils.initSp(this);
         L.e("initSharedSpUtil  ");
     }
 
@@ -68,8 +71,12 @@ public class MyApplication extends BaseApplication{
      */
     @Override
     public void initDbUtil() {
-        new DBUser("00","123456","0").save();
-        L.e("initDbUtil  ");
+        if(SPUtils.getBoolean("isFirstInstall",true)){
+            DBUserBill.initDBUserTable();
+            DBPosSettingBill.initPosSettingTable();
+            SPUtils.putBoolean("isFirstInstall",false);
+        }
+        L.e("initDbUtil");
     }
 
     /**

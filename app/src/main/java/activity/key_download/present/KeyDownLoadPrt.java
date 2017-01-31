@@ -1,7 +1,7 @@
 package activity.key_download.present;
 
 import android.content.Context;
-import android.widget.Toast;
+import android.util.Log;
 
 import activity.key_download.model.KeyDownReq;
 import activity.key_download.view.IKeyDownLoadAty;
@@ -12,6 +12,8 @@ import pos2.fields.F41;
 import pos2.fields.F42;
 import pos2.fields.F60;
 import pos2.model.Body_STD;
+import pos2.utils.Ped;
+import tools.com.hellolibrary.hello_convert.ConvertUtils;
 
 /**
  * Created by lenovo on 2017/1/5.
@@ -27,6 +29,9 @@ public class KeyDownLoadPrt extends BaseDealPrt implements IKeyDownLoadPrt {
         mView = pView;
     }
 
+    /**
+     * 下主密钥
+     */
     @Override
     public void actionKeyDown() {
         KeyDownReq lKeyDownReq = new KeyDownReq(
@@ -39,40 +44,34 @@ public class KeyDownLoadPrt extends BaseDealPrt implements IKeyDownLoadPrt {
         lKeyDownReq.actionDeal(mContext, "49.4.175.10", 5005, 100, "6000080000", "0800", "03,41,42,60", lKeyDownReq, new BaseReq.ResultListener() {
             @Override
             public void succ(Body_STD pBody_std) {
-                Toast.makeText(mContext,"succ"+pBody_std.getmF44().getValue(),Toast.LENGTH_LONG).show();
-                pBody_std.show();
+                //pBody_std.show();
+                writeMasterKey(pBody_std);
             }
 
             @Override
             public void fail(Body_STD pBody_std) {
-                Toast.makeText(mContext,"fail"+pBody_std.getmF44().getValue(),Toast.LENGTH_LONG).show();
-                pBody_std.show();
+                //pBody_std.show();
+                mView.onKeyDownFail("主密钥下载失败："+pBody_std.getmF44().getValue());
             }
         });
     }
 
-
-    /*@Override
-    public void actionKeyDown() {
-        try {
-            Field lField = FieldFactory.getField(mContext, FieldFactory.DearType.keyDownload);
-            lField.getF41().setValue("1201QZ8Q");
-            lField.getF42().setValue("103100048141347");
-            byte lSendMsg[] = lField.pack();
-            sendAndRcvMsg(mContext,lSendMsg, "49.4.175.10", 5005, 50, new OnSendAndRcvFinish() {
-                @Override
-                public void onSendAndRcvSucc(String pRcvMsg) {
-                    mView.onSignInSucc(pRcvMsg);
-                }
-
-                @Override
-                public void onSendAndRcvFail(String pMsg) {
-                    mView.onSignInFail(pMsg);
-                }
-            });
-        } catch (IOException pE) {
-            pE.printStackTrace();
-            mView.onSignInFail(pE.getMessage());
+    /**
+     * 写主密钥
+     * @param pBody_std 报文体
+     */
+    @Override
+    public void writeMasterKey(Body_STD pBody_std) {
+        String strKEK = "31313131313131313131313131313131";
+        byte[] bcdKEK = ConvertUtils.hexStringToByte(strKEK);
+        String strMstSec = pBody_std.getmF48().getValue().split("-->")[1];
+        byte[] bcdMstSec = ConvertUtils.hexStringToByte(strMstSec);
+        int iRet = Ped.writeMasterKeyByKEK(1, bcdKEK.length, bcdKEK, bcdMstSec.length, bcdMstSec);
+        if(iRet == 0) {
+            Log.i("vbvb","写入主密钥成功");
+            mView.onKeyDownSucc("主密钥下载成功写入成功");
+        } else {
+            mView.onKeyDownFail("主密钥下载成功写入失败，返回值:"+iRet);
         }
-    }*/
+    }
 }

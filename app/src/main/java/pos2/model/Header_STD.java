@@ -8,7 +8,8 @@ import pos2.fields.F_02;
 import pos2.fields.F_03;
 import pos2.fields.F_04;
 import pos2.fields.F_05;
-import pos2.utils.Converter;
+import tools.com.hellolibrary.hello_convert.ConvertUtils;
+
 
 /**
  * ��׼8583ͷ����
@@ -73,14 +74,14 @@ public class Header_STD {
 				"软件分版本号:"+mF03.getValue().substring(6,12)+")" :"";
 		String f04 = mF04!=null? "\r\nmF4" + mF04.DES+"="+mF04.getValue():"" ;
 		String f05 = mF05!=null? "\r\nmF5" + mF05.DES+"="+mF05.getValue() + "\r\n"+
-				Converter.hexString2BinaryString(mF05.getValue()).substring(0,8)+"\r\n"+
-				Converter.hexString2BinaryString(mF05.getValue()).substring(8,16)+"\r\n"+
-				Converter.hexString2BinaryString(mF05.getValue()).substring(16,24)+"\r\n"+
-				Converter.hexString2BinaryString(mF05.getValue()).substring(24,32)+"\r\n"+
-				Converter.hexString2BinaryString(mF05.getValue()).substring(32,40)+"\r\n"+
-				Converter.hexString2BinaryString(mF05.getValue()).substring(40,48)+"\r\n"+
-				Converter.hexString2BinaryString(mF05.getValue()).substring(48,56)+"\r\n"+
-				Converter.hexString2BinaryString(mF05.getValue()).substring(56,64)+"\r\n":"";
+				ConvertUtils.hexStringToBinaryString(mF05.getValue()).substring(0,8)+"\r\n"+
+				ConvertUtils.hexStringToBinaryString(mF05.getValue()).substring(8,16)+"\r\n"+
+				ConvertUtils.hexStringToBinaryString(mF05.getValue()).substring(16,24)+"\r\n"+
+				ConvertUtils.hexStringToBinaryString(mF05.getValue()).substring(24,32)+"\r\n"+
+				ConvertUtils.hexStringToBinaryString(mF05.getValue()).substring(32,40)+"\r\n"+
+				ConvertUtils.hexStringToBinaryString(mF05.getValue()).substring(40,48)+"\r\n"+
+				ConvertUtils.hexStringToBinaryString(mF05.getValue()).substring(48,56)+"\r\n"+
+				ConvertUtils.hexStringToBinaryString(mF05.getValue()).substring(56,64)+"\r\n":"";
 		Log.i("vbvb","头报文解包结果\r\n"+f01+f02+f03+f04+f05);
 	}
 	

@@ -70,7 +70,7 @@ public class MsgUtils {
         Method bodyMethod[] = bodyClass.getMethods();
         List<Method> bodyMethodList = getRightMethodList(bodyMethod, "setmF");
         // 获得位图
-        String binaryBitMap = Converter.hexString2BinaryString(header.getmF05()
+        String binaryBitMap = ConvertUtils.hexStringToBinaryString(header.getmF05()
                 .getValue());
         // 根据位图的二进制形式获得有数据的域
         char fieldChars[] = binaryBitMap.toCharArray();

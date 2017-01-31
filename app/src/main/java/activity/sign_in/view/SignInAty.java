@@ -2,12 +2,12 @@ package activity.sign_in.view;
 
 import android.content.Context;
 import android.content.Intent;
-import android.util.Log;
 import android.view.View;
 import android.widget.Toast;
 
 import activity.sign_in.presenter.SignInPrt;
 import tools.com.hellolibrary.hello_base.BaseActivity;
+import tools.com.hellolibrary.hello_dialog.DialogUtil;
 import tools.com.hellotools.R;
 
 /**
@@ -17,18 +17,6 @@ import tools.com.hellotools.R;
 
 public class SignInAty extends BaseActivity implements ISignInAty{
     private SignInPrt mPresenter;
-
-    @Override
-    public void onSignInSucc(String pMsg) {
-        Toast.makeText(this,pMsg,Toast.LENGTH_LONG);
-        Log.i("vbvb","签到成功:"+pMsg);
-    }
-
-    @Override
-    public void onSignInFail(String pMsg) {
-        Toast.makeText(this,pMsg,Toast.LENGTH_LONG);
-        Log.i("vbvb","签到失败："+pMsg);
-    }
 
     @Override
     public void onClick(View v) {
@@ -47,6 +35,7 @@ public class SignInAty extends BaseActivity implements ISignInAty{
 
     @Override
     public void initListener() {
+        DialogUtil.showProgressDialog(this,false,DialogUtil.STYLE_CIRCAL,"签到中",25);
         mPresenter.actionSign();
     }
 
@@ -63,4 +52,17 @@ public class SignInAty extends BaseActivity implements ISignInAty{
     public static void launch(Context pContext){
         pContext.startActivity(new Intent(pContext,SignInAty.class));
     }
+
+    @Override
+    public void onSignInSucc(String pMsg) {
+        DialogUtil.hideProgressDialog();
+        Toast.makeText(this,pMsg,Toast.LENGTH_LONG).show();
+    }
+
+    @Override
+    public void onSignInFail(String pMsg) {
+        DialogUtil.hideProgressDialog();
+        Toast.makeText(this,pMsg,Toast.LENGTH_LONG).show();
+    }
+
 }

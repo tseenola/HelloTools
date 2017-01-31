@@ -7,6 +7,7 @@ import activity.sign_in.model.SignInReq;
 import activity.sign_in.view.ISignInAty;
 import base.BaseDealPrt;
 import base.BaseReq;
+import db.bill.DBPosSettingBill;
 import pos2.fields.F03;
 import pos2.fields.F25;
 import pos2.fields.F41;
@@ -15,7 +16,7 @@ import pos2.fields.F60;
 import pos2.model.Body_STD;
 
 /**
- * Created by lenovo on 2017/1/5.
+ * Created by lijun on 2017/1/5.
  * 描述：
  */
 
@@ -42,39 +43,29 @@ public class SignInPrt extends BaseDealPrt implements ISignInPrt {
             @Override
             public void succ(Body_STD pBody_std) {
                 Toast.makeText(mContext,"succ"+pBody_std.getmF44().getValue(),Toast.LENGTH_LONG).show();
-                pBody_std.show();
+                syncParaWithService(pBody_std);
             }
 
             @Override
             public void fail(Body_STD pBody_std) {
                 Toast.makeText(mContext,"fail"+pBody_std.getmF44().getValue(),Toast.LENGTH_LONG).show();
-                pBody_std.show();
             }
         });
     }
 
-    /*@Override
-    public void actionSign() {
-        try {
-            Field lField = FieldFactory.getField(mContext, FieldFactory.DearType.signIn);
-            lField.getF41().setValue("1201QZ8Q");
-            lField.getF42().setValue("103100048141347");
-            byte lSendMsg[] = lField.pack();
-            sendAndRcvMsg(mContext,lSendMsg, "49.4.175.10", 5005, 50, new OnSendAndRcvFinish() {
-                @Override
-                public void onSendAndRcvSucc(String pRcvMsg) {
-                    mView.onSignInSucc(pRcvMsg);
-                }
 
-                @Override
-                public void onSendAndRcvFail(String pMsg) {
-                    mView.onSignInFail(pMsg);
-                }
-            });
-        } catch (IOException pE) {
-            pE.printStackTrace();
-            mView.onSignInFail(pE.getMessage());
-        }
-    }*/
-
+    /**
+     * 1.同步批次号
+     * 2.同步流水号
+     * 3.写入工作密钥
+     */
+    @Override
+    public void syncParaWithService(Body_STD pBody_std) {
+        String f63 = pBody_std.getmF62().getValue().split("-->")[1];
+        String lBatch = f63.substring(6,12);
+        String lTrace = f63.substring(0,6);
+        DBPosSettingBill.syncBatchAndTrace(lBatch,lTrace);
+        //写入工作密钥
+        mView.onSignInSucc("签到成功");
+    }
 }

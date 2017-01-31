@@ -2,33 +2,21 @@ package activity.key_download.view;
 
 import android.content.Context;
 import android.content.Intent;
-import android.util.Log;
 import android.view.View;
 import android.widget.Toast;
 
 import activity.key_download.present.KeyDownLoadPrt;
 import tools.com.hellolibrary.hello_base.BaseActivity;
+import tools.com.hellolibrary.hello_dialog.DialogUtil;
 import tools.com.hellotools.R;
 
 /**
- * Created by lenovo on 2017/1/4.
+ * Created by lijun on 2017/1/4.
  * 描述：
  */
 
 public class KeyDownLoadAty extends BaseActivity implements IKeyDownLoadAty {
     private KeyDownLoadPrt mPresenter;
-
-    @Override
-    public void onSignInSucc(String pMsg) {
-        Toast.makeText(this,pMsg,Toast.LENGTH_LONG);
-        Log.i("vbvb","主密钥下载成功:"+pMsg);
-    }
-
-    @Override
-    public void onSignInFail(String pMsg) {
-        Toast.makeText(this,pMsg,Toast.LENGTH_LONG);
-        Log.i("vbvb","主密钥下载失败："+pMsg);
-    }
 
     @Override
     public void onClick(View v) {
@@ -47,6 +35,7 @@ public class KeyDownLoadAty extends BaseActivity implements IKeyDownLoadAty {
 
     @Override
     public void initListener() {
+        DialogUtil.showProgressDialog(this,true,DialogUtil.STYLE_CIRCAL,"主密钥下载中",25);
         mPresenter.actionKeyDown();
     }
 
@@ -63,4 +52,17 @@ public class KeyDownLoadAty extends BaseActivity implements IKeyDownLoadAty {
     public static void launch(Context pContext){
         pContext.startActivity(new Intent(pContext,KeyDownLoadAty.class));
     }
+
+    @Override
+    public void onKeyDownSucc(String pMsg) {
+        Toast.makeText(this,pMsg,Toast.LENGTH_LONG).show();
+        DialogUtil.hideProgressDialog();
+    }
+
+    @Override
+    public void onKeyDownFail(String pMsg) {
+        Toast.makeText(this,pMsg,Toast.LENGTH_LONG).show();
+        DialogUtil.hideProgressDialog();
+    }
+
 }

@@ -112,5 +112,84 @@ public class ConvertUtils {
     public static String hexStringToStr(String pHexString){
         return new String(ConvertUtils.hexStringToByte(pHexString));
     }
+////////////////////////////////////////////////////////////////////////////////
 
+
+
+    public static void BcdToAsc(byte[] sAscBuf, byte[] sBcdBuf, int iAscLen) {
+        int i, j;
+
+        j = 0;
+        for (i = 0; i < iAscLen / 2; i++) {
+            sAscBuf[j] = (byte) ((sBcdBuf[i] & 0xf0) >> 4);
+            sAscBuf[j] = abcd_to_asc(sAscBuf[j]);
+            j++;
+            sAscBuf[j] = (byte) (sBcdBuf[i] & 0x0f);
+            sAscBuf[j] = abcd_to_asc(sAscBuf[j]);
+            j++;
+        }
+        if (iAscLen % 2 != 0) {
+            sAscBuf[j] = (byte) ((sBcdBuf[i] & 0xf0) >> 4);
+            sAscBuf[j] = abcd_to_asc(sAscBuf[j]);
+        }
+    }
+
+    public static byte abcd_to_asc(byte ucBcd) {
+        byte ucAsc;
+
+        ucBcd &= 0x0f;
+        if (ucBcd <= 9) {
+            ucAsc = (byte) (ucBcd + (byte) '0');
+        } else {
+            ucAsc = (byte) (ucBcd + (byte) 'A' - (byte) 10);
+        }
+        return ucAsc;
+    }
+
+
+    public static void AscToBcd(byte[] sBcdBuf, byte[] sAscBuf, int iAscLen) {
+        int i, j;
+
+        j = 0;
+
+        for (i = 0; i < (iAscLen + 1) / 2; i++) {
+            sBcdBuf[i] = (byte) (aasc_to_bcd(sAscBuf[j++]) << 4);
+            if (j >= iAscLen) {
+                sBcdBuf[i] |= 0x00;
+            } else {
+                sBcdBuf[i] |= aasc_to_bcd(sAscBuf[j++]);
+            }
+        }
+    }
+
+    public static byte aasc_to_bcd(byte ucAsc) {
+        byte ucBcd;
+
+        if (ucAsc >= '0' && ucAsc <= '9')
+            ucBcd = (byte) (ucAsc - '0');
+        else if (ucAsc >= 'A' && ucAsc <= 'F')
+            ucBcd = (byte) (ucAsc - 'A' + 10);
+        else if (ucAsc >= 'a' && ucAsc <= 'f')
+            ucBcd = (byte) (ucAsc - 'a' + 10);
+        else if (ucAsc > 0x39 && ucAsc <= 0x3f)
+            ucBcd = (byte) (ucAsc - '0');
+        else ucBcd = 0x0f;
+
+        return ucBcd;
+    }
+
+
+    public static void do_xor_urovo(byte[] src1, byte[] src2, int num) {
+        int i;
+
+        int data2 = 0;
+        int data1 = 0;
+
+        for (i = 0; i < num; i++) {
+            data1 = 0x00ff & src1[i];
+            data2 = 0x00ff & src2[i];
+            data1 ^= data2;
+            src1[i] = (byte) (data1 & 0x00ff);
+        }
+    }
 }

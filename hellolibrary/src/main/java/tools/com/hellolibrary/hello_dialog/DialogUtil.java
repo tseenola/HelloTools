@@ -20,6 +20,8 @@ import android.widget.Toast;
 
 import java.lang.reflect.Field;
 
+import tools.com.hellolibrary.hello_thread.ThreadUtil;
+
 /**
  * Created by jun lee on 2016/5/19. 描述：对progressBar得封装
  */
@@ -78,9 +80,10 @@ public class DialogUtil {
      * 隐藏progressBar
      */
     public static void hideProgressDialog() {
-        if (mDialog != null) {
+        if (mDialog != null&&mDialog.isShowing()) {
             mDialog.dismiss();
         }
+        mDialog=null;
     }
 
     /**
@@ -102,14 +105,13 @@ public class DialogUtil {
             };
         }
         showProgressDialog(aty, false, STYLE_CIRCAL, msg, textSize);
-        new Thread() {
+        ThreadUtil.runCachedService(new Runnable() {
             @Override
             public void run() {
-                super.run();
                 SystemClock.sleep(showTime);
                 mHandler.sendEmptyMessage(0);
             }
-        }.start();
+        });
     }
 
     /**

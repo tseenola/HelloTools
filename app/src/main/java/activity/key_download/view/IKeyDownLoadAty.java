@@ -6,6 +6,6 @@ package activity.key_download.view;
  */
 
 public interface IKeyDownLoadAty {
-    void onSignInSucc(String pMsg);
-    void onSignInFail(String pMsg);
+    void onKeyDownSucc(String pMsg);
+    void onKeyDownFail(String pMsg);
 }
