@@ -6,7 +6,7 @@ package tools.com.hellolibrary.helllo_my_inter;
  */
 
 public interface IUrovoSDK {
-    public static final int ParentKeyNo = 0;
+    public static final int BE_USED_TO_LOAD_PARENT_KEY = 0;//when DownloadKey is used to load parent key, this parameter can be ignore. 当Downladkey函数被用来加载主密钥，这个参数填写0
     /**
      * 密钥类型
      */

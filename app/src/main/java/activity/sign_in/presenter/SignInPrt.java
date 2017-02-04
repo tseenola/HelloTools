@@ -15,6 +15,7 @@ import pos2.fields.F41;
 import pos2.fields.F42;
 import pos2.fields.F60;
 import pos2.model.Body_STD;
+import tools.com.hellolibrary.hello_convert.ConvertUtils;
 
 /**
  * Created by lijun on 2017/1/5.
@@ -81,14 +82,21 @@ public class SignInPrt extends BaseDealPrt implements ISignInPrt {
         }
 
         if(!workKeySec.startsWith("01")) {
-            throw new IllegalArgumentException("不支持的工作密钥加密类型");
-        }
-        boolean succ = WorkingKeyWriter.doWriteWorkKey();
-        if(succ){
-            mView.onSignInSucc("签到写入工作密钥成功");
-        }else {
-            mView.onSignInFail("签到写入工作密钥失败");
+            throw new IllegalArgumentException("不支持的工作密钥加密类型,现在只支持ECB");
         }
 
+        String lPinSec = workKeySec.substring(2,17*2);
+        String lMacSec = workKeySec.substring(17*2,33*2);
+
+        byte pinDatas [] = ConvertUtils.hexStringToByte(lPinSec);
+        byte macDatas [] = ConvertUtils.hexStringToByte(lMacSec);
+
+        int masterKeyIndex = DBPosSettingBill.getMasterKeyIndex();
+        boolean succ = WorkingKeyWriter.doWriteWorkKey(pinDatas,macDatas,new byte[0],masterKeyIndex,new byte[4],false);
+        if(succ){
+            mView.onSignInSucc("签到and写入工作密钥成功");
+        }else {
+            mView.onSignInFail("签到but写入工作密钥失败");
+        }
     }
 }

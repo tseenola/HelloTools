@@ -13,10 +13,10 @@ public abstract class  MasterKeyWriteTemplate extends MaxqManagerHelper{
 
     /**
      * 清除安全芯片中指定的密钥索引下所有主密钥
-     * @param masterKeyIndex
+     * @param KeyNo
      * @return
      */
-    public abstract boolean clearAllMasterKeyByIndex(int masterKeyIndex);
+    public abstract boolean clearAllMasterKeyByIndex(int KeyNo);
 
     /**
      * 写入主密钥解密密钥明文到安全芯片
@@ -58,7 +58,7 @@ public abstract class  MasterKeyWriteTemplate extends MaxqManagerHelper{
     /**
      * 写入主密钥
      */
-    public boolean doWriteMasterKeyByKEK(int masterKeyIndex, byte[] kekData, byte[] masterSecData){
+    public boolean doWriteMasterKeyByKEK(int KeyNo, byte[] kekData, byte[] masterSecData){
         byte[] ResponseData = new byte[kekData.length];
         byte[] ResLen = new byte[1];
         byte[] DecryResponseData = new byte[16];
@@ -67,11 +67,11 @@ public abstract class  MasterKeyWriteTemplate extends MaxqManagerHelper{
         byte[] StartValueLen = new byte[8];
 
         return initMaxqManager()&&//初始化安全芯片
-                clearAllMasterKeyByIndex(masterKeyIndex)&&//清除指定密钥索引所有主密钥
-                writeKEK(KeyUsage._MASTKEY,masterKeyIndex,ParentKeyNo,kekData,kekData.length,ResponseData,ResLen)&&//写入主密钥解密密钥明文到安全芯片
-                decryMasterKey(KeyUsage._MASTKEY,masterKeyIndex,Algorithm._ECB,StartValueLen,StartValueLen.length,0x00,masterSecData,masterSecData.length,DecryResponseData,DecryResLen)&&//对主密钥密文解密
-                clearAllMasterKeyByIndex(masterKeyIndex)&&//清除指定密钥索引所有主密钥
-                writeMasterKey(KeyUsage._MASTKEY,masterKeyIndex,ParentKeyNo,DecryResponseData,DecryResponseData.length,ResponseData,ResLen)&&//写入主密钥明文到安全芯片
+                clearAllMasterKeyByIndex(KeyNo)&&//清除指定密钥索引所有主密钥
+                writeKEK(KeyUsage._MASTKEY,KeyNo, BE_USED_TO_LOAD_PARENT_KEY,kekData,kekData.length,ResponseData,ResLen)&&//写入主密钥解密密钥明文到安全芯片
+                decryMasterKey(KeyUsage._MASTKEY,KeyNo,Algorithm._ECB,StartValueLen,StartValueLen.length,0x00,masterSecData,masterSecData.length,DecryResponseData,DecryResLen)&&//对主密钥密文解密
+                clearAllMasterKeyByIndex(KeyNo)&&//清除指定密钥索引所有主密钥
+                writeMasterKey(KeyUsage._MASTKEY,KeyNo, BE_USED_TO_LOAD_PARENT_KEY,DecryResponseData,DecryResponseData.length,ResponseData,ResLen)&&//写入主密钥明文到安全芯片
                 closeMaxqManager();
     }
 

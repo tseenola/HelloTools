@@ -12,8 +12,8 @@ public class MasterKeyWriter extends MasterKeyWriteTemplate {
     private MasterKeyWriter(){};
 
 
-    public static boolean actionMasterKeyWrite(int masterKeyIndex,byte[] kekData,byte[] masterSecData){
-        return new MasterKeyWriter().doWriteMasterKeyByKEK(masterKeyIndex,kekData,masterSecData);
+    public static boolean actionMasterKeyWrite(int KeyNo,byte[] kekData,byte[] masterSecData){
+        return new MasterKeyWriter().doWriteMasterKeyByKEK(KeyNo,kekData,masterSecData);
     }
 
     @Override

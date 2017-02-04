@@ -8,6 +8,7 @@ import activity.key_download.view.IKeyDownLoadAty;
 import base.BaseDealPrt;
 import base.BaseReq;
 import core.MasterKeyWriter;
+import db.bill.DBPosSettingBill;
 import pos2.fields.F03;
 import pos2.fields.F41;
 import pos2.fields.F42;
@@ -64,8 +65,8 @@ public class KeyDownLoadPrt extends BaseDealPrt implements IKeyDownLoadPrt {
         byte[] bcdKEK = ConvertUtils.hexStringToByte(strKEK);
         String strMstSec = pBody_std.getmF48().getValue().split("-->")[1];
         byte[] bcdMstSec = ConvertUtils.hexStringToByte(strMstSec);
-
-        boolean iRet = MasterKeyWriter.actionMasterKeyWrite(1,bcdKEK,bcdMstSec);
+        int masterKeyIndex = DBPosSettingBill.getMasterKeyIndex();
+        boolean iRet = MasterKeyWriter.actionMasterKeyWrite(masterKeyIndex,bcdKEK,bcdMstSec);
 
         if(iRet) {
             Log.i("vbvb","写入主密钥成功");

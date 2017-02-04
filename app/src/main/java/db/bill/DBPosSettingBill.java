@@ -1,8 +1,11 @@
 package db.bill;
 
 import android.content.ContentValues;
+import android.util.Log;
 
 import org.litepal.crud.DataSupport;
+
+import java.util.List;
 
 import base.ConfigValues;
 import base.Constants;
@@ -75,5 +78,89 @@ public class DBPosSettingBill {
         ContentValues traceVal = new ContentValues();
         traceVal.put("parmValue", pTrace);
         DataSupport.updateAll(DBPosSetting.class, traceVal, "keyIndex=? and parmName=?","1", "iNowTraceNo");
+    }
+
+    /**
+     * 获得pin密钥索引
+     * @return
+     */
+    public static int getPinKeyIndex(){
+        int pinKeyIndex = 0;
+        try {
+            pinKeyIndex = Integer.valueOf(getParamValue(1,"iPinKIndex"));
+        }catch (Exception pE){
+            pE.printStackTrace();
+        }
+        return pinKeyIndex;
+    }
+
+    /**
+     * 获得磁道密钥索引
+     * @return
+     */
+    public static int getTrackKeyIndex(){
+        int trackIndex = 0;
+        try {
+            trackIndex = Integer.valueOf(getParamValue(1,"iEncryptIndex"));
+        }catch (Exception pE){
+            pE.printStackTrace();
+        }
+        return trackIndex;
+    }
+
+    /**
+     * 获得主密钥索引
+     * @return
+     */
+    public static int getMasterKeyIndex(){
+        int masterKeyIndex = 0;
+        try {
+            masterKeyIndex = Integer.valueOf(getParamValue(1,"iMKIndex"));
+        }catch (Exception pE){
+            pE.printStackTrace();
+        }
+        return masterKeyIndex;
+    }
+
+    /**
+     * 获取Mac密钥索引
+     * @return
+     */
+    public static int getMacKeyIndex(){
+        int macKeyIndex = 0;
+        try {
+            macKeyIndex = Integer.valueOf(getParamValue(1,"iMACKIndex"));
+        }catch (Exception pE){
+            pE.printStackTrace();
+        }
+        return macKeyIndex;
+    }
+
+    /**
+     * 获取参数值
+     */
+    private static String getParamValue(int keyIndex, String parmName) {
+        String parmValue = "";
+        try {
+            List<DBPosSetting> dbPosSettingList = DataSupport.where("keyIndex=? and parmName=?", keyIndex + "", parmName + "").find(DBPosSetting.class);
+            if (dbPosSettingList == null) {
+                parmValue = "";
+            } else {
+                if (dbPosSettingList.size() == 0) {
+                    parmValue = "";
+                } else {
+                    DBPosSetting dbPosSetting = dbPosSettingList.get(0);
+                    if (dbPosSetting != null) {
+                        parmValue = dbPosSetting.getParmValue();
+                    } else {
+                        parmValue = "";
+                    }
+                }
+            }
+        } catch (Exception ex) {
+            Log.e("ConfigUtil", ex.getMessage(), ex);
+            parmValue = "";
+        }
+        return parmValue;
     }
 }
