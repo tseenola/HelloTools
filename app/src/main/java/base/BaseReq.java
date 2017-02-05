@@ -8,6 +8,7 @@ import android.util.Log;
 import java.lang.reflect.Field;
 
 import core.MacCalculater;
+import db.bill.DBPosSettingBill;
 import pos.IPosTempTemplet;
 import pos2.constant.Constant;
 import pos2.model.BaseField;
@@ -30,13 +31,17 @@ public abstract class  BaseReq implements IPosTempTemplet{
 	public String mBitMap;
 
 	@Override
-	public void actionDeal(final Context pContext, final String pIp, final int pPort, final int pTime, final String pTpdu, final String pDealType, final String pBitMapStr, final BaseReq pDealReq, final ResultListener pResultListener) {
+	public void actionDeal(final Context pContext,final String pDealType, final String pBitMapStr, final BaseReq pDealReq, final ResultListener pResultListener) {
+		final String lTpdu = DBPosSettingBill.getTpdu();
+		final String lIp = DBPosSettingBill.getIp();
+		final int lPort = DBPosSettingBill.getPort();
+		final int lTime = DBPosSettingBill.getSocketTimeOut();
 		ThreadUtil.runCachedService(new Runnable() {
 			@Override
 			public void run() {
 				SystemClock.sleep(500);
-				byte sendMsgByte [] = pack(pTpdu,pDealType,pBitMapStr,pDealReq);//组包
-				sendPack(pContext, sendMsgByte, pIp, pPort, pTime);//发包
+				byte sendMsgByte [] = pack(lTpdu,pDealType,pBitMapStr,pDealReq);//组包
+				sendPack(pContext, sendMsgByte, lIp, lPort, lTime);//发包
 				String rcvedHexMsg = rcvPack();//收包
 				final Object [] unPackResult = unPack(rcvedHexMsg);//解包
 				//final Object [] unPackResult = unPack("010F600000000808102038000002D0000E9400000000001813590122303031323031515A38513130333130303034383134313334371662646262643264376233633962396136003301179600641C1ADA22BEF375639B45E7F2BEF375639B45E7F2BEF375639B45E7F200123130303030303230303030300152313131313131202020203232323232322020202033333333333320202020202020202020202020202020202020202020202020202020202020202020B9ABD6F7B7D8B4E4CEA2B4F3CFC3202020202020202020202020202020202020202020202020202037333932FF00FF50FF50FF50FCC0FF00FE50FE508000BF5000000000000303031003000099999999000001000000010100000000");//签到收到的成功报文

@@ -167,6 +167,47 @@ public class DBPosSettingBill {
         setParamValue(1,"fNeedDLEmvPublicKeys",pVal);
     }
 
+
+    /**
+     * 设置签到状态
+     * @param pB
+     */
+    public static void setSignInStatus(boolean pB) {
+        setParamValue(1,"isSign",pB?"1":"0");
+    }
+
+    /**
+     * 获取tpdu
+     */
+    public static String getTpdu(){
+        return getParamValue(1,"sTPDU");
+    }
+
+    /**
+     * 获取端口
+     * @return
+     */
+    public static int getPort(){
+        return Integer.valueOf(getParamValue(1,"sIPport"));
+    }
+
+    /**
+     * 获取ip地址
+     * @return
+     */
+    public static String getIp(){
+        return getParamValue(1,"sIPAddr");
+    }
+
+    /**
+     * 获取网络超时时间
+     * @return
+     */
+    public static int getSocketTimeOut(){
+        return Integer.valueOf(getParamValue(1,"iCommWaitTime"));
+    }
+
+
     /**
      * 获取参数值
      */
@@ -218,6 +259,5 @@ public class DBPosSettingBill {
         }
         return bResult;
     }
-
 
 }

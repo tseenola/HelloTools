@@ -16,7 +16,7 @@ public class ConfigValues {
      * 小额商户默认通讯信息
      */
     public static final String DEFAULT_NORMAL_TPDU = "6000080000";
-    public static final String DEFAULT_NORMAL_ADDR = "192.168.0.210";
+    public static final String DEFAULT_NORMAL_ADDR = "49.4.175.10";
     public static final String DEFAULT_NORMAL_PORT = "5005";
 
     public static final String DEFAULT_NORMAL_TPDU_CLEAR = "6000550000";
@@ -34,8 +34,8 @@ public class ConfigValues {
     /**
      * 小额商户默认商户信息
      */
-    public static final String DEFAULT_NORMAL_MID = "000000000000000";
-    public static final String DEFAULT_NORMAL_TID = "00000000";
+    public static final String DEFAULT_NORMAL_MID = "103100048141347";
+    public static final String DEFAULT_NORMAL_TID = "1201QZ8Q";
     public static final String DEFAULT_NORMAL_MNAME = "";
     public static final String DEFAULT_NORMAL_CLEAR_FLAG = "0";
     public static final String DEFAULT_NORMAL_CLEAR_ID = "";

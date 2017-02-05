@@ -53,7 +53,7 @@ public class InitParamPrt extends BaseDealPrt implements IInitParamPrt {
                 new F60("A00199"),
                 new F64("")
         );
-        lIcParamReq.actionDeal(mContext, "49.4.175.10", 5005, 100, "6000080000", "0800", "03,11,25,41,42,60,64", lIcParamReq, new BaseReq.ResultListener() {
+        lIcParamReq.actionDeal(mContext, "0800", "03,11,25,41,42,60,64", lIcParamReq, new BaseReq.ResultListener() {
             @Override
             public void succ(Body_STD pBody_std) {
                 int lAidNo = IcCardParamDownDecoder.getAidNum(pBody_std.getmF63().getValue());
@@ -87,7 +87,7 @@ public class InitParamPrt extends BaseDealPrt implements IInitParamPrt {
                 new F63(StringUtils.fillContentBy(StringUtils.Dir.left, "0", pCapkSeq + "", 2)),
                 new F64("")
         );
-        lCAPKDownReq.actionDeal(mContext, "49.4.175.10", 5005, 100, "6000080000", "0800", "03,11,25,41,42,60,63,64", lCAPKDownReq, new BaseReq.ResultListener() {
+        lCAPKDownReq.actionDeal(mContext, "0800", "03,11,25,41,42,60,63,64", lCAPKDownReq, new BaseReq.ResultListener() {
             @Override
             public void succ(Body_STD pBody_std) {
                 //拼接Capk
@@ -141,7 +141,7 @@ public class InitParamPrt extends BaseDealPrt implements IInitParamPrt {
                 new F63(StringUtils.fillContentBy(StringUtils.Dir.left, "0", pAidSeq + "", 2)),
                 new F64("")
         );
-        lAidDownLoadReq.actionDeal(mContext, "49.4.175.10", 5005, 100, "6000080000", "0800", "03,11,25,41,42,60,63,64", lAidDownLoadReq, new BaseReq.ResultListener() {
+        lAidDownLoadReq.actionDeal(mContext, "0800", "03,11,25,41,42,60,63,64", lAidDownLoadReq, new BaseReq.ResultListener() {
             @Override
             public void succ(Body_STD pBody_std) {
                 Log.i("vbvb", "aid 下载成功");

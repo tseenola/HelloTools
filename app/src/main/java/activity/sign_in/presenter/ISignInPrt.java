@@ -17,6 +17,7 @@ public interface ISignInPrt {
      * 1.同步批次号
      * 2.同步流水号
      * 3.写入工作密钥
+     * 4.同步签到状态到数据库（是否已经签到）
      */
-    void syncParaWithService(Body_STD pBody_std);
+    void syncParaWithServiceAndDB(Body_STD pBody_std);
 }

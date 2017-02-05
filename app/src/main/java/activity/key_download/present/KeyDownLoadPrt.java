@@ -42,7 +42,7 @@ public class KeyDownLoadPrt extends BaseDealPrt implements IKeyDownLoadPrt {
                 new F60("A00199")//N
         );
 
-        lKeyDownReq.actionDeal(mContext, "49.4.175.10", 5005, 100, "6000080000", "0800", "03,41,42,60", lKeyDownReq, new BaseReq.ResultListener() {
+        lKeyDownReq.actionDeal(mContext, "0800", "03,41,42,60", lKeyDownReq, new BaseReq.ResultListener() {
             @Override
             public void succ(Body_STD pBody_std) {
                 writeMasterKey(pBody_std);

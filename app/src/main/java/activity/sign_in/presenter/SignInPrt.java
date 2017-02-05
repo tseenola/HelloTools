@@ -41,11 +41,11 @@ public class SignInPrt extends BaseDealPrt implements ISignInPrt {
                 new F42("103100048141347"),//ANS
                 new F60("A00199"));//N
         //交易并接受结果
-        signReq.actionDeal(mContext, "49.4.175.10", 5005, 100, "6000080000", "0800", "03,25,41,42,60", signReq, new BaseReq.ResultListener() {
+        signReq.actionDeal(mContext,"0800", "03,25,41,42,60", signReq, new BaseReq.ResultListener() {
             @Override
             public void succ(Body_STD pBody_std) {
                 Toast.makeText(mContext,"succ"+pBody_std.getmF44().getValue(),Toast.LENGTH_LONG).show();
-                syncParaWithService(pBody_std);
+                syncParaWithServiceAndDB(pBody_std);
             }
 
             @Override
@@ -54,20 +54,20 @@ public class SignInPrt extends BaseDealPrt implements ISignInPrt {
             }
         });
     }
-
-
     /**
      * 1.同步批次号
      * 2.同步流水号
      * 3.写入工作密钥
+     * 4.同步签到状态到数据库（是否已经签到）
      */
     @Override
-    public void syncParaWithService(Body_STD pBody_std) {
+    public void syncParaWithServiceAndDB(Body_STD pBody_std) {
+        //1.同步批次号,2.同步流水号
         String f63 = pBody_std.getmF62().getValue().split("-->")[1];
         String lBatch = f63.substring(6,12);
         String lTrace = f63.substring(0,6);
         DBPosSettingBill.syncBatchAndTrace(lBatch,lTrace);
-        //写入工作密钥
+        //3.写入工作密钥
         /* 天下汇工作密钥的数据长度33个字节。
          * 第1字节MAC类型，目前只支持0x01，采用ECB进行运算。
          * 第2-17字节PIN Key的密文。
@@ -92,10 +92,16 @@ public class SignInPrt extends BaseDealPrt implements ISignInPrt {
         byte macDatas [] = ConvertUtils.hexStringToByte(lMacSec);
 
         int masterKeyIndex = DBPosSettingBill.getMasterKeyIndex();
+
         boolean succ = WorkingKeyWriter.doWriteWorkKey(pinDatas,macDatas,new byte[0],masterKeyIndex,new byte[4],false);
+
         if(succ){
+            //4.同步签到状态到数据库（是否已经签到）
+            DBPosSettingBill.setSignInStatus(true);
             mView.onSignInSucc("签到and写入工作密钥成功");
         }else {
+            //4.同步签到状态到数据库（是否已经签到）
+            DBPosSettingBill.setSignInStatus(false);
             mView.onSignInFail("签到but写入工作密钥失败");
         }
     }

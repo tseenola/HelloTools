@@ -15,15 +15,11 @@ public interface IPosTempTemplet {
     /**
      * 执行交易流程（模板方法模式）
      * @param pContext 上下文
-     * @param pIp ip地址
-     * @param pPort 端口
-     * @param pTime 超时时间
-     * @param pTpdu tpdu
      * @param pDealType 交易类型 eg:0200 , 0800 and so on
      * @param pBitMapStr 位图 eg:"02,03,25,64"
      * @param pDealReq 交易实体 ：eg:SignInReq , KeyDownReq
      */
-    void actionDeal(final Context pContext, final String pIp, final int pPort, final int pTime, final String pTpdu, final String pDealType, final String pBitMapStr, final BaseReq pDealReq, BaseReq.ResultListener pResultListener);
+    void actionDeal(final Context pContext,final String pDealType, final String pBitMapStr, final BaseReq pDealReq, BaseReq.ResultListener pResultListener);
     /**
      * 组包
      * @param pTpdu  TPDU
