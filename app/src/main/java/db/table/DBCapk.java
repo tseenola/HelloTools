@@ -39,13 +39,18 @@ public class DBCapk extends DataSupport {
         CAPKExpDate = cAPKExpDate;
     }
 
-    public boolean insert(List<String> capkList) {
+
+    public boolean insertList(List<String> capkList) {
         for (String capk : capkList) {
             new DBCapk("", capk, "", "", "", "", "", "", "", "", "").save();
         }
         return true;
     }
 
+    public boolean insert(String capkList) {
+        new DBCapk("", capkList, "", "", "", "", "", "", "", "", "").save();
+        return true;
+    }
 
 
     public String getIndexID() {

@@ -10,6 +10,7 @@ import java.net.InetSocketAddress;
 import java.net.Socket;
 import java.net.UnknownHostException;
 
+import myutils.LogRecUtil;
 import tools.com.hellolibrary.hello_convert.ConvertUtils;
 
 /**
@@ -60,6 +61,7 @@ public class SocketUtils {
             }
             OutputStream socketWriter = mScoketClient.getOutputStream();
             Log.i("vbvb", "发送出去的报文：" + ConvertUtils.bytesToHexString(pBuff));
+            LogRecUtil.info("发送出去的报文：" + ConvertUtils.bytesToHexString(pBuff));
             socketWriter.write(pBuff);
             socketWriter.flush();
         } catch (Exception e) {
@@ -76,7 +78,6 @@ public class SocketUtils {
      */
     public static byte[] revMsg(int MS) {
         byte[] RecvBuff = new byte[2048];
-        System.gc();
         try {
             mScoketClient.setSoTimeout(MS * 1000);
             InputStream input = mScoketClient.getInputStream();
@@ -84,6 +85,7 @@ public class SocketUtils {
             byte lRevMsg [] = new byte[Recvlen];
             System.arraycopy(RecvBuff,0,lRevMsg,0,Recvlen);
             Log.i("vbvb", "接收到的报文：" + ConvertUtils.bytesToHexString(lRevMsg));
+            LogRecUtil.info("接收到的报文：" + ConvertUtils.bytesToHexString(lRevMsg));
             return lRevMsg;
         } catch (Exception e) {
             e.printStackTrace();

@@ -8,6 +8,7 @@ import java.util.LinkedList;
 
 import db.bill.DBPosSettingBill;
 import db.bill.DBUserBill;
+import myutils.LogRecUtil;
 import tools.com.hellolibrary.hello_base.BaseApplication;
 import tools.com.hellolibrary.hello_log.L;
 import tools.com.hellolibrary.hello_spref.SPUtils;
@@ -37,6 +38,7 @@ public class MyApplication extends BaseApplication{
      */
     @Override
     public void initLogRecUtil() {
+        LogRecUtil.init(this,"HelloTools");
         L.e("initLogRecUtil  ");
     }
 

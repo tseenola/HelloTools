@@ -101,10 +101,15 @@ public class DBAppParas extends DataSupport {
         this.abAcquirerID = abAcquirerID;
     }
 
-    public boolean insert(List<String> aidList) {
+    public boolean insertAidList(List<String> aidList) {
         for (String aid : aidList) {
             new DBAppParas("", aid, "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "").save();
         }
+        return true;
+    }
+
+    public boolean insert(String aid) {
+        new DBAppParas("", aid, "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "").save();
         return true;
     }
 

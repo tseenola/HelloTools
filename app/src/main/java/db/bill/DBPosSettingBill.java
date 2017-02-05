@@ -137,6 +137,37 @@ public class DBPosSettingBill {
     }
 
     /**
+     * 获取当前凭证号（流水）
+     * @return
+     */
+    public static int getTraceNo(){
+        int traceNo = 0;
+        try {
+            traceNo = Integer.valueOf(getParamValue(1,"iNowTraceNo"));
+        }catch (Exception pE){
+            pE.printStackTrace();
+        }
+        return traceNo;
+    }
+
+
+    /**
+     * 设置不需要下载Aid参数
+     * @param pVal 0不需要，1需要
+     */
+    public static void setNoNeedDownAid(String pVal) {
+        setParamValue(1,"fNeedDLEmvParas",pVal);
+    }
+
+    /**
+     * 设置是否需需要下载Capk
+     * @param pVal 0不需要，1需要
+     */
+    public static void setNoNeedDownCapk(String pVal) {
+        setParamValue(1,"fNeedDLEmvPublicKeys",pVal);
+    }
+
+    /**
      * 获取参数值
      */
     private static String getParamValue(int keyIndex, String parmName) {
@@ -163,4 +194,30 @@ public class DBPosSettingBill {
         }
         return parmValue;
     }
+
+
+    /**
+     * 设置参数值 ConfigUtil.setParamValue(keyIndex, "iNowTraceNo", recvISO8583.szField62.substring(0, 6));
+     */
+    public static boolean setParamValue(int keyIndex, String parmName, String parmValue) {
+        boolean bResult = false;
+        try {
+            List<DBPosSetting> dbPosSettingList = DataSupport.where("keyIndex=? and parmName=?", keyIndex + "", parmName).find(DBPosSetting.class);
+            if (dbPosSettingList == null || dbPosSettingList.size() == 0) {
+                // 如果不存在数据，则新增
+                new DBPosSetting(keyIndex, parmName, parmValue, "").save();
+            } else {
+                // 如果存在数据，则更新
+                ContentValues values = new ContentValues();
+                values.put("parmValue", parmValue);
+                DataSupport.updateAll(DBPosSetting.class, values, "keyIndex=? and parmName=?", keyIndex + "", parmName);
+            }
+            bResult = true;
+        } catch (Exception ex) {
+            bResult = false;
+        }
+        return bResult;
+    }
+
+
 }

@@ -178,18 +178,4 @@ public class ConvertUtils {
         return ucBcd;
     }
 
-
-    public static void do_xor_urovo(byte[] src1, byte[] src2, int num) {
-        int i;
-
-        int data2 = 0;
-        int data1 = 0;
-
-        for (i = 0; i < num; i++) {
-            data1 = 0x00ff & src1[i];
-            data2 = 0x00ff & src2[i];
-            data1 ^= data2;
-            src1[i] = (byte) (data1 & 0x00ff);
-        }
-    }
 }
