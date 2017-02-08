@@ -27,11 +27,12 @@ import static tools.com.hellolibrary.hello_socket.SocketUtils.revMsg;
  * 报文请求基础类，采用模板方法模式
  */
 public abstract class  BaseReq implements IPosTempTemplet{
-	public String mMesType;
-	public String mBitMap;
+	private int mMsgType;
+	private String mBitMap;
 
 	@Override
-	public void actionDeal(final Context pContext,final String pDealType, final String pBitMapStr, final BaseReq pDealReq, final ResultListener pResultListener) {
+	public void actionDeal(final Context pContext,final String pMsgType, final String pBitMapStr, final BaseReq pDealReq, final ResultListener pResultListener) {
+		mMsgType = Integer.valueOf(pMsgType);
 		final String lTpdu = DBPosSettingBill.getTpdu();
 		final String lIp = DBPosSettingBill.getIp();
 		final int lPort = DBPosSettingBill.getPort();
@@ -40,16 +41,21 @@ public abstract class  BaseReq implements IPosTempTemplet{
 			@Override
 			public void run() {
 				SystemClock.sleep(500);
-				byte sendMsgByte [] = pack(lTpdu,pDealType,pBitMapStr,pDealReq);//组包
-				sendPack(pContext, sendMsgByte, lIp, lPort, lTime);//发包
-				String rcvedHexMsg = rcvPack();//收包
-				final Object [] unPackResult = unPack(rcvedHexMsg);//解包
+				//组包
+				byte sendMsgByte [] = pack(lTpdu,pMsgType,pBitMapStr,pDealReq);
+				//发包
+				sendPack(pContext, sendMsgByte, lIp, lPort, lTime);
+				//收包
+				String rcvedHexMsg = rcvPack();
+				//解包
+				final Object [] unPackResult = unPack(rcvedHexMsg);
 				//final Object [] unPackResult = unPack("010F600000000808102038000002D0000E9400000000001813590122303031323031515A38513130333130303034383134313334371662646262643264376233633962396136003301179600641C1ADA22BEF375639B45E7F2BEF375639B45E7F2BEF375639B45E7F200123130303030303230303030300152313131313131202020203232323232322020202033333333333320202020202020202020202020202020202020202020202020202020202020202020B9ABD6F7B7D8B4E4CEA2B4F3CFC3202020202020202020202020202020202020202020202020202037333932FF00FF50FF50FF50FCC0FF00FE50FE508000BF5000000000000303031003000099999999000001000000010100000000");//签到收到的成功报文
 				//final Object [] unPackResult = unPack("005E600000000808102000000002D10000900000303031323031515A3851313033313030303438313431333437166264626264326437623363396239613600323635354541363238434636323538354636353545413632384346363235383546");//主密钥下载收到的成功报文
 				//final Object [] unPackResult = unPack("005F600000000808102020000002D00003920000100000303031323031515A38513130333130303034383134313334371662646262643264376233633962396136002212E0E0C801562200040202020156015601000001000CB2857CFD07D48322");//IC卡终端参数下载
 				//final Object [] unPackResult = unPack("007F600000000808102020000002D00003990000100000303031323031515A38513130333130303034383134313334371662646262643264376233633962396136005402A0000000041010FFFFFFFFFFFFFFFFFF020000FC50A8A0000400000000F850A8F8000000000005000100000000001090109F370400857F5DE36BC970C4");//第1条aid
 				//final Object [] unPackResult = unPack("011D600000000808102020000002D00003930000100000303031323031515A38513130333130303034383134313334371662646262643264376233633962396136021202A000000003080101B0D9FD6ED75D51D0E30664BD157023EAA1FFA871E4DA65672B863D255E81E137A51DE4F72BCC9E44ACE12127F87E263D3AF9DD9CF35CA4A7B01E907000BA85D24954C2FCA3074825DDD4C0C8F186CB020F683E02F2DEAD3969133F06F7845166ACEB57CA0FC2603445469811D293BFEFBAFAB57631B3DD91E796BF850A25012F1AE38F05AA5C4D6D03B1DC2E568612785938BBC9B3CD3A910C1DA55A5A9218ACE0F7A21287752682F15832A678D6E1ED0B00000320D213126955DE205ADC2FD2822BD22DE21CF9A8231231A06BC4B27E172FE7");//第1条capk
-				final boolean isDealSucc = chkPack(unPackResult);//检包
+				//检包
+				final boolean isDealSucc = chkPack(unPackResult);
 				ThreadUtil.runOnUiThread(new Runnable() {
 					@Override
 					public void run() {
@@ -75,7 +81,7 @@ public abstract class  BaseReq implements IPosTempTemplet{
 			int i = 0;
 			for (int o = 0; o < bitmapChars.length; o++) {
 				if (bitmapChars[o] == '1') {
-					try {
+						try {
 						//获取值
 						BaseField baseField = (BaseField) signInField[i].get(pDealReq);
 						String value = baseField.value;
@@ -166,13 +172,40 @@ public abstract class  BaseReq implements IPosTempTemplet{
 		return ConvertUtils.bytesToHexString(pRevMsgByte);
 	}
 
+	/**
+	 * 检查包
+	 * 1.交易状态是否为00
+	 * 2.消息类型是否对应
+	 * 3.商户号是否匹配
+	 * 4.终端号是否匹配
+	 * @param pUnPackResult pUnPackResult[0]解包后的报文头，pUnPackResult[1]解包后的报文体，
+	 * @return 交易是否成功
+	 */
 	@Override
 	public boolean chkPack(Object [] pUnPackResult) {
-		String retCode = ((Body_STD)pUnPackResult[1]).getmF39().getValue();
-		if(retCode.contains("3030-->00")){
-			return true;
+
+		Body_STD lBody_std = (Body_STD)pUnPackResult[1];
+		String retCode = lBody_std.getmF39().getValue();
+		if(!retCode.contains("3030-->00")){
+			return false;
 		}
-		return false;
+
+		int lRcvMsgType = Integer.valueOf(((Header_STD)pUnPackResult[0]).getmF04().getValue());
+		int z = mMsgType+10;
+		if((mMsgType+10)!=lRcvMsgType){
+			return false;
+		}
+
+		String rcvTerminalNo = lBody_std.getmF41().getValue();
+		if(!rcvTerminalNo.contains(DBPosSettingBill.getTerminalNo())){
+			return false;
+		}
+
+		String rcvMerchantNo = lBody_std.getmF42().getValue();
+		if(!rcvMerchantNo.contains(DBPosSettingBill.getMerchantNo())){
+			return false;
+		}
+		return true;
 	}
 
 

@@ -1,29 +1,12 @@
 package activity.balance.presenter;
 
 import android.content.Context;
+import android.util.Log;
 
-import activity.balance.model.BalanceReq;
 import activity.balance.view.IBalanceAty;
 import base.BaseDealPrt;
-import base.BaseReq;
-import pos2.fields.F02;
-import pos2.fields.F03;
-import pos2.fields.F11;
-import pos2.fields.F14;
-import pos2.fields.F22;
-import pos2.fields.F23;
-import pos2.fields.F25;
-import pos2.fields.F35;
-import pos2.fields.F36;
-import pos2.fields.F41;
-import pos2.fields.F42;
-import pos2.fields.F49;
-import pos2.fields.F52;
-import pos2.fields.F55;
-import pos2.fields.F60;
-import pos2.fields.F62;
-import pos2.fields.F64;
-import pos2.model.Body_STD;
+import core.CardReader;
+import models.CardInfoModel;
 
 /**
  * Created by lenovo on 2017/2/5.
@@ -41,7 +24,24 @@ public class BalancePrt extends BaseDealPrt implements IBalancePrt{
 
     @Override
     public void actionQueryBalance() {
-        BalanceReq lBalanceReq = new BalanceReq(
+
+        new CardReader().readCard(new CardReader.OnReadCardFinish() {
+            @Override
+            public void onSucc(CardInfoModel pPardInfo) {
+                CardReader.checkCardThreadIsRun = false;
+                Log.i("vbvb","刷卡成功："+pPardInfo.toString());
+            }
+
+            @Override
+            public void onFail(String pFailMsg) {
+                CardReader.checkCardThreadIsRun = false;
+                Log.i("vbvb","刷卡失败：" + pFailMsg);
+            }
+        });
+
+
+
+        /*BalanceReq lBalanceReq = new BalanceReq(
                 new F02(""),
                 new F03(""),
                 new F11(""),
@@ -71,6 +71,6 @@ public class BalancePrt extends BaseDealPrt implements IBalancePrt{
             public void fail(Body_STD pBody_std) {
 
             }
-        });
+        });*/
     }
 }

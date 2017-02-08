@@ -1,0 +1,29 @@
+{
+	"DBUserDefValList":[
+		{
+			"userId" : "99",
+			"passwd" : "12345678",
+			"level" : "1"
+		},
+        {
+            "userId" : "00",
+            "passwd" : "112233",
+            "level" : "2"
+        },
+		{
+            "userId" : "01",
+            "passwd" : "0000",
+            "level" : "3"
+        },
+		{
+            "userId": "02",
+            "passwd": "0000",
+            "level": "3"
+        },
+		{
+            "userId": "03",
+            "passwd": "0000",
+            "level": "3"
+        }
+	]
+}

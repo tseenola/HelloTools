@@ -1,7 +1,10 @@
 package activity.balance.view;
 
+import android.content.Context;
+import android.content.Intent;
 import android.view.View;
 
+import activity.balance.presenter.BalancePrt;
 import tools.com.hellolibrary.hello_base.BaseActivity;
 import tools.com.hellotools.R;
 
@@ -11,6 +14,8 @@ import tools.com.hellotools.R;
  */
 
 public class BalanceAty extends BaseActivity implements IBalanceAty{
+    private BalancePrt mPresenter;
+
     @Override
     public void onClick(View v) {
 
@@ -28,7 +33,7 @@ public class BalanceAty extends BaseActivity implements IBalanceAty{
 
     @Override
     public void initListener() {
-
+        mPresenter.actionQueryBalance();
     }
 
     @Override
@@ -38,7 +43,7 @@ public class BalanceAty extends BaseActivity implements IBalanceAty{
 
     @Override
     public void initPresenter() {
-
+        mPresenter = new BalancePrt(this);
     }
 
     @Override
@@ -49,5 +54,9 @@ public class BalanceAty extends BaseActivity implements IBalanceAty{
     @Override
     public void onQueryBalanceFail(String pErrMsg) {
 
+    }
+
+    public static void launch(Context pContext) {
+        pContext.startActivity(new Intent(pContext,BalanceAty.class));
     }
 }

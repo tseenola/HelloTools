@@ -36,4 +36,5 @@ dependencies {
     compile files('libs/gson-2.6.2.jar')
     compile project(path: ':litepal')
     compile files('libs/platform_sdk_v2.2.3.jar')
+    compile files('libs/JniUVOPEV300.jar')
 }

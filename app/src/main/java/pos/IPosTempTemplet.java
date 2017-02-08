@@ -13,13 +13,13 @@ public interface IPosTempTemplet {
 
 
     /**
-     * 执行交易流程（模板方法模式）
+     * 执行交易流程
      * @param pContext 上下文
-     * @param pDealType 交易类型 eg:0200 , 0800 and so on
+     * @param pMsgType 消息类型 eg:0200 , 0800 and so on
      * @param pBitMapStr 位图 eg:"02,03,25,64"
      * @param pDealReq 交易实体 ：eg:SignInReq , KeyDownReq
      */
-    void actionDeal(final Context pContext,final String pDealType, final String pBitMapStr, final BaseReq pDealReq, BaseReq.ResultListener pResultListener);
+    void actionDeal(final Context pContext,final String pMsgType, final String pBitMapStr, final BaseReq pDealReq, BaseReq.ResultListener pResultListener);
     /**
      * 组包
      * @param pTpdu  TPDU
@@ -55,6 +55,10 @@ public interface IPosTempTemplet {
 
     /**
      * 检查包
+     * 1.交易状态是否为00
+     * 2.消息类型是否对应
+     * 3.商户号是否匹配
+     * 4.终端号是否匹配
      * @param pUnPackResult 解包后的结果作为参数
      * @return 交易是否成功
      */

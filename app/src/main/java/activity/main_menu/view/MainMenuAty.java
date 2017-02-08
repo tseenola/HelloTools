@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.view.View;
 import android.widget.Button;
 
+import activity.balance.view.BalanceAty;
 import activity.init_para.view.InitParamAty;
 import activity.key_download.view.KeyDownLoadAty;
 import activity.sign_in.view.SignInAty;
@@ -18,7 +19,7 @@ import tools.com.hellotools.R;
  * 描述：
  */
 
-public class MainMenuAty extends BaseActivity{
+public class MainMenuAty extends BaseActivity {
     @Bind(R.id.bt_MainKeyDown)
     Button mBtMainKeyDown;
     @Bind(R.id.bt_InitParaDown)
@@ -35,29 +36,35 @@ public class MainMenuAty extends BaseActivity{
     Button mBtSettle;
     @Bind(R.id.bt_SignOut)
     Button mBtSignOut;
+    @Bind(R.id.bt_QueryBalance)
+    Button mBtQueryBalance;
 
     @Override
     public void onClick(View v) {
-        switch (v.getId()){
+        switch (v.getId()) {
             case R.id.bt_MainKeyDown:
                 KeyDownLoadAty.launch(this);
-            break;
+                break;
             case R.id.bt_InitParaDown:
                 InitParamAty.launch(this);
-            break;
+                break;
             case R.id.bt_SignIn:
                 SignInAty.launch(this);
-            break;
+                break;
+            case R.id.bt_QueryBalance:
+                BalanceAty.launch(this);
+                break;
             case R.id.bt_Sale:
-            break;
+
+                break;
             case R.id.bt_SaleVoid:
-            break;
+                break;
             case R.id.bt_SaleRefund:
-            break;
+                break;
             case R.id.bt_Settle:
-            break;
+                break;
             case R.id.bt_SignOut:
-            break;
+                break;
         }
     }
 
@@ -77,6 +84,7 @@ public class MainMenuAty extends BaseActivity{
         mBtMainKeyDown.setOnClickListener(this);
         mBtInitParaDown.setOnClickListener(this);
         mBtSignIn.setOnClickListener(this);
+        mBtQueryBalance.setOnClickListener(this);
     }
 
     @Override

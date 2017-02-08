@@ -74,8 +74,8 @@ public class MyApplication extends BaseApplication{
     @Override
     public void initDbUtil() {
         if(SPUtils.getBoolean("isFirstInstall",true)){
-            DBUserBill.initDBUserTable();
-            DBPosSettingBill.initPosSettingTable();
+            DBUserBill.initDBUserTable(this);
+            DBPosSettingBill.initPosSettingTable(this);
             SPUtils.putBoolean("isFirstInstall",false);
         }
         L.e("initDbUtil");

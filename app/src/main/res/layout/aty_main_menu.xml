@@ -22,6 +22,12 @@
         android:text="签到"/>
 
     <Button
+        android:id="@+id/bt_QueryBalance"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="查询余额"/>
+
+    <Button
         android:id="@+id/bt_Sale"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"

@@ -1,0 +1,160 @@
+{
+	"DBPosSettingDefValList":[
+		{
+			"keyIndex": 1,
+			"parmName": "iMKIndex",
+			"parmValue": "1",
+			"parmMemo": "主密钥索引"
+		},
+		{
+			"keyIndex": 2,
+			"parmName": "iMKGap",
+			"parmValue": "2",
+			"parmMemo": "暂不用到"
+		},
+		{
+			"keyIndex": 3,
+			"parmName": "iMACKIndex",
+			"parmValue": "3",
+			"parmMemo": "MAC密钥索引"
+		},
+		{
+			"keyIndex": 4,
+			"parmName": "iEncryptIndex",
+			"parmValue": "4",
+			"parmMemo": "磁道加密密钥索引"
+		},
+		{
+			"keyIndex": 5,
+			"parmName": "iPinKIndex",
+			"parmValue": "5",
+			"parmMemo": "PIN密钥索引"
+		},
+		{
+			"keyIndex": 1,
+			"parmName": "iNowTraceNo",
+			"parmValue": "000001",
+			"parmMemo": "凭证号"
+		},
+		{
+			"keyIndex": 1,
+			"parmName": "iNowBatchNo",
+			"parmValue": "000001",
+			"parmMemo": "批次号"
+		},
+		{
+			"keyIndex": 1,
+			"parmName": "iCommWaitTime",
+			"parmValue": "25",
+			"parmMemo": "超时时间"
+		},
+		{
+			"keyIndex": 1,
+			"parmName": "iReReverseTimes",
+			"parmValue": "3",
+			"parmMemo": "冲正次数"
+		},
+		{
+			"keyIndex": 1,
+			"parmName": "sTermId",
+			"parmValue": "1201QZ8Q",
+			"parmMemo": "终端号"
+		},
+		{
+			"keyIndex": 1,
+			"parmName": "sUnitNum",
+			"parmValue": "103100048141347",
+			"parmMemo": "商户号"
+		},
+		{
+			"keyIndex": 1,
+			"parmName": "sUnitChnName",
+			"parmValue": "test",
+			"parmMemo": "商户名"
+		},
+		{
+			"keyIndex": 1,
+			"parmName": "sIPAddr",
+			"parmValue": "49.4.175.10",
+			"parmMemo": "IP地址"
+		},
+		{
+			"keyIndex": 1,
+			"parmName": "sIPport",
+			"parmValue": "5005",
+			"parmMemo": "端口号"
+		},
+		{
+			"keyIndex": 1,
+			"parmName": "sTPDU",
+			"parmValue": "6000080000",
+			"parmMemo": "TPDU"
+		},
+		{
+			"keyIndex": 1,
+			"parmName": "bElecSignFlag",
+			"parmValue": "0",
+			"parmMemo": "电子签名标识"
+		},
+		{
+			"keyIndex": 1,
+			"parmName": "bClearFlag",
+			"parmValue": "0",
+			"parmMemo": "交行二次清分开关"
+		},
+		{
+			"keyIndex": 1,
+			"parmName": "sClearID",
+			"parmValue": "",
+			"parmMemo": "交行二次清分标识"
+		},
+		{
+			"keyIndex": 1,
+			"parmName": "fNeedDLEmvParas",
+			"parmValue": "1",
+			"parmMemo": "需要下载EMV参数"
+		},
+		{
+			"keyIndex": 1,
+			"parmName": "fNeedDLEmvParas",
+			"parmValue": "1",
+			"parmMemo": "需要下载EMV参数"
+		},
+		{
+			"keyIndex": 1,
+			"parmName": "fNeedDLEmvPublicKeys",
+			"parmValue": "1",
+			"parmMemo": "需要下载公钥"
+		},
+		{
+			"keyIndex": 1,
+			"parmName": "iTicketNum",
+			"parmValue": "2",
+			"parmMemo": "小票张数"
+		},
+		{
+			"keyIndex": 1,
+			"parmName": "isSign",
+			"parmValue": "logout",
+			"parmMemo": "是否已签到状态"
+		},
+		{
+			"keyIndex": 1,
+			"parmName": "lastLoginTime",
+			"parmValue": "0",
+			"parmMemo": "最后一次签到时间"
+		},
+		{
+			"keyIndex": 1,
+			"parmName": "iMaxRefundAmt",
+			"parmValue": "10000",
+			"parmMemo": "最大退货金额"
+		},
+		{
+			"keyIndex": 1,
+			"parmName": "iMaxTradeCount",
+			"parmValue": "100",
+			"parmMemo": "最大交易笔数"
+		}
+	]
+}
