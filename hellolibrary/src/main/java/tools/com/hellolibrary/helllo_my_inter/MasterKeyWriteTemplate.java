@@ -31,7 +31,6 @@ public abstract class  MasterKeyWriteTemplate extends MaxqManagerHelper{
     /**
      * 对主密钥密文解密
      */
-
     public abstract boolean decryMasterKey(int KeyUsage,
                                            int KeyNo,
                                            int Algorithm,

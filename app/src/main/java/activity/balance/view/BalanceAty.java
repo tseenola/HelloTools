@@ -33,6 +33,8 @@ public class BalanceAty extends BaseActivity implements IBalanceAty{
 
     @Override
     public void initListener() {
+        //执行刷卡
+        //DialogUtil.showProgressDialog(this,false,DialogUtil.STYLE_CIRCAL,"刷卡中",25);
         mPresenter.actionQueryBalance();
     }
 
@@ -59,4 +61,5 @@ public class BalanceAty extends BaseActivity implements IBalanceAty{
     public static void launch(Context pContext) {
         pContext.startActivity(new Intent(pContext,BalanceAty.class));
     }
+
 }

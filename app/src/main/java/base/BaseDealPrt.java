@@ -1,40 +1,11 @@
 package base;
 
-import android.content.Context;
-
-import java.io.IOException;
-
-import factory.FieldFactory;
-import pos.Field;
-import tools.com.hellolibrary.hello_convert.ConvertUtils;
-import tools.com.hellolibrary.hello_socket.SocketUtils;
-import tools.com.hellolibrary.hello_thread.ThreadUtil;
-
 /**
  * Created by lenovo on 2017/1/11.
  * 描述：
  */
 
-public class BaseDealPrt implements IBaseDealPrt {
-
-    @Override
-    public void sendAndRcvMsg(final Context pContext, final byte [] lSendMsg, final String pIp, final int pPort, final int pTimeOut, final OnSendAndRcvFinish pListner) {
-
-        ThreadUtil.runCachedService(new Runnable() {
-            @Override
-            public void run() {
-
-                initSocket(pIp,pPort,pTimeOut);
-
-                sendMsg(lSendMsg,lSendMsg.length);
-
-                byte pRevMsgByte[] = revMsg(pTimeOut);
-
-                unPackRcvHexStr(pContext,pRevMsgByte);
-
-            }
-        });
-    }
+/*public class BaseDealPrt implements IBaseDealPrt {
 
     @Override
     public void initSocket(String ServerIp, int iPort, int timeout) {
@@ -72,4 +43,4 @@ public class BaseDealPrt implements IBaseDealPrt {
         String revMsgHexStr  = ConvertUtils.bytesToHexString(rcvdMsg);
 
     }
-}
+}*/

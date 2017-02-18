@@ -7,7 +7,6 @@ import activity.init_para.model.AidDownLoadReq;
 import activity.init_para.model.CAPKDownReq;
 import activity.init_para.model.IcParamReq;
 import activity.init_para.view.IInitParamAty;
-import base.BaseDealPrt;
 import base.BaseReq;
 import core.IcCardParamDownDecoder;
 import core.TlvUtils;
@@ -29,8 +28,8 @@ import tools.com.hellolibrary.hello_string.StringUtils;
  * Created by lenovo on 2017/1/19.
  * 描述：
  */
-
-public class InitParamPrt extends BaseDealPrt implements IInitParamPrt {
+//public class InitParamPrt extends BaseDealPrt implements IInitParamPrt {
+public class InitParamPrt implements IInitParamPrt {
     private IInitParamAty mView;
     private Context mContext;
 

@@ -5,7 +5,7 @@ package activity.balance.view;
  * 描述：
  */
 
-public interface IBalanceAty {
+public interface IBalanceAty{
     /**
      * 查询成功返回余额，余额单位为分
      * @param pAmt

@@ -5,7 +5,6 @@ import android.util.Log;
 
 import activity.key_download.model.KeyDownReq;
 import activity.key_download.view.IKeyDownLoadAty;
-import base.BaseDealPrt;
 import base.BaseReq;
 import core.MasterKeyWriter;
 import db.bill.DBPosSettingBill;
@@ -20,8 +19,8 @@ import tools.com.hellolibrary.hello_convert.ConvertUtils;
  * Created by lenovo on 2017/1/5.
  * 描述：
  */
-
-public class KeyDownLoadPrt extends BaseDealPrt implements IKeyDownLoadPrt {
+//public class KeyDownLoadPrt extends BaseDealPrt implements IKeyDownLoadPrt {
+public class KeyDownLoadPrt implements IKeyDownLoadPrt {
 
     private final IKeyDownLoadAty mView;
     private Context mContext;

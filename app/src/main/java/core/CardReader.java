@@ -29,10 +29,11 @@ public class CardReader {
     PICCReadService piccReadService;
     public static boolean checkCardThreadIsRun = true;
     public void readCard(final OnReadCardFinish pOnReadCardFinish) {
-
+        checkCardThreadIsRun = true;
         ThreadUtil.runCachedService(new Runnable() {
             @Override
             public void run() {
+                int time = 0;
                 Log.i("vbvb","open");
                 UROPElibJni.GMax3250Open();
                 UROPElibJni.ICCOpen();
@@ -49,7 +50,13 @@ public class CardReader {
 
                 initCard(sCarmode);
 
-                do {
+                while(checkCardThreadIsRun) {
+                    time++;
+                    if(time>=10){
+                        checkCardThreadIsRun=false;
+                        Log.i("vbvb","刷卡超时");
+                        pOnReadCardFinish.onReadCardFail("刷卡超时");
+                    }
                     Log.i("vbvb","循环中");
                     if (EnableMagChkCard) {
                         magReadService.ReadMagCard();
@@ -60,7 +67,8 @@ public class CardReader {
                     if (EnablePICCChkCard) {
                         piccReadService.ReadPICCard();
                     }
-                    SystemClock.sleep(1000);
+                    SystemClock.sleep(500);
+                    Log.i("vbvb","checkCardThreadIsRun:"+checkCardThreadIsRun);
                     if(!checkCardThreadIsRun){
                         Log.i("vbvb","close");
                         UROPElibJni.ICCClose();
@@ -69,15 +77,15 @@ public class CardReader {
                         UROPElibJni.GMax3250Close();
                         UROPElibJni.SleepEnableSuspend(1);
                     }
-                }while (checkCardThreadIsRun);
+                }
                 Log.i("vbvb","跳出循环");
             }
         });
     }
 
     public interface OnReadCardFinish {
-        void onSucc(CardInfoModel pPardInfo);
-        void onFail(String pFailMsg);
+        void onReadCardSucc(CardInfoModel pPardInfo);
+        void onReadCardFail(String pFailMsg);
     }
 
     /**

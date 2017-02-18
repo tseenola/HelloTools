@@ -8,11 +8,9 @@ import core.CardReader;
 import models.CardInfoModel;
 
 
-public class MagReadService {
-    private CardReader.OnReadCardFinish mOnReadCardFinish;
+public class MagReadService extends BaseReadService{
     // 磁条卡刷卡状态
-    private boolean MagCardReadSuccess = false;
-
+    protected boolean MagCardReadSuccess = false;
     /**
      * 读磁条卡
      */
@@ -48,11 +46,11 @@ public class MagReadService {
                         }
                         if (!cardInfo.getCardNo().isEmpty()) {
                             MagCardReadSuccess = true;
-                            mOnReadCardFinish.onSucc(cardInfo);
+                            sendSuccMsgToUiThread(cardInfo);
                         }
                     } catch (Exception ex) {
                         Log.i("vbvb",ex.getMessage());
-                        mOnReadCardFinish.onFail("读取磁条卡出错");
+                        sendFailMsgToUiThread("读取磁条卡出错");
                     }
                 }
             }
@@ -108,5 +106,6 @@ public class MagReadService {
         }
         return trackInfo;
     }
+
 
 }

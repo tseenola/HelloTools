@@ -12,9 +12,8 @@ import tools.com.hellolibrary.hello_string.StringUtils;
 /**
  * 非接卡读卡服务
  */
-public class PICCReadService extends CardReadService{
+public class PICCReadService extends BaseReadService{
     private boolean PICCardReadSuccess = false;
-    private CardReader.OnReadCardFinish mOnReadCardFinish;
     public PICCReadService(CardReader.OnReadCardFinish pOnReadCardFinish) {
         mOnReadCardFinish = pOnReadCardFinish;
         this.PICCardReadSuccess = false;
@@ -34,7 +33,7 @@ public class PICCReadService extends CardReadService{
 
         if (initTransRet != 0 || createAppRet != 0) {
             // 选择应用时错误
-            mOnReadCardFinish.onFail("选择应用时错误");
+            sendFailMsgToUiThread("选择应用时错误");
             return false;
         }
 
@@ -49,7 +48,7 @@ public class PICCReadService extends CardReadService{
             }
         }
         if (appSelRet != 0) {
-            mOnReadCardFinish.onFail("选择应用时错误");
+            sendFailMsgToUiThread("选择应用时错误");
             // 选择应用时错误
             return false;
         }
@@ -69,7 +68,7 @@ public class PICCReadService extends CardReadService{
                     if (readPPRet != 0) {
                         // 脱机数据认证错误
                         Log.i("vbvb","非接读卡 ReadApp Result:" + readPPRet);
-                        mOnReadCardFinish.onFail("脱机数据认证错误");
+                        sendFailMsgToUiThread("脱机数据认证错误");
                         return;
                     }
                     int fddaRet = UROPElibJni.QPbocFDDA();
@@ -106,12 +105,12 @@ public class PICCReadService extends CardReadService{
 
                             if(!cardInfo.getCardNo().isEmpty()) {
                                 PICCardReadSuccess = true;
-                                mOnReadCardFinish.onSucc(cardInfo);
+                                sendSuccMsgToUiThread(cardInfo);
                             }
                             break;
                         default:
                             Log.i("vbvb","非接读卡 QPbocFDDA Result:" + fddaRet);
-                            mOnReadCardFinish.onFail("非接读卡 错误");
+                            sendFailMsgToUiThread("非接读卡 错误");
                             break;
                     }
                 }

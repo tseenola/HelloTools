@@ -5,7 +5,6 @@ import android.widget.Toast;
 
 import activity.sign_in.model.SignInReq;
 import activity.sign_in.view.ISignInAty;
-import base.BaseDealPrt;
 import base.BaseReq;
 import core.WorkingKeyWriter;
 import db.bill.DBPosSettingBill;
@@ -19,10 +18,10 @@ import tools.com.hellolibrary.hello_convert.ConvertUtils;
 
 /**
  * Created by lijun on 2017/1/5.
- * 描述：
+ * 描述：签到完成后需要（写入工作密钥，还需要同步批次号和流水号---->syncParaWithServiceAndDB()）
  */
-
-public class SignInPrt extends BaseDealPrt implements ISignInPrt {
+//public class SignInPrt extends BaseDealPrt implements ISignInPrt {
+public class SignInPrt implements ISignInPrt {
 
     private final ISignInAty mView;
     private Context mContext;

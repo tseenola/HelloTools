@@ -7,9 +7,8 @@ import models.CardInfoModel;
 import tools.com.hellolibrary.hello_string.StringUtils;
 
 
-public class ICReadService extends CardReadService{
+public class ICReadService extends BaseReadService{
     private boolean ICCardReadSuccess = false;
-    private CardReader.OnReadCardFinish mOnReadCardFinish;
     public ICReadService(CardReader.OnReadCardFinish pOnReadCardFinish) {
         mOnReadCardFinish = pOnReadCardFinish;
         this.ICCardReadSuccess = false;
@@ -20,12 +19,11 @@ public class ICReadService extends CardReadService{
      */
     private boolean IsICCardInserted() {
         byte[] rsp = new byte[4];
-
         int ret = UROPElibJni.ICCCheck(rsp);
         if (ret == 0) {
             // 检查是否插入真正的卡
             if (rsp[0] == 1) {
-                mOnReadCardFinish.onFail("检查是否插入真正的卡");
+                sendFailMsgToUiThread("检查是否插入真正的卡");
                 return true;
             } else {
                 return false;
@@ -40,7 +38,7 @@ public class ICReadService extends CardReadService{
         int createAppRet = UROPElibJni.CreateAppLists();
         if (initTransRet != 0 || createAppRet != 0) {
             // 选择应用时错误
-            mOnReadCardFinish.onFail("选择应用时错误");
+            sendFailMsgToUiThread("选择应用时错误");
             return false;
         }
 
@@ -48,7 +46,7 @@ public class ICReadService extends CardReadService{
         int appSelRet = UROPElibJni.AppSel(appIndex);
         if (appSelRet != 0) {
             // 选择应用时错误
-            mOnReadCardFinish.onFail("选择应用时错误");
+            sendFailMsgToUiThread("选择应用时错误");
             return false;
         }
         return true;
@@ -67,7 +65,7 @@ public class ICReadService extends CardReadService{
                     int cardAuthRet = UROPElibJni.CardAuth();
                     if (readPPRet != 0 || cardAuthRet != 0) {
                         // 脱机数据认证错误
-                        mOnReadCardFinish.onFail("脱机数据认证错误");
+                        sendFailMsgToUiThread("脱机数据认证错误");
                         return;
                     }
 
@@ -82,9 +80,9 @@ public class ICReadService extends CardReadService{
                             int ret = UROPElibJni.ICCCheck(arg0);
                             if (ret != 0) {
                                 // 中途拔卡
-                                mOnReadCardFinish.onFail("中途拔卡");
+                                sendFailMsgToUiThread("中途拔卡");
                             } else {
-                                mOnReadCardFinish.onFail("读取应用时错误");
+                                sendFailMsgToUiThread("读取应用时错误");
                             }
                             return;
                         }
@@ -104,7 +102,7 @@ public class ICReadService extends CardReadService{
                             cardInfo.setCardSeqNo(cardSeqNo);
                         }
                     } catch (Exception e) {
-                        mOnReadCardFinish.onFail("读卡错误");
+                        sendFailMsgToUiThread("读卡错误");
                         return;
                     }
                     // 持卡人验证
@@ -119,12 +117,12 @@ public class ICReadService extends CardReadService{
                             break;
                         default:
                             // 持卡人认证错误
-                            mOnReadCardFinish.onFail("持卡人认证错误");
+                            sendFailMsgToUiThread("持卡人认证错误");
                             return;
                     }
                     if(!cardInfo.getCardNo().isEmpty()) {
                         ICCardReadSuccess = true;
-                        mOnReadCardFinish.onSucc(cardInfo);
+                        sendSuccMsgToUiThread(cardInfo);
                     }
                 }
             }

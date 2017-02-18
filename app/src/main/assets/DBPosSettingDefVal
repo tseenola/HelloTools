@@ -7,25 +7,25 @@
 			"parmMemo": "主密钥索引"
 		},
 		{
-			"keyIndex": 2,
+			"keyIndex": 1,
 			"parmName": "iMKGap",
 			"parmValue": "2",
 			"parmMemo": "暂不用到"
 		},
 		{
-			"keyIndex": 3,
+			"keyIndex": 1,
 			"parmName": "iMACKIndex",
 			"parmValue": "3",
 			"parmMemo": "MAC密钥索引"
 		},
 		{
-			"keyIndex": 4,
+			"keyIndex": 1,
 			"parmName": "iEncryptIndex",
 			"parmValue": "4",
 			"parmMemo": "磁道加密密钥索引"
 		},
 		{
-			"keyIndex": 5,
+			"keyIndex": 1,
 			"parmName": "iPinKIndex",
 			"parmValue": "5",
 			"parmMemo": "PIN密钥索引"
