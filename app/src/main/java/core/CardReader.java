@@ -83,9 +83,17 @@ public class CardReader {
         });
     }
 
+    /**
+     * 读卡回调接口
+     */
     public interface OnReadCardFinish {
         void onReadCardSucc(CardInfoModel pPardInfo);
         void onReadCardFail(String pFailMsg);
+    }
+
+    public interface OnEncryPwdFinish{
+        void onEncryPwdSucc(CardInfoModel pCardInfoModel,String pPinEncryStr);
+        void onEncryPwdFail(String pErroMsg);
     }
 
     /**

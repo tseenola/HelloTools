@@ -117,18 +117,32 @@ public class DBPosSettingBill {
 
     /**
      * 获取当前凭证号（流水）
-     * @return
+     * @return 返回5位数的流水号
      */
-    public static int getTraceNo(){
-        int traceNo = 0;
+    public static String getTraceNo(){
+        String traceNo = "";
         try {
-            traceNo = Integer.valueOf(getParamValue(1,"iNowTraceNo"));
+            traceNo = StringUtils.fillContentBy(StringUtils.Dir.left,"0",getParamValue(1,"iNowTraceNo"),5);
         }catch (Exception pE){
             pE.printStackTrace();
         }
         return traceNo;
     }
 
+
+    /**
+     * 获取当前批次号
+     * @return 返回5位字符串批次号
+     */
+    public static String getBatchNo(){
+        String batchNo = "";
+        try {
+            batchNo = StringUtils.fillContentBy(StringUtils.Dir.left,"0",getParamValue(1,"iNowBatchNo"),5);
+        }catch (Exception pE){
+            pE.printStackTrace();
+        }
+        return batchNo;
+    }
 
     /**
      * 设置不需要下载Aid参数

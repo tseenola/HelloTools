@@ -14,10 +14,13 @@ import utils.PosStringUtils;
  * 描述：
  */
 
-public class ReadCardTemp implements IReadCardTemp,CardReader.OnReadCardFinish{
-    public static String encrypedPinKey= "";
+public abstract class ReadCardTemp implements IReadCardTemp,CardReader.OnReadCardFinish, CardReader.OnEncryPwdFinish {
+    CardReader.OnEncryPwdFinish mOnEncryPwdFinish;
+    CardInfoModel mCardInfoModel;
+    static String encrypedPinKey= "";
     @Override
-    public void actionReadCardProcess() {
+    public void actionReadCardProcess(CardReader.OnEncryPwdFinish pOnEncryPwdFinish) {
+        mOnEncryPwdFinish = pOnEncryPwdFinish;
         encrypedPinKey = "";
         new CardReader().readCard(this);
     }
@@ -26,9 +29,10 @@ public class ReadCardTemp implements IReadCardTemp,CardReader.OnReadCardFinish{
      * 2.弹出密码键盘接收密码
      * @param pPardInfo
      */
-    private void inputTradePwdEntry(CardInfoModel pPardInfo) {
+    protected void inputTradePwdEntry(CardInfoModel pPardInfo) {
+        mCardInfoModel = pPardInfo;
         // 获取PIN KEY INDEX
-        int pinKeyIndex = Integer.valueOf(DBPosSettingBill.getPinKeyIndex());
+        int pinKeyIndex = DBPosSettingBill.getPinKeyIndex();
 
         // 初始化密码键盘
         String amtAndCardNo = "";
@@ -47,17 +51,6 @@ public class ReadCardTemp implements IReadCardTemp,CardReader.OnReadCardFinish{
     }
 
 
-    @Override
-    public void onReadCardSucc(CardInfoModel pPardInfo) {
-        CardReader.checkCardThreadIsRun = false;
-        Log.i("vbvb","读卡成功："+pPardInfo.toString());
-        inputTradePwdEntry(pPardInfo);
-    }
-
-    @Override
-    public void onReadCardFail(String pFailMsg) {
-        Log.i("vbvb","读卡失败：");
-    }
 
     /**
      * 密码键盘监听
@@ -82,6 +75,7 @@ public class ReadCardTemp implements IReadCardTemp,CardReader.OnReadCardFinish{
                     // 确认按键
                     String encrypedPinKey = new String(keybuf);
                     Log.i("vbvb","按下了确认键:"+encrypedPinKey);
+                    mOnEncryPwdFinish.onEncryPwdSucc(mCardInfoModel,encrypedPinKey);
                 } else if (result == 1) {
                     // 取消按键
                     Log.i("vbvb","按下了取消键");

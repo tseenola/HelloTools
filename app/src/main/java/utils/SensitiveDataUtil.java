@@ -112,7 +112,7 @@ public class SensitiveDataUtil {
             System.arraycopy(outdata, 0, bcdSec, i * 8, 8);
         }
         byte[] ascSec = new byte[bcdSec.length * 2];
-        Funs.BcdToAsc(ascSec, bcdSec, ascSec.length);
+        StringUtils.BcdToAsc(ascSec, bcdSec, ascSec.length);
         resultTxt += new String(ascSec);
         return resultTxt;
     }*/

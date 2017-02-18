@@ -1,15 +1,18 @@
 package activity.balance.presenter;
 
 import android.content.Context;
+import android.util.Log;
+import android.widget.Toast;
 
 import activity.balance.view.IBalanceAty;
 import base.ReadCardTemp;
+import core.CardReader;
+import models.CardInfoModel;
 
 /**
  * Created by lenovo on 2017/2/5.
  * 描述：
  */
-//public class BalancePrt extends BaseDealPrt implements IBalancePrt{
 public class BalancePrt extends ReadCardTemp implements IBalancePrt{
 
     private final IBalanceAty mView;
@@ -48,26 +51,53 @@ public class BalancePrt extends ReadCardTemp implements IBalancePrt{
 
     @Override
     public void actionQueryBalance() {
-        actionReadCardProcess();
+        actionReadCardProcess(this);
 
 
-         /*BalanceReq lBalanceReq = new BalanceReq(
-                new F02(SensitiveDataUtil.hideSensitiveData(2,)),
+
+    }
+
+
+    @Override
+    public void onReadCardSucc(CardInfoModel pPardInfo) {
+        CardReader.checkCardThreadIsRun = false;
+        Log.i("vbvb","读卡成功："+pPardInfo.toString());
+        inputTradePwdEntry(pPardInfo);
+    }
+
+    @Override
+    public void onReadCardFail(String pFailMsg) {
+        Log.i("vbvb","读卡失败：");
+    }
+
+    @Override
+    public void onEncryPwdSucc(CardInfoModel pCardInfoModel, String pPinEncryStr) {
+        Toast.makeText(mContext, "读卡且获取密码成功："+pCardInfoModel.toString()+" 密码为："+pPinEncryStr, Toast.LENGTH_SHORT).show();
+        Log.i("vbvb","读卡且获取密码成功："+pCardInfoModel.toString()+" 密码为："+pPinEncryStr);
+        /*BalanceReq lBalanceReq = new BalanceReq(
+                new F02(SensitiveDataUtil.hideSensitiveData(2,pCardInfoModel.getCardNo())),
                 new F03("310000"),
                 new F11(DBPosSettingBill.getTraceNo()+""),
-                new F14(SensitiveDataUtil.hideSensitiveData(14,)),
-                new F22(""),
+                new F14(SensitiveDataUtil.hideSensitiveData(14,pCardInfoModel.getValidTime())),
+                new F22(pCardInfoModel.getCardSeqNo()),
                 new F23(""),
                 new F25("14"),
-                new F35(""),
-                new F36(""),
+                new F35(SensitiveDataUtil.hideSensitiveData(35,pCardInfoModel.getTrack2())),
+                new F36(SensitiveDataUtil.hideSensitiveData(36,pCardInfoModel.getTrack3())),
                 new F41(DBPosSettingBill.getTerminalNo()),
                 new F42(DBPosSettingBill.getMerchantNo()),
                 new F49("156"),
-                new F52(""),
-                new F55(""),
-                new F60(""),
-                new F62(""),
+                new F52(pPinEncryStr),
+                new F55( ),
+                new F60(SensitiveDataUtil.getEncryptionData(1,
+                        new String[] {
+                                pCardInfoModel.getCardNo(),
+                                pCardInfoModel.getValidTime(),
+                                "",
+                                pCardInfoModel.getTrack2().replaceAll("=", "D"),
+                                pCardInfoModel.getTrack3().replaceAll("=", "D")
+                        })),
+                new F62(DBPosSettingBill.getTraceNo()),
                 new F64("")
         );
 
@@ -82,5 +112,10 @@ public class BalancePrt extends ReadCardTemp implements IBalancePrt{
 
             }
         });*/
+    }
+
+    @Override
+    public void onEncryPwdFail(String pErroMsg) {
+        Log.i("vbvb","读卡且获取密码失败："+pErroMsg);
     }
 }
