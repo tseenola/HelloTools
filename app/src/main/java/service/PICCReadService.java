@@ -4,6 +4,7 @@ import android.util.Log;
 
 import com.jniexport.UROPElibJni;
 
+import base.Constants;
 import core.CardReader;
 import models.CardInfoModel;
 import tools.com.hellolibrary.hello_string.StringUtils;
@@ -105,6 +106,7 @@ public class PICCReadService extends BaseReadService{
 
                             if(!cardInfo.getCardNo().isEmpty()) {
                                 PICCardReadSuccess = true;
+                                cardInfo.setSwipedMode(Constants.SWIPE_MODE.CLCARD_SWIPED);
                                 sendSuccMsgToUiThread(cardInfo);
                             }
                             break;

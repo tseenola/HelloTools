@@ -4,6 +4,7 @@ import android.util.Log;
 
 import com.jniexport.UROPElibJni;
 
+import base.Constants;
 import core.CardReader;
 import models.CardInfoModel;
 
@@ -46,6 +47,7 @@ public class MagReadService extends BaseReadService{
                         }
                         if (!cardInfo.getCardNo().isEmpty()) {
                             MagCardReadSuccess = true;
+                            cardInfo.setSwipedMode(Constants.SWIPE_MODE.CARD_SWIPED);
                             sendSuccMsgToUiThread(cardInfo);
                         }
                     } catch (Exception ex) {

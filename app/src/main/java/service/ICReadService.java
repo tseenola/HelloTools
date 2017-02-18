@@ -2,6 +2,7 @@ package service;
 
 import com.jniexport.UROPElibJni;
 
+import base.Constants;
 import core.CardReader;
 import models.CardInfoModel;
 import tools.com.hellolibrary.hello_string.StringUtils;
@@ -122,6 +123,7 @@ public class ICReadService extends BaseReadService{
                     }
                     if(!cardInfo.getCardNo().isEmpty()) {
                         ICCardReadSuccess = true;
+                        cardInfo.setSwipedMode(Constants.SWIPE_MODE.CARD_INSERTED);
                         sendSuccMsgToUiThread(cardInfo);
                     }
                 }

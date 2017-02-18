@@ -1,6 +1,7 @@
 package base;
 
 import android.device.MaxqManager;
+import android.text.TextUtils;
 import android.util.Log;
 
 import core.CardReader;
@@ -96,4 +97,27 @@ public abstract class ReadCardTemp implements IReadCardTemp,CardReader.OnReadCar
         }
     };
 
+    /**获取22域的值
+     * @param
+     * @return
+     */
+    public String getField22(int bSwipedMode,String sPINData) {
+        String str1 = "";
+        if(bSwipedMode == Constants.SWIPE_MODE.NO_SWIPE_INSERT) {
+            str1 = "001";
+        } else if (bSwipedMode == Constants.SWIPE_MODE.CARD_SWIPED) {
+            str1 = "002";
+        } else if (bSwipedMode == Constants.SWIPE_MODE.CARD_INSERTED) {
+            str1 = "005";
+        } else if (bSwipedMode == Constants.SWIPE_MODE.CLCARD_SWIPED) {
+            str1 = "007";
+        }
+
+        if (TextUtils.isEmpty(sPINData)) {
+            str1 += "2";
+        } else {
+            str1 += "1";
+        }
+        return str1;
+    }
 }

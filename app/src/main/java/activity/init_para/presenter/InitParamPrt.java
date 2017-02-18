@@ -45,7 +45,7 @@ public class InitParamPrt implements IInitParamPrt {
     public void actionIcCardParamDown() {
         IcParamReq lIcParamReq = new IcParamReq(
                 new F03("920000"),
-                new F11(DBPosSettingBill.getTraceNo() + ""),
+                new F11(DBPosSettingBill.getTraceNo()),
                 new F25("14"),
                 new F41("1201QZ8Q"),
                 new F42("103100048141347"),
@@ -78,7 +78,7 @@ public class InitParamPrt implements IInitParamPrt {
     public void actionCapkDown(final int pCapkSeq) {
         CAPKDownReq lCAPKDownReq = new CAPKDownReq(
                 new F03("930000"),
-                new F11(DBPosSettingBill.getTraceNo() + ""),
+                new F11(DBPosSettingBill.getTraceNo()),
                 new F25("14"),
                 new F41("1201QZ8Q"),
                 new F42("103100048141347"),
@@ -132,7 +132,7 @@ public class InitParamPrt implements IInitParamPrt {
     public void actionAidDown(final int pAidSeq) {
         AidDownLoadReq lAidDownLoadReq = new AidDownLoadReq(
                 new F03("990000"),
-                new F11(DBPosSettingBill.getTraceNo() + ""),
+                new F11(DBPosSettingBill.getTraceNo()),
                 new F25("14"),
                 new F41("1201QZ8Q"),
                 new F42("103100048141347"),
