@@ -102,7 +102,7 @@ public class PosInputDatas implements Serializable {
         sICCData = "";
         sTradeDate = "";
         sCardType = "";
-        existsCardBin = "N";
+        existsCardBin = "BCD";
         sPanSeqNo = "";
         cvmStartRet = 0;
     }

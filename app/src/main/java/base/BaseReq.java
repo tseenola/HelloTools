@@ -3,9 +3,11 @@ package base;
 
 import android.content.Context;
 import android.os.SystemClock;
+import android.text.TextUtils;
 import android.util.Log;
 
 import java.lang.reflect.Field;
+import java.util.List;
 
 import core.MacCalculater;
 import db.bill.DBPosSettingBill;
@@ -79,40 +81,84 @@ public abstract class  BaseReq implements IPosTempTemplet{
 			Class signInReqClazz = pDealReq.getClass();
 			Field signInField[] = signInReqClazz.getFields();
 			int i = 0;
+			String finalBinaryBitmap = "";//实际情况的位图和预计位图可能不一样（实际位图可能这个域没有值，所以需要判断对应域是否有值，如果没有值，该域为“0”，有值该域位图为“1”）
 			for (int o = 0; o < bitmapChars.length; o++) {
 				if (bitmapChars[o] == '1') {
 						try {
 						//获取值
 						BaseField baseField = (BaseField) signInField[i].get(pDealReq);
 						String value = baseField.value;
+						//判断该域是否有值，然后要重新计算位图，
+						if(TextUtils.isEmpty(value)){
+							if(o==63){
+								finalBinaryBitmap += "1";
+							}else {
+								finalBinaryBitmap += "0";
+							}
+							i++;
+							continue;
+						}else{
+							finalBinaryBitmap += "1";
+						}
+
 						//获取域类型
 						Class clazz = Class.forName("pos2.fields.F"
 								+ StringUtils.formatStr(o + 1, "00"));
 						Field fieldTypeField = clazz.getField("FILED_TYPE");
 						Constant.FieldType fieldType = (Constant.FieldType) fieldTypeField.get(pDealReq);
+						//当长度不够时获取左边补还是右补
+						Field lDIR = clazz.getField("DIR");
+						StringUtils.Dir lDir = (StringUtils.Dir)lDIR.get(pDealReq);
+						//当长度不够时填充什么，一般是填充0或者空格
+						Field lFiLL = clazz.getField("FiLL");
+						String lFill = (String)lFiLL.get(pDealReq);
+
 						switch (fieldType){
-							case AN:
-							case ANS:
+							case ASCII:
 								value = ConvertUtils.strToHexString(value);
 								break;
-							case N:
-							case B:
+							case BCD:
+							case BIN:
 							case HEX:
+							case TRACK:
 								break;
 							default:
 								throw new NullPointerException("没有找到对应域类型");
 						}
+
 						//获取域长度类型
 						Field lengTypeField = clazz.getField("lengtype");
 						String lengtype = (String) lengTypeField.get(pDealReq);
+						//域值的串长度
+						int valLen = value.length();
 						switch (lengtype){
 							case "fix":
 								break;
 							case "llvar":
-								value = (tools.com.hellolibrary.hello_string.StringUtils.fillContentBy(tools.com.hellolibrary.hello_string.StringUtils.Dir.left,"0",value.length()/2+"",2)+value);
+
+								if(fieldType== Constant.FieldType.BCD ||fieldType== Constant.FieldType.TRACK){
+									//BCD长度为偶数
+									if(valLen%2!=0){
+										value = StringUtils.fillContentBy(lDir,lFill,value,valLen+1);
+									}
+									value = (tools.com.hellolibrary.hello_string.StringUtils.fillContentBy(tools.com.hellolibrary.hello_string.StringUtils.Dir.left,"0",valLen+"",2)+value);
+								}else {
+									value = (tools.com.hellolibrary.hello_string.StringUtils.fillContentBy(tools.com.hellolibrary.hello_string.StringUtils.Dir.left,"0",valLen/2+"",2)+value);
+								}
+
 								break;
 							case "lllvar":
-								value = (tools.com.hellolibrary.hello_string.StringUtils.fillContentBy(tools.com.hellolibrary.hello_string.StringUtils.Dir.left,"0",value.length()/2+"",4)+value);
+								if(fieldType== Constant.FieldType.BCD){
+
+									//BCD长度为偶数
+									if(valLen%2!=0){
+										value = StringUtils.fillContentBy(lDir,lFill,value,valLen+1);
+									}
+									value = (tools.com.hellolibrary.hello_string.StringUtils.fillContentBy(tools.com.hellolibrary.hello_string.StringUtils.Dir.left,"0",valLen+"",4)+value);
+								}else {
+									value = (tools.com.hellolibrary.hello_string.StringUtils.fillContentBy(tools.com.hellolibrary.hello_string.StringUtils.Dir.left,"0",valLen/2+"",4)+value);
+								}
+
 								break;
 							default:
 								throw new NullPointerException("没有找到对应长度类型");
@@ -122,14 +168,17 @@ public abstract class  BaseReq implements IPosTempTemplet{
 						e.printStackTrace();
 					}
 					i++;
+				}else{
+					finalBinaryBitmap += "0";
 				}
 			}
 			//拼接位图
-			target = bitmap+target;
+			//target = bitmap+target;
+		    target = ConvertUtils.binaryStringToHexString(finalBinaryBitmap)+target;
 			//拼接消息类型
 			target = pDealType + target;
 			//计算mac(如果不需要计算直接返回原值)
-			target = MacCalculater.getMac(bitmap,target);
+			target = MacCalculater.getMac(finalBinaryBitmap,target);
 			//拼接tpdu
 			target = pTpdu + target;
 			//拼接长度
@@ -234,5 +283,18 @@ public abstract class  BaseReq implements IPosTempTemplet{
 	public interface ResultListener {
 		void succ(Body_STD pBody_std);
 		void fail(Body_STD pBody_std);
+	}
+
+
+	public void getFieldBitmap(List<BaseField> pList) {
+		String bitmapBinaryStr = "";
+		for(BaseField lField:pList){
+			if (TextUtils.isEmpty(lField.getValue())){
+				bitmapBinaryStr +=0;
+			}else {
+				bitmapBinaryStr +=1;
+			}
+			Log.i("vbvb","bitmap: "+bitmapBinaryStr);
+		}
 	}
 }

@@ -43,7 +43,7 @@ public class BalanceReq extends BaseReq{
     public F62 f62;
     public F64 f64;
 
-    public BalanceReq(F02 pF02, F03 pF03, F11 pF11, F14 pF14, F22 pF22, F23 pF23, F25 pF25, F35 pF35, F36 pF36, F41 pF41, F42 pF42, F49 pF49, F52 pF52, F55 pF55, F60 pF60, F62 pF62, F64 pF64) {
+    public BalanceReq(F02 pF02, F03 pF03, F11 pF11, F14 pF14, F22 pF22, F23 pF23,F25 pF25, F35 pF35, F36 pF36, F41 pF41, F42 pF42, F49 pF49, F52 pF52, F55 pF55, F60 pF60, F62 pF62, F64 pF64) {
         f02 = pF02;
         f03 = pF03;
         f11 = pF11;

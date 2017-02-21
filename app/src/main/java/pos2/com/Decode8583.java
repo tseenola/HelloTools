@@ -42,9 +42,9 @@ public class Decode8583 {
 		SignInReq signReq = new SignInReq(
 				new F03("940000"),
 				new F25("14"),
-				new F41("1201M3t7"),//ANS
-				new F42("113610353110021"),//ANS
-				new F60("A00199"));//N
+				new F41("1201M3t7"),//ASCII
+				new F42("113610353110021"),//ASCII
+				new F60("A00199"));//BCD
 		System.out.println("���ͳ�ȥ�ı��ĵ�16�����ַ�����ʽ�ı�ʾ��"+signReq.toString());
 		
 	}

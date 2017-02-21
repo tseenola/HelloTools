@@ -92,12 +92,11 @@ public class MsgUtils {
                                 currentCursorIndex,
                                 currentCursorIndex += llvarUseLen));
                         switch (lFieldInfo.getFILED_TYPE()) {
-                            case AN:
-                            case ANS:
+                            case ASCII:
                             case HEX:
                                 fieldLen *= 2;
                                 break;
-                            case N:
+                            case BCD:
                                 if (fieldLen % 2 != 0) {
                                     fieldLen += 1;
                                 }
@@ -159,14 +158,13 @@ public class MsgUtils {
     public static String getValueByConvertHexStr(String pHexString, Constant.FieldType pFieldType) throws UnsupportedEncodingException {
         String target = "";
         switch (pFieldType) {
-            case AN://如果域本身是ASC那么需要进行 16进制转ASC
-            case ANS:
+            case ASCII://如果域本身是ASC那么需要进行 16进制转ASC
                 String str = ConvertUtils.hexStringToStr(pHexString);
                 String str2 = new String(ConvertUtils.hexStringToByte(str.toUpperCase()),"gbk");//这个是针对农行的44域，44域为汉字农行对汉字做了两次16进制转换 eg(交易成功-->BDBBD2D7B3C9B9A6-->bdbbd2d7b3c9b9a6-->62646262643264376233633962396136),另外农行汉字编码为gbk，一般我们用utf-8这个看情况而定
                 target = pHexString+"-->"+ConvertUtils.hexStringToStr(pHexString)+"-->"+str2;
                 break;
             case HEX://域本身的值要求是N或者HEX直接返回即可
-            case N:
+            case BCD:
                 target = pHexString;
                 break;
             default:

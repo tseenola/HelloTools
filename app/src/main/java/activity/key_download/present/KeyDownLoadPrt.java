@@ -36,9 +36,9 @@ public class KeyDownLoadPrt implements IKeyDownLoadPrt {
     public void actionKeyDown() {
         KeyDownReq lKeyDownReq = new KeyDownReq(
                 new F03("900000"),
-                new F41("1201QZ8Q"),//ANS
-                new F42("103100048141347"),//ANS
-                new F60("A00199")//N
+                new F41("1201QZ8Q"),//ASCII
+                new F42("103100048141347"),//ASCII
+                new F60("A00199")//BCD
         );
 
         lKeyDownReq.actionDeal(mContext, "0800", "03,41,42,60", lKeyDownReq, new BaseReq.ResultListener() {

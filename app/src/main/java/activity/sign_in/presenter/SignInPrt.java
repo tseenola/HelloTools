@@ -36,9 +36,9 @@ public class SignInPrt implements ISignInPrt {
         SignInReq signReq = new SignInReq(
                 new F03("940000"),
                 new F25("14"),
-                new F41("1201QZ8Q"),//ANS
-                new F42("103100048141347"),//ANS
-                new F60("A00199"));//N
+                new F41("1201QZ8Q"),//ASCII
+                new F42("103100048141347"),//ASCII
+                new F60("A00199"));//BCD
         //交易并接受结果
         signReq.actionDeal(mContext,"0800", "03,25,41,42,60", signReq, new BaseReq.ResultListener() {
             @Override

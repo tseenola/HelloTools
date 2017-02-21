@@ -44,33 +44,6 @@ public class BalancePrt extends ReadCardTemp implements IBalancePrt{
         mView = pView;
     }
 
-
-    /*@Override
-    public void actionReadCard() {
-        new CardReader().readCard(new CardReader.OnReadCardFinish() {
-            @Override
-            public void onReadCardSucc(final CardInfoModel pPardInfo) {
-                CardReader.checkCardThreadIsRun = false;
-                ThreadUtil.runOnUiThread(new Runnable() {
-                    @Override
-                    public void run() {
-                        mView.onReadCardSucc(pPardInfo);
-                    }
-                });
-            }
-
-            @Override
-            public void onReadCardFail(final String pFailMsg) {
-                ThreadUtil.runOnUiThread(new Runnable() {
-                    @Override
-                    public void run() {
-                        mView.onReadCardFail(pFailMsg);
-                    }
-                });
-            }
-        });
-    }*/
-
     @Override
     public void actionQueryBalance() {
         actionReadCardProcess(this);
@@ -97,7 +70,7 @@ public class BalancePrt extends ReadCardTemp implements IBalancePrt{
         BalanceReq lBalanceReq = new BalanceReq(
                 new F02(SensitiveDataUtil.hideSensitiveData(2,pCardInfoModel.getCardNo())),
                 new F03("310000"),
-                new F11(DBPosSettingBill.getTraceNo()),
+                new F11("000055"),//new F11(DBPosSettingBill.getTraceNo()),
                 new F14(SensitiveDataUtil.hideSensitiveData(14,pCardInfoModel.getValidTime())),
                 new F22(getField22(pCardInfoModel.getSwipedMode(),pPinEncryStr)),
                 new F23(pCardInfoModel.getCardSeqNo()),
@@ -117,7 +90,7 @@ public class BalancePrt extends ReadCardTemp implements IBalancePrt{
                                 pCardInfoModel.getTrack2().replaceAll("=", "D"),
                                 pCardInfoModel.getTrack3().replaceAll("=", "D")
                         })),
-                new F62(DBPosSettingBill.getTraceNo()+DBPosSettingBill.getBatchNo()),
+                new F62("000055"+DBPosSettingBill.getBatchNo()),//new F62(DBPosSettingBill.getTraceNo()+DBPosSettingBill.getBatchNo()),
                 new F64("")
         );
 

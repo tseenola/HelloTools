@@ -3,6 +3,7 @@ package pos2.fields;
 
 import pos2.constant.Constant;
 import pos2.model.BaseField;
+import tools.com.hellolibrary.hello_string.StringUtils;
 
 /**
  * 2016��8��23��
@@ -10,10 +11,12 @@ import pos2.model.BaseField;
  * for��
  */
 public class F48 extends BaseField {
+	public static final StringUtils.Dir DIR = StringUtils.Dir.left;
+	public static final String FiLL = "0";
 	public static final String lengtype = "lllvar";
 	public static final String DES = "附加数据－私有";
 	public static boolean IS_VAR_LEN = true;
-	public static final Constant.FieldType FILED_TYPE = Constant.FieldType.ANS;
+	public static final Constant.FieldType FILED_TYPE = Constant.FieldType.ASCII;
 	public static final int VAR_LEN = 2;
 	public static final int CONTENT_MAX_LEN = 332;
 	public static final String FIELD_INFO = 

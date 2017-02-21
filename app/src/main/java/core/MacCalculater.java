@@ -15,14 +15,16 @@ import static pos2.utils.Ped.Urovo_PciDes;
  */
 
 public class MacCalculater {
+
     /**
-     *
-     * @param pNeedCalMacMsg
+     * 计算Mac
+     * @param pBinaryBitMapStr 位图的二进制字符串形式
+     * @param pNeedCalMacMsg 需要计算Mac的数据
      * @return
      */
-    public static String getMac(String pBitMap,String pNeedCalMacMsg){
+    public static String getMac(String pBinaryBitMapStr,String pNeedCalMacMsg){
         String msg = pNeedCalMacMsg;
-        if(pBitMap.endsWith("1")){
+        if(pBinaryBitMapStr.endsWith("1")){
             int macKeyIndex = DBPosSettingBill.getMacKeyIndex();
             byte [] needCalMac = ConvertUtils.hexStringToByte(msg);
             byte [] macOut = new byte[8];
