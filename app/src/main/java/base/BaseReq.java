@@ -11,6 +11,8 @@ import java.util.List;
 
 import core.MacCalculater;
 import db.bill.DBPosSettingBill;
+import models.MsgType;
+import models.MsgTypeInfo;
 import pos.IPosTempTemplet;
 import pos2.constant.Constant;
 import pos2.model.BaseField;
@@ -33,8 +35,9 @@ public abstract class  BaseReq implements IPosTempTemplet{
 	private String mBitMap;
 
 	@Override
-	public void actionDeal(final Context pContext,final String pMsgType, final String pBitMapStr, final BaseReq pDealReq, final ResultListener pResultListener) {
-		mMsgType = Integer.valueOf(pMsgType);
+	public void actionDeal(final Context pContext, MsgType pMsgType, final BaseReq pDealReq, final ResultListener pResultListener) {
+		final MsgTypeInfo lMsgTypeInfo = pMsgType.getValue();
+		mMsgType = Integer.valueOf(lMsgTypeInfo.getType());
 		final String lTpdu = DBPosSettingBill.getTpdu();
 		final String lIp = DBPosSettingBill.getIp();
 		final int lPort = DBPosSettingBill.getPort();
@@ -44,9 +47,11 @@ public abstract class  BaseReq implements IPosTempTemplet{
 			public void run() {
 				SystemClock.sleep(500);
 				//组包
-				byte sendMsgByte [] = pack(lTpdu,pMsgType,pBitMapStr,pDealReq);
+				byte sendMsgByte [] = pack(lTpdu,lMsgTypeInfo.getType(),lMsgTypeInfo.getMustHaveField(),pDealReq);
 				//发包
 				sendPack(pContext, sendMsgByte, lIp, lPort, lTime);
+				//流水加1
+				tranceNoAddOne();
 				//收包
 				String rcvedHexMsg = rcvPack();
 				//解包
@@ -127,15 +132,17 @@ public abstract class  BaseReq implements IPosTempTemplet{
 						}
 
 						//获取域长度类型
-						Field lengTypeField = clazz.getField("lengtype");
-						String lengtype = (String) lengTypeField.get(pDealReq);
+						/*Field lengTypeField = clazz.getField("lengtype");
+						String lengtype = (String) lengTypeField.get(pDealReq);*/
+						Field lengTypeField = clazz.getField("lengthtype");
+						BaseField.LenthType lengtype = (BaseField.LenthType) lengTypeField.get(pDealReq);
+
 						//域值的串长度
 						int valLen = value.length();
 						switch (lengtype){
-							case "fix":
+							case fix:
 								break;
-							case "llvar":
-
+							case llvar:
 								if(fieldType== Constant.FieldType.BCD ||fieldType== Constant.FieldType.TRACK){
 									//BCD长度为偶数
 									if(valLen%2!=0){
@@ -147,7 +154,7 @@ public abstract class  BaseReq implements IPosTempTemplet{
 								}
 
 								break;
-							case "lllvar":
+							case lllvar:
 								if(fieldType== Constant.FieldType.BCD){
 
 									//BCD长度为偶数
@@ -196,6 +203,11 @@ public abstract class  BaseReq implements IPosTempTemplet{
 			if (sendMsgRet!=0){
 				throw new IllegalStateException("发送失败:sendMsgRet"+sendMsgRet);
 			}
+	}
+
+	@Override
+	public void tranceNoAddOne() {
+		DBPosSettingBill.tranceNoAddOne();
 	}
 
 	@Override

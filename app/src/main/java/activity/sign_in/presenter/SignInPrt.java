@@ -8,6 +8,7 @@ import activity.sign_in.view.ISignInAty;
 import base.BaseReq;
 import core.WorkingKeyWriter;
 import db.bill.DBPosSettingBill;
+import models.MsgType;
 import pos2.fields.F03;
 import pos2.fields.F25;
 import pos2.fields.F41;
@@ -20,7 +21,6 @@ import tools.com.hellolibrary.hello_convert.ConvertUtils;
  * Created by lijun on 2017/1/5.
  * 描述：签到完成后需要（写入工作密钥，还需要同步批次号和流水号---->syncParaWithServiceAndDB()）
  */
-//public class SignInPrt extends BaseDealPrt implements ISignInPrt {
 public class SignInPrt implements ISignInPrt {
 
     private final ISignInAty mView;
@@ -40,7 +40,7 @@ public class SignInPrt implements ISignInPrt {
                 new F42("103100048141347"),//ASCII
                 new F60("A00199"));//BCD
         //交易并接受结果
-        signReq.actionDeal(mContext,"0800", "03,25,41,42,60", signReq, new BaseReq.ResultListener() {
+        signReq.actionDeal(mContext, MsgType.SignIn, signReq, new BaseReq.ResultListener() {
             @Override
             public void succ(Body_STD pBody_std) {
                 Toast.makeText(mContext,"succ"+pBody_std.getmF44().getValue(),Toast.LENGTH_LONG).show();

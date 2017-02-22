@@ -49,16 +49,43 @@ public class DBPosSettingBill {
      * @param pTrace 流水号
      */
     public static void syncBatchAndTrace(String pBatch, String pTrace) {
-        // 如果存在数据，则更新
-        ContentValues batchVal = new ContentValues();
-        batchVal.put("parmValue", pBatch);
-        DataSupport.updateAll(DBPosSetting.class, batchVal, "keyIndex=? and parmName=?","1", "iNowBatchNo");
+        setBatch(pBatch);
+        setTraceNo(pTrace);
+    }
 
+    /**
+     * 设置流水号
+     * @param pTrace
+     */
+    public static void setTraceNo(String pTrace){
+        if(pTrace.length()!=6){
+            throw new IllegalArgumentException("传入的流水号不合法");
+        }
         ContentValues traceVal = new ContentValues();
         traceVal.put("parmValue", pTrace);
         DataSupport.updateAll(DBPosSetting.class, traceVal, "keyIndex=? and parmName=?","1", "iNowTraceNo");
     }
 
+    /**
+     * 流水号加1
+     */
+    public static void tranceNoAddOne() {
+        int tranceNo = Integer.valueOf(getTraceNo());
+        setTraceNo(StringUtils.fillContentBy(StringUtils.Dir.left,"0",tranceNo+1+"",6));
+    }
+
+    /**
+     * 设置批次号
+     * @param pBatch
+     */
+    public static void setBatch(String pBatch){
+        if(pBatch.length()!=6){
+            throw new IllegalArgumentException("传入的批次号不合法");
+        }
+        ContentValues batchVal = new ContentValues();
+        batchVal.put("parmValue", pBatch);
+        DataSupport.updateAll(DBPosSetting.class, batchVal, "keyIndex=? and parmName=?","1", "iNowBatchNo");
+    }
     /**
      * 获得pin密钥索引
      * @return
@@ -121,10 +148,9 @@ public class DBPosSettingBill {
      */
     public static String getTraceNo(){
         String traceNo = "";
-        try {
-            traceNo = StringUtils.fillContentBy(StringUtils.Dir.left,"0",getParamValue(1,"iNowTraceNo"),5);
-        }catch (Exception pE){
-            pE.printStackTrace();
+        traceNo = StringUtils.fillContentBy(StringUtils.Dir.left,"0",getParamValue(1,"iNowTraceNo"),5);
+        if(Integer.valueOf(traceNo)>=999999L){
+            throw new IllegalStateException("流水号不足，请先结算！");
         }
         return traceNo;
     }

@@ -11,9 +11,9 @@ import tools.com.hellolibrary.hello_string.StringUtils;
  * for��2�����˺�
  */
 public class F02 extends BaseField {
+	public static final LenthType lengthtype = LenthType.lllvar;
 	public static final StringUtils.Dir DIR = StringUtils.Dir.left;
 	public static final String FiLL = "0";
-	public static final String lengtype = "llvar";
 	public static final String DES = "主账号";//域名称
 	public static boolean IS_VAR_LEN = true;//是否为变长
 	public static final Constant.FieldType FILED_TYPE =  Constant.FieldType.BCD;//类型为数字

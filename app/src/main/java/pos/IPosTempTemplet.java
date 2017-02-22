@@ -3,10 +3,11 @@ package pos;
 import android.content.Context;
 
 import base.BaseReq;
+import models.MsgType;
 
 /**
  * Created by lenovo on 2017/1/13.
- * 描述：
+ * 描述：pos标准流程
  */
 
 public interface IPosTempTemplet {
@@ -15,11 +16,10 @@ public interface IPosTempTemplet {
     /**
      * 执行交易流程
      * @param pContext 上下文
-     * @param pMsgType 消息类型 eg:0200 , 0800 and so on
-     * @param pBitMapStr 位图 eg:"02,03,25,64"
+     * @param pMsgType MsgType
      * @param pDealReq 交易实体 ：eg:SignInReq , KeyDownReq
      */
-    void actionDeal(final Context pContext,final String pMsgType, final String pBitMapStr, final BaseReq pDealReq, BaseReq.ResultListener pResultListener);
+    void actionDeal(final Context pContext, MsgType pMsgType, final BaseReq pDealReq, BaseReq.ResultListener pResultListener);
     /**
      * 组包
      * @param pTpdu  TPDU
@@ -40,6 +40,10 @@ public interface IPosTempTemplet {
      */
     void sendPack(final Context pContext, final byte [] lSendMsg, final String pIp, final int pPort, final int pTimeOut);
 
+    /**
+     * 流水号加1
+     */
+    void tranceNoAddOne();
     /**
      * 收包
      */

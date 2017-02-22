@@ -11,9 +11,9 @@ import tools.com.hellolibrary.hello_string.StringUtils;
  * for���ܿ���ϵͳ���ٺ�(System Trace Audit Number)
  */
 public class F11 extends BaseField {
+	public static final LenthType lengthtype = LenthType.fix;
 	public static final StringUtils.Dir DIR = StringUtils.Dir.left;
 	public static final String FiLL = "0";
-	public static final String lengtype = "fix";
 	public static final String DES = "pos流水号";
 	public static boolean IS_VAR_LEN = false;//�Ƿ�Ϊ�߳�����
 	public static final Constant.FieldType FILED_TYPE = Constant.FieldType.BCD;

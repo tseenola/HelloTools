@@ -13,6 +13,7 @@ import core.TlvUtils;
 import db.bill.DBAppParasBill;
 import db.bill.DBCapkBill;
 import db.bill.DBPosSettingBill;
+import models.MsgType;
 import pos2.fields.F03;
 import pos2.fields.F11;
 import pos2.fields.F25;
@@ -28,7 +29,6 @@ import tools.com.hellolibrary.hello_string.StringUtils;
  * Created by lenovo on 2017/1/19.
  * 描述：
  */
-//public class InitParamPrt extends BaseDealPrt implements IInitParamPrt {
 public class InitParamPrt implements IInitParamPrt {
     private IInitParamAty mView;
     private Context mContext;
@@ -52,7 +52,7 @@ public class InitParamPrt implements IInitParamPrt {
                 new F60("A00199"),
                 new F64("")
         );
-        lIcParamReq.actionDeal(mContext, "0800", "03,11,25,41,42,60,64", lIcParamReq, new BaseReq.ResultListener() {
+        lIcParamReq.actionDeal(mContext, MsgType.IcCardParamDown, lIcParamReq, new BaseReq.ResultListener() {
             @Override
             public void succ(Body_STD pBody_std) {
                 int lAidNo = IcCardParamDownDecoder.getAidNum(pBody_std.getmF63().getValue());
@@ -86,7 +86,7 @@ public class InitParamPrt implements IInitParamPrt {
                 new F63(StringUtils.fillContentBy(StringUtils.Dir.left, "0", pCapkSeq + "", 2)),
                 new F64("")
         );
-        lCAPKDownReq.actionDeal(mContext, "0800", "03,11,25,41,42,60,63,64", lCAPKDownReq, new BaseReq.ResultListener() {
+        lCAPKDownReq.actionDeal(mContext, MsgType.CapkDown, lCAPKDownReq, new BaseReq.ResultListener() {
             @Override
             public void succ(Body_STD pBody_std) {
                 //拼接Capk
@@ -140,7 +140,7 @@ public class InitParamPrt implements IInitParamPrt {
                 new F63(StringUtils.fillContentBy(StringUtils.Dir.left, "0", pAidSeq + "", 2)),
                 new F64("")
         );
-        lAidDownLoadReq.actionDeal(mContext, "0800", "03,11,25,41,42,60,63,64", lAidDownLoadReq, new BaseReq.ResultListener() {
+        lAidDownLoadReq.actionDeal(mContext, MsgType.AidDown, lAidDownLoadReq, new BaseReq.ResultListener() {
             @Override
             public void succ(Body_STD pBody_std) {
                 Log.i("vbvb", "aid 下载成功");

@@ -11,9 +11,9 @@ import tools.com.hellolibrary.hello_string.StringUtils;
  * for�����׽��(Amount Of Transactions)
  */
 public class F04 extends BaseField {
+	public static final LenthType lengthtype = LenthType.fix;
 	public static final StringUtils.Dir DIR = StringUtils.Dir.left;
 	public static final String FiLL = "0";
-	public static final String lengtype = "fix";
 	public static final String DES = "交易金额";
 	public static boolean IS_VAR_LEN = false;
 	public static final Constant.FieldType FILED_TYPE = Constant.FieldType.BCD;

@@ -1,8 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-              android:orientation="vertical"
               android:layout_width="match_parent"
-              android:layout_height="match_parent">
+              android:layout_height="match_parent"
+              android:orientation="vertical">
+
     <Button
         android:id="@+id/bt_MainKeyDown"
         android:layout_width="match_parent"
@@ -50,9 +51,37 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="结算"/>
+
     <Button
         android:id="@+id/bt_SignOut"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="签退"/>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <EditText
+            android:id="@+id/et_TranceN"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="2"
+            />
+
+        <Button
+            android:id="@+id/bt_GetTranceN"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="获取流水"/>
+
+        <Button
+            android:id="@+id/bt_SetTranceN"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="修改流水"/>
+    </LinearLayout>
+
 </LinearLayout>

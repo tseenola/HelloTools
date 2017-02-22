@@ -4,6 +4,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.view.View;
 import android.widget.Button;
+import android.widget.EditText;
 
 import activity.balance.view.BalanceAty;
 import activity.init_para.view.InitParamAty;
@@ -11,6 +12,7 @@ import activity.key_download.view.KeyDownLoadAty;
 import activity.sign_in.view.SignInAty;
 import butterknife.Bind;
 import butterknife.ButterKnife;
+import db.bill.DBPosSettingBill;
 import tools.com.hellolibrary.hello_base.BaseActivity;
 import tools.com.hellotools.R;
 
@@ -38,6 +40,12 @@ public class MainMenuAty extends BaseActivity {
     Button mBtSignOut;
     @Bind(R.id.bt_QueryBalance)
     Button mBtQueryBalance;
+    @Bind(R.id.et_TranceN)
+    EditText mEtTranceN;
+    @Bind(R.id.bt_GetTranceN)
+    Button mBtGetTranceN;
+    @Bind(R.id.bt_SetTranceN)
+    Button mBtSetTranceN;
 
     @Override
     public void onClick(View v) {
@@ -65,6 +73,14 @@ public class MainMenuAty extends BaseActivity {
                 break;
             case R.id.bt_SignOut:
                 break;
+            case R.id.bt_GetTranceN://获取流水
+                mEtTranceN.setText(DBPosSettingBill.getTraceNo());
+                break;
+            case R.id.bt_SetTranceN://设置流水
+                DBPosSettingBill.setTraceNo(mEtTranceN.getText().toString());
+                break;
+            default:
+                break;
         }
     }
 
@@ -77,6 +93,7 @@ public class MainMenuAty extends BaseActivity {
     public void initView() {
         setContentView(R.layout.aty_main_menu);
         ButterKnife.bind(this);
+        mEtTranceN.setText(DBPosSettingBill.getTraceNo());
     }
 
     @Override
@@ -85,6 +102,8 @@ public class MainMenuAty extends BaseActivity {
         mBtInitParaDown.setOnClickListener(this);
         mBtSignIn.setOnClickListener(this);
         mBtQueryBalance.setOnClickListener(this);
+        mBtGetTranceN.setOnClickListener(this);
+        mBtSetTranceN.setOnClickListener(this);
     }
 
     @Override

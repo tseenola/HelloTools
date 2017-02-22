@@ -11,9 +11,9 @@ import tools.com.hellolibrary.hello_string.StringUtils;
  * for��
  */
 public class F58 extends BaseField {
+	public static final LenthType lengthtype = LenthType.llvar;
 	public static final StringUtils.Dir DIR = StringUtils.Dir.left;
 	public static final String FiLL = "0";
-	public static final String lengtype = "llvar";
 	public static final String DES = "PBOC电子钱包标准的交易信息";
 	public static boolean IS_VAR_LEN = true;
 	public static final Constant.FieldType FILED_TYPE = Constant.FieldType.ASCII;

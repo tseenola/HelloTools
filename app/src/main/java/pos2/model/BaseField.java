@@ -14,4 +14,8 @@ public class BaseField {
 	public void setValue(String value) {
 		this.value = value;
 	}
+
+	public enum LenthType{
+		fix,llvar,lllvar;
+	}
 }

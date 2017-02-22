@@ -8,6 +8,7 @@ import activity.key_download.view.IKeyDownLoadAty;
 import base.BaseReq;
 import core.MasterKeyWriter;
 import db.bill.DBPosSettingBill;
+import models.MsgType;
 import pos2.fields.F03;
 import pos2.fields.F41;
 import pos2.fields.F42;
@@ -41,7 +42,7 @@ public class KeyDownLoadPrt implements IKeyDownLoadPrt {
                 new F60("A00199")//BCD
         );
 
-        lKeyDownReq.actionDeal(mContext, "0800", "03,41,42,60", lKeyDownReq, new BaseReq.ResultListener() {
+        lKeyDownReq.actionDeal(mContext, MsgType.KeyDownLoad, lKeyDownReq, new BaseReq.ResultListener() {
             @Override
             public void succ(Body_STD pBody_std) {
                 writeMasterKey(pBody_std);

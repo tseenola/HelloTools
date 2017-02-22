@@ -11,6 +11,7 @@ import base.ReadCardTemp;
 import core.CardReader;
 import db.bill.DBPosSettingBill;
 import models.CardInfoModel;
+import models.MsgType;
 import pos2.fields.F02;
 import pos2.fields.F03;
 import pos2.fields.F11;
@@ -60,7 +61,7 @@ public class BalancePrt extends ReadCardTemp implements IBalancePrt{
 
     @Override
     public void onReadCardFail(String pFailMsg) {
-        Log.i("vbvb","读卡失败：");
+        Log.i("vbvb","读卡失败："+pFailMsg);
     }
 
     @Override
@@ -70,7 +71,7 @@ public class BalancePrt extends ReadCardTemp implements IBalancePrt{
         BalanceReq lBalanceReq = new BalanceReq(
                 new F02(SensitiveDataUtil.hideSensitiveData(2,pCardInfoModel.getCardNo())),
                 new F03("310000"),
-                new F11("000055"),//new F11(DBPosSettingBill.getTraceNo()),
+                new F11(DBPosSettingBill.getTraceNo()),
                 new F14(SensitiveDataUtil.hideSensitiveData(14,pCardInfoModel.getValidTime())),
                 new F22(getField22(pCardInfoModel.getSwipedMode(),pPinEncryStr)),
                 new F23(pCardInfoModel.getCardSeqNo()),
@@ -90,11 +91,11 @@ public class BalancePrt extends ReadCardTemp implements IBalancePrt{
                                 pCardInfoModel.getTrack2().replaceAll("=", "D"),
                                 pCardInfoModel.getTrack3().replaceAll("=", "D")
                         })),
-                new F62("000055"+DBPosSettingBill.getBatchNo()),//new F62(DBPosSettingBill.getTraceNo()+DBPosSettingBill.getBatchNo()),
+                new F62(DBPosSettingBill.getTraceNo()+DBPosSettingBill.getBatchNo()),
                 new F64("")
         );
 
-        lBalanceReq.actionDeal(mContext, "0200", "02,03,11,14,22,23,25,35,36,41,42,49,52,55,60,62,64", lBalanceReq, new BaseReq.ResultListener() {
+        lBalanceReq.actionDeal(mContext, MsgType.BalanceQuery, lBalanceReq, new BaseReq.ResultListener() {
             @Override
             public void succ(Body_STD pBody_std) {
 
@@ -111,4 +112,5 @@ public class BalancePrt extends ReadCardTemp implements IBalancePrt{
     public void onEncryPwdFail(String pErroMsg) {
         Log.i("vbvb","读卡且获取密码失败："+pErroMsg);
     }
+
 }
