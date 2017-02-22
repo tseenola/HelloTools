@@ -3,8 +3,9 @@
               android:orientation="vertical"
               android:layout_width="match_parent"
               android:layout_height="match_parent">
-    <EditText
+    <TextView
+        android:id="@+id/tv_Amt"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:text="balance"/>
+        android:text="余额"/>
 </LinearLayout>

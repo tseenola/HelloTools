@@ -103,7 +103,7 @@ public class Constants {
     /**
      * 刷卡类型
      */
-    public final class SWIPE_MODE {
+    /*public final class SWIPE_MODE {
         // 没有刷卡/插卡
         public final static byte NO_SWIPE_INSERT = 0x00;
         // 刷卡
@@ -112,7 +112,7 @@ public class Constants {
         public final static byte CARD_INSERTED = 0x02;
         // 非接
         public final static byte CLCARD_SWIPED = 0x10;
-    }
+    }*/
 
     /**
      * 密钥类型

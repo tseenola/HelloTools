@@ -8,6 +8,7 @@ import core.CardReader;
 import core.PinpadManager;
 import db.bill.DBPosSettingBill;
 import models.CardInfoModel;
+import models.SwipedMode;
 import utils.PosStringUtils;
 
 /**
@@ -103,7 +104,7 @@ public abstract class ReadCardTemp implements IReadCardTemp,CardReader.OnReadCar
      */
     public String getField22(int bSwipedMode,String sPINData) {
         String str1 = "";
-        if(bSwipedMode == Constants.SWIPE_MODE.NO_SWIPE_INSERT) {
+        /*if(bSwipedMode == Constants.SWIPE_MODE.NO_SWIPE_INSERT) {
             str1 = "001";
         } else if (bSwipedMode == Constants.SWIPE_MODE.CARD_SWIPED) {
             str1 = "002";
@@ -111,8 +112,17 @@ public abstract class ReadCardTemp implements IReadCardTemp,CardReader.OnReadCar
             str1 = "005";
         } else if (bSwipedMode == Constants.SWIPE_MODE.CLCARD_SWIPED) {
             str1 = "007";
-        }
+        }*/
 
+        if(bSwipedMode == SwipedMode.NO_SWIPE_INSERT.getMode()) {
+            str1 = "001";
+        } else if (bSwipedMode == SwipedMode.CARD_SWIPED.getMode()) {
+            str1 = "002";
+        } else if (bSwipedMode == SwipedMode.CARD_INSERTED.getMode()) {
+            str1 = "005";
+        } else if (bSwipedMode == SwipedMode.CLCARD_SWIPED.getMode()) {
+            str1 = "007";
+        }
         if (TextUtils.isEmpty(sPINData)) {
             str1 += "2";
         } else {
@@ -120,4 +130,24 @@ public abstract class ReadCardTemp implements IReadCardTemp,CardReader.OnReadCar
         }
         return str1;
     }
+
+    public String getField22_2(SwipedMode pSwipedMode,String sPINData) {
+        String str1 = "";
+        if(pSwipedMode == SwipedMode.NO_SWIPE_INSERT) {
+            str1 = "001";
+        } else if (pSwipedMode == SwipedMode.CARD_SWIPED) {
+            str1 = "002";
+        } else if (pSwipedMode == SwipedMode.CARD_INSERTED) {
+            str1 = "005";
+        } else if (pSwipedMode == SwipedMode.CLCARD_SWIPED) {
+            str1 = "007";
+        }
+        if (TextUtils.isEmpty(sPINData)) {
+            str1 += "2";
+        } else {
+            str1 += "1";
+        }
+        return str1;
+    }
+
 }

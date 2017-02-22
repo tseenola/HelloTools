@@ -11,8 +11,8 @@ public class CardInfoModel {
     private String m_validTime = "";
     private String m_cardSeqNo = "";
     private int m_cvmStartRet = 0;
-    private int mSwipedMode = 0;
-
+    //private int mSwipedMode = 0;
+    private SwipedMode mSwipedMode;
     public String getTrack1() {
         return m_track1;
     }
@@ -69,15 +69,22 @@ public class CardInfoModel {
         this.m_cvmStartRet = m_cvmStartRet;
     }
 
-    public int getSwipedMode() {
+    public SwipedMode getSwipedMode() {
+        return mSwipedMode;
+    }
+
+    public void setSwipedMode(SwipedMode pSwipedMode) {
+        mSwipedMode = pSwipedMode;
+    }
+/*    public int getSwipedMode() {
         return mSwipedMode;
     }
 
     public void setSwipedMode(int pSwipedMode) {
         mSwipedMode = pSwipedMode;
-    }
+    }*/
 
-    @Override
+    /*@Override
     public String toString() {
         return "CardInfoModel{" +
                 "m_track1='" + m_track1 + '\'' +
@@ -89,5 +96,5 @@ public class CardInfoModel {
                 ", m_cvmStartRet=" + m_cvmStartRet +
                 ", mSwipedMode=" + mSwipedMode +
                 '}';
-    }
+    }*/
 }

@@ -1,7 +1,5 @@
 package models;
 
-import android.util.Log;
-
 /**
  * Created by lenovo on 2017/2/22.
  * 描述：消息
@@ -17,7 +15,6 @@ public enum MsgType {
     private MsgTypeInfo value;
 
     MsgType(MsgTypeInfo value) {
-        Log.i("vbvb","MsgType初始化");
         this.value = value;
     }
 

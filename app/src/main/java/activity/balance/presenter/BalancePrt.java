@@ -60,8 +60,9 @@ public class BalancePrt extends ReadCardTemp implements IBalancePrt{
     }
 
     @Override
-    public void onReadCardFail(String pFailMsg) {
+    public void onReadCardFail(final String pFailMsg) {
         Log.i("vbvb","读卡失败："+pFailMsg);
+        mView.onQueryBalanceFail(pFailMsg);
     }
 
     @Override
@@ -73,7 +74,7 @@ public class BalancePrt extends ReadCardTemp implements IBalancePrt{
                 new F03("310000"),
                 new F11(DBPosSettingBill.getTraceNo()),
                 new F14(SensitiveDataUtil.hideSensitiveData(14,pCardInfoModel.getValidTime())),
-                new F22(getField22(pCardInfoModel.getSwipedMode(),pPinEncryStr)),
+                new F22(getField22_2(pCardInfoModel.getSwipedMode(),pPinEncryStr)),//new F22(getField22(pCardInfoModel.getSwipedMode(),pPinEncryStr)),
                 new F23(pCardInfoModel.getCardSeqNo()),
                 new F25("14"),
                 new F35(SensitiveDataUtil.hideSensitiveData(35,pCardInfoModel.getTrack2())),
@@ -82,7 +83,7 @@ public class BalancePrt extends ReadCardTemp implements IBalancePrt{
                 new F42(DBPosSettingBill.getMerchantNo()),
                 new F49("156"),
                 new F52(pPinEncryStr),
-                new F55(""),
+                new F55(),
                 new F60(SensitiveDataUtil.getEncryptionData(1,
                         new String[] {
                                 pCardInfoModel.getCardNo(),
@@ -98,12 +99,12 @@ public class BalancePrt extends ReadCardTemp implements IBalancePrt{
         lBalanceReq.actionDeal(mContext, MsgType.BalanceQuery, lBalanceReq, new BaseReq.ResultListener() {
             @Override
             public void succ(Body_STD pBody_std) {
-
+                mView.onQueryBalanceSucc(pBody_std.getmF54().getValue().split("-->")[1].substring(17,29));
             }
 
             @Override
             public void fail(Body_STD pBody_std) {
-
+                mView.onQueryBalanceFail(pBody_std.getmF44().getValue());
             }
         });
     }

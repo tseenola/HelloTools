@@ -37,8 +37,8 @@ public class KeyDownLoadPrt implements IKeyDownLoadPrt {
     public void actionKeyDown() {
         KeyDownReq lKeyDownReq = new KeyDownReq(
                 new F03("900000"),
-                new F41("1201QZ8Q"),//ASCII
-                new F42("103100048141347"),//ASCII
+                new F41(DBPosSettingBill.getTerminalNo()),
+                new F42(DBPosSettingBill.getMerchantNo()),
                 new F60("A00199")//BCD
         );
 

@@ -47,8 +47,8 @@ public class InitParamPrt implements IInitParamPrt {
                 new F03("920000"),
                 new F11(DBPosSettingBill.getTraceNo()),
                 new F25("14"),
-                new F41("1201QZ8Q"),
-                new F42("103100048141347"),
+                new F41(DBPosSettingBill.getTerminalNo()),
+                new F42(DBPosSettingBill.getMerchantNo()),
                 new F60("A00199"),
                 new F64("")
         );
@@ -80,8 +80,8 @@ public class InitParamPrt implements IInitParamPrt {
                 new F03("930000"),
                 new F11(DBPosSettingBill.getTraceNo()),
                 new F25("14"),
-                new F41("1201QZ8Q"),
-                new F42("103100048141347"),
+                new F41(DBPosSettingBill.getTerminalNo()),
+                new F42(DBPosSettingBill.getMerchantNo()),
                 new F60("A00199"),
                 new F63(StringUtils.fillContentBy(StringUtils.Dir.left, "0", pCapkSeq + "", 2)),
                 new F64("")
@@ -134,8 +134,8 @@ public class InitParamPrt implements IInitParamPrt {
                 new F03("990000"),
                 new F11(DBPosSettingBill.getTraceNo()),
                 new F25("14"),
-                new F41("1201QZ8Q"),
-                new F42("103100048141347"),
+                new F41(DBPosSettingBill.getTerminalNo()),
+                new F42(DBPosSettingBill.getMerchantNo()),
                 new F60("A00199"),
                 new F63(StringUtils.fillContentBy(StringUtils.Dir.left, "0", pAidSeq + "", 2)),
                 new F64("")
