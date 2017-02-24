@@ -6,8 +6,11 @@ import com.facebook.stetho.Stetho;
 
 import java.util.LinkedList;
 
+import db.bill.DBAppParasBill;
+import db.bill.DBCapkBill;
 import db.bill.DBPosSettingBill;
 import db.bill.DBUserBill;
+import models.EmvProvider;
 import myutils.LogRecUtil;
 import tools.com.hellolibrary.hello_base.BaseApplication;
 import tools.com.hellolibrary.hello_log.L;
@@ -38,8 +41,8 @@ public class MyApplication extends BaseApplication{
      */
     @Override
     public void initLogRecUtil() {
+        //这个日志为app日志，日志会上传到ustore
         LogRecUtil.init(this,"HelloTools");
-        L.e("initLogRecUtil  ");
     }
 
     /**
@@ -76,8 +79,13 @@ public class MyApplication extends BaseApplication{
         if(SPUtils.getBoolean("isFirstInstall",true)){
             DBUserBill.initDBUserTable(this);
             DBPosSettingBill.initPosSettingTable(this);
+            new EmvProvider().initAID(EmvProvider.AIDList);
+            new EmvProvider().initCAPK(EmvProvider.CapkList);
             SPUtils.putBoolean("isFirstInstall",false);
         }
+        new EmvProvider().initTremConfig();
+        DBAppParasBill.initEmvAID();
+        DBCapkBill.initEmvCapk();
         L.e("initDbUtil");
     }
 

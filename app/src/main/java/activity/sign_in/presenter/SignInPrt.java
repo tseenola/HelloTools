@@ -1,6 +1,7 @@
 package activity.sign_in.presenter;
 
 import android.content.Context;
+import android.text.TextUtils;
 import android.widget.Toast;
 
 import activity.sign_in.model.SignInReq;
@@ -40,7 +41,7 @@ public class SignInPrt implements ISignInPrt {
                 new F42(DBPosSettingBill.getMerchantNo()),
                 new F60("A00199"));//BCD
         //交易并接受结果
-        signReq.actionDeal(mContext, MsgType.SignIn, signReq, new BaseReq.ResultListener() {
+        signReq.actionDeal(mContext, MsgType.SignIn, signReq, null,new BaseReq.ResultListener() {
             @Override
             public void succ(Body_STD pBody_std) {
                 Toast.makeText(mContext,"succ"+pBody_std.getmF44().getValue(),Toast.LENGTH_LONG).show();
@@ -61,10 +62,13 @@ public class SignInPrt implements ISignInPrt {
      */
     @Override
     public void syncParaWithServiceAndDB(Body_STD pBody_std) {
+        if(!TextUtils.equals(pBody_std.getmF62().DES,"凭证号和批次号")){
+            throw new IllegalStateException("获取凭证号和批次号时发生错误，当前域DES不是凭证号和批次号！请重新确认 凭证号和批次号 所在域！");
+        }
         //1.同步批次号,2.同步流水号
-        String f63 = pBody_std.getmF62().getValue().split("-->")[1];
-        String lBatch = f63.substring(6,12);
-        String lTrace = f63.substring(0,6);
+        String f62 = pBody_std.getmF62().getValue().split("-->")[1];
+        String lBatch = f62.substring(6,12);
+        String lTrace = f62.substring(0,6);
         DBPosSettingBill.syncBatchAndTrace(lBatch,lTrace);
         //3.写入工作密钥
         /* 天下汇工作密钥的数据长度33个字节。
@@ -72,6 +76,9 @@ public class SignInPrt implements ISignInPrt {
          * 第2-17字节PIN Key的密文。
          * 第18-33字节MAC Key的密文。
          */
+        if(!TextUtils.equals(pBody_std.getmF61().DES,"工作密钥")){
+            throw new IllegalStateException("获取工作密钥时发生错误，当前域DES不是工作密钥！请重新确认 工作密钥 所在域！");
+        }
         String workKeySec = pBody_std.getmF61().getValue();
 
         if(workKeySec == null) {

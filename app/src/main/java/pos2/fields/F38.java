@@ -13,7 +13,7 @@ public class F38 extends BaseField {
 	public static final LenthType lengthtype = LenthType.fix;
 	public static final StringUtils.Dir DIR = StringUtils.Dir.left;
 	public static final String FiLL = "0";
-	public static final String DES = "授权码";
+	public static final String DES = "预授权标识应答码";
 	public static boolean IS_VAR_LEN = false;
 	public static final Constant.FieldType FILED_TYPE = Constant.FieldType.ASCII;
 	public static final int NORMAL_LEN = 6;

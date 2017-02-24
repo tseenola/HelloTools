@@ -59,7 +59,7 @@ public class DBPosSettingBill {
      */
     public static void setTraceNo(String pTrace){
         if(pTrace.length()!=6){
-            throw new IllegalArgumentException("传入的流水号不合法");
+            throw new IllegalArgumentException("传入的流水号不合法,长度错误！");
         }
         ContentValues traceVal = new ContentValues();
         traceVal.put("parmValue", pTrace);

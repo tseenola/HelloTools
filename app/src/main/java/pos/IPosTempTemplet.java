@@ -3,6 +3,7 @@ package pos;
 import android.content.Context;
 
 import base.BaseReq;
+import models.CardInfoModel;
 import models.MsgType;
 
 /**
@@ -12,14 +13,22 @@ import models.MsgType;
 
 public interface IPosTempTemplet {
 
+    /**
+     *
+     * @param pContext
+     * @param pMsgType
+     * @param pDealReq
+     */
 
     /**
      * 执行交易流程
      * @param pContext 上下文
      * @param pMsgType MsgType
      * @param pDealReq 交易实体 ：eg:SignInReq , KeyDownReq
+     * @param pCardInfoModel 刷卡信息如果交易不需要刷卡，可以传null
+     * @param pResultListener 交易结果的回调（成功回调，失败回调）
      */
-    void actionDeal(final Context pContext, MsgType pMsgType, final BaseReq pDealReq, BaseReq.ResultListener pResultListener);
+    void actionDeal(final Context pContext, MsgType pMsgType, final BaseReq pDealReq, CardInfoModel pCardInfoModel, BaseReq.ResultListener pResultListener);
     /**
      * 组包
      * @param pTpdu  TPDU

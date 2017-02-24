@@ -1,6 +1,7 @@
 package activity.balance.presenter;
 
 import android.content.Context;
+import android.text.TextUtils;
 import android.util.Log;
 import android.widget.Toast;
 
@@ -48,10 +49,13 @@ public class BalancePrt extends ReadCardTemp implements IBalancePrt{
     @Override
     public void actionQueryBalance() {
         actionReadCardProcess(this);
-
     }
 
-
+    /**
+     * 读卡成功
+     * 弹出密码键盘
+     * @param pPardInfo
+     */
     @Override
     public void onReadCardSucc(CardInfoModel pPardInfo) {
         CardReader.checkCardThreadIsRun = false;
@@ -59,6 +63,10 @@ public class BalancePrt extends ReadCardTemp implements IBalancePrt{
         inputTradePwdEntry(pPardInfo);
     }
 
+    /**
+     * 读卡失败
+     * @param pFailMsg
+     */
     @Override
     public void onReadCardFail(final String pFailMsg) {
         Log.i("vbvb","读卡失败："+pFailMsg);
@@ -69,6 +77,9 @@ public class BalancePrt extends ReadCardTemp implements IBalancePrt{
     public void onEncryPwdSucc(CardInfoModel pCardInfoModel, String pPinEncryStr) {
         Toast.makeText(mContext, "读卡且获取密码成功："+pCardInfoModel.toString()+" 密码为："+pPinEncryStr, Toast.LENGTH_SHORT).show();
         Log.i("vbvb","读卡且获取密码成功："+pCardInfoModel.toString()+" 密码为："+pPinEncryStr);
+
+        checkICCard(pCardInfoModel,pPinEncryStr,MsgType.BalanceQuery);
+
         BalanceReq lBalanceReq = new BalanceReq(
                 new F02(SensitiveDataUtil.hideSensitiveData(2,pCardInfoModel.getCardNo())),
                 new F03("310000"),
@@ -83,7 +94,7 @@ public class BalancePrt extends ReadCardTemp implements IBalancePrt{
                 new F42(DBPosSettingBill.getMerchantNo()),
                 new F49("156"),
                 new F52(pPinEncryStr),
-                new F55(),
+                new F55(getF55ForOnlineTx()),
                 new F60(SensitiveDataUtil.getEncryptionData(1,
                         new String[] {
                                 pCardInfoModel.getCardNo(),
@@ -96,15 +107,23 @@ public class BalancePrt extends ReadCardTemp implements IBalancePrt{
                 new F64("")
         );
 
-        lBalanceReq.actionDeal(mContext, MsgType.BalanceQuery, lBalanceReq, new BaseReq.ResultListener() {
+        lBalanceReq.actionDeal(mContext, MsgType.BalanceQuery, lBalanceReq,pCardInfoModel,new BaseReq.ResultListener() {
             @Override
             public void succ(Body_STD pBody_std) {
-                mView.onQueryBalanceSucc(pBody_std.getmF54().getValue().split("-->")[1].substring(17,29));
+                if(!TextUtils.equals("余额",pBody_std.getmF54().DES)){
+                    throw new IllegalStateException("获取余额时发生错误，当前域DES不是余额！请重新确认余额所在域！");
+                }else {
+                    mView.onQueryBalanceSucc(pBody_std.getmF54().getValue().split("-->")[1].substring(17,29));
+                }
             }
 
             @Override
             public void fail(Body_STD pBody_std) {
-                mView.onQueryBalanceFail(pBody_std.getmF44().getValue());
+                if(!TextUtils.equals("余额",pBody_std.getmF54().DES)){
+                    throw new IllegalStateException("获取余额时发生错误，当前域DES不是余额！请重新确认余额所在域！");
+                }else {
+                    mView.onQueryBalanceFail(pBody_std.getmF44().getValue());
+                }
             }
         });
     }

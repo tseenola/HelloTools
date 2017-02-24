@@ -124,7 +124,7 @@ public class ICReadService extends BaseReadService{
                     if(!cardInfo.getCardNo().isEmpty()) {
                         ICCardReadSuccess = true;
                         //cardInfo.setSwipedMode(Constants.SWIPE_MODE.CARD_INSERTED);
-                        cardInfo.setSwipedMode(SwipedMode.CARD_SWIPED);
+                        cardInfo.setSwipedMode(SwipedMode.CARD_INSERTED);
                         sendSuccMsgToUiThread(cardInfo);
                     }
                 }

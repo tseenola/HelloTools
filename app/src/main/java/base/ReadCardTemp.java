@@ -4,11 +4,15 @@ import android.device.MaxqManager;
 import android.text.TextUtils;
 import android.util.Log;
 
+import com.jniexport.UROPElibJni;
+
 import core.CardReader;
 import core.PinpadManager;
 import db.bill.DBPosSettingBill;
 import models.CardInfoModel;
+import models.MsgType;
 import models.SwipedMode;
+import tools.com.hellolibrary.hello_convert.ConvertUtils;
 import utils.PosStringUtils;
 
 /**
@@ -20,6 +24,8 @@ public abstract class ReadCardTemp implements IReadCardTemp,CardReader.OnReadCar
     CardReader.OnEncryPwdFinish mOnEncryPwdFinish;
     CardInfoModel mCardInfoModel;
     static String encrypedPinKey= "";
+    private PinpadManager pinpadMgr;
+
     @Override
     public void actionReadCardProcess(CardReader.OnEncryPwdFinish pOnEncryPwdFinish) {
         mOnEncryPwdFinish = pOnEncryPwdFinish;
@@ -43,7 +49,7 @@ public abstract class ReadCardTemp implements IReadCardTemp,CardReader.OnReadCar
         /*} else {
             amtAndCardNo = "支付卡号：" + StringUtil.getStarPan(inputDatas.sPan) + "\n" + "交易金额：" + inputDatas.sAmt;
         }*/
-        PinpadManager pinpadMgr = PinpadManager.getInstance();
+        pinpadMgr = PinpadManager.getInstance();
         pinpadMgr.init();
         pinpadMgr.startInputPwd(pinKeyIndex,
                 pPardInfo.getCardNo(),
@@ -77,17 +83,21 @@ public abstract class ReadCardTemp implements IReadCardTemp,CardReader.OnReadCar
                     // 确认按键
                     String encrypedPinKey = new String(keybuf);
                     Log.i("vbvb","按下了确认键:"+encrypedPinKey);
+                    finishPinPad();
                     mOnEncryPwdFinish.onEncryPwdSucc(mCardInfoModel,encrypedPinKey);
                 } else if (result == 1) {
                     // 取消按键
+                    finishPinPad();
                     Log.i("vbvb","按下了取消键");
                     //onPasswordInputTimeout();
                 } else if (result == -1) {
+                    finishPinPad();
                     // 失败或超时
                     Log.i("vbvb","失败或超时");
                     //onPasswordInputTimeout();
                 } else {
                     // 其他错误
+                    finishPinPad();
                     Log.i("vbvb","其他错误");
                     //onPasswordInputTimeout();
                 }
@@ -150,4 +160,93 @@ public abstract class ReadCardTemp implements IReadCardTemp,CardReader.OnReadCar
         return str1;
     }
 
+
+    /**
+     * 获取IC卡的发送数据,是在报文上送时，从这里取出55域
+     * @return
+     */
+    public String getF55ForOnlineTx() {
+        String str = "";
+        int[] IccDatasLen = new int[2];
+        byte[] ICCDatas = new byte[256];
+        byte[] ICCDatasAsc = new byte[1024];
+
+        int get55Result = UROPElibJni.GetF55ForOnlineTx(ICCDatas, IccDatasLen);
+        if (IccDatasLen[0] > 512)
+            IccDatasLen[0] = 512;
+
+        if (IccDatasLen[0] > 0) {
+            int Bcdlen = IccDatasLen[0];
+            ICCDatasAsc = new byte[Bcdlen * 2];
+            ConvertUtils.BcdToAsc(ICCDatasAsc, ICCDatas, Bcdlen * 2);
+
+            str = new String(ICCDatasAsc);
+            Log.i("vbvb","Ic卡数据域 : "+str);
+            return str;
+        } else {
+            Log.i("vbvb","Ic卡数据域 : ");
+            return "";
+        }
+    }
+    /**
+     * 检查IC卡
+     * @param pCardInfoModel
+     * @param pPinEncryStr
+     * @param pMsgType
+     */
+    protected void checkICCard(CardInfoModel pCardInfoModel, String pPinEncryStr, MsgType pMsgType) {
+        int pinMode = 0;
+        int i= pCardInfoModel.getSwipedMode().getMode();
+        int ii = SwipedMode.CARD_INSERTED.getMode();
+        if (pCardInfoModel.getSwipedMode().getMode() == SwipedMode.CARD_INSERTED.getMode()) {
+            if (pPinEncryStr=="") {
+                pinMode = 2;    // 没有输PIN
+            } else {
+                pinMode = 1;    // 有输入PIN
+            }
+            switch (pCardInfoModel.getCvmStartRet()) {
+                case 0:         // 无需cvm
+                case 49:        // 请出示证件
+                    break;
+                case 50:        // 需要输入联机密文
+                    UROPElibJni.SetPinCVR(pinMode);
+                    break;
+                case 51:        // 需要输入脱机明文
+                    // 暂不处理
+                    // if (pwd.length() > 0)
+                    //     UROPElibJni.ProcOfflinePlantPin(pwd.getBytes(), pwd.length());
+                default:
+                    break;
+            }
+            // 不输入密码执行ProcRiskActAnalyse会返回-225
+            // 参数设置需要输入密码：消费撤销、预授权撤销
+            // 无需输密：退货、预授权完成、预授权完成(请求)撤销
+            if (pMsgType.getValue() != MsgType.Sale.getValue()) {
+                int analyseRet = UROPElibJni.ProcRiskActAnalyse();
+                switch (analyseRet) {
+                    case 203:   // 脱机接收
+                    case 204:   // 电子现金脱机接收
+                    case 223:   // 联机处理
+                        break;
+                    default:
+                        throw new IllegalStateException("终端行为分析出错 " + analyseRet);
+                }
+            }
+        } else if (pCardInfoModel.getSwipedMode() == SwipedMode.CLCARD_SWIPED) {
+            UROPElibJni.SetPinCVR(0);
+        }
+    }
+
+    /**
+     * 停止密码键盘
+     */
+    private void finishPinPad() {
+        if(pinpadMgr != null) {
+            // 移除PinPad监听
+            pinpadMgr.removePinpadListener(pedInputListener);
+            // 关闭密码键盘
+            pinpadMgr.fini();
+            pinpadMgr=null;
+        }
+    }
 }
