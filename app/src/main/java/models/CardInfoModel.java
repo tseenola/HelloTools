@@ -1,72 +1,88 @@
 package models;
 
+import java.io.Serializable;
+
 /**
  * 卡片信息实体类
  */
-public class CardInfoModel {
-    private String m_track1 = "";
-    private String m_track2 = "";
-    private String m_track3 = "";
-    private String m_cardNo = "";
-    private String m_validTime = "";
-    private String m_cardSeqNo = "";
-    private int m_cvmStartRet = 0;
-    //private int mSwipedMode = 0;
+public class CardInfoModel implements Serializable{
+    private static final long serialVersionUID = -7060210544600464481L;
+    private String track1 = "";
+    private String track2 = "";
+    private String track3 = "";
+    private String cardNo = "";
+    private String validTime = "";
+    private String cardSeqNo = "";
+    private int cvmStartRet = 0;
+    private String encrypedPwd = "";//加密后的密码
     private SwipedMode mSwipedMode;
-    public String getTrack1() {
-        return m_track1;
+
+    public static long getSerialVersionUID() {
+        return serialVersionUID;
     }
 
-    public void setTrack1(String m_track1) {
-        this.m_track1 = m_track1;
+    public String getTrack1() {
+        return track1;
+    }
+
+    public void setTrack1(String pTrack1) {
+        track1 = pTrack1;
     }
 
     public String getTrack2() {
-        return m_track2;
+        return track2;
     }
 
-    public void setTrack2(String m_track2) {
-        this.m_track2 = m_track2;
+    public void setTrack2(String pTrack2) {
+        track2 = pTrack2;
     }
 
     public String getTrack3() {
-        return m_track3;
+        return track3;
     }
 
-    public void setTrack3(String m_track3) {
-        this.m_track3 = m_track3;
+    public void setTrack3(String pTrack3) {
+        track3 = pTrack3;
     }
 
     public String getCardNo() {
-        return m_cardNo;
+        return cardNo;
     }
 
-    public void setCardNo(String m_cardNo) {
-        this.m_cardNo = m_cardNo;
+    public void setCardNo(String pCardNo) {
+        cardNo = pCardNo;
     }
 
     public String getValidTime() {
-        return m_validTime;
+        return validTime;
     }
 
-    public void setValidTime(String m_validTime) {
-        this.m_validTime = m_validTime;
+    public void setValidTime(String pValidTime) {
+        validTime = pValidTime;
     }
 
     public String getCardSeqNo() {
-        return m_cardSeqNo;
+        return cardSeqNo;
     }
 
-    public void setCardSeqNo(String m_cardSeqNo) {
-        this.m_cardSeqNo = m_cardSeqNo;
+    public void setCardSeqNo(String pCardSeqNo) {
+        cardSeqNo = pCardSeqNo;
     }
 
     public int getCvmStartRet() {
-        return m_cvmStartRet;
+        return cvmStartRet;
     }
 
-    public void setCvmStartRet(int m_cvmStartRet) {
-        this.m_cvmStartRet = m_cvmStartRet;
+    public void setCvmStartRet(int pCvmStartRet) {
+        cvmStartRet = pCvmStartRet;
+    }
+
+    public String getEncrypedPwd() {
+        return encrypedPwd;
+    }
+
+    public void setEncrypedPwd(String pEncrypedPwd) {
+        encrypedPwd = pEncrypedPwd;
     }
 
     public SwipedMode getSwipedMode() {
@@ -76,25 +92,19 @@ public class CardInfoModel {
     public void setSwipedMode(SwipedMode pSwipedMode) {
         mSwipedMode = pSwipedMode;
     }
-/*    public int getSwipedMode() {
-        return mSwipedMode;
-    }
 
-    public void setSwipedMode(int pSwipedMode) {
-        mSwipedMode = pSwipedMode;
-    }*/
-
-    /*@Override
+    @Override
     public String toString() {
         return "CardInfoModel{" +
-                "m_track1='" + m_track1 + '\'' +
-                ", m_track2='" + m_track2 + '\'' +
-                ", m_track3='" + m_track3 + '\'' +
-                ", m_cardNo='" + m_cardNo + '\'' +
-                ", m_validTime='" + m_validTime + '\'' +
-                ", m_cardSeqNo='" + m_cardSeqNo + '\'' +
-                ", m_cvmStartRet=" + m_cvmStartRet +
+                "track1='" + track1 + '\'' +
+                ", track2='" + track2 + '\'' +
+                ", track3='" + track3 + '\'' +
+                ", cardNo='" + cardNo + '\'' +
+                ", validTime='" + validTime + '\'' +
+                ", cardSeqNo='" + cardSeqNo + '\'' +
+                ", cvmStartRet=" + cvmStartRet +
+                ", encrypedPwd='" + encrypedPwd + '\'' +
                 ", mSwipedMode=" + mSwipedMode +
                 '}';
-    }*/
+    }
 }

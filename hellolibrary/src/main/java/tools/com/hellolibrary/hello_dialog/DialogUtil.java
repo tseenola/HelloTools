@@ -3,6 +3,7 @@ package tools.com.hellolibrary.hello_dialog;
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.app.ProgressDialog;
+import android.content.Context;
 import android.content.DialogInterface;
 import android.os.Handler;
 import android.os.Message;
@@ -44,8 +45,8 @@ public class DialogUtil {
      *                  window ..........is your activity running）
      * @param textSize  字体大小（20-40）
      */
-    public static void showProgressDialog(@NonNull final Activity ctx, final Boolean canCancle, final int style, final String message, final int textSize) {
-        ctx.runOnUiThread(new Runnable() {
+    public static void showProgressDialog(@NonNull final Context ctx, final Boolean canCancle, final int style, final String message, final int textSize) {
+        ThreadUtil.runOnUiThread(new Runnable() {
             @Override
             public void run() {
                 mDialog = new ProgressDialog(ctx);
@@ -57,6 +58,21 @@ public class DialogUtil {
                 setDialogTextSize(dialogView, textSize);
             }
         });
+
+
+
+        /*ctx.runOnUiThread(new Runnable() {
+            @Override
+            public void run() {
+                mDialog = new ProgressDialog(ctx);
+                mDialog.setCancelable(canCancle);
+                mDialog.setProgressStyle(style);
+                mDialog.setMessage(message);
+                mDialog.show();
+                View dialogView = mDialog.getWindow().getDecorView();
+                setDialogTextSize(dialogView, textSize);
+            }
+        });*/
     }
 
     public static void setCancelable(boolean pCancelable) {
@@ -163,7 +179,7 @@ public class DialogUtil {
      * @param listener
      */
 
-    private static void build1ChooseDialog(final Activity ctx, final String title, final String msg, final String positiveMsg, @NonNull final On1DialogChoseListener listener) {
+    private static void build1ChooseDialog(final Context ctx, final String title, final String msg, final String positiveMsg, @NonNull final On1DialogChoseListener listener) {
 
         mBuilder = new AlertDialog.Builder(ctx);
         if (!TextUtils.isEmpty(title)) {
@@ -215,7 +231,7 @@ public class DialogUtil {
      * @param positiveMsg
      * @param listener
      */
-    public static void show1ChooseDialog(final Activity ctx, final String title, final String msg, final String positiveMsg, @NonNull final On1DialogChoseListener listener) {
+    public static void show1ChooseDialog(final Context ctx, final String title, final String msg, final String positiveMsg, @NonNull final On1DialogChoseListener listener) {
         build1ChooseDialog(ctx, title, msg, positiveMsg, listener);
         mBuilder.show();
     }

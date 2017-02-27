@@ -119,8 +119,8 @@ public class BalancePrt extends ReadCardTemp implements IBalancePrt{
 
             @Override
             public void fail(Body_STD pBody_std) {
-                if(!TextUtils.equals("余额",pBody_std.getmF54().DES)){
-                    throw new IllegalStateException("获取余额时发生错误，当前域DES不是余额！请重新确认余额所在域！");
+                if(!TextUtils.equals("附加响应数据",pBody_std.getmF44().DES)){
+                    throw new IllegalStateException("获取 附加响应数据 时发生错误，当前域DES不是 附加响应数据 ！请重新确认 附加响应数据 所在域！");
                 }else {
                     mView.onQueryBalanceFail(pBody_std.getmF44().getValue());
                 }

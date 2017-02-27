@@ -9,6 +9,7 @@ import android.widget.EditText;
 import activity.balance.view.BalanceAty;
 import activity.init_para.view.InitParamAty;
 import activity.key_download.view.KeyDownLoadAty;
+import activity.sale.view.SaleAty;
 import activity.sign_in.view.SignInAty;
 import butterknife.Bind;
 import butterknife.ButterKnife;
@@ -63,7 +64,7 @@ public class MainMenuAty extends BaseActivity {
                 BalanceAty.launch(this);
                 break;
             case R.id.bt_Sale:
-
+                SaleAty.launch(this);
                 break;
             case R.id.bt_SaleVoid:
                 break;
@@ -104,6 +105,7 @@ public class MainMenuAty extends BaseActivity {
         mBtQueryBalance.setOnClickListener(this);
         mBtGetTranceN.setOnClickListener(this);
         mBtSetTranceN.setOnClickListener(this);
+        mBtSale.setOnClickListener(this);
     }
 
     @Override

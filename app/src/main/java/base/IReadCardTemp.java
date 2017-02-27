@@ -14,5 +14,4 @@ public interface IReadCardTemp {
      * 2.弹出密码键盘接收密码
      */
     void actionReadCardProcess(CardReader.OnEncryPwdFinish pOnEncryPwdFinish);
-
 }

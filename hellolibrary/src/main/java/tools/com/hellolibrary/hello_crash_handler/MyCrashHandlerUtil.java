@@ -1,16 +1,13 @@
 package tools.com.hellolibrary.hello_crash_handler;
 
 import android.content.Context;
-import android.content.Intent;
 import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
 import android.os.Build;
 import android.os.Environment;
-import android.os.Looper;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.util.Log;
-import android.widget.Toast;
 
 import java.io.File;
 import java.io.FileOutputStream;
@@ -24,6 +21,8 @@ import java.util.HashMap;
 import java.util.Iterator;
 import java.util.Map;
 
+import tools.com.hellolibrary.hello_dialog.DialogUtil;
+
 /**
  * 系统崩溃的时候需要处理下面的动作
  * 1.收集并且记录崩溃错误日志
@@ -31,14 +30,30 @@ import java.util.Map;
  * 3.重启应用程序
  * 4.崩溃的时候给予用户适当的提示
  */
-interface CrashListner {
 
-    void onSystemCrash();
-
-
-}
 
 public class MyCrashHandlerUtil implements Thread.UncaughtExceptionHandler {
+    @Override
+    public void uncaughtException(Thread thread, Throwable ex) {
+
+        DialogUtil.show1ChooseDialog(mContext, "程序出现异常", ex.getMessage(), "退出", new DialogUtil.On1DialogChoseListener() {
+            @Override
+            public void onPositiveChose() {
+                //System.exit(0);
+            }
+        });
+
+/*        this.collectDeviceInfo(this.mContext);
+        this.saveCrashInfo2File(ex);*/
+        this.mCallback.onSystemCrash();
+    }
+
+    public interface CrashListner {
+
+        void onSystemCrash();
+
+    }
+
     private static final String TAG = "CrashHandler";
     @NonNull
     private static MyCrashHandlerUtil INSTANCE = new MyCrashHandlerUtil();
@@ -67,37 +82,30 @@ public class MyCrashHandlerUtil implements Thread.UncaughtExceptionHandler {
         Thread.setDefaultUncaughtExceptionHandler(this);
     }
 
-    public void uncaughtException(Thread thread, Throwable ex) {
-        if (!this.handleException(ex) && this.mDefaultHandler != null) {
-            this.mDefaultHandler.uncaughtException(thread, ex);
-        } else {
-            try {
-                Thread.sleep(3000L);
-            } catch (InterruptedException var4) {
-                var4.printStackTrace();
-                Log.e("CrashHandler", "error : ", var4);
-            }
-            //退出程序
-            android.os.Process.killProcess(android.os.Process.myPid());
-            System.exit(1);
-        }
-        this.mCallback.onSystemCrash();
-    }
 
-    private boolean handleException(@Nullable Throwable ex) {
+
+    private boolean handleException(@Nullable final Throwable ex) {
         if (ex == null) {
             return false;
         } else {
-            (new Thread() {
+            /*(new Thread() {
                 public void run() {
                     Looper.prepare();
-                    Toast.makeText(mContext, "很抱歉,程序出现异常,即将重新启动", Toast.LENGTH_LONG).show();
+                    //Toast.makeText(mContext, "很抱歉,程序出现异常,即将重新启动", Toast.LENGTH_LONG).show();
+                    DialogUtil.show1ChooseDialog(mContext, "程序出现异常", ex.getMessage(), "退出", new DialogUtil.On1DialogChoseListener() {
+                        @Override
+                        public void onPositiveChose() {
+                            //System.exit(0);
+                        }
+                    });
                     Looper.loop();
                 }
-            }).start();
+            }).start();*/
+
+
             this.collectDeviceInfo(this.mContext);
             this.saveCrashInfo2File(ex);
-            mContext.startActivity(new Intent(mContext, mCls));
+            //mContext.startActivity(new Intent(mContext, mCls));
             return true;
         }
     }

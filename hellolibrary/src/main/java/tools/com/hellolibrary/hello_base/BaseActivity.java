@@ -16,6 +16,8 @@ import tools.com.hellolibrary.helllo_my_inter.ActivityTemplate;
  */
 
 public abstract class BaseActivity extends Activity implements ActivityTemplate,View.OnClickListener{
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
