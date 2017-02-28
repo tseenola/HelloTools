@@ -9,7 +9,6 @@ import activity.init_para.model.IcParamReq;
 import activity.init_para.view.IInitParamAty;
 import base.BaseReq;
 import core.IcCardParamDownDecoder;
-import core.TlvUtils;
 import db.bill.DBAppParasBill;
 import db.bill.DBCapkBill;
 import db.bill.DBPosSettingBill;
@@ -24,6 +23,7 @@ import pos2.fields.F63;
 import pos2.fields.F64;
 import pos2.model.Body_STD;
 import tools.com.hellolibrary.hello_string.StringUtils;
+import utils.PosStringUtils;
 
 /**
  * Created by lenovo on 2017/1/19.
@@ -104,14 +104,14 @@ public class InitParamPrt implements IInitParamPrt {
                 //有效期
                 String dateValue = "20" + pBody_std.getmF63().getValue().substring(66 + moduleLength, 72 + moduleLength);
 
-                String strCapk = TlvUtils.getTlvStr("9F06", ridValue)
-                        + TlvUtils.getTlvStr("9F22", indexValue)
-                        + TlvUtils.getTlvStr("DF06", hashFlag)
-                        + TlvUtils.getTlvStr("DF07", algorithmFlag)
-                        + TlvUtils.getTlvStr("DF02", moduleValue)
-                        + TlvUtils.getTlvStr("DF04", exponentValue)
-                        + TlvUtils.getTlvStr("DF03", validValue)
-                        + TlvUtils.getTlvStr("DF05", dateValue);
+                String strCapk = PosStringUtils.getTlvStr("9F06", ridValue)
+                        + PosStringUtils.getTlvStr("9F22", indexValue)
+                        + PosStringUtils.getTlvStr("DF06", hashFlag)
+                        + PosStringUtils.getTlvStr("DF07", algorithmFlag)
+                        + PosStringUtils.getTlvStr("DF02", moduleValue)
+                        + PosStringUtils.getTlvStr("DF04", exponentValue)
+                        + PosStringUtils.getTlvStr("DF03", validValue)
+                        + PosStringUtils.getTlvStr("DF05", dateValue);
                 DBCapkBill.inserAid(strCapk);
                 mView.onCAPKDownDownSucc(strCapk,pCapkSeq);
             }
@@ -158,18 +158,18 @@ public class InitParamPrt implements IInitParamPrt {
                 String defaultDDOL = pBody_std.getmF63().getValue().substring(100, 106);//缺省DDOL
                 String supportPin = pBody_std.getmF63().getValue().substring(106, 108);//终端联机PIN支持能力
 
-                String strAid = TlvUtils.getTlvStr("9F06", aid)
-                        + TlvUtils.getTlvStr("9F09", appVer)
-                        + TlvUtils.getTlvStr("DF01", matchWay)
-                        + TlvUtils.getTlvStr("DF11", defaultAct)
-                        + TlvUtils.getTlvStr("DF13", refuseAct)
-                        + TlvUtils.getTlvStr("DF12", onlineAct)
-                        + TlvUtils.getTlvStr("9F1B", termLow)
-                        + TlvUtils.getTlvStr("DF15", orThreshold)
-                        + TlvUtils.getTlvStr("DF16", orMaxPercent)
-                        + TlvUtils.getTlvStr("DF17", rTarPercent)
-                        + TlvUtils.getTlvStr("DF14", defaultDDOL)
-                        + TlvUtils.getTlvStr("DF18", supportPin);
+                String strAid = PosStringUtils.getTlvStr("9F06", aid)
+                        + PosStringUtils.getTlvStr("9F09", appVer)
+                        + PosStringUtils.getTlvStr("DF01", matchWay)
+                        + PosStringUtils.getTlvStr("DF11", defaultAct)
+                        + PosStringUtils.getTlvStr("DF13", refuseAct)
+                        + PosStringUtils.getTlvStr("DF12", onlineAct)
+                        + PosStringUtils.getTlvStr("9F1B", termLow)
+                        + PosStringUtils.getTlvStr("DF15", orThreshold)
+                        + PosStringUtils.getTlvStr("DF16", orMaxPercent)
+                        + PosStringUtils.getTlvStr("DF17", rTarPercent)
+                        + PosStringUtils.getTlvStr("DF14", defaultDDOL)
+                        + PosStringUtils.getTlvStr("DF18", supportPin);
                 DBAppParasBill.inserAid(strAid);
                 mView.onAidDownSucc(strAid,pAidSeq);
             }

@@ -47,7 +47,6 @@ public class MagReadService extends BaseReadService{
                         }
                         if (!cardInfo.getCardNo().isEmpty()) {
                             MagCardReadSuccess = true;
-                            //cardInfo.setSwipedMode(Constants.SWIPE_MODE.CARD_SWIPED);
                             cardInfo.setSwipedMode(SwipedMode.CARD_SWIPED);
                             sendSuccMsgToUiThread(cardInfo);
                         }

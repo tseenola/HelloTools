@@ -1,6 +1,6 @@
 package activity.balance.presenter;
 
-import activity.balance.model.BalanceReq;
+import activity.balance.model.BalanceQueryReq;
 import base.BaseReq;
 import base.BaseSwipeCardPrt;
 import db.bill.DBPosSettingBill;
@@ -36,7 +36,7 @@ public class BalanceQueryPrt extends BaseSwipeCardPrt{
 
     @Override
     public BaseReq actionDeal(CardInfoModel pCardInfoModel) {
-        BalanceReq lBalanceReq = new BalanceReq(
+        BalanceQueryReq lBalanceReq = new BalanceQueryReq(
                 new F02(SensitiveDataUtil.hideSensitiveData(2,pCardInfoModel.getCardNo())),
                 new F03("310000"),
                 new F11(DBPosSettingBill.getTraceNo()),

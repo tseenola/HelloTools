@@ -70,6 +70,8 @@ public class UserEntryAty extends BaseActivity implements IUserEntryAty{
                user.setPwd(mEtPwd.getText().toString().trim());
                mPresenter.actionEntry(user);
            break;
+           default:
+               break;
        }
     }
 

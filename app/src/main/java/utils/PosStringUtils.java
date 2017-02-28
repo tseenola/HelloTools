@@ -1,5 +1,7 @@
 package utils;
 
+import tools.com.hellolibrary.hello_convert.ConvertUtils;
+
 /**
  * Created by lenovo on 2017/2/14.
  * 描述：
@@ -20,4 +22,23 @@ public class PosStringUtils {
         stringBuffer.append(string.substring(string.length() - 4, string.length()));
         return stringBuffer.toString();
     }
+
+    public static String getTlvStr(String tag, String value) {
+        String result = tag;
+        int length = value.length() / 2;
+        if(length <= 0) {
+            result = "";
+        }
+        else if(length <= 127) {
+            result += ConvertUtils.bytesToHexString(new byte[] {(byte) length})+value;
+        }
+        else if(length <= 255) {
+            result += ConvertUtils.bytesToHexString(new byte[] {(byte) 0x81, (byte) length})+value;
+        }
+        else {
+            result = "";
+        }
+        return result;
+    }
+
 }

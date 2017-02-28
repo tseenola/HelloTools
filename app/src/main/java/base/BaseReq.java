@@ -16,7 +16,6 @@ import models.CardInfoModel;
 import models.MsgType;
 import models.MsgTypeInfo;
 import models.SwipedMode;
-import pos.IPosTempTemplet;
 import pos2.constant.Constant;
 import pos2.model.BaseField;
 import pos2.model.Body_STD;
