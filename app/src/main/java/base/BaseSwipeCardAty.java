@@ -37,15 +37,11 @@ public abstract class BaseSwipeCardAty extends BaseActivity implements IBaseSwip
                 if (resultCode == RESULT_OK) {
                     Bundle lBundle = data.getBundleExtra(ReadCardAty.READ_CARD_RESULT);
                     CardInfoModel lCardInfoModel = (CardInfoModel) lBundle.getSerializable("a");
-                    //mEtAmt.setText(lCardInfoModel.toString());
                     Log.i("vbvb", "xixixixsucc:" + lCardInfoModel.toString());
                     DialogUtil.showProgressDialog(this,false,DialogUtil.STYLE_CIRCAL,"消费交易中",25);
-                    //mPresenter.actionSale(lCardInfoModel);
-                    //mPresenter.actionCardDeal(lCardInfoModel, MsgType.Sale);
                     mIBaseSwipeCardPrt.actionCardDeal(this,lCardInfoModel,mMsgType,this);
                 } else {
                     String result = data.getStringExtra(ReadCardAty.READ_CARD_RESULT);
-                    //mEtAmt.setText(result);
                     Log.i("vbvb", "xixixixfale:" + result);
                 }
                 break;

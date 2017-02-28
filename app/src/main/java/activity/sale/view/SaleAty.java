@@ -11,6 +11,7 @@ import base.BaseSwipeCardAty;
 import butterknife.Bind;
 import butterknife.ButterKnife;
 import models.MsgType;
+import pos2.model.Body_STD;
 import tools.com.hellolibrary.hello_dialog.DialogUtil;
 import tools.com.hellotools.R;
 
@@ -60,14 +61,12 @@ public class SaleAty extends BaseSwipeCardAty{
     }
 
     @Override
-    public void onDealSucc(String pMsg) {
-        DialogUtil.hideProgressDialog();
+    public void onDealSucc(String pMsg,Body_STD pBody_std) {
         mEtAmt.setText("消费结果："+pMsg);
     }
 
     @Override
-    public void onDealFail(String pErrorMsg) {
-        DialogUtil.hideProgressDialog();
+    public void onDealFail(String pErrorMsg,Body_STD pBody_std) {
         mEtAmt.setText("消费结果："+pErrorMsg);
     }
 

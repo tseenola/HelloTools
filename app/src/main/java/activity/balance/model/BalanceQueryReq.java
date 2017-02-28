@@ -20,11 +20,11 @@ import pos2.fields.F62;
 import pos2.fields.F64;
 
 /**
- * Created by lenovo on 2017/2/5.
+ * Created by lenovo on 2017/2/28.
  * 描述：
  */
 
-public class BalanceReq extends BaseReq{
+public class BalanceQueryReq extends BaseReq{
     public F02 f02;
     public F03 f03;
     public F11 f11;
@@ -43,7 +43,7 @@ public class BalanceReq extends BaseReq{
     public F62 f62;
     public F64 f64;
 
-    public BalanceReq(F02 pF02, F03 pF03, F11 pF11, F14 pF14, F22 pF22, F23 pF23,F25 pF25, F35 pF35, F36 pF36, F41 pF41, F42 pF42, F49 pF49, F52 pF52, F55 pF55, F60 pF60, F62 pF62, F64 pF64) {
+    public BalanceQueryReq(F02 pF02, F03 pF03, F11 pF11, F14 pF14, F22 pF22, F23 pF23, F25 pF25, F35 pF35, F36 pF36, F41 pF41, F42 pF42, F49 pF49, F52 pF52, F55 pF55, F60 pF60, F62 pF62, F64 pF64) {
         f02 = pF02;
         f03 = pF03;
         f11 = pF11;

@@ -11,6 +11,7 @@ import models.MsgType;
 import models.SwipedMode;
 import pos2.model.Body_STD;
 import tools.com.hellolibrary.hello_convert.ConvertUtils;
+import tools.com.hellolibrary.hello_dialog.DialogUtil;
 
 /**
  * Created by lenovo on 2017/2/28.
@@ -121,16 +122,17 @@ public abstract class BaseSwipeCardPrt implements IBaseSwipeCardPrt{
         lBaseReq.actionDeal(pContext, pMsgType, lBaseReq, pCardInfoModel, new BaseReq.ResultListener() {
             @Override
             public void succ(Body_STD pBody_std) {
-                //mView.onSaleSucc("消费成功！");
-                pIBaseSwipeCardAty.onDealSucc("消费成功！");
+                DialogUtil.hideProgressDialog();
+                pIBaseSwipeCardAty.onDealSucc("成功！",pBody_std);
             }
 
             @Override
             public void fail(Body_STD pBody_std) {
+                DialogUtil.hideProgressDialog();
                 if(!TextUtils.equals("附加响应数据",pBody_std.getmF44().DES)){
                     throw new IllegalStateException("获取 附加响应数据 时发生错误，当前域DES不是 附加响应数据 ！请重新确认 附加响应数据 所在域！");
                 }else {
-                    //mView.onSaleFail(pBody_std.getmF44().getValue());
+                    pIBaseSwipeCardAty.onDealFail("失败："+pBody_std.getmF44().getValue(),pBody_std);
                 }
             }
         });

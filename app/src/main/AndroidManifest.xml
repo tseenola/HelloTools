@@ -61,6 +61,8 @@
             android:name="activity.sale.view.SaleAty">
 
         </activity>
+
+        <activity android:name="activity.balance.view.BalanceQueryAty"/>
     </application>
 
 </manifest>

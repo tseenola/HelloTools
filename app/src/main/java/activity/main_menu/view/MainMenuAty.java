@@ -6,7 +6,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 
-import activity.balance.view.BalanceAty;
+import activity.balance.view.BalanceQueryAty;
 import activity.init_para.view.InitParamAty;
 import activity.key_download.view.KeyDownLoadAty;
 import activity.sale.view.SaleAty;
@@ -61,7 +61,8 @@ public class MainMenuAty extends BaseActivity {
                 SignInAty.launch(this);
                 break;
             case R.id.bt_QueryBalance:
-                BalanceAty.launch(this);
+                //BalanceAty.launch(this);
+                BalanceQueryAty.launch(this);
                 break;
             case R.id.bt_Sale:
                 SaleAty.launch(this);
