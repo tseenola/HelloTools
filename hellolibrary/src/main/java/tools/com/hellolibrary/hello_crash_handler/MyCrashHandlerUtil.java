@@ -21,8 +21,6 @@ import java.util.HashMap;
 import java.util.Iterator;
 import java.util.Map;
 
-import tools.com.hellolibrary.hello_dialog.DialogUtil;
-
 /**
  * 系统崩溃的时候需要处理下面的动作
  * 1.收集并且记录崩溃错误日志
@@ -36,12 +34,6 @@ public class MyCrashHandlerUtil implements Thread.UncaughtExceptionHandler {
     @Override
     public void uncaughtException(Thread thread, Throwable ex) {
 
-        DialogUtil.show1ChooseDialog(mContext, "程序出现异常", ex.getMessage(), "退出", new DialogUtil.On1DialogChoseListener() {
-            @Override
-            public void onPositiveChose() {
-                //System.exit(0);
-            }
-        });
 
 /*        this.collectDeviceInfo(this.mContext);
         this.saveCrashInfo2File(ex);*/

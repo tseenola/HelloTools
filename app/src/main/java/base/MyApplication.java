@@ -1,7 +1,6 @@
 package base;
 
 import android.app.Activity;
-import android.util.Log;
 
 import com.facebook.stetho.Stetho;
 
@@ -26,6 +25,7 @@ import tools.com.hellolibrary.hello_thread.ThreadUtil;
 public class MyApplication extends BaseApplication{
     private static MyApplication mApp;
     private LinkedList<Activity> mAtyList;
+    private Activity mCurActivity;
     public static MyApplication getApp(){
         return mApp;
     }
@@ -51,27 +51,7 @@ public class MyApplication extends BaseApplication{
      */
     @Override
     public void initUncaughtException() {
-        Thread.currentThread().setUncaughtExceptionHandler(new Thread.UncaughtExceptionHandler() {
-            @Override
-            public void uncaughtException(Thread thread, Throwable ex) {
-                Log.i("vbvb","asdfasdfasdfadsfasdf");
-                /*DialogUtil.show1ChooseDialog(getApplicationContext(), "程序出现异常", ex.getMessage(), "退出", new DialogUtil.On1DialogChoseListener() {
-                    @Override
-                    public void onPositiveChose() {
-                        //System.exit(0);
-                    }
-                });*/
-            }
-        });
 
-
-/*        MyCrashHandlerUtil.getInstance().init(this, new MyCrashHandlerUtil.CrashListner() {
-            @Override
-            public void onSystemCrash() {
-                //System.exit(0);
-
-            }
-        },UserEntryAty.class);*/
         L.e("initUncaughtException");
     }
 
@@ -144,6 +124,7 @@ public class MyApplication extends BaseApplication{
      */
     @Override
     public void onActivityCreate(Activity pActivity) {
+        mCurActivity = pActivity;
         L.e("onActivityCreate  ");
         mAtyList.add(pActivity);
     }

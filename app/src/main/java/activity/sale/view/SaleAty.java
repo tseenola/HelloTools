@@ -2,18 +2,15 @@ package activity.sale.view;
 
 import android.content.Context;
 import android.content.Intent;
-import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 
-import activity.read_card.view.ReadCardAty;
 import activity.sale.presenter.SalePrt;
+import base.BaseSwipeCardAty;
 import butterknife.Bind;
 import butterknife.ButterKnife;
-import models.CardInfoModel;
-import tools.com.hellolibrary.hello_base.BaseActivity;
+import models.MsgType;
 import tools.com.hellolibrary.hello_dialog.DialogUtil;
 import tools.com.hellotools.R;
 
@@ -22,7 +19,7 @@ import tools.com.hellotools.R;
  * 描述：
  */
 
-public class SaleAty extends BaseActivity implements ISaleAty {
+public class SaleAty extends BaseSwipeCardAty{
     public static final int READ_CARD = 1;
     @Bind(R.id.bt_Sale)
     Button mBtSale;
@@ -32,11 +29,9 @@ public class SaleAty extends BaseActivity implements ISaleAty {
 
     @Override
     public void onClick(View v) {
-        Intent intent = new Intent();
-        intent.setClass(this, ReadCardAty.class);
-        intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-        startActivityForResult(intent, READ_CARD);
+        readCard(mPresenter, MsgType.Sale);
     }
+
 
     @Override
     public void initData() {
@@ -56,11 +51,6 @@ public class SaleAty extends BaseActivity implements ISaleAty {
     }
 
     @Override
-    public void releaseResource() {
-
-    }
-
-    @Override
     public void initPresenter() {
         mPresenter = new SalePrt(this);
     }
@@ -70,36 +60,13 @@ public class SaleAty extends BaseActivity implements ISaleAty {
     }
 
     @Override
-    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
-        super.onActivityResult(requestCode, resultCode, data);
-        switch (requestCode) {
-            case READ_CARD:
-                if (resultCode == RESULT_OK) {
-                    Bundle lBundle = data.getBundleExtra(ReadCardAty.READ_CARD_RESULT);
-                    CardInfoModel lCardInfoModel = (CardInfoModel) lBundle.getSerializable("a");
-                    mEtAmt.setText(lCardInfoModel.toString());
-                    Log.i("vbvb", "xixixixsucc:" + lCardInfoModel.toString());
-                    DialogUtil.showProgressDialog(this,false,DialogUtil.STYLE_CIRCAL,"消费交易中",25);
-                    mPresenter.actionSale(lCardInfoModel);
-                } else {
-                    String result = data.getStringExtra(ReadCardAty.READ_CARD_RESULT);
-                    mEtAmt.setText(result);
-                    Log.i("vbvb", "xixixixfale:" + result);
-                }
-                break;
-            default:
-                break;
-        }
-    }
-
-    @Override
-    public void onSaleSucc(String pMsg) {
+    public void onDealSucc(String pMsg) {
         DialogUtil.hideProgressDialog();
         mEtAmt.setText("消费结果："+pMsg);
     }
 
     @Override
-    public void onSaleFail(String pErrorMsg) {
+    public void onDealFail(String pErrorMsg) {
         DialogUtil.hideProgressDialog();
         mEtAmt.setText("消费结果："+pErrorMsg);
     }

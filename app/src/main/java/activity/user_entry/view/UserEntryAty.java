@@ -65,7 +65,6 @@ public class UserEntryAty extends BaseActivity implements IUserEntryAty{
                MyApplication.getApp().killAppReleaseResource();
            break;
            case R.id.bt_SignIn:
-               int i = 3/0;
                UserEntryModel user = new UserEntryModel();
                user.setName(mEtUserId.getText().toString().trim());
                user.setPwd(mEtPwd.getText().toString().trim());
