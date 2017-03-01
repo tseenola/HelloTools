@@ -13,7 +13,7 @@ public class Constant {
 	 * HEX 无格式十六进制数，长度单位为字节（Byte）
 	 * TRACK 压缩的磁道信息。长度为磁道字符数。
 	 */
-	public static enum FieldType{
+	public enum FieldType{
 		BCD,ASCII,BIN,HEX,TRACK
 	}
 }
