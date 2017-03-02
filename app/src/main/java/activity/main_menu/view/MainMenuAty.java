@@ -68,6 +68,7 @@ public class MainMenuAty extends BaseActivity {
                 SaleAty.launch(this);
                 break;
             case R.id.bt_SaleVoid:
+                //Test.launch(this);
                 break;
             case R.id.bt_SaleRefund:
                 break;
@@ -107,6 +108,7 @@ public class MainMenuAty extends BaseActivity {
         mBtGetTranceN.setOnClickListener(this);
         mBtSetTranceN.setOnClickListener(this);
         mBtSale.setOnClickListener(this);
+        mBtSaleVoid.setOnClickListener(this);
     }
 
     @Override

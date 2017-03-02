@@ -30,9 +30,14 @@ public class BalanceQueryAty extends BaseSwipeCardAty {
 
     @Override
     public void onClick(View v) {
-        readCard(mPresenter, MsgType.BalanceQuery);
+        readCard(mPresenter, MsgType.BalanceQuery,null);
     }
 
+    /**
+     * 余额查询成功
+     * @param pMsg 成功信息
+     * @param pBody_std
+     */
     @Override
     public void onDealSucc(String pMsg,Body_STD pBody_std) {
         if(!TextUtils.equals("余额",pBody_std.getmF54().DES)){
@@ -41,6 +46,11 @@ public class BalanceQueryAty extends BaseSwipeCardAty {
         mTvAmt.setText(pBody_std.getmF54().getValue().split("-->")[1].substring(17,29));
     }
 
+    /**
+     * 余额查询失败
+     * @param pErrorMsg 失败信息
+     * @param pBody_std 接收到的报文对象
+     */
     @Override
     public void onDealFail(String pErrorMsg,Body_STD pBody_std) {
         mTvAmt.setText(pErrorMsg);

@@ -4,11 +4,11 @@ import android.content.Context;
 import android.text.TextUtils;
 import android.util.Log;
 
+import com.hello.readcard.enumm.SwipedMode;
+import com.hello.readcard.model.CardInfoModel;
 import com.jniexport.UROPElibJni;
 
-import models.CardInfoModel;
 import models.MsgType;
-import models.SwipedMode;
 import pos2.model.Body_STD;
 import tools.com.hellolibrary.hello_convert.ConvertUtils;
 import tools.com.hellolibrary.hello_dialog.DialogUtil;

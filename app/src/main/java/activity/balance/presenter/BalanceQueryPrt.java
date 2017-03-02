@@ -1,10 +1,11 @@
 package activity.balance.presenter;
 
+import com.hello.readcard.model.CardInfoModel;
+
 import activity.balance.model.BalanceQueryReq;
 import base.BaseReq;
 import base.BaseSwipeCardPrt;
 import db.bill.DBPosSettingBill;
-import models.CardInfoModel;
 import pos2.fields.F02;
 import pos2.fields.F03;
 import pos2.fields.F11;

@@ -2,8 +2,8 @@ package base;
 
 import android.content.Context;
 
-import base.BaseReq;
-import models.CardInfoModel;
+import com.hello.readcard.model.CardInfoModel;
+
 import models.MsgType;
 
 /**

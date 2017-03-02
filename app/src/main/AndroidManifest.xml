@@ -63,6 +63,8 @@
         </activity>
 
         <activity android:name="activity.balance.view.BalanceQueryAty"/>
+
+        <activity android:name="activity.test.Test"/>
     </application>
 
 </manifest>

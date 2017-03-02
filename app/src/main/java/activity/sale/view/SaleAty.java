@@ -12,7 +12,6 @@ import butterknife.Bind;
 import butterknife.ButterKnife;
 import models.MsgType;
 import pos2.model.Body_STD;
-import tools.com.hellolibrary.hello_dialog.DialogUtil;
 import tools.com.hellotools.R;
 
 /**
@@ -30,7 +29,7 @@ public class SaleAty extends BaseSwipeCardAty{
 
     @Override
     public void onClick(View v) {
-        readCard(mPresenter, MsgType.Sale);
+        readCard(mPresenter, MsgType.Sale,"0.01");
     }
 
 

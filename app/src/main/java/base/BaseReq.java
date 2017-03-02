@@ -6,16 +6,16 @@ import android.os.SystemClock;
 import android.text.TextUtils;
 import android.util.Log;
 
+import com.hello.readcard.enumm.SwipedMode;
+import com.hello.readcard.model.CardInfoModel;
 import com.jniexport.UROPElibJni;
 
 import java.lang.reflect.Field;
 
 import core.MacCalculater;
 import db.bill.DBPosSettingBill;
-import models.CardInfoModel;
 import models.MsgType;
 import models.MsgTypeInfo;
-import models.SwipedMode;
 import pos2.constant.Constant;
 import pos2.model.BaseField;
 import pos2.model.Body_STD;

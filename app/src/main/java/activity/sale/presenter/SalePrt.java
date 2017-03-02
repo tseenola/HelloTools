@@ -1,11 +1,12 @@
 package activity.sale.presenter;
 
+import com.hello.readcard.model.CardInfoModel;
+
 import activity.sale.model.SaleReq;
 import base.BaseReq;
 import base.BaseSwipeCardPrt;
 import base.IBaseSwipeCardAty;
 import db.bill.DBPosSettingBill;
-import models.CardInfoModel;
 import pos2.fields.F02;
 import pos2.fields.F03;
 import pos2.fields.F04;

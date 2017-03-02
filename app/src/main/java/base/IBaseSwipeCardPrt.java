@@ -2,7 +2,8 @@ package base;
 
 import android.content.Context;
 
-import models.CardInfoModel;
+import com.hello.readcard.model.CardInfoModel;
+
 import models.MsgType;
 
 /**
@@ -11,5 +12,5 @@ import models.MsgType;
  */
 
 public interface IBaseSwipeCardPrt {
-    void actionCardDeal(Context pContext, CardInfoModel pCardInfoModel, MsgType pMsgType,IBaseSwipeCardAty pIBaseSwipeCardAty);
+    void actionCardDeal(Context pContext, CardInfoModel pCardInfoModel, MsgType pMsgType, IBaseSwipeCardAty pIBaseSwipeCardAty);
 }

@@ -2,10 +2,13 @@ package base;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.annotation.Nullable;
 import android.util.Log;
 
-import activity.read_card.view.ReadCardAty;
-import models.CardInfoModel;
+import com.hello.readcard.activity.v.ReadCardAty;
+import com.hello.readcard.model.CardInfoModel;
+
+import db.bill.DBPosSettingBill;
 import models.MsgType;
 import tools.com.hellolibrary.hello_base.BaseActivity;
 import tools.com.hellolibrary.hello_dialog.DialogUtil;
@@ -20,15 +23,31 @@ import static activity.sale.view.SaleAty.READ_CARD;
 public abstract class BaseSwipeCardAty extends BaseActivity implements IBaseSwipeCardAty{
     IBaseSwipeCardPrt mIBaseSwipeCardPrt;
     MsgType mMsgType;
-    public void readCard(IBaseSwipeCardPrt pIBaseSwipeCardPrt,MsgType pMsgType){
+
+    /**
+     *
+     * @param pIBaseSwipeCardPrt
+     * @param pMsgType 交易类型
+     * @param pAmt 交易金额,不涉及金额交易时候可以为空
+     */
+    public void readCard(IBaseSwipeCardPrt pIBaseSwipeCardPrt,MsgType pMsgType,@Nullable String pAmt){
         mIBaseSwipeCardPrt = pIBaseSwipeCardPrt;
         mMsgType = pMsgType;
         Intent intent = new Intent();
-        intent.setClass(this, ReadCardAty.class);
+        intent.putExtra("pTimeOutSecs",5);//刷卡超时时间
+        intent.putExtra("pAmt",pAmt);//交易金额
+        intent.putExtra("pPinKeyIndex", DBPosSettingBill.getPinKeyIndex());
+        intent.setClass(this, com.hello.readcard.activity.v.ReadCardAty.class);
         intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
         startActivityForResult(intent, READ_CARD);
     }
 
+    /**
+     * 读卡超时
+     * @param requestCode
+     * @param resultCode
+     * @param data
+     */
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
@@ -43,6 +62,7 @@ public abstract class BaseSwipeCardAty extends BaseActivity implements IBaseSwip
                 } else {
                     String result = data.getStringExtra(ReadCardAty.READ_CARD_RESULT);
                     Log.i("vbvb", "xixixixfale:" + result);
+                    onDealFail(result,null);
                 }
                 break;
             default:

@@ -7,17 +7,16 @@
     android:orientation="vertical"
     tools:ignore="MergeRootFrame">
 
-
-    <include
-        layout="@layout/view_icc_read_process"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_gravity="bottom" />
-
     <ImageView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:scaleType="centerCrop"
-        android:src="@mipmap/swipcard"
-        android:id="@+id/imageView"/>
+        android:src="@mipmap/swipcard" />
+
+
+     <include
+        layout="@layout/view_icc_read_process"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="bottom" />
 </FrameLayout>
