@@ -12,10 +12,8 @@ import tools.com.hellolibrary.hello_convert.ConvertUtils;
 
 
 /**
- * ��׼8583ͷ����
- * 2016��8��29��
- * by lee
- * for����ȡ���ĵĹ̶���Ϣ�����ĳ��ȣ�TPDU,����ͷ,��Ϣ���ͣ�λͼ��
+ * 报文头部分（这里的报文头称呼和标准银联pos规范不一样哦）
+ * 范围（报文长度--位图）
  */
 public class Header_STD {
 	private F_01 mF01;

@@ -7,9 +7,9 @@ import android.util.Log;
 
 import com.hello.readcard.activity.v.ReadCardAty;
 import com.hello.readcard.model.CardInfoModel;
+import com.urovo.poscommon.models.MsgType;
 
 import db.bill.DBPosSettingBill;
-import models.MsgType;
 import tools.com.hellolibrary.hello_base.BaseActivity;
 import tools.com.hellolibrary.hello_dialog.DialogUtil;
 

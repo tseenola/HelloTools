@@ -4,8 +4,9 @@ import java.util.List;
 
 /**
  * Created by lijun on 2017/2/6.
- * 描述：这个类用于对用户表进行初始化的。
- * 初始化方法为在assets文件夹中（DBUserDefVal）读取Json格式的初始值。
+ * 描述：这个类用于对表(DBuser)进行初始化
+ * 初始化时候需要有初始化值，这个初始值是从
+ * assets文件夹(DBuserDefVal)中读取Json。
  */
 
 public class DBUserDefVal {

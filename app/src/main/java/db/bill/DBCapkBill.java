@@ -1,12 +1,14 @@
 package db.bill;
 
+import com.urovo.poscommon.models.EmvProvider;
+
 import org.litepal.crud.DataSupport;
 
 import java.util.ArrayList;
 import java.util.List;
 
 import db.table.DBCapk;
-import models.EmvProvider;
+
 
 /**
  * Created by lenovo on 2017/2/5.

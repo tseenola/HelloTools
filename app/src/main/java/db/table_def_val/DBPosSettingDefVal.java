@@ -3,9 +3,10 @@ package db.table_def_val;
 import java.util.List;
 
 /**
- * Created by lenovo on 2017/2/6.
- * 描述：这个类用于对设置表(DBPosSetting)进行初始化
- * 初始化方法为在assets文件夹(DBPosSettingDefVal)中读取Json格式的初始值。
+ * Created by lijun on 2017/2/6.
+ * 描述：这个类用于对表(DBPosSetting)进行初始化
+ * 初始化的时候需要有初始化值，这个初始值是从
+ * assets文件夹(DBPosSettingDefVal)中读取Json。
  */
 
 public class DBPosSettingDefVal {

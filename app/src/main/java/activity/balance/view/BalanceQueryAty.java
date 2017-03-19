@@ -7,12 +7,13 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 
+import com.urovo.poscommon.models.MsgType;
+
 import activity.balance.presenter.BalanceQueryPrt;
 import base.BaseSwipeCardAty;
 import base.IBaseSwipeCardPrt;
 import butterknife.Bind;
 import butterknife.ButterKnife;
-import models.MsgType;
 import pos2.model.Body_STD;
 import tools.com.hellotools.R;
 

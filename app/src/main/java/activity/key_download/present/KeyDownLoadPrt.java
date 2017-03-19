@@ -4,12 +4,13 @@ import android.content.Context;
 import android.text.TextUtils;
 import android.util.Log;
 
+import com.urovo.poscommon.models.MsgType;
+
 import activity.key_download.model.KeyDownReq;
 import activity.key_download.view.IKeyDownLoadAty;
 import base.BaseReq;
 import core.MasterKeyWriter;
 import db.bill.DBPosSettingBill;
-import models.MsgType;
 import pos2.fields.F03;
 import pos2.fields.F41;
 import pos2.fields.F42;

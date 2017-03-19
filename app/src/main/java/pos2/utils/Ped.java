@@ -1,15 +1,6 @@
 package pos2.utils;
 
-import android.device.MaxqManager;
-import android.util.Log;
-
-import java.util.Arrays;
-
-import base.Constants;
-import tools.com.hellolibrary.hello_convert.ConvertUtils;
-
-
-public class Ped {
+/*public class Ped {
     private static MaxqManager mMaxqManager = null;
 
     public Ped() {
@@ -38,7 +29,7 @@ public class Ped {
         return true;
     }
 
-    /**用指定密钥DES/3DES运算的内部方法
+    *//**用指定密钥DES/3DES运算的内部方法
      * @param KeyIdx
      * @param data
      * @param datalen
@@ -46,8 +37,8 @@ public class Ped {
      * @param out
      * @param mode
      * @return
-     */
-    /*private static int Do3Des(int KeyIdx, byte[] data, int datalen, byte[] key, byte out[], int mode) {
+     *//*
+    *//*private static int Do3Des(int KeyIdx, byte[] data, int datalen, byte[] key, byte out[], int mode) {
         int ret = -255;
         int j = datalen / 8;
         int k = datalen % 8;
@@ -103,16 +94,16 @@ public class Ped {
         }
         System.arraycopy(outs, 0, out, 0, datalen);
         return ret;
-    }*/
+    }*//*
 
-    /**
+    *//**
      * 写入主密钥
      *
      * @param KeyType  :密钥类型,
      * @param key_no   :密钥号
      * @param key_len  :密钥长度(一般十六个字节长)
      * @param key_data :密钥数据(明文) 返回0成功，非0不成功
-     */
+     *//*
     public static int Urovo_PCIWriteMKey(int KeyType, int key_no, int key_len, byte[] key_data) {
         int iRet = 0;
         byte[] response = new byte[16];
@@ -134,14 +125,14 @@ public class Ped {
         return iRet;
     }
 
-    /**通过KEK写入MasterKey
+    *//**通过KEK写入MasterKey
      * @param masterKeyIndex 主密钥索引
      * @param kekLen	KEK字节长度
      * @param kekData KEK字节数组
      * @param masterSecLen masterKey密文长度
      * @param masterSecData masterKey密文字节数组
      * @return 0：成功； -1：写入KEK失败；-2：主密钥解密失败；-3写入主密钥明文失败
-     */
+     *//*
     public static int writeMasterKeyByKEK(int masterKeyIndex, int kekLen, byte[] kekData, int masterSecLen, byte[] masterSecData) {
         int iRet = Urovo_PCIWriteMKey(Constants.KEY_TYPE._MASTKEY, masterKeyIndex, kekLen, kekData);
         if(iRet != 0) {
@@ -161,7 +152,7 @@ public class Ped {
         return 0;
     }
 
-    /**
+    *//**
      * 指定的密钥号做运算
      *
      * @param KeyType :密钥类型,
@@ -171,7 +162,7 @@ public class Ped {
      * @param desout  :结果
      * @param mode    :1为加密，0为解密
      * @return 返回0成功，非0不成功
-     */
+     *//*
     public static int Urovo_PciDes(int KeyType, int key_no, int inlen, byte[] indata, byte[] desout, int mode) {
         int iRet;
         byte[] reslen = new byte[1];
@@ -193,7 +184,7 @@ public class Ped {
         return iRet;
     }
 
-    /**
+    *//**
      * 写工作密钥
      *
      * @param KeyType     :密钥类型,
@@ -203,8 +194,8 @@ public class Ped {
      * @param mkey_no     :为主密钥号,是通过这个索引对应的主密钥对key_data运算
      * @param sbcdMacbuff :检验值
      * @param iCheckMode  :1要求校验，0不要校验 返回0成功，非0不成功
-     */
-    /*public static int Urovo_PciWriteWorkKey(int KeyType, int key_no, int key_len, byte[] key_data, int mkey_no, byte[] sbcdMacbuff, int iCheckMode) {
+     *//*
+    *//*public static int Urovo_PciWriteWorkKey(int KeyType, int key_no, int key_len, byte[] key_data, int mkey_no, byte[] sbcdMacbuff, int iCheckMode) {
         int iRet;
         byte[] reslen = new byte[1];
         byte[] dStartValue = new byte[8];
@@ -247,9 +238,9 @@ public class Ped {
 
         iRet = mMaxqManager.loadKey(kt, key_no, mkey_no, key_data, key_len, response, reslen);
         return iRet;
-    }*/
+    }*//*
 
-    /*public static int PINDES(int keyIndex, String CarNo, String PinD, String[] Pin_OUT) {
+    *//*public static int PINDES(int keyIndex, String CarNo, String PinD, String[] Pin_OUT) {
         int i, n;
         int j = 0;
         // 处理帐号
@@ -306,7 +297,7 @@ public class Ped {
         } else {
             return iRet;
         }
-    }*/
+    }*//*
 
     public int GetMac(int macKeyIndex, short DataInLen, byte[] DataIn, byte[] MacOut, byte mode) {
         byte[] buf = new byte[17];
@@ -373,15 +364,15 @@ public class Ped {
         return -2;
     }
 
-    /**用指定密钥块进行DES/3DES运算
+    *//**用指定密钥块进行DES/3DES运算
      * @param KeyIdx 待运算的密钥索引
      * @param DataInLen 输入数据长度
      * @param DataIn 输入数据
      * @param DataOut 输出数据
      * @param mode 0-ECB解密；1-ECB加密
      * @return
-     */
-    /*public static int CalcDES(int KeyIdx, int DataInLen, byte[] DataIn, byte[] DataOut, int mode) {
+     *//*
+    *//*public static int CalcDES(int KeyIdx, int DataInLen, byte[] DataIn, byte[] DataOut, int mode) {
         byte[] plantbuf = new byte[16];
 
         if (mode == 0x00) {
@@ -399,9 +390,9 @@ public class Ped {
             // CBC加密
         }
         return 0;
-    }*/
+    }*//*
 
-    /*public int WriteKey(int srcKeyType, int srcKeyIdx, int dstKeyType, int dstKeyIdx, int algthflag, int dstKeyLen, byte[] bufIn, int iCheckMode, int checkbuflen, byte[] aucCheckBuf) {
+    *//*public int WriteKey(int srcKeyType, int srcKeyIdx, int dstKeyType, int dstKeyIdx, int algthflag, int dstKeyLen, byte[] bufIn, int iCheckMode, int checkbuflen, byte[] aucCheckBuf) {
         int iRet = 0;
         byte[] buf = new byte[16];
 
@@ -462,5 +453,5 @@ public class Ped {
         }
 
         return ResponseCode._NORMAL_ERROR;
-    }*/
-}
+    }*//*
+}*/

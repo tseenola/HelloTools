@@ -9,9 +9,11 @@
         <option name="modules">
           <set>
             <option value="$PROJECT_DIR$" />
+            <option value="$PROJECT_DIR$/CalculateMac" />
+            <option value="$PROJECT_DIR$/PosCommon" />
             <option value="$PROJECT_DIR$/app" />
             <option value="$PROJECT_DIR$/hellolibrary" />
-            <option value="$PROJECT_DIR$/litepal" />
+            <option value="$PROJECT_DIR$/readcard" />
             <option value="$PROJECT_DIR$/validatorlibrary" />
           </set>
         </option>

@@ -3,6 +3,8 @@ package activity.init_para.presenter;
 import android.content.Context;
 import android.util.Log;
 
+import com.urovo.poscommon.models.MsgType;
+
 import activity.init_para.model.AidDownLoadReq;
 import activity.init_para.model.CAPKDownReq;
 import activity.init_para.model.IcParamReq;
@@ -12,7 +14,6 @@ import core.IcCardParamDownDecoder;
 import db.bill.DBAppParasBill;
 import db.bill.DBCapkBill;
 import db.bill.DBPosSettingBill;
-import models.MsgType;
 import pos2.fields.F03;
 import pos2.fields.F11;
 import pos2.fields.F25;
@@ -22,8 +23,9 @@ import pos2.fields.F60;
 import pos2.fields.F63;
 import pos2.fields.F64;
 import pos2.model.Body_STD;
+import tools.com.hellolibrary.hello_string.PosStringUtils;
 import tools.com.hellolibrary.hello_string.StringUtils;
-import utils.PosStringUtils;
+
 
 /**
  * Created by lenovo on 2017/1/19.

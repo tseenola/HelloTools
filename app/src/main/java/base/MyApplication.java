@@ -3,6 +3,7 @@ package base;
 import android.app.Activity;
 
 import com.facebook.stetho.Stetho;
+import com.urovo.poscommon.models.EmvProvider;
 
 import java.util.LinkedList;
 
@@ -10,7 +11,6 @@ import db.bill.DBAppParasBill;
 import db.bill.DBCapkBill;
 import db.bill.DBPosSettingBill;
 import db.bill.DBUserBill;
-import models.EmvProvider;
 import myutils.LogRecUtil;
 import tools.com.hellolibrary.hello_base.BaseApplication;
 import tools.com.hellolibrary.hello_log.L;

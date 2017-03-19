@@ -7,8 +7,8 @@ import android.util.Log;
 import com.hello.readcard.enumm.SwipedMode;
 import com.hello.readcard.model.CardInfoModel;
 import com.jniexport.UROPElibJni;
+import com.urovo.poscommon.models.MsgType;
 
-import models.MsgType;
 import pos2.model.Body_STD;
 import tools.com.hellolibrary.hello_convert.ConvertUtils;
 import tools.com.hellolibrary.hello_dialog.DialogUtil;

@@ -1,4 +1,4 @@
-package utils;
+package tools.com.hellolibrary.hello_string;
 
 import tools.com.hellolibrary.hello_convert.ConvertUtils;
 

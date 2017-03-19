@@ -3,8 +3,8 @@ package base;
 import android.content.Context;
 
 import com.hello.readcard.model.CardInfoModel;
+import com.urovo.poscommon.models.MsgType;
 
-import models.MsgType;
 
 /**
  * Created by lenovo on 2017/2/28.

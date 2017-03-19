@@ -2,9 +2,11 @@ package core;
 
 import android.util.Log;
 
+import com.urovo.poscommon.Constants;
+import com.urovo.poscommon.models.KeyType;
+
 import java.util.Arrays;
 
-import base.Constants;
 import base.ResponseCode;
 import db.bill.DBPosSettingBill;
 import tools.com.hellolibrary.helllo_my_inter.IUrovoSDK;
@@ -37,28 +39,28 @@ public class WorkingKeyWriter extends WorkingKeyWriterTemplate{
     @Override
     public boolean writePinKey(byte [] pPinDatas,int pMasterKeyIndex,byte[] pCheckVal,boolean pIsNeedCheck) {
         int lPinKeyIndex = DBPosSettingBill.getPinKeyIndex();
-        boolean isSucc = Urovo_PciWriteWorkKey(KeyUsage._PINKEY,lPinKeyIndex,pPinDatas.length,pPinDatas,pMasterKeyIndex,pCheckVal,pIsNeedCheck)==0;
+        boolean isSucc = Urovo_PciWriteWorkKey(KeyType._PINKEY,lPinKeyIndex,pPinDatas.length,pPinDatas,pMasterKeyIndex,pCheckVal,pIsNeedCheck)==0;
         return isSucc;
     }
 
     @Override
     public boolean writeMacKey(byte pMacDatas [],int pMasterKeyIndex,byte[] pCheckVal,boolean pIsNeedCheck) {
         int lMacKeyIndex = DBPosSettingBill.getMacKeyIndex();
-        boolean isSucc = Urovo_PciWriteWorkKey(KeyUsage._MACKEY,lMacKeyIndex,pMacDatas.length,pMacDatas,pMasterKeyIndex,pCheckVal,pIsNeedCheck)==0;
+        boolean isSucc = Urovo_PciWriteWorkKey(KeyType._MACKEY,lMacKeyIndex,pMacDatas.length,pMacDatas,pMasterKeyIndex,pCheckVal,pIsNeedCheck)==0;
         return isSucc;
     }
 
     @Override
     public boolean writeTrackKey(byte [] pTrackDatas,int pMasterKeyIndex,byte[] pCheckVal,boolean pIsNeedCheck) {
         int lTrackKeyIndex = DBPosSettingBill.getTrackKeyIndex();
-        boolean isSucc = Urovo_PciWriteWorkKey(KeyUsage._TLK,lTrackKeyIndex,pTrackDatas.length,pTrackDatas,pMasterKeyIndex,pCheckVal,pIsNeedCheck)==0;
+        boolean isSucc = Urovo_PciWriteWorkKey(KeyType._TLK,lTrackKeyIndex,pTrackDatas.length,pTrackDatas,pMasterKeyIndex,pCheckVal,pIsNeedCheck)==0;
         return isSucc;
     }
 
     /**
      * 写工作密钥
      *
-     * @param KeyUsage     :密钥类型,
+     * @param pKeyType     :密钥类型,
      * @param KeyNo      :密钥号 0-20
      * @param key_len     :密钥长度(一般十六个字节长)
      * @param key_data    :被写进去的密钥
@@ -66,7 +68,8 @@ public class WorkingKeyWriter extends WorkingKeyWriterTemplate{
      * @param sbcdMacbuff :检验值
      * @param pNeedCheck  :1要求校验，0不要校验 返回0成功，非0不成功
      */
-    public int Urovo_PciWriteWorkKey(int KeyUsage, int KeyNo, int key_len, byte[] key_data, int masterKeyIndex, byte[] sbcdMacbuff, boolean pNeedCheck) {
+
+    public int Urovo_PciWriteWorkKey(KeyType pKeyType, int KeyNo, int key_len, byte[] key_data, int masterKeyIndex, byte[] sbcdMacbuff, boolean pNeedCheck) {
         int iRet;
         byte[] reslen = new byte[1];
         byte[] dStartValue = new byte[8];
@@ -76,10 +79,10 @@ public class WorkingKeyWriter extends WorkingKeyWriterTemplate{
         byte[] sbuf = new byte[33];
         int kt = 0;
 
-        if (KeyUsage == Constants.KEY_TYPE._TLK){
-            kt = Constants.KEY_TYPE._MASTKEY;
+        if (pKeyType == KeyType._TLK){
+            kt = KeyType._MASTKEY.getValue();
         } else{
-            kt = (byte) KeyUsage;
+            kt =  pKeyType.getValue();
         }
 
         // 先用test ID写进去。

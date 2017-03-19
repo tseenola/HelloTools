@@ -4,12 +4,13 @@ import android.content.Context;
 import android.text.TextUtils;
 import android.widget.Toast;
 
+import com.urovo.poscommon.models.MsgType;
+
 import activity.sign_in.model.SignInReq;
 import activity.sign_in.view.ISignInAty;
 import base.BaseReq;
 import core.WorkingKeyWriter;
 import db.bill.DBPosSettingBill;
-import models.MsgType;
 import pos2.fields.F03;
 import pos2.fields.F25;
 import pos2.fields.F41;

@@ -1,9 +1,7 @@
 package pos2.model;
 
 /**
- * 2016��8��29��
- * by lee
- * for��
+ *
  */
 public class BaseField {
 

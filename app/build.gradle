@@ -28,4 +28,6 @@ dependencies {
     //我自己的框架
     compile project(':hellolibrary')
     compile project(':readcard')
+    compile project(':PosCommon')
+    compile project(':CalculateMac')
 }

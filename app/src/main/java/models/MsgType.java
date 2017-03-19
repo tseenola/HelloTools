@@ -5,7 +5,7 @@ package models;
  * 描述：消息类型
  */
 
-public enum MsgType {
+/*public enum MsgType {
     KeyDownLoad(new MsgTypeInfo(
             "主密钥下载",
             "0800",
@@ -42,6 +42,4 @@ public enum MsgType {
         return value;
     }
 
-
-
-}
+}*/

@@ -9,13 +9,13 @@ import android.util.Log;
 import com.hello.readcard.enumm.SwipedMode;
 import com.hello.readcard.model.CardInfoModel;
 import com.jniexport.UROPElibJni;
+import com.urovo.calculatemac.MacCalculater;
+import com.urovo.poscommon.models.MsgType;
+import com.urovo.poscommon.models.MsgTypeInfo;
 
 import java.lang.reflect.Field;
 
-import core.MacCalculater;
 import db.bill.DBPosSettingBill;
-import models.MsgType;
-import models.MsgTypeInfo;
 import pos2.constant.Constant;
 import pos2.model.BaseField;
 import pos2.model.Body_STD;
@@ -193,7 +193,7 @@ public abstract class BaseReq implements IPosTempTemplet {
         //拼接消息类型
         target = pDealType + target;
         //计算mac(如果不需要计算直接返回原值)
-        target = MacCalculater.getMac(finalBinaryBitmap, target);
+        target = new MacCalculater().getMac(DBPosSettingBill.getMacKeyIndex(),finalBinaryBitmap, target);
         //拼接tpdu
         target = pTpdu + target;
         //拼接长度

@@ -1,27 +1,19 @@
 package core;
 
-import java.util.Arrays;
-
-import base.Constants;
-import db.bill.DBPosSettingBill;
-import tools.com.hellolibrary.hello_convert.ConvertUtils;
-
-import static pos2.utils.Ped.Urovo_PciDes;
-
 /**
  * Created by lenovo on 2017/2/5.
  * 描述：计算Mac
  * mac计算范围（消息类型---63域）
  */
 
-public class MacCalculater {
+/*public class MacCalculater {
 
-    /**
+    *//**
      * 计算Mac
      * @param pBinaryBitMapStr 位图的二进制字符串形式
      * @param pNeedCalMacMsg 需要计算Mac的数据
      * @return
-     */
+     *//*
     public static String getMac(String pBinaryBitMapStr,String pNeedCalMacMsg){
         String msg = pNeedCalMacMsg;
         if(pBinaryBitMapStr.endsWith("1")){
@@ -100,4 +92,4 @@ public class MacCalculater {
         }
         return -2;
     }
-}
+}*/

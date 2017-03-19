@@ -5,11 +5,7 @@ import pos2.constant.Constant;
 import pos2.model.BaseField;
 import tools.com.hellolibrary.hello_string.StringUtils;
 
-/**
- * 2016��8��23��
- * by lee
- * for��2�����˺�
- */
+
 public class F02 extends BaseField {
 	public static final LenthType lengthtype = LenthType.llvar;
 	public static final StringUtils.Dir DIR = StringUtils.Dir.left;

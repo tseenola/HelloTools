@@ -2,9 +2,11 @@ package utils;
 
 import android.text.TextUtils;
 
-import base.Constants;
+
+import com.urovo.poscommon.models.KeyType;
+import com.urovo.poscommon.utils.Ped;
+
 import db.bill.DBPosSettingBill;
-import pos2.utils.Ped;
 import tools.com.hellolibrary.hello_convert.ConvertUtils;
 import tools.com.hellolibrary.hello_string.StringUtils;
 
@@ -105,7 +107,7 @@ public class SensitiveDataUtil {
             byte[] indata = new byte[8];
             byte[] outdata = new byte[8];
             System.arraycopy(bcdSens, i * 8, indata, 0, 8);
-            int iRet = Ped.Urovo_PciDes(Constants.KEY_TYPE._MACKEY,
+            int iRet = Ped.Urovo_PciDes(KeyType._MACKEY,
                     DBPosSettingBill.getMacKeyIndex(),
                     indata.length, indata,
                     outdata,

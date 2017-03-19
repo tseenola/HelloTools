@@ -38,8 +38,8 @@ import pos2.fields.F63;
 import pos2.fields.F64;
 
 /**
- * ��׼8583�岿��
- * 2016��8��29�� by lee for��
+ * 报文体部分
+ * 包括（主账号——64域mac)
  */
 public class Body_STD {
 	private F02 mF02 ;
