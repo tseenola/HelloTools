@@ -37,4 +37,10 @@ public abstract class BaseActivity extends Activity implements ActivityTemplate,
     protected void showToast(String msg){
         Toast.makeText(this,msg,Toast.LENGTH_SHORT).show();
     }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        releaseResource();
+    }
 }

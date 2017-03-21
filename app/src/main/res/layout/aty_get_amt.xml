@@ -1,0 +1,60 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#99CCFF"
+    android:orientation="vertical">
+
+    <RelativeLayout
+        android:id="@+id/layout_money"
+        android:layout_width="match_parent"
+        android:layout_height="150dp"
+        android:paddingLeft="10dp"
+        android:paddingRight="10dp"
+        android:paddingTop="10dp">
+
+        <TextView
+            android:id="@+id/tv1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:gravity="center_vertical"
+            android:paddingLeft="10dp"
+            android:text="请输入金额："
+            android:textColor="#565555"
+            android:textSize="17sp" />
+
+        <TextView
+            android:id="@+id/tv2"
+            android:layout_width="wrap_content"
+            android:layout_height="80dp"
+            android:layout_below="@+id/tv1"
+            android:layout_toLeftOf="@+id/edit_text_amount"
+            android:background="@null"
+            android:gravity="bottom"
+            android:paddingBottom="5dp"
+            android:paddingLeft="10dp"
+            android:text="￥ "
+            android:textColor="#FFFFFFFF"
+            android:textSize="25sp" />
+
+        <view.CustomSoftInputEditText
+            android:id="@+id/edit_text_amount"
+            android:layout_width="wrap_content"
+            android:layout_height="80dp"
+            android:layout_alignParentRight="true"
+            android:layout_below="@+id/tv1"
+            android:layout_centerVertical="true"
+            android:background="@null"
+            android:focusable="false"
+            android:gravity="bottom|left"
+            android:hint="0.00"
+            android:inputType="numberDecimal"
+            android:maxLength="13"
+            android:paddingLeft="10dp"
+            android:singleLine="true"
+            android:textColor="#FFFFFFFF"
+            android:textColorHint="#FFFFFFFF"
+            android:textSize="42sp" />
+    </RelativeLayout>
+
+
+</LinearLayout>

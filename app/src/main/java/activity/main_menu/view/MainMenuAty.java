@@ -6,6 +6,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 
+import activity.GetAmt;
 import activity.balance.view.BalanceQueryAty;
 import activity.init_para.view.InitParamAty;
 import activity.key_download.view.KeyDownLoadAty;
@@ -47,6 +48,8 @@ public class MainMenuAty extends BaseActivity {
     Button mBtGetTranceN;
     @Bind(R.id.bt_SetTranceN)
     Button mBtSetTranceN;
+    @Bind(R.id.bt_GetAmt)
+    Button mBtGetAmt;
 
     @Override
     public void onClick(View v) {
@@ -75,6 +78,9 @@ public class MainMenuAty extends BaseActivity {
             case R.id.bt_Settle:
                 break;
             case R.id.bt_SignOut:
+                break;
+            case R.id.bt_GetAmt:
+                GetAmt.launch(this);
                 break;
             case R.id.bt_GetTranceN://获取流水
                 mEtTranceN.setText(DBPosSettingBill.getTraceNo());
@@ -109,6 +115,7 @@ public class MainMenuAty extends BaseActivity {
         mBtSetTranceN.setOnClickListener(this);
         mBtSale.setOnClickListener(this);
         mBtSaleVoid.setOnClickListener(this);
+        mBtGetAmt.setOnClickListener(this);
     }
 
     @Override
