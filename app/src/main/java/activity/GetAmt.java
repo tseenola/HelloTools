@@ -25,19 +25,20 @@ public class GetAmt extends BaseActivity{
     private View mView;
     private SoftInputPop mSoftInputPanelPopup;
     private CustomSoftInputEditText mCustomSoftInputEditText;
-
+    public static final int SHOW_POP = 0;
+    public static final int FINISH_ACTIVITY = 1;
     protected Handler mHandler = new Handler(){
         @Override
         public void handleMessage(Message msg) {
             super.handleMessage(msg);
             switch (msg.what){
-                case 1:
+                case SHOW_POP:
                     mCustomSoftInputEditText.dispatchTouchEvent(MotionEvent.obtain(
                             SystemClock.uptimeMillis(),
                             SystemClock.uptimeMillis(),
                             MotionEvent.ACTION_DOWN, mCustomSoftInputEditText.getLeft() + 5, mCustomSoftInputEditText.getTop() + 5, 0));
                     break;
-                case 2:
+                case FINISH_ACTIVITY:
                     GetAmt.this.finish();
                     break;
             }
@@ -121,9 +122,9 @@ public class GetAmt extends BaseActivity{
                 synchronized(this)
                 {
                     SystemClock.sleep(200);
-                    mHandler.sendEmptyMessage(1);
+                    mHandler.sendEmptyMessage(SHOW_POP);
                     SystemClock.sleep(5000);
-                    mHandler.sendEmptyMessage(2);
+                    mHandler.sendEmptyMessage(FINISH_ACTIVITY);
                 }
             }
         }.start();
