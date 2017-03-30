@@ -7,6 +7,7 @@ import android.util.Log;
 
 import com.hello.readcard.activity.v.ReadCardAty;
 import com.hello.readcard.model.CardInfoModel;
+import com.hello.readcard.read_card_service.CardReader;
 import com.urovo.poscommon.models.MsgType;
 
 import db.bill.DBPosSettingBill;
@@ -34,7 +35,7 @@ public abstract class BaseSwipeCardAty extends BaseActivity implements IBaseSwip
         mIBaseSwipeCardPrt = pIBaseSwipeCardPrt;
         mMsgType = pMsgType;
         Intent intent = new Intent();
-        intent.putExtra("pTimeOutSecs",5);//刷卡超时时间
+        intent.putExtra("pTimeOutSecs",25);//刷卡超时时间
         intent.putExtra("pAmt",pAmt);//交易金额
         intent.putExtra("pPinKeyIndex", DBPosSettingBill.getPinKeyIndex());
         intent.setClass(this, com.hello.readcard.activity.v.ReadCardAty.class);
@@ -59,6 +60,7 @@ public abstract class BaseSwipeCardAty extends BaseActivity implements IBaseSwip
                     Log.i("vbvb", "xixixixsucc:" + lCardInfoModel.toString());
                     DialogUtil.showProgressDialog(this,false,DialogUtil.STYLE_CIRCAL,"消费交易中",25);
                     mIBaseSwipeCardPrt.actionCardDeal(this,lCardInfoModel,mMsgType,this);
+                    CardReader.checkCardThreadIsRun = false;
                 } else {
                     String result = data.getStringExtra(ReadCardAty.READ_CARD_RESULT);
                     Log.i("vbvb", "xixixixfale:" + result);

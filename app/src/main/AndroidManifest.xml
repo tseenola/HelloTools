@@ -67,6 +67,9 @@
         <activity android:name="activity.test.Test"/>
 
         <activity android:name="activity.GetAmt"/>
+
+        <activity android:name="activity.TestAmt"
+                  android:windowSoftInputMode="stateVisible|adjustPan"/>
     </application>
 
 </manifest>

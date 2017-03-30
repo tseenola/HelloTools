@@ -88,7 +88,6 @@ public class CardReader {
                         UROPElibJni.MagCardClose();
                         UROPElibJni.GMax3250Close();
                         UROPElibJni.SleepEnableSuspend(1);
-
                     }
                 }
                 Log.i("vbvb","跳出循环");

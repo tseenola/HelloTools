@@ -14,7 +14,6 @@
             <option value="$PROJECT_DIR$/app" />
             <option value="$PROJECT_DIR$/hellolibrary" />
             <option value="$PROJECT_DIR$/readcard" />
-            <option value="$PROJECT_DIR$/validatorlibrary" />
           </set>
         </option>
         <option name="resolveModulePerSourceSet" value="false" />
