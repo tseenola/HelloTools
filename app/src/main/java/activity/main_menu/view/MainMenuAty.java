@@ -7,7 +7,6 @@ import android.widget.Button;
 import android.widget.EditText;
 
 import activity.GetAmt;
-import activity.GetAmtUtils;
 import activity.balance.view.BalanceQueryAty;
 import activity.init_para.view.InitParamAty;
 import activity.key_download.view.KeyDownLoadAty;
@@ -17,6 +16,7 @@ import butterknife.Bind;
 import butterknife.ButterKnife;
 import db.bill.DBPosSettingBill;
 import tools.com.hellolibrary.hello_base.BaseActivity;
+import tools.com.hellolibrary.hello_dialog.GetAmtPop;
 import tools.com.hellotools.R;
 
 /**
@@ -93,7 +93,7 @@ public class MainMenuAty extends BaseActivity {
                 break;
             case R.id.bt_Test:
                 //TestAmt.launch(this);
-                new GetAmtUtils().showPopwindow(v,MainMenuAty.this,0x000000);
+                new GetAmtPop().showPopwindow(v,MainMenuAty.this,0xFF8A2BE2);
                 break;
             default:
                 break;
