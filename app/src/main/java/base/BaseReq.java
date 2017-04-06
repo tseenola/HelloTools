@@ -46,7 +46,7 @@ public abstract class BaseReq implements IPosTempTemplet {
         final String lIp = DBPosSettingBill.getIp();
         final int lPort = DBPosSettingBill.getPort();
         final int lTime = DBPosSettingBill.getSocketTimeOut();
-        ThreadUtil.runCachedService(new Runnable() {
+        ThreadUtil.runFixedService(new Runnable() {
             @Override
             public void run() {
                 SystemClock.sleep(500);
@@ -82,7 +82,7 @@ public abstract class BaseReq implements IPosTempTemplet {
                     }
                 });
             }
-        });
+        },1);
     }
 
     @Override

@@ -12,5 +12,20 @@ import com.urovo.poscommon.models.MsgType;
  */
 
 public interface IBaseSwipeCardPrt {
+    /**
+     * 检查ic卡
+     * @param pCardInfoModel
+     * @param pPinEncryStr
+     * @param pMsgType
+     */
+    void checkICCard(CardInfoModel pCardInfoModel, String pPinEncryStr, MsgType pMsgType);
+
+    /**
+     *
+     * @param pContext
+     * @param pCardInfoModel
+     * @param pMsgType
+     * @param pIBaseSwipeCardAty
+     */
     void actionCardDeal(Context pContext, CardInfoModel pCardInfoModel, MsgType pMsgType, IBaseSwipeCardAty pIBaseSwipeCardAty);
 }

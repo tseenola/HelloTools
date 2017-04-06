@@ -26,7 +26,6 @@ import tools.com.hellolibrary.hello_thread.ThreadUtil;
  * Created by jun lee on 2016/5/19. 描述：对progressBar得封装
  */
 public class DialogUtil {
-
     public static final int STYLE_CIRCAL = 0;
     public static final int STYLE_HORIZONTAL = 1;
     private static ProgressDialog mDialog;

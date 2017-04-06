@@ -14,13 +14,6 @@ import com.urovo.poscommon.models.MsgType;
 public interface IPosTempTemplet {
 
     /**
-     *
-     * @param pContext
-     * @param pMsgType
-     * @param pDealReq
-     */
-
-    /**
      * 执行交易流程
      * @param pContext 上下文
      * @param pMsgType MsgType

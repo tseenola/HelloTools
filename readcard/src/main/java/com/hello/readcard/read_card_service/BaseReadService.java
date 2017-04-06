@@ -16,7 +16,7 @@ public class BaseReadService {
 
 
     protected void sendSuccMsgToUiThread(final CardInfoModel cardInfo){
-        //CardReader.checkCardThreadIsRun = false;
+        //CardReader.mCheckCardThreadIsRun = false;
         ThreadUtil.runOnUiThread(new Runnable() {
             @Override
             public void run() {

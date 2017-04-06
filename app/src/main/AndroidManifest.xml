@@ -35,6 +35,11 @@
         <activity
             android:name="activity.sign_in.view.SignInAty">
         </activity>
+
+        <activity
+            android:name="activity.sign_in2.view.SignInAty2">
+        </activity>
+
         <!--主密钥下载-->
         <activity
             android:name="activity.key_download.view.KeyDownLoadAty">

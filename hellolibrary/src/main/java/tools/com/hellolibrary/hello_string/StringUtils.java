@@ -208,7 +208,7 @@ public class StringUtils {
         }
         return content;
     }
-    public static enum Dir{
+    public enum Dir{
         left,right
     }
 

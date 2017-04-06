@@ -13,7 +13,7 @@ import base.BaseSwipeCardPrt;
 
 public class TestPrt extends BaseSwipeCardPrt{
     @Override
-    public BaseReq actionDeal(CardInfoModel pCardInfoModel) {
+    public BaseReq getMsgModle(CardInfoModel pCardInfoModel) {
 
         return null;
     }

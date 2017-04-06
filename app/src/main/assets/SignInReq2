@@ -1,0 +1,65 @@
+{
+    "msgLength": "",
+    "msgDes": "签到",
+    "msgType": "0800",
+    "TPDU": "",
+    "msgHead": "",
+    "bitmap": "",
+    "SignReq": [
+        {
+            "fieldOrder": "0",
+            "length": 6,
+            "des": "交易处理码",
+            "lengthType": "fix",
+            "contentType": "bcd",
+            "align": "right",
+            "fill": "0",
+            "value": "940000",
+            "haveToExist": true
+        },
+        {
+            "fieldOrder": "0",
+            "length": 2,
+            "des": "服务点条件码",
+            "lengthType": "fix",
+            "contentType": "bcd",
+            "align": "right",
+            "fill": " ",
+            "value": "14",
+            "haveToExist": true
+        },
+        {
+            "fieldOrder": "0",
+            "length": 8,
+            "des": "受卡机终端标识码",
+            "lengthType": "fix",
+            "contentType": "asc",
+            "align": "left",
+            "fill": " ",
+            "value": "",
+            "haveToExist": true
+        },
+        {
+            "fieldOrder": "0",
+            "length": 15,
+            "des": "受卡方标识码",
+            "lengthType": "fix",
+            "contentType": "asc",
+            "align": "left",
+            "fill": " ",
+            "value": "",
+            "haveToExist": true
+        },
+        {
+            "fieldOrder": "0",
+            "length": 17,
+            "des": "自定义域",
+            "lengthType": "lllvar",
+            "align": "left",
+            "contentType": "hex",
+            "fill": "0",
+            "value": "A00199",
+            "haveToExist": true
+        }
+    ]
+}

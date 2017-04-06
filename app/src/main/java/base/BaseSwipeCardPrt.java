@@ -72,7 +72,8 @@ public abstract class BaseSwipeCardPrt implements IBaseSwipeCardPrt{
      * @param pPinEncryStr
      * @param pMsgType
      */
-    protected void checkICCard(CardInfoModel pCardInfoModel, String pPinEncryStr, MsgType pMsgType) {
+    @Override
+    public void checkICCard(CardInfoModel pCardInfoModel, String pPinEncryStr, MsgType pMsgType) {
         int pinMode = 0;
         int i= pCardInfoModel.getSwipedMode().getMode();
         int ii = SwipedMode.CARD_INSERTED.getMode();
@@ -118,7 +119,7 @@ public abstract class BaseSwipeCardPrt implements IBaseSwipeCardPrt{
     @Override
     public void actionCardDeal(Context pContext, CardInfoModel pCardInfoModel, MsgType pMsgType, final IBaseSwipeCardAty pIBaseSwipeCardAty) {
         checkICCard(pCardInfoModel,pCardInfoModel.getEncrypedPwd(),pMsgType);
-        BaseReq lBaseReq = actionDeal(pCardInfoModel);
+        BaseReq lBaseReq = getMsgModle(pCardInfoModel);
         lBaseReq.actionDeal(pContext, pMsgType, lBaseReq, pCardInfoModel, new BaseReq.ResultListener() {
             @Override
             public void succ(Body_STD pBody_std) {
@@ -138,5 +139,10 @@ public abstract class BaseSwipeCardPrt implements IBaseSwipeCardPrt{
         });
     }
 
-    public abstract BaseReq actionDeal(CardInfoModel pCardInfoModel);
+    /**
+     * 获得报文对象
+     * @param pCardInfoModel
+     * @return
+     */
+    public abstract BaseReq getMsgModle(CardInfoModel pCardInfoModel);
 }

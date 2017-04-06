@@ -36,7 +36,7 @@ public class BalanceQueryPrt extends BaseSwipeCardPrt{
     }
 
     @Override
-    public BaseReq actionDeal(CardInfoModel pCardInfoModel) {
+    public BaseReq getMsgModle(CardInfoModel pCardInfoModel) {
         BalanceQueryReq lBalanceReq = new BalanceQueryReq(
                 new F02(SensitiveDataUtil.hideSensitiveData(2,pCardInfoModel.getCardNo())),
                 new F03("310000"),

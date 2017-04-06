@@ -18,7 +18,13 @@ import com.hello.readcard.read_pwd.PwdReader;
  */
 
 public class ReadCardAty extends Activity implements IReadCardAty {
-    public static final String READ_CARD_RESULT = "READ_CARD_RESULT";
+
+    public static final String SWIPE_CARD_TIME_OUT = "pTimeOutSecs";//刷卡超时时间
+    public static final String SWIPE_CARD_AMT = "pAmt";//刷卡交易金额
+    public static final String PINKEY_INDEX = "pPinKeyIndex";//PIN密钥索引
+
+    public static final String READ_CARD_RESULT_BUNDLE = "READ_CARD_RESULT_BUNDLE";
+    public static final String READ_CARD_RESULT_CARD_MODLE = "READ_CARD_RESULT_CARD_MODLE";
     private int mPinKeyIndex;
     private String mAmt;
 
@@ -27,9 +33,9 @@ public class ReadCardAty extends Activity implements IReadCardAty {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.aty_read_card);
         Intent lIntent = getIntent();
-        mPinKeyIndex = lIntent.getIntExtra("pPinKeyIndex",2);
-        int lTimeOutSecs = lIntent.getIntExtra("pTimeOutSecs",15);
-        mAmt = lIntent.getStringExtra("pAmt");
+        int lTimeOutSecs = lIntent.getIntExtra(SWIPE_CARD_TIME_OUT,15);
+        mAmt = lIntent.getStringExtra(SWIPE_CARD_AMT);
+        mPinKeyIndex = lIntent.getIntExtra(PINKEY_INDEX,2);
         new CardReader().readCard(lTimeOutSecs,this);
     }
 
@@ -44,7 +50,7 @@ public class ReadCardAty extends Activity implements IReadCardAty {
         Log.i("vbvb","读卡失败："+pFailMsg);
         if(TextUtils.equals("刷卡超时",pFailMsg)){
             Intent lResult = new Intent();
-            lResult.putExtra(READ_CARD_RESULT,"读卡失败："+pFailMsg);
+            lResult.putExtra(READ_CARD_RESULT_BUNDLE,"读卡失败："+pFailMsg);
             setResult(RESULT_CANCELED,lResult);
             this.finish();
         }
@@ -55,9 +61,9 @@ public class ReadCardAty extends Activity implements IReadCardAty {
         pCardInfoModel.setEncrypedPwd(pPinEncryStr);
         Log.i("vbvb","读卡且获取密码成功："+pCardInfoModel.toString()+" 密码为："+pPinEncryStr);
         Bundle lBundle = new Bundle();
-        lBundle.putSerializable("a",pCardInfoModel);
+        lBundle.putSerializable(READ_CARD_RESULT_CARD_MODLE,pCardInfoModel);
         Intent lResult = new Intent();
-        lResult.putExtra(READ_CARD_RESULT,lBundle);
+        lResult.putExtra(READ_CARD_RESULT_BUNDLE,lBundle);
         setResult(RESULT_OK,lResult);
         this.finish();
         //checkICCard(pCardInfoModel,pPinEncryStr, MsgType.BalanceQuery);
@@ -67,7 +73,7 @@ public class ReadCardAty extends Activity implements IReadCardAty {
     public void onEncryPwdFail(String pErroMsg) {
         Log.i("vbvb","读卡且获取密码失败："+pErroMsg);
         Intent lResult = new Intent();
-        lResult.putExtra(READ_CARD_RESULT,"读卡且获取密码失败："+pErroMsg);
+        lResult.putExtra(READ_CARD_RESULT_BUNDLE,"读卡且获取密码失败："+pErroMsg);
         setResult(RESULT_CANCELED,lResult);
         this.finish();
     }

@@ -2,7 +2,7 @@ package com.urovo.poscommon.models;
 
 /**
  * Created by lenovo on 2017/3/7.
- * 描述：
+ * 描述：密钥类型
  */
 
 public enum KeyType {

@@ -21,12 +21,13 @@ public class CardReader {
     protected boolean EnableICChkCard = false;
     // 非接卡
     protected boolean EnablePICCChkCard = false;
-    MagReadService magReadService;
-    ICReadService icReadService;
-    PICCReadService piccReadService;
-    public static boolean checkCardThreadIsRun = true;
+    MagReadService mMagReadService;
+    ICReadService mIcReadService;
+    PICCReadService mPiccReadService;
+    public static boolean mCheckCardThreadIsRun = true;
 
     public static final int INTERVAL_TIME = 250;
+
     private int mBigestTimes;
 
 
@@ -37,8 +38,8 @@ public class CardReader {
      */
     public void readCard(final int pTimeOutSecs, final OnReadCardFinish pOnReadCardFinish) {
         mBigestTimes = 1000/INTERVAL_TIME * pTimeOutSecs;
-        checkCardThreadIsRun = true;
-        ThreadUtil.runCachedService(new Runnable() {
+        mCheckCardThreadIsRun = true;
+        ThreadUtil.runFixedService(new Runnable() {
             @Override
             public void run() {
                 int time = 0;
@@ -50,17 +51,17 @@ public class CardReader {
                 UROPElibJni.PEDatasInit();
                 UROPElibJni.SleepEnableSuspend(0);
 
-                magReadService = new MagReadService(pOnReadCardFinish);
-                icReadService = new ICReadService(pOnReadCardFinish);
-                piccReadService = new PICCReadService(pOnReadCardFinish);
+                mMagReadService = new MagReadService(pOnReadCardFinish);
+                mIcReadService = new ICReadService(pOnReadCardFinish);
+                mPiccReadService = new PICCReadService(pOnReadCardFinish);
                 // 定义检卡类型
                 int sCarmode = SwipedMode.CARD_SWIPED.getMode() | SwipedMode.CARD_INSERTED.getMode() | SwipedMode.CLCARD_SWIPED.getMode();
 
                 initCard2(sCarmode);
-                while(checkCardThreadIsRun) {
+                while(mCheckCardThreadIsRun) {
                     time++;
                     if(time>=mBigestTimes){
-                        checkCardThreadIsRun=false;
+                        mCheckCardThreadIsRun =false;
                         Log.i("vbvb","刷卡超时");
                         ThreadUtil.runOnUiThread(new Runnable() {
                             @Override
@@ -71,17 +72,17 @@ public class CardReader {
                     }
                     Log.i("vbvb","循环中");
                     if (EnableMagChkCard) {
-                        magReadService.ReadMagCard();
+                        mMagReadService.ReadMagCard();
                     }
                     if (EnableICChkCard) {
-                        icReadService.ReadICCard();
+                        mIcReadService.ReadICCard();
                     }
                     if (EnablePICCChkCard) {
-                        piccReadService.ReadPICCard();
+                        mPiccReadService.ReadPICCard();
                     }
                     SystemClock.sleep(INTERVAL_TIME);
-                    Log.i("vbvb","checkCardThreadIsRun:"+checkCardThreadIsRun);
-                    if(!checkCardThreadIsRun){
+                    Log.i("vbvb","mCheckCardThreadIsRun:"+ mCheckCardThreadIsRun);
+                    if(!mCheckCardThreadIsRun){
                         Log.i("vbvb","close");
                         UROPElibJni.ICCClose();
                         UROPElibJni.PIccClose();
@@ -92,7 +93,7 @@ public class CardReader {
                 }
                 Log.i("vbvb","跳出循环");
             }
-        });
+        },1);
     }
 
     /**

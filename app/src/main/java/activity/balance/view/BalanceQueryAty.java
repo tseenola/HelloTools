@@ -31,7 +31,7 @@ public class BalanceQueryAty extends BaseSwipeCardAty {
 
     @Override
     public void onClick(View v) {
-        readCard(mPresenter, MsgType.BalanceQuery,null);
+        readCard(mPresenter, MsgType.BalanceQuery,null);//执行读卡
     }
 
     /**

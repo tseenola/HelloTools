@@ -39,7 +39,7 @@ public class SalePrt extends BaseSwipeCardPrt{// implements ISalePrt{
     }
 
     @Override
-    public BaseReq actionDeal(CardInfoModel pCardInfoModel) {
+    public BaseReq getMsgModle(CardInfoModel pCardInfoModel) {
         SaleReq lSaleReq = new SaleReq(
                 new F02(SensitiveDataUtil.hideSensitiveData(2,pCardInfoModel.getCardNo())),
                 new F03("00A000"),

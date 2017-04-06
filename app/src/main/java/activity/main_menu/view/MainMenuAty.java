@@ -11,12 +11,12 @@ import activity.balance.view.BalanceQueryAty;
 import activity.init_para.view.InitParamAty;
 import activity.key_download.view.KeyDownLoadAty;
 import activity.sale.view.SaleAty;
-import activity.sign_in.view.SignInAty;
+import activity.sign_in2.view.SignInAty2;
+import activity.test.Test;
 import butterknife.Bind;
 import butterknife.ButterKnife;
 import db.bill.DBPosSettingBill;
 import tools.com.hellolibrary.hello_base.BaseActivity;
-import tools.com.hellolibrary.hello_dialog.GetAmtPop;
 import tools.com.hellotools.R;
 
 /**
@@ -64,7 +64,8 @@ public class MainMenuAty extends BaseActivity {
                 InitParamAty.launch(this);
                 break;
             case R.id.bt_SignIn:
-                SignInAty.launch(this);
+                //SignInAty.launch(this);
+                SignInAty2.launch(this);
                 break;
             case R.id.bt_QueryBalance:
                 //BalanceAty.launch(this);
@@ -93,7 +94,9 @@ public class MainMenuAty extends BaseActivity {
                 break;
             case R.id.bt_Test:
                 //TestAmt.launch(this);
-                new GetAmtPop().showPopwindow(v,MainMenuAty.this,0xFF8A2BE2);
+
+                //new GetAmtPop().showPopwindow(v,MainMenuAty.this,0xFF8A2BE2);
+                Test.launch(this);
                 break;
             default:
                 break;

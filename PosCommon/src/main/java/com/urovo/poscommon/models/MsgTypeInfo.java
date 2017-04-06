@@ -2,7 +2,11 @@ package com.urovo.poscommon.models;
 
 /**
  * Created by lenovo on 2017/2/22.
- * 描述：
+ * 描述：定义交易类型
+ * 交易类型包括三个方面
+ * 1.交易的汉字描述
+ * 2.发包类型：eg:消费 0800
+ * 3.此交易类型必须有的域有哪些。eg:消费必须有 2域，5域，63域，64域。。。就需要传入：02,05,63,64
  */
 
 public class MsgTypeInfo {
