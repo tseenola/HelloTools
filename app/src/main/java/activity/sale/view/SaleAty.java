@@ -6,13 +6,13 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 
+import com.buildpackage.model.Body_STD;
 import com.urovo.poscommon.models.MsgType;
 
 import activity.sale.presenter.SalePrt;
 import base.BaseSwipeCardAty;
 import butterknife.Bind;
 import butterknife.ButterKnife;
-import pos2.model.Body_STD;
 import tools.com.hellotools.R;
 
 /**

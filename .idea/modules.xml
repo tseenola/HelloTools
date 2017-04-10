@@ -2,9 +2,12 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
+      <module fileurl="file://$PROJECT_DIR$/BuildPackageByJson/BuildPackageByJson.iml" filepath="$PROJECT_DIR$/BuildPackageByJson/BuildPackageByJson.iml" />
+      <module fileurl="file://$PROJECT_DIR$/BuildPackageByReflection/BuildPackageByReflection.iml" filepath="$PROJECT_DIR$/BuildPackageByReflection/BuildPackageByReflection.iml" />
       <module fileurl="file://$PROJECT_DIR$/CalculateMac/CalculateMac.iml" filepath="$PROJECT_DIR$/CalculateMac/CalculateMac.iml" />
       <module fileurl="file://$PROJECT_DIR$/HelloTools.iml" filepath="$PROJECT_DIR$/HelloTools.iml" />
       <module fileurl="file://$PROJECT_DIR$/PosCommon/PosCommon.iml" filepath="$PROJECT_DIR$/PosCommon/PosCommon.iml" />
+      <module fileurl="file://$PROJECT_DIR$/WriteMasterKey/WriteMasterKey.iml" filepath="$PROJECT_DIR$/WriteMasterKey/WriteMasterKey.iml" />
       <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" />
       <module fileurl="file://$PROJECT_DIR$/hellolibrary/hellolibrary.iml" filepath="$PROJECT_DIR$/hellolibrary/hellolibrary.iml" />
       <module fileurl="file://$PROJECT_DIR$/readcard/readcard.iml" filepath="$PROJECT_DIR$/readcard/readcard.iml" />

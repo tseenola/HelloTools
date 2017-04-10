@@ -1,10 +1,12 @@
 package activity.key_download.model;
 
+import com.buildpackage.fields.F03;
+import com.buildpackage.fields.F41;
+import com.buildpackage.fields.F42;
+import com.buildpackage.fields.F60;
+
 import base.BaseReq;
-import pos2.fields.F03;
-import pos2.fields.F41;
-import pos2.fields.F42;
-import pos2.fields.F60;
+
 
 /**
  * Created by lenovo on 2017/1/19.

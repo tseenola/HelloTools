@@ -4,18 +4,19 @@ import android.content.Context;
 import android.text.TextUtils;
 import android.util.Log;
 
+import com.buildpackage.fields.F03;
+import com.buildpackage.fields.F41;
+import com.buildpackage.fields.F42;
+import com.buildpackage.fields.F60;
+import com.buildpackage.model.Body_STD;
+import com.customview.writemasterkey.MasterKeyUtils;
+import com.customview.writemasterkey.MasterKeyWriter;
 import com.urovo.poscommon.models.MsgType;
 
 import activity.key_download.model.KeyDownReq;
 import activity.key_download.view.IKeyDownLoadAty;
 import base.BaseReq;
-import core.MasterKeyWriter;
 import db.bill.DBPosSettingBill;
-import pos2.fields.F03;
-import pos2.fields.F41;
-import pos2.fields.F42;
-import pos2.fields.F60;
-import pos2.model.Body_STD;
 import tools.com.hellolibrary.hello_convert.ConvertUtils;
 
 /**
@@ -65,11 +66,12 @@ public class KeyDownLoadPrt implements IKeyDownLoadPrt {
         if(!TextUtils.equals(pBody_std.getmF48().DES,"附加数据－私有(主密钥)")){
             throw new IllegalStateException("获取主密钥时出错，当前域DES不是 附加数据－私有(主密钥) ！请重新确认附加数据－私有(主密钥) 所在域！");
         }
-        byte[] bcdKEK = ConvertUtils.hexStringToByte(STRKEK);
+        byte[] bcdKEK = ConvertUtils.hexStringToByte(STRKEK);//主密钥密文解密密钥
         String strMstSec = pBody_std.getmF48().getValue().split("-->")[1];
-        byte[] bcdMstSec = ConvertUtils.hexStringToByte(strMstSec);
+        byte[] bcdMstSec = ConvertUtils.hexStringToByte(strMstSec);//主密钥密文
         int masterKeyIndex = DBPosSettingBill.getMasterKeyIndex();
-        boolean iRet = MasterKeyWriter.actionMasterKeyWrite(masterKeyIndex,bcdKEK,bcdMstSec);
+        //boolean iRet = MasterKeyWriter.actionMasterKeyWrite(masterKeyIndex,bcdKEK,bcdMstSec);
+        boolean iRet = MasterKeyUtils.doMasterKeyWrite(masterKeyIndex,STRKEK,strMstSec,new MasterKeyWriter());
         if(iRet) {
             Log.i("vbvb","写入主密钥成功");
             mView.onKeyDownSucc("主密钥下载成功写入成功");

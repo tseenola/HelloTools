@@ -4,6 +4,12 @@ import android.content.Context;
 import android.text.TextUtils;
 import android.widget.Toast;
 
+import com.buildpackage.fields.F03;
+import com.buildpackage.fields.F25;
+import com.buildpackage.fields.F41;
+import com.buildpackage.fields.F42;
+import com.buildpackage.fields.F60;
+import com.buildpackage.model.Body_STD;
 import com.urovo.poscommon.models.MsgType;
 
 import activity.sign_in.model.SignInReq;
@@ -11,12 +17,6 @@ import activity.sign_in.view.ISignInAty;
 import base.BaseReq;
 import core.WorkingKeyWriter;
 import db.bill.DBPosSettingBill;
-import pos2.fields.F03;
-import pos2.fields.F25;
-import pos2.fields.F41;
-import pos2.fields.F42;
-import pos2.fields.F60;
-import pos2.model.Body_STD;
 import tools.com.hellolibrary.hello_convert.ConvertUtils;
 
 /**

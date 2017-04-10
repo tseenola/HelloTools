@@ -2,6 +2,7 @@ package db.bill;
 
 import android.content.ContentValues;
 import android.content.Context;
+import android.text.TextUtils;
 import android.util.Log;
 
 import com.google.gson.Gson;
@@ -11,6 +12,7 @@ import org.litepal.crud.DataSupport;
 import java.io.InputStream;
 import java.util.List;
 
+import base.MyApplication;
 import db.table.DBPosSetting;
 import db.table_def_val.DBPosSettingDefVal;
 import tools.com.hellolibrary.hello_string.StringUtils;
@@ -21,6 +23,28 @@ import tools.com.hellolibrary.hello_string.StringUtils;
  */
 
 public class DBPosSettingBill {
+
+    /**
+     * 将一个数据库中还不存在的ｋｅｙ动态添加到数据库中。
+     * @return
+     */
+    public static boolean addNewRecord(String parmName, String parmValue){
+        InputStream lInputStream = null;
+        try{
+            lInputStream = MyApplication.getApp().getAssets().open("DBPosSettingDefVal");
+        }catch (Exception pE){
+            pE.printStackTrace();
+        }
+        String lDBPosSettingStr = StringUtils.streamToString(lInputStream);
+        DBPosSettingDefVal lDBPosSettingDefVal = new Gson().fromJson(lDBPosSettingStr, DBPosSettingDefVal.class);
+        List<DBPosSettingDefVal.DBPosSettingDefValListBean> lDBPosSettingDefValList = lDBPosSettingDefVal.getDBPosSettingDefValList();
+        for(DBPosSettingDefVal.DBPosSettingDefValListBean lDBPosSettingDefValListBean:lDBPosSettingDefValList){
+            if(TextUtils.equals(lDBPosSettingDefValListBean.getParmName(),parmName)){
+                return new DBPosSetting(lDBPosSettingDefValListBean.getKeyIndex(), lDBPosSettingDefValListBean.getParmName(), parmValue, lDBPosSettingDefValListBean.getParmMemo()).save();
+            }
+        }
+        return false;
+    }
     /**
      * 初始化Pos参数表
      * @return 是否初始化成功
@@ -61,9 +85,7 @@ public class DBPosSettingBill {
         if(pTrace.length()!=6){
             throw new IllegalArgumentException("传入的流水号不合法,长度错误！");
         }
-        ContentValues traceVal = new ContentValues();
-        traceVal.put("parmValue", pTrace);
-        DataSupport.updateAll(DBPosSetting.class, traceVal, "keyIndex=? and parmName=?","1", "iNowTraceNo");
+        setParamValue(1,"iNowTraceNo",pTrace);
     }
 
     /**
@@ -281,7 +303,8 @@ public class DBPosSettingBill {
             List<DBPosSetting> dbPosSettingList = DataSupport.where("keyIndex=? and parmName=?", keyIndex + "", parmName).find(DBPosSetting.class);
             if (dbPosSettingList == null || dbPosSettingList.size() == 0) {
                 // 如果不存在数据，则新增
-                new DBPosSetting(keyIndex, parmName, parmValue, "").save();
+                //new DBPosSetting(keyIndex, parmName, parmValue, "").save();
+                addNewRecord(parmName, parmValue);
             } else {
                 // 如果存在数据，则更新
                 ContentValues values = new ContentValues();
@@ -294,5 +317,7 @@ public class DBPosSettingBill {
         }
         return bResult;
     }
+
+
 
 }

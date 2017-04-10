@@ -3,12 +3,13 @@ package activity.sign_in2.presenter;
 import android.content.Context;
 import android.text.TextUtils;
 
+import com.buildpackage.model.Body_STD;
+
 import activity.sign_in2.modle.SignInReq2;
 import activity.sign_in2.view.ISignInAty2;
 import base.BaseReq;
 import core.WorkingKeyWriter;
 import db.bill.DBPosSettingBill;
-import pos2.model.Body_STD;
 import tools.com.hellolibrary.hello_convert.ConvertUtils;
 
 /**

@@ -4,14 +4,9 @@ import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
-
-import com.google.gson.Gson;
 
 import java.io.InputStream;
-import java.util.List;
 
-import db.bill.DBPosSettingBill;
 import tools.com.hellolibrary.hello_string.StringUtils;
 
 
@@ -31,7 +26,7 @@ public class Test extends Activity {
             pE.printStackTrace();
         }
         String lSignIn = StringUtils.streamToString(lInputStream);
-        Mod2 lDefVal = new Gson().fromJson(lSignIn, Mod2.class);
+        /*Mod2 lDefVal = new Gson().fromJson(lSignIn, Mod2.class);
         //设置基本信息
         lDefVal.setMsgDes("签到");
         lDefVal.setIsNeedMac(false);
@@ -48,7 +43,7 @@ public class Test extends Activity {
         lReqBeanList.get(41).setValue(DBPosSettingBill.getMerchantNo());
         lReqBeanList.get(59).setValue("A00199");
         String hexMsg = lDefVal.buildMsg();
-        Log.i("vbvb","发送出去的报文的16进制字符串表示："+hexMsg);
+        Log.i("vbvb","发送出去的报文的16进制字符串表示："+hexMsg);*/
 
     }
 
@@ -57,7 +52,7 @@ public class Test extends Activity {
     /**
      * 余额查询报文
      */
-    public void balanceQuery(){
+    /*public void balanceQuery(){
         InputStream lInputStream = null;
         try{
             lInputStream = this.getAssets().open("FieldInfo2.txt");
@@ -82,7 +77,7 @@ public class Test extends Activity {
         lReqBeanList.get(59).setValue("A00199");
         String hexMsg = lDefVal.buildMsg();
         Log.i("vbvb","发送出去的报文的16进制字符串表示："+hexMsg);
-    }
+    }*/
 
     public static void launch(Context pContext) {
         pContext.startActivity(new Intent(pContext,Test.class));

@@ -1,14 +1,16 @@
 package activity.init_para.model;
 
+import com.buildpackage.fields.F03;
+import com.buildpackage.fields.F11;
+import com.buildpackage.fields.F25;
+import com.buildpackage.fields.F41;
+import com.buildpackage.fields.F42;
+import com.buildpackage.fields.F60;
+import com.buildpackage.fields.F63;
+import com.buildpackage.fields.F64;
+
 import base.BaseReq;
-import pos2.fields.F03;
-import pos2.fields.F11;
-import pos2.fields.F25;
-import pos2.fields.F41;
-import pos2.fields.F42;
-import pos2.fields.F60;
-import pos2.fields.F63;
-import pos2.fields.F64;
+
 
 /**
  * Created by lenovo on 2017/1/19.

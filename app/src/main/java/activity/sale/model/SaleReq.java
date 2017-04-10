@@ -1,24 +1,26 @@
 package activity.sale.model;
 
+import com.buildpackage.fields.F02;
+import com.buildpackage.fields.F03;
+import com.buildpackage.fields.F04;
+import com.buildpackage.fields.F11;
+import com.buildpackage.fields.F14;
+import com.buildpackage.fields.F22;
+import com.buildpackage.fields.F23;
+import com.buildpackage.fields.F25;
+import com.buildpackage.fields.F35;
+import com.buildpackage.fields.F36;
+import com.buildpackage.fields.F41;
+import com.buildpackage.fields.F42;
+import com.buildpackage.fields.F49;
+import com.buildpackage.fields.F52;
+import com.buildpackage.fields.F55;
+import com.buildpackage.fields.F60;
+import com.buildpackage.fields.F62;
+import com.buildpackage.fields.F64;
+
 import base.BaseReq;
-import pos2.fields.F02;
-import pos2.fields.F03;
-import pos2.fields.F04;
-import pos2.fields.F11;
-import pos2.fields.F14;
-import pos2.fields.F22;
-import pos2.fields.F23;
-import pos2.fields.F25;
-import pos2.fields.F35;
-import pos2.fields.F36;
-import pos2.fields.F41;
-import pos2.fields.F42;
-import pos2.fields.F49;
-import pos2.fields.F52;
-import pos2.fields.F55;
-import pos2.fields.F60;
-import pos2.fields.F62;
-import pos2.fields.F64;
+
 
 /**
  * Created by lenovo on 2017/2/27.

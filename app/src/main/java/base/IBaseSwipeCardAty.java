@@ -1,6 +1,7 @@
 package base;
 
-import pos2.model.Body_STD;
+
+import com.buildpackage.model.Body_STD;
 
 /**
  * Created by lenovo on 2017/2/28.

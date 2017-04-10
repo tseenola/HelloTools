@@ -1,13 +1,15 @@
 package activity.init_para.model;
 
+import com.buildpackage.fields.F03;
+import com.buildpackage.fields.F11;
+import com.buildpackage.fields.F25;
+import com.buildpackage.fields.F41;
+import com.buildpackage.fields.F42;
+import com.buildpackage.fields.F60;
+import com.buildpackage.fields.F64;
+
 import base.BaseReq;
-import pos2.fields.F03;
-import pos2.fields.F11;
-import pos2.fields.F25;
-import pos2.fields.F41;
-import pos2.fields.F42;
-import pos2.fields.F60;
-import pos2.fields.F64;
+
 
 /**
  * Created by lenovo on 2017/1/19.
@@ -23,7 +25,7 @@ public class IcParamReq extends BaseReq{
     public F60 f60;
     public F64 f64;
 
-    public IcParamReq(F03 f03,F11 f11,F25 f25, F41 f41, F42 f42, F60 f60,F64 f64) {
+    public IcParamReq(F03 f03, F11 f11, F25 f25, F41 f41, F42 f42, F60 f60, F64 f64) {
         this.f03= f03;
         this.f11= f11;
         this.f25= f25;

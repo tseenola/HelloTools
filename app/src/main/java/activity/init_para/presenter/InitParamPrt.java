@@ -3,6 +3,15 @@ package activity.init_para.presenter;
 import android.content.Context;
 import android.util.Log;
 
+import com.buildpackage.fields.F03;
+import com.buildpackage.fields.F11;
+import com.buildpackage.fields.F25;
+import com.buildpackage.fields.F41;
+import com.buildpackage.fields.F42;
+import com.buildpackage.fields.F60;
+import com.buildpackage.fields.F63;
+import com.buildpackage.fields.F64;
+import com.buildpackage.model.Body_STD;
 import com.urovo.poscommon.models.MsgType;
 
 import activity.init_para.model.AidDownLoadReq;
@@ -14,15 +23,6 @@ import core.IcCardParamDownDecoder;
 import db.bill.DBAppParasBill;
 import db.bill.DBCapkBill;
 import db.bill.DBPosSettingBill;
-import pos2.fields.F03;
-import pos2.fields.F11;
-import pos2.fields.F25;
-import pos2.fields.F41;
-import pos2.fields.F42;
-import pos2.fields.F60;
-import pos2.fields.F63;
-import pos2.fields.F64;
-import pos2.model.Body_STD;
 import tools.com.hellolibrary.hello_string.PosStringUtils;
 import tools.com.hellolibrary.hello_string.StringUtils;
 
