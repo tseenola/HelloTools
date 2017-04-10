@@ -51,7 +51,7 @@ public abstract class BaseReq implements IPosTempTemplet {
             public void run() {
                 SystemClock.sleep(500);
                 //组包
-                byte sendMsgByte[] = pack(lTpdu, mMsgTypeInfo.getType(), mMsgTypeInfo.getMustHaveField(), pDealReq);
+                //byte sendMsgByte[] = pack(lTpdu, mMsgTypeInfo.getType(), mMsgTypeInfo.getMustHaveField(), pDealReq);
                 //发包
                 //sendPack(pContext, sendMsgByte, lIp, lPort, lTime);
                 //流水加1

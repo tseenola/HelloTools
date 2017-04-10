@@ -7,7 +7,7 @@ import android.device.MaxqManager;
  * 描述：
  */
 
-public class MaxqManagerHelper implements IUrovoSDK{
+public class MaxqManagerHelper{
 
     protected MaxqManager mMaxqManager;
 

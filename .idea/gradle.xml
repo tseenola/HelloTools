@@ -12,6 +12,7 @@
             <option value="$PROJECT_DIR$/BuildPackageByJson" />
             <option value="$PROJECT_DIR$/BuildPackageByReflection" />
             <option value="$PROJECT_DIR$/CalculateMac" />
+            <option value="$PROJECT_DIR$/KeyTool" />
             <option value="$PROJECT_DIR$/PosCommon" />
             <option value="$PROJECT_DIR$/WriteMasterKey" />
             <option value="$PROJECT_DIR$/WriteWorkKey" />

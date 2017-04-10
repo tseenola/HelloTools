@@ -1,1 +1,1 @@
-include ':app', ':hellolibrary', ':readcard', ':CalculateMac', ':PosCommon', ':BuildPackageByJson', ':BuildPackageByReflection', ':WriteMasterKey', ':WriteWorkKey'
+include ':app', ':hellolibrary', ':readcard', ':CalculateMac', ':PosCommon', ':BuildPackageByJson', ':BuildPackageByReflection', ':WriteMasterKey', ':WriteWorkKey', ':KeyTool'

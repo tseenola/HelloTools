@@ -6,6 +6,7 @@
       <module fileurl="file://$PROJECT_DIR$/BuildPackageByReflection/BuildPackageByReflection.iml" filepath="$PROJECT_DIR$/BuildPackageByReflection/BuildPackageByReflection.iml" />
       <module fileurl="file://$PROJECT_DIR$/CalculateMac/CalculateMac.iml" filepath="$PROJECT_DIR$/CalculateMac/CalculateMac.iml" />
       <module fileurl="file://$PROJECT_DIR$/HelloTools.iml" filepath="$PROJECT_DIR$/HelloTools.iml" />
+      <module fileurl="file://$PROJECT_DIR$/KeyTool/KeyTool.iml" filepath="$PROJECT_DIR$/KeyTool/KeyTool.iml" />
       <module fileurl="file://$PROJECT_DIR$/PosCommon/PosCommon.iml" filepath="$PROJECT_DIR$/PosCommon/PosCommon.iml" />
       <module fileurl="file://$PROJECT_DIR$/WriteMasterKey/WriteMasterKey.iml" filepath="$PROJECT_DIR$/WriteMasterKey/WriteMasterKey.iml" />
       <module fileurl="file://$PROJECT_DIR$/WriteWorkKey/WriteWorkKey.iml" filepath="$PROJECT_DIR$/WriteWorkKey/WriteWorkKey.iml" />
