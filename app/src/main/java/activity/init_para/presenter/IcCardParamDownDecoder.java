@@ -1,4 +1,4 @@
-package core;
+package activity.init_para.presenter;
 
 /**
  * Created by lenovo on 2017/2/5.

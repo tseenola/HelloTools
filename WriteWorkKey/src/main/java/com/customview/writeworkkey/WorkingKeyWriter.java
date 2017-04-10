@@ -1,16 +1,10 @@
-package core;
+package com.customview.writeworkkey;
 
 import android.util.Log;
 
-import com.urovo.poscommon.Constants;
-import com.urovo.poscommon.models.KeyType;
-
 import java.util.Arrays;
 
-import base.ResponseCode;
-import db.bill.DBPosSettingBill;
 import tools.com.hellolibrary.helllo_my_inter.IUrovoSDK;
-import tools.com.hellolibrary.helllo_my_inter.WorkingKeyWriterTemplate;
 import tools.com.hellolibrary.hello_convert.ConvertUtils;
 
 /**
@@ -20,7 +14,6 @@ import tools.com.hellolibrary.hello_convert.ConvertUtils;
 
 public class WorkingKeyWriter extends WorkingKeyWriterTemplate{
 
-    private WorkingKeyWriter(){}
 
     /**
      *
@@ -32,28 +25,25 @@ public class WorkingKeyWriter extends WorkingKeyWriterTemplate{
      * @param pIsNeedCheck 是否校验
      * @return
      */
-    public static boolean doWriteWorkKey(byte [] pPinDatas,byte pMacDatas [] ,byte [] pTrackDatas,int pMasterKeyIndex,byte[] pCheckVal,boolean pIsNeedCheck){
-        return new WorkingKeyWriter().writeWorkingKey(pPinDatas,pMacDatas,pTrackDatas,pMasterKeyIndex,pCheckVal,pIsNeedCheck);
+    public boolean doWriteWorkKey(byte [] pPinDatas,int pPiniKeyIndex,byte pMacDatas [] ,int pMacKeyIndex,byte [] pTrackDatas,int pTrackKeyIndex,int pMasterKeyIndex,byte[] pCheckVal,boolean pIsNeedCheck){
+        return new WorkingKeyWriter().writeWorkingKey(pPinDatas,pPiniKeyIndex,pMacDatas,pMacKeyIndex,pTrackDatas,pTrackKeyIndex,pMasterKeyIndex,pCheckVal,pIsNeedCheck);
     }
 
     @Override
-    public boolean writePinKey(byte [] pPinDatas,int pMasterKeyIndex,byte[] pCheckVal,boolean pIsNeedCheck) {
-        int lPinKeyIndex = DBPosSettingBill.getPinKeyIndex();
-        boolean isSucc = Urovo_PciWriteWorkKey(KeyType._PINKEY,lPinKeyIndex,pPinDatas.length,pPinDatas,pMasterKeyIndex,pCheckVal,pIsNeedCheck)==0;
+    public boolean writePinKey(int pPiniKeyIndex,byte [] pPinDatas,int pMasterKeyIndex,byte[] pCheckVal,boolean pIsNeedCheck) {
+        boolean isSucc = Urovo_PciWriteWorkKey(KeyType._PINKEY,pPiniKeyIndex,pPinDatas.length,pPinDatas,pMasterKeyIndex,pCheckVal,pIsNeedCheck)==0;
         return isSucc;
     }
 
     @Override
-    public boolean writeMacKey(byte pMacDatas [],int pMasterKeyIndex,byte[] pCheckVal,boolean pIsNeedCheck) {
-        int lMacKeyIndex = DBPosSettingBill.getMacKeyIndex();
-        boolean isSucc = Urovo_PciWriteWorkKey(KeyType._MACKEY,lMacKeyIndex,pMacDatas.length,pMacDatas,pMasterKeyIndex,pCheckVal,pIsNeedCheck)==0;
+    public boolean writeMacKey(int pMacKeyIndex,byte pMacDatas [],int pMasterKeyIndex,byte[] pCheckVal,boolean pIsNeedCheck) {
+        boolean isSucc = Urovo_PciWriteWorkKey(KeyType._MACKEY,pMacKeyIndex,pMacDatas.length,pMacDatas,pMasterKeyIndex,pCheckVal,pIsNeedCheck)==0;
         return isSucc;
     }
 
     @Override
-    public boolean writeTrackKey(byte [] pTrackDatas,int pMasterKeyIndex,byte[] pCheckVal,boolean pIsNeedCheck) {
-        int lTrackKeyIndex = DBPosSettingBill.getTrackKeyIndex();
-        boolean isSucc = Urovo_PciWriteWorkKey(KeyType._TLK,lTrackKeyIndex,pTrackDatas.length,pTrackDatas,pMasterKeyIndex,pCheckVal,pIsNeedCheck)==0;
+    public boolean writeTrackKey(int pTrackKeyIndex,byte [] pTrackDatas,int pMasterKeyIndex,byte[] pCheckVal,boolean pIsNeedCheck) {
+        boolean isSucc = Urovo_PciWriteWorkKey(KeyType._TLK,pTrackKeyIndex,pTrackDatas.length,pTrackDatas,pMasterKeyIndex,pCheckVal,pIsNeedCheck)==0;
         return isSucc;
     }
 

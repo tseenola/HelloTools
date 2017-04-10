@@ -14,6 +14,7 @@
             <option value="$PROJECT_DIR$/CalculateMac" />
             <option value="$PROJECT_DIR$/PosCommon" />
             <option value="$PROJECT_DIR$/WriteMasterKey" />
+            <option value="$PROJECT_DIR$/WriteWorkKey" />
             <option value="$PROJECT_DIR$/app" />
             <option value="$PROJECT_DIR$/hellolibrary" />
             <option value="$PROJECT_DIR$/readcard" />

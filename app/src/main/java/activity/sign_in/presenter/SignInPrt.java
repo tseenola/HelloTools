@@ -10,12 +10,13 @@ import com.buildpackage.fields.F41;
 import com.buildpackage.fields.F42;
 import com.buildpackage.fields.F60;
 import com.buildpackage.model.Body_STD;
+import com.customview.writeworkkey.WorkKeyWriteUtils;
+import com.customview.writeworkkey.WorkingKeyWriter;
 import com.urovo.poscommon.models.MsgType;
 
 import activity.sign_in.model.SignInReq;
 import activity.sign_in.view.ISignInAty;
 import base.BaseReq;
-import core.WorkingKeyWriter;
 import db.bill.DBPosSettingBill;
 import tools.com.hellolibrary.hello_convert.ConvertUtils;
 
@@ -99,8 +100,14 @@ public class SignInPrt implements ISignInPrt {
         byte macDatas [] = ConvertUtils.hexStringToByte(lMacSec);
 
         int masterKeyIndex = DBPosSettingBill.getMasterKeyIndex();
+        int lPinKeyIndex = DBPosSettingBill.getPinKeyIndex();
+        int lMacKeyIndex = DBPosSettingBill.getMacKeyIndex();
+        int lTrackKeyIndex = DBPosSettingBill.getTrackKeyIndex();
 
-        boolean succ = WorkingKeyWriter.doWriteWorkKey(pinDatas,macDatas,new byte[0],masterKeyIndex,new byte[4],false);
+
+        //boolean succ = WorkingKeyWriter.doWriteWorkKey(pinDatas,macDatas,new byte[0],masterKeyIndex,new byte[4],false);
+
+        boolean succ = WorkKeyWriteUtils.doWriteWorkKey(pinDatas,lPinKeyIndex,macDatas,lMacKeyIndex,null,lTrackKeyIndex,masterKeyIndex,new byte[4],false,new WorkingKeyWriter());
 
         if(succ){
             //4.同步签到状态到数据库（是否已经签到）

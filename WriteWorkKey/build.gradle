@@ -1,15 +1,17 @@
-apply plugin: 'com.android.application'
+apply plugin: 'com.android.library'
 
 android {
     compileSdkVersion 23
     buildToolsVersion "23.0.3"
+
     defaultConfig {
-        applicationId "tools.com.hellotools"
         minSdkVersion 16
         targetSdkVersion 23
         versionCode 1
         versionName "1.0"
+
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
+
     }
     buildTypes {
         release {
@@ -24,13 +26,5 @@ dependencies {
     androidTestCompile('com.android.support.test.espresso:espresso-core:2.2.2', {
         exclude group: 'com.android.support', module: 'support-annotations'
     })
-    //我自己的框架
     compile project(':hellolibrary')
-    compile project(':PosCommon')
-    compile project(':CalculateMac')
-    compile project(':readcard')
-    compile project(':BuildPackageByJson')
-    compile project(':BuildPackageByReflection')
-    compile project(':WriteMasterKey')
-    compile project(':WriteWorkKey')
 }

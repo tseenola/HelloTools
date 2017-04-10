@@ -1,4 +1,6 @@
-package com.urovo.calculatemac;
+package com.urovo.calculatemac.utils;
+
+import com.urovo.calculatemac.IMacCalculater;
 
 /**
  * Created by lenovo on 2017/4/10.

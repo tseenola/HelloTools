@@ -8,6 +8,7 @@ import com.buildpackage.modle.Field;
 import com.buildpackage.modle.IField;
 import com.google.gson.Gson;
 import com.urovo.calculatemac.MacDefCalculater;
+import com.urovo.calculatemac.utils.MacCalculaterUtils;
 
 import java.io.InputStream;
 import java.util.List;
@@ -67,7 +68,8 @@ public class FieldHelper implements IField{
 
         //3.求：mac
         if(pField.isIsNeedMac()){
-            BitmapHexStr = new MacDefCalculater().getMac(pField.getMacIndex(),binaryBitmap,hexBody);
+            //BitmapHexStr = new MacDefCalculater().getMac(pField.getMacIndex(),binaryBitmap,hexBody);
+            BitmapHexStr = MacCalculaterUtils.getMac(pField.getMacIndex(),hexBody,new MacDefCalculater());
             pField.setMacHexStr(BitmapHexStr);
         }
 

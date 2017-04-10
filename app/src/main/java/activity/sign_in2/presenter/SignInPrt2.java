@@ -4,11 +4,12 @@ import android.content.Context;
 import android.text.TextUtils;
 
 import com.buildpackage.model.Body_STD;
+import com.customview.writeworkkey.WorkKeyWriteUtils;
+import com.customview.writeworkkey.WorkingKeyWriter;
 
 import activity.sign_in2.modle.SignInReq2;
 import activity.sign_in2.view.ISignInAty2;
 import base.BaseReq;
-import core.WorkingKeyWriter;
 import db.bill.DBPosSettingBill;
 import tools.com.hellolibrary.hello_convert.ConvertUtils;
 
@@ -85,9 +86,11 @@ public class SignInPrt2 implements ISignInPrt2 {
         byte macDatas [] = ConvertUtils.hexStringToByte(lMacSec);
 
         int masterKeyIndex = DBPosSettingBill.getMasterKeyIndex();
-
-        boolean succ = WorkingKeyWriter.doWriteWorkKey(pinDatas,macDatas,new byte[0],masterKeyIndex,new byte[4],false);
-
+        int lPinKeyIndex = DBPosSettingBill.getPinKeyIndex();
+        int lMacKeyIndex = DBPosSettingBill.getMacKeyIndex();
+        int lTrackKeyIndex = DBPosSettingBill.getTrackKeyIndex();
+        //boolean succ = WorkingKeyWriter.doWriteWorkKey(pinDatas,macDatas,new byte[0],masterKeyIndex,new byte[4],false);
+        boolean succ = WorkKeyWriteUtils.doWriteWorkKey(pinDatas,lPinKeyIndex,macDatas,lMacKeyIndex,null,lTrackKeyIndex,masterKeyIndex,new byte[4],false,new WorkingKeyWriter());
         if(succ){
             //4.同步签到状态到数据库（是否已经签到）
             DBPosSettingBill.setSignInStatus(true);

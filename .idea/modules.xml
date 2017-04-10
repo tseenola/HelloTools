@@ -8,6 +8,7 @@
       <module fileurl="file://$PROJECT_DIR$/HelloTools.iml" filepath="$PROJECT_DIR$/HelloTools.iml" />
       <module fileurl="file://$PROJECT_DIR$/PosCommon/PosCommon.iml" filepath="$PROJECT_DIR$/PosCommon/PosCommon.iml" />
       <module fileurl="file://$PROJECT_DIR$/WriteMasterKey/WriteMasterKey.iml" filepath="$PROJECT_DIR$/WriteMasterKey/WriteMasterKey.iml" />
+      <module fileurl="file://$PROJECT_DIR$/WriteWorkKey/WriteWorkKey.iml" filepath="$PROJECT_DIR$/WriteWorkKey/WriteWorkKey.iml" />
       <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" />
       <module fileurl="file://$PROJECT_DIR$/hellolibrary/hellolibrary.iml" filepath="$PROJECT_DIR$/hellolibrary/hellolibrary.iml" />
       <module fileurl="file://$PROJECT_DIR$/readcard/readcard.iml" filepath="$PROJECT_DIR$/readcard/readcard.iml" />

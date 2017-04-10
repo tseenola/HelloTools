@@ -41,15 +41,6 @@ public class SignInReq2 extends BaseReq2 {
 	 */
 	@Override
 	public String getHexStrMsg(){
-		/*InputStream lInputStream = null;
-		try{
-			lInputStream = mContext.getAssets().open("FieldInfo3.txt");
-		}catch (Exception pE){
-			pE.printStackTrace();
-		}
-		String lSignIn = StringUtils.streamToString(lInputStream);
-		Mod2 lDefVal = new Gson().fromJson(lSignIn, Mod2.class);*/
-		//Field lFieldInfo = FieldHelper.getFieldInfoInstance(mContext);
 		Field lFieldInfo = FieldUtils.getFieldInfoInstance(mContext,new FieldHelper());
 
 		//设置基本信息
@@ -68,7 +59,6 @@ public class SignInReq2 extends BaseReq2 {
 		lReqBeanList.get(41).setValue(DBPosSettingBill.getMerchantNo());
 		lReqBeanList.get(59).setValue("A00199");
 		String hexMsg =FieldUtils.buildMsg(lFieldInfo,new FieldHelper());
-		//String hexMsg = lFieldInfo.buildMsg();
 
 		Log.i("vbvb","发送出去的报文的16进制字符串表示："+hexMsg);
 		return hexMsg;

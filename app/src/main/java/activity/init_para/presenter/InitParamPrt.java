@@ -19,7 +19,6 @@ import activity.init_para.model.CAPKDownReq;
 import activity.init_para.model.IcParamReq;
 import activity.init_para.view.IInitParamAty;
 import base.BaseReq;
-import core.IcCardParamDownDecoder;
 import db.bill.DBAppParasBill;
 import db.bill.DBCapkBill;
 import db.bill.DBPosSettingBill;

@@ -14,7 +14,8 @@ public class MasterKeyUtils {
      * @param pMasterKeyIndex 主密钥索引
      * @param pMasterKeyAntidoteKey 主密钥解密密钥
      * @param pMasterSecKey 主密钥
-     * @param pMasterKeyWriteTemplate
+     * @param pMasterKeyWriteTemplate 主密钥具体写入类，执行具体的主密钥写入，目前已经提供了一个默认写入算法（com.customview.writemasterkey.MasterKeyWriter#MasterKeyWriter()）
+     *                        如果有自己的写入算法，请实现接口（com.customview.writemasterkey.MasterKeyWriteTemplate）
      * @return
      */
     public static boolean doMasterKeyWrite(int pMasterKeyIndex, String pMasterKeyAntidoteKey, String pMasterSecKey, MasterKeyWriteTemplate pMasterKeyWriteTemplate){

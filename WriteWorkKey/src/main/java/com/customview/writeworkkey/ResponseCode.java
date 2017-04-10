@@ -1,4 +1,4 @@
-package base;
+package com.customview.writeworkkey;
 
 public class ResponseCode {
     /**

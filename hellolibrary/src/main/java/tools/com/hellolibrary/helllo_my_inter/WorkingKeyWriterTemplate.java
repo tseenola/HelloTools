@@ -5,24 +5,24 @@ package tools.com.hellolibrary.helllo_my_inter;
  * 描述：
  */
 
-public abstract class WorkingKeyWriterTemplate extends MaxqManagerHelper{
+/*public abstract class WorkingKeyWriterTemplate extends MaxqManagerHelper{
     protected int mMasterKeyIndex = 0;
-    /**
+    *//**
      * 写pin密钥
      * @return
-     */
+     *//*
     public abstract boolean writePinKey(byte [] pPinDatas,int pMasterKeyIndex,byte[] pCheckVal,boolean pIsNeedCheck);
 
-    /**
+    *//**
      * 写mac密钥
      * @return
-     */
+     *//*
     public abstract boolean writeMacKey(byte pMacDatas [],int pMasterKeyIndex,byte[] pCheckVal,boolean pIsNeedCheck);
 
-    /**
+    *//**
      * 写磁道密钥
      * @return
-     */
+     *//*
     public abstract boolean writeTrackKey(byte [] pTrackDatas,int pMasterKeyIndex,byte[] pCheckVal,boolean pIsNeedCheck);
 
 
@@ -33,4 +33,4 @@ public abstract class WorkingKeyWriterTemplate extends MaxqManagerHelper{
                 //天下汇没有磁道密钥所以注释掉  writeTrackKey(pTrackDatas,pMasterKeyIndex,pCheckVal,pIsNeedCheck)&&
                 closeMaxqManager();
     }
-}
+}*/

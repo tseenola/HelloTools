@@ -1,4 +1,4 @@
-package com.urovo.poscommon;
+package com.customview.writeworkkey;
 
 /**
  * Created by LiuY on 2015/12/8.
