@@ -116,6 +116,7 @@ public class MyApplication extends BaseApplication{
     public void killAppReleaseResource() {
         L.e("killAppReleaseResource  ");
         exitAllActivity(mAtyList);
+        System.exit(0);
     }
 
     /**
@@ -136,7 +137,8 @@ public class MyApplication extends BaseApplication{
     @Override
     public void onActivityDestory(Activity pActivity) {
         L.e("onActivityDestory  ");
-        pActivity.finish();
+        mAtyList.remove(pActivity);
+
     }
 
 }
