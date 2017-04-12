@@ -11,7 +11,7 @@ import activity.balance.view.BalanceQueryAty;
 import activity.init_para.view.InitParamAty;
 import activity.key_download.view.KeyDownLoadAty;
 import activity.sale.view.SaleAty;
-import activity.sign_in2.view.SignInAty2;
+import activity.sign_in.view.SignInAty;
 import activity.test.Test;
 import butterknife.Bind;
 import butterknife.ButterKnife;
@@ -64,8 +64,8 @@ public class MainMenuAty extends BaseActivity {
                 InitParamAty.launch(this);
                 break;
             case R.id.bt_SignIn:
-                //SignInAty.launch(this);
-                SignInAty2.launch(this);
+                SignInAty.launch(this);
+                //SignInAty2.launch(this);
                 break;
             case R.id.bt_QueryBalance:
                 //BalanceAty.launch(this);

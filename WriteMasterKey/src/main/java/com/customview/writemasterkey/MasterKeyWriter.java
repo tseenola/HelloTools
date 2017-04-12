@@ -3,6 +3,10 @@ package com.customview.writemasterkey;
 
 import android.util.Log;
 
+import com.customview.keytool.triple_des.algorithm.TripleDesImpl;
+import com.customview.keytool.triple_des.utils.TripleDesUtils;
+import com.urovo.poscommon.models.KeyUsage;
+
 import tools.com.hellolibrary.hello_convert.ConvertUtils;
 
 /**
@@ -11,11 +15,16 @@ import tools.com.hellolibrary.hello_convert.ConvertUtils;
  */
 
 public class MasterKeyWriter extends MasterKeyWriteTemplate {
+    private MasterKeyWriter(){}
 
+    private static final MasterKeyWriter mMasterKeyWriter = new MasterKeyWriter();
+    public static MasterKeyWriter getInstance(){
+        return mMasterKeyWriter;
+    }
     @Override
     public boolean clearAllMasterKeyByIndex(int pMasterKeyIndex) {
         if (mMaxqManager==null){
-            initMaxqManager();
+            openMaxqManager();
         }
 
         byte[] response = new byte[16];
@@ -28,44 +37,23 @@ public class MasterKeyWriter extends MasterKeyWriteTemplate {
     }
 
     @Override
-    public boolean writeKEK(KeyUsage pKeyUsage, int KeyNo, int ParentKeyNo, byte[] KeyData, int KeyDataLen, byte[] ResponseData, byte[] ResLen) {
-        if(mMaxqManager==null){
-            initMaxqManager();
+    public byte [] decryMasterKey(byte[] pMasterKeyAntidoteKey, byte[] pMasterKeyData) {
+        byte [] decryptedMasterKey = null;
+        try {
+            decryptedMasterKey = TripleDesUtils.decrypt_16(pMasterKeyAntidoteKey,pMasterKeyData, TripleDesImpl.getInstance());
+        } catch (Exception pE) {
+            pE.printStackTrace();
         }
-        boolean succ = mMaxqManager.loadKey(pKeyUsage.getValue(),KeyNo,ParentKeyNo,KeyData,KeyDataLen,ResponseData,ResLen)==0;
-        return succ;
-    }
-
-
-    @Override
-    public boolean decryMasterKey(KeyUsage pKeyUsage,
-                                  int KeyNo,
-                                  Algorithm pAlgorithm,
-                                  byte[] StartValue,
-                                  int StartValueLen,
-                                  int PaddingChar,
-                                  byte[] DecryptData,
-                                  int DecryptDataLen,
-                                  byte[] ResponseData,
-                                  byte[] ResLen) {
-        if(mMaxqManager==null){
-            initMaxqManager();
-        }
-        Log.i("vbvb","被解密数据："+ ConvertUtils.bytesToHexString(DecryptData));
-        boolean succ = mMaxqManager.decryptData(pKeyUsage.getValue(), KeyNo,pAlgorithm.getValue(),StartValue,StartValueLen,PaddingChar,DecryptData,DecryptDataLen,ResponseData,ResLen)==0;
-        Log.i("vbvb","decryptData ret:" + succ);
-        Log.i("vbvb","解密结果："+ ConvertUtils.bytesToHexString(ResponseData));
-        return succ;
+        return decryptedMasterKey;
     }
 
     @Override
     public boolean writeMasterKey(KeyUsage pKeyUsage, int pMasterKeyIndex, int ParentKeyNo, byte[] pMasterKeys, int pMasterKeysLength, byte[] ResponseData, byte[] ResLen) {
         if(mMaxqManager==null){
-            initMaxqManager();
+            openMaxqManager();
         }
         boolean succ = mMaxqManager.loadKey(pKeyUsage.getValue(), pMasterKeyIndex,ParentKeyNo, pMasterKeys, pMasterKeysLength,ResponseData,ResLen)==0;
         Log.i("vbvb","被写入主密钥明文："+ConvertUtils.bytesToHexString(pMasterKeys));
-        Log.i("vbvb","主密钥写入结果："+succ);
         return succ;
     }
 }

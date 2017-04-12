@@ -27,7 +27,7 @@ package tools.com.hellolibrary.helllo_my_inter;
 
 
     protected boolean writeWorkingKey(byte [] pPinDatas,byte pMacDatas [] ,byte [] pTrackDatas,int pMasterKeyIndex,byte[] pCheckVal,boolean pIsNeedCheck){
-        return initMaxqManager()&&
+        return openMaxqManager()&&
                 writePinKey(pPinDatas,pMasterKeyIndex,pCheckVal,pIsNeedCheck)&&
                 writeMacKey(pMacDatas,pMasterKeyIndex,pCheckVal,pIsNeedCheck)&&
                 //天下汇没有磁道密钥所以注释掉  writeTrackKey(pTrackDatas,pMasterKeyIndex,pCheckVal,pIsNeedCheck)&&

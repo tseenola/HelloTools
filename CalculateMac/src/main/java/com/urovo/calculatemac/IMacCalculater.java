@@ -6,35 +6,12 @@ package com.urovo.calculatemac;
  */
 
 public interface IMacCalculater {
-
     /**
-     * 计算mac
-     * @param pMacKeyIndex mac索引
-     * @param pNeedCalMacMsg 计算mac的16进制字符串表示
-     * @return 16进制Mac计算结果字符串
+     * 计算mac （ECB）类型
+     * @param pMacKeyIndex mac密钥索引
+     * @param pDataInLen mac数据长度
+     * @param pNeedMacDatas 计算mac的数据
+     * @return mac计算结果
      */
-    String getMac(int pMacKeyIndex,String pNeedCalMacMsg);
-
-
-    /**
-     * 计算mac
-     * @param pMacKeyIndex mac索引
-     * @param pNeedCalMacMsgs 计算mac的消息数组（2-63域）
-     * @return 16进制Mac计算结果字符串
-     */
-    String getMac(int pMacKeyIndex,byte pNeedCalMacMsgs []);
-
-    /**
-     * mac真正的算法
-     * @param pMacKeyIndex mac的密钥索引
-     * @param pDataInLen 计算Mac的数据
-     * @param pDataIn 计算Mac数据的长度
-     * @param pMacOut 计算Mac的输出
-     * @param mode
-     * @return
-     */
-    int getMac(int pMacKeyIndex, int pDataInLen, byte[] pDataIn, byte[] pMacOut, byte mode);
-
-
-
+    byte [] getMac(int pMacKeyIndex, int pDataInLen, byte[] pNeedMacDatas);
 }

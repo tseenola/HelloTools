@@ -90,7 +90,7 @@ public class SignInPrt2 implements ISignInPrt2 {
         int lMacKeyIndex = DBPosSettingBill.getMacKeyIndex();
         int lTrackKeyIndex = DBPosSettingBill.getTrackKeyIndex();
         //boolean succ = WorkingKeyWriter.doWriteWorkKey(pinDatas,macDatas,new byte[0],masterKeyIndex,new byte[4],false);
-        boolean succ = WorkKeyWriteUtils.doWriteWorkKey(pinDatas,lPinKeyIndex,macDatas,lMacKeyIndex,null,lTrackKeyIndex,masterKeyIndex,new byte[4],false,new WorkingKeyWriter());
+        boolean succ = WorkKeyWriteUtils.doWriteWorkKey(pinDatas,lPinKeyIndex,macDatas,lMacKeyIndex,null,lTrackKeyIndex,masterKeyIndex,new byte[4],false,WorkingKeyWriter.getInstance());
         if(succ){
             //4.同步签到状态到数据库（是否已经签到）
             DBPosSettingBill.setSignInStatus(true);

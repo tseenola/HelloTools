@@ -1,5 +1,8 @@
 package com.customview.writemasterkey;
 
+import com.urovo.poscommon.models.KeyUsage;
+import com.urovo.poscommon.models.MaxqManagerHelper;
+
 /**
  * Created by lenovo on 2017/1/31.
  * 描述：写入主密钥模板（模板方法模式）
@@ -8,7 +11,7 @@ package com.customview.writemasterkey;
  * 3.写入主密钥
  */
 
-public abstract class MasterKeyWriteTemplate extends MaxqManagerHelper{
+public abstract class MasterKeyWriteTemplate extends MaxqManagerHelper {
     public static final int BE_USED_TO_LOAD_PARENT_KEY = 0;
 
     /**
@@ -18,49 +21,15 @@ public abstract class MasterKeyWriteTemplate extends MaxqManagerHelper{
      */
     public abstract boolean clearAllMasterKeyByIndex(int pMasterKeyIndex);
 
-    /**
-     * 写入主密钥解密密钥明文到安全芯片
-     * @param pKeyUsage
-     * @param KeyNo
-     * @param ParentKeyNo
-     * @param KeyData
-     * @param KeyDataLen
-     * @param ResponseData
-     * @param ResLen
-     * @return
-     */
-    public abstract boolean writeKEK(KeyUsage pKeyUsage,
-                                     int KeyNo,
-                                     int ParentKeyNo,
-                                     byte[] KeyData,
-                                     int KeyDataLen,
-                                     byte[] ResponseData,
-                                     byte[] ResLen);
 
     /**
-     * 对主密钥密文解密
-     * @param pKeyUsage
-     * @param KeyNo
-     * @param pAlgorithm
-     * @param StartValue
-     * @param StartValueLen
-     * @param PaddingChar
-     * @param DecryptData
-     * @param DecryptDataLen
-     * @param ResponseData
-     * @param ResLen
+     * 使用主密钥的密钥对主密钥密文进行解密
+     * @param pMasterKeyAntidoteKey
+     * @param pMasterKeyData
      * @return
      */
-    public abstract boolean decryMasterKey(KeyUsage pKeyUsage,
-                                           int KeyNo,
-                                           Algorithm pAlgorithm,
-                                           byte[] StartValue,
-                                           int StartValueLen,
-                                           int PaddingChar,
-                                           byte[] DecryptData,
-                                           int DecryptDataLen,
-                                           byte[] ResponseData,
-                                           byte[] ResLen);
+    public abstract byte [] decryMasterKey(byte pMasterKeyAntidoteKey [] , byte pMasterKeyData []);
+
     /**
      * 写入主密钥明文到安全芯片
      * @return
@@ -73,31 +42,31 @@ public abstract class MasterKeyWriteTemplate extends MaxqManagerHelper{
                                            byte[] ResponseData,
                                            byte[] ResLen);
 
+
     /**
      * 写入主密钥
+     * 1.初始化安全芯片 openMaxqManager()
+     * 2.清空芯片中的主密钥 clearAllMasterKeyByIndex(pMasterKeyIndex)
+     * 3.使用主密钥的密钥对主密钥密文进行解密 decryMasterKey(pMasterKeyKey,pMasterSecKey)
+     * 4.向芯片中写入主密钥明文 writeMasterKey（,,,,,,,,）
+     * 5.关闭芯片释放资源 closeMaxqManager()
+     * @param pMasterKeyIndex 主密钥索引
+     * @param pMasterKeyAntidoteKey 对主密钥的密钥
+     * @param pMasterSecKey 主密钥密文
+     * @return 返回是否写入主密钥成功
      */
-    public boolean doWriteMasterKeyByKEK(int pMasterKeyIndex, byte[] kekData, byte[] masterSecData){
-        byte[] ResponseData = new byte[kekData.length];
+    public boolean doWriteMasterKeyByAntidoteKey(int pMasterKeyIndex, byte[] pMasterKeyAntidoteKey, byte[] pMasterSecKey){
+        byte[] ResponseData = new byte[pMasterKeyAntidoteKey.length];
         byte[] ResLen = new byte[1];
-        byte[] DecryResponseData = new byte[16];
-        byte[] DecryResLen = new byte[1];
 
-        byte[] StartValueLen = new byte[8];
+        boolean initRet = openMaxqManager();//初始化安全芯片
+        boolean clearRet = clearAllMasterKeyByIndex(pMasterKeyIndex);//清除指定密钥索引所有主密钥
+        byte decryptdMasterKey [] = decryMasterKey(pMasterKeyAntidoteKey,pMasterSecKey);//对主密钥密文解密
+        boolean decryptRet = decryptdMasterKey!=null;
+        boolean writeRet = writeMasterKey(KeyUsage.MASTER_KEY,pMasterKeyIndex, BE_USED_TO_LOAD_PARENT_KEY,decryptdMasterKey,decryptdMasterKey.length,ResponseData,ResLen);//写入主密钥明文到安全芯片
+        boolean closeRet = closeMaxqManager();
 
-        return initMaxqManager()&&//初始化安全芯片
-
-               clearAllMasterKeyByIndex(pMasterKeyIndex)&&//清除指定密钥索引所有主密钥
-
-               writeKEK(KeyUsage.MASTER_KEY,pMasterKeyIndex, BE_USED_TO_LOAD_PARENT_KEY,kekData,kekData.length,ResponseData,ResLen)&&//写入主密钥解密密钥明文到安全芯片
-
-               decryMasterKey(KeyUsage.MASTER_KEY,pMasterKeyIndex,Algorithm.ECB,StartValueLen,StartValueLen.length,0x00,masterSecData,masterSecData.length,DecryResponseData,DecryResLen)&&//对主密钥密文解密
-
-               clearAllMasterKeyByIndex(pMasterKeyIndex)&&//清除指定密钥索引所有主密钥
-
-               writeMasterKey(KeyUsage.MASTER_KEY,pMasterKeyIndex, BE_USED_TO_LOAD_PARENT_KEY,DecryResponseData,DecryResponseData.length,ResponseData,ResLen)&&//写入主密钥明文到安全芯片
-
-               closeMaxqManager();
+        return initRet && clearRet && decryptRet && writeRet && closeRet;
     }
-
 
 }

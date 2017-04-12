@@ -1,4 +1,4 @@
-package com.customview.writemasterkey;
+package com.urovo.poscommon.models;
 
 /**
  * Created by lenovo on 2017/4/10.

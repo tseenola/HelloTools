@@ -61,7 +61,7 @@ public abstract class BaseReq2 extends BaseReq {
      */
     @Override
     public Object[] unPack(String pRcvedHexMsg) {
-        Field lField = FieldUtils.parseMsg(mContext,pRcvedHexMsg,new FieldHelper());
+        Field lField = FieldUtils.parseMsg(mContext,pRcvedHexMsg,FieldHelper.getInstance());
         return super.unPack(pRcvedHexMsg);
     }
 

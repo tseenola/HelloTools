@@ -19,7 +19,7 @@ public class MasterKeyUtils {
      * @return
      */
     public static boolean doMasterKeyWrite(int pMasterKeyIndex, String pMasterKeyAntidoteKey, String pMasterSecKey, MasterKeyWriteTemplate pMasterKeyWriteTemplate){
-        return pMasterKeyWriteTemplate.doWriteMasterKeyByKEK(pMasterKeyIndex,
+        return pMasterKeyWriteTemplate.doWriteMasterKeyByAntidoteKey(pMasterKeyIndex,
                 ConvertUtils.hexStringToByte(pMasterKeyAntidoteKey),
                 ConvertUtils.hexStringToByte(pMasterSecKey));
     }

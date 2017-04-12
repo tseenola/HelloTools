@@ -33,4 +33,5 @@ dependencies {
     compile project(':BuildPackageByReflection')
     compile project(':WriteMasterKey')
     compile project(':WriteWorkKey')
+    compile project(':KeyTool')
 }

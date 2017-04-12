@@ -1,21 +1,19 @@
 package tools.com.hellolibrary.helllo_my_inter;
 
-import android.device.MaxqManager;
-
 /**
  * Created by lenovo on 2017/1/31.
  * 描述：
  */
 
-public class MaxqManagerHelper implements IUrovoSDK{
+/*public class MaxqManagerHelper{
 
     protected MaxqManager mMaxqManager;
 
-    /**
-     * 初始化安全芯片
+    *//**
+     * 开启安全芯片
      * @return
-     */
-    protected boolean initMaxqManager() {
+     *//*
+    protected boolean openMaxqManager() {
         int ret = 0;
         if (mMaxqManager == null) {
             mMaxqManager = new MaxqManager();
@@ -24,10 +22,10 @@ public class MaxqManagerHelper implements IUrovoSDK{
         return ret == 0;
     }
 
-    /**
+    *//**
      * 关闭安全芯片
      * @return
-     */
+     *//*
     protected boolean closeMaxqManager() {
         int ret = 0;
         if (mMaxqManager != null) {
@@ -35,4 +33,5 @@ public class MaxqManagerHelper implements IUrovoSDK{
         }
         return ret == 0;
     }
-}
+
+}*/

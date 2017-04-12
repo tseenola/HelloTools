@@ -1,4 +1,4 @@
-package com.customview.writemasterkey;
+package com.urovo.poscommon.models;
 
 /**
  * Created by lenovo on 2017/4/10.
@@ -11,7 +11,9 @@ public enum KeyUsage {
     PIN_KEY(2),//pin密钥
     MAC_KEY(3),//mac密钥
     MASTER_KEY(4),//主密钥
-    Reserved_KEY(5),//预留
+    Reserved_KEY1(5),//预留1
+    Reserved_KEY2(6),//预留2
+    Reserved_KEY3(7),//预留3
     ;
 
     private int mValue;

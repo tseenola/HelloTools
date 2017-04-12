@@ -71,7 +71,7 @@ public class KeyDownLoadPrt implements IKeyDownLoadPrt {
         byte[] bcdMstSec = ConvertUtils.hexStringToByte(strMstSec);//主密钥密文
         int masterKeyIndex = DBPosSettingBill.getMasterKeyIndex();
         //boolean iRet = MasterKeyWriter.actionMasterKeyWrite(masterKeyIndex,bcdKEK,bcdMstSec);
-        boolean iRet = MasterKeyUtils.doMasterKeyWrite(masterKeyIndex,STRKEK,strMstSec,new MasterKeyWriter());
+        boolean iRet = MasterKeyUtils.doMasterKeyWrite(masterKeyIndex,STRKEK,strMstSec,MasterKeyWriter.getInstance());
         if(iRet) {
             Log.i("vbvb","写入主密钥成功");
             mView.onKeyDownSucc("主密钥下载成功写入成功");

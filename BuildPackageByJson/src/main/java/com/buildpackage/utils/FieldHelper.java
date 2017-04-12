@@ -7,7 +7,7 @@ import android.util.Log;
 import com.buildpackage.modle.Field;
 import com.buildpackage.modle.IField;
 import com.google.gson.Gson;
-import com.urovo.calculatemac.MacDefCalculater;
+import com.urovo.calculatemac.MacCalculater_9606;
 import com.urovo.calculatemac.utils.MacCalculaterUtils;
 
 import java.io.InputStream;
@@ -23,9 +23,13 @@ import tools.com.hellolibrary.hello_string.StringUtils;
 
 public class FieldHelper implements IField{
 
-    public FieldHelper() {
+    private FieldHelper() {
     }
 
+    private static final FieldHelper mFieldHelper = new FieldHelper();
+    public static FieldHelper getInstance(){
+        return mFieldHelper;
+    }
     @Override
     public Field getFieldInfoInstance(Context pContext){
         InputStream lInputStream = null;
@@ -68,8 +72,10 @@ public class FieldHelper implements IField{
 
         //3.求：mac
         if(pField.isIsNeedMac()){
-            //BitmapHexStr = new MacDefCalculater().getMac(pField.getMacIndex(),binaryBitmap,hexBody);
-            BitmapHexStr = MacCalculaterUtils.getMac(pField.getMacIndex(),hexBody,new MacDefCalculater());
+            byte lNeedCalMacDatas [] = ConvertUtils.hexStringToByte(hexBody);
+
+            byte lMacResult []= MacCalculaterUtils.getMac(pField.getMacIndex(),lNeedCalMacDatas.length,lNeedCalMacDatas,new MacCalculater_9606());
+            BitmapHexStr += ConvertUtils.bytesToHexString(lMacResult);
             pField.setMacHexStr(BitmapHexStr);
         }
 
