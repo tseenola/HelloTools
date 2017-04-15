@@ -6,6 +6,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 
+import com.customview.keytool.des.algorithm.DesImpl;
 import com.customview.keytool.triple_des.algorithm.TripleDesImpl;
 import com.customview.keytool.triple_des.utils.TripleDesUtils;
 
@@ -21,14 +22,14 @@ public class Test extends Activity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-         String key = "927C021361AB04981AB5A2BFDAD961921AB5A2BFDAD96192";
-        String data = "000000000000000000";
+         String key = "1111111111111111";
+        String data = "1D474897741FBD60";
         String enResult = "";
         try {
-            byte result []= TripleDesUtils.encrypt_24(ConvertUtils.hexStringToByte(key),
-                    ConvertUtils.hexStringToByte(data),
-                    TripleDesImpl.getInstance());
-            Log.i("vbvb","3des加密结果："+ConvertUtils.bytesToHexString(result));
+            /*byte result []= DesUtils.encrypt(ConvertUtils.hexStringToByte(key),ConvertUtils.hexStringToByte(data),
+                    DesImpl.getInstance());*/
+            byte result []= DesImpl.getInstance().encrypt(key.getBytes(),ConvertUtils.hexStringToByte(data));
+            Log.i("vbvb","1D474897741FBD60 des加密结果："+ConvertUtils.bytesToHexString(result));
             enResult = ConvertUtils.bytesToHexString(result);
         } catch (Exception pE) {
             pE.printStackTrace();

@@ -1,11 +1,11 @@
 package activity.user_entry.view;
 
-import android.content.Intent;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
+import activity.main_menu.view.MainMenuAty;
 import activity.user_entry.model.UserEntryModel;
 import activity.user_entry.presenter.UserEntryPrt;
 import base.MyApplication;
@@ -78,9 +78,7 @@ public class UserEntryAty extends BaseActivity implements IUserEntryAty{
     @Override
     public void onUserLoginSucc(UserEntryModel pUserEntryModel) {
         Toast.makeText(this,"欢迎"+pUserEntryModel.getName()+"登陆",Toast.LENGTH_LONG).show();
-        startActivity(new Intent(this,UserEntryAty.class));
-        //MainMenuAty.launch(this);
-
+        MainMenuAty.launch(this);
     }
 
     @Override
