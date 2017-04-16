@@ -3,6 +3,11 @@ package com.customview.keytool.hmac.algorithm;
 /**
  * Created by lenovo on 2017/4/15.
  * 描述：
+ * HmacMD5   :摘要长度（128）；
+ * HmacSHA1  :摘要长度（160）；
+ * HmacSHA256:摘要长度（256）；
+ * HmacSHA384:摘要长度（384）；
+ * HamcSHA512:摘要长度（512）；
  */
 
 public enum HMacType {
