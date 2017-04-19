@@ -122,7 +122,7 @@ public class TripleDesImpl implements ITripleDes{
      */
     protected void checkParams16(byte[] pKey, byte[] pData){
         if(pKey.length != 16){
-            throw new IllegalArgumentException("3Des密钥长度应该是16字节");
+            throw new IllegalArgumentException("checkParams16 3Des密钥长度应该是16字节");
         }
 
         if(pData.length %8 != 0){
@@ -137,7 +137,7 @@ public class TripleDesImpl implements ITripleDes{
      */
     protected void checkParams24(byte[] pKey, byte[] pData){
         if(pKey.length != 24){
-            throw new IllegalArgumentException("3Des密钥长度应该是16字节");
+            throw new IllegalArgumentException("checkParams24 3Des密钥长度应该是24字节");
         }
 
         if(pData.length %8 != 0){

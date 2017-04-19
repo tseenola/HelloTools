@@ -6,11 +6,10 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 
-import com.customview.keytool.des.algorithm.DesImpl;
-import com.customview.keytool.triple_des.algorithm.TripleDesImpl;
-import com.customview.keytool.triple_des.utils.TripleDesUtils;
+import com.customview.keytool.rsa.RSAUtils;
 
-import tools.com.hellolibrary.hello_convert.ConvertUtils;
+import java.security.PrivateKey;
+import java.security.PublicKey;
 
 
 /**
@@ -22,30 +21,21 @@ public class Test extends Activity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-         String key = "1111111111111111";
-        String data = "1D474897741FBD60";
-        String enResult = "";
         try {
-            /*byte result []= DesUtils.encrypt(ConvertUtils.hexStringToByte(key),ConvertUtils.hexStringToByte(data),
-                    DesImpl.getInstance());*/
-            byte result []= DesImpl.getInstance().encrypt(key.getBytes(),ConvertUtils.hexStringToByte(data));
-            Log.i("vbvb","1D474897741FBD60 des加密结果："+ConvertUtils.bytesToHexString(result));
-            enResult = ConvertUtils.bytesToHexString(result);
+            PublicKey lRSAPublicKey = RSAUtils.loadPublicKey(this.getResources().openRawResource(com.customview.keytool.R.raw.rsa_public_key));
+            PrivateKey lPrivateKey = RSAUtils.loadPrivateKey(this.getResources().openRawResource(com.customview.keytool.R.raw.private_key_pkcs8));
+            String data = "你好";
+            byte pData [] = data.getBytes();
+            byte pData2 [] = new byte[256];
+            System.arraycopy(pData,0,pData2,0,pData.length);
+            byte enResult []= RSAUtils.encryptData(pData2,lRSAPublicKey);
+            Log.i("vbvb","解密结果"+new String(enResult));
+            byte deResult [] = RSAUtils.decryptData(enResult,lPrivateKey);
+            Log.i("vbvb","解密结果"+new String(deResult));
         } catch (Exception pE) {
             pE.printStackTrace();
         }
 
-
-        String key2 = "927C021361AB04981AB5A2BFDAD961921AB5A2BFDAD96192";
-        String data2 = enResult;
-        try {
-            byte result []= TripleDesUtils.decrypt_24(ConvertUtils.hexStringToByte(key2),
-                    ConvertUtils.hexStringToByte(data2),
-                    TripleDesImpl.getInstance());
-            Log.i("vbvb","3des解密结果："+ConvertUtils.bytesToHexString(result));
-        } catch (Exception pE) {
-            pE.printStackTrace();
-        }
 
     }
 
