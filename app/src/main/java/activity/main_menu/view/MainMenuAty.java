@@ -10,9 +10,9 @@ import activity.GetAmt;
 import activity.balance.view.BalanceQueryAty;
 import activity.init_para.view.InitParamAty;
 import activity.key_download.view.KeyDownLoadAty;
-import activity.sale.view.SaleAty;
+import activity.sale2.Sale2;
+import activity.setting.SettingAty;
 import activity.sign_in.view.SignInAty;
-import activity.test.Test;
 import butterknife.Bind;
 import butterknife.ButterKnife;
 import db.bill.DBPosSettingBill;
@@ -72,7 +72,8 @@ public class MainMenuAty extends BaseActivity {
                 BalanceQueryAty.launch(this);
                 break;
             case R.id.bt_Sale:
-                SaleAty.launch(this);
+                //SaleAty.launch(this);
+                Sale2.launch(this);
                 break;
             case R.id.bt_SaleVoid:
                 //Test.launch(this);
@@ -96,7 +97,8 @@ public class MainMenuAty extends BaseActivity {
                 //TestAmt.launch(this);
 
                 //new GetAmtPop().showPopwindow(v,MainMenuAty.this,0xFF8A2BE2);
-                Test.launch(this);
+                //Test.launch(this);
+                SettingAty.launch(this);
                 break;
             default:
                 break;
@@ -105,6 +107,7 @@ public class MainMenuAty extends BaseActivity {
 
     @Override
     public void initData() {
+
 
     }
 

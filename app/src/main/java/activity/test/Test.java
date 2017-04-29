@@ -39,9 +39,6 @@ public class Test extends Activity {
 
     }
 
-
-
-
     public static void launch(Context pContext) {
         pContext.startActivity(new Intent(pContext,Test.class));
     }

@@ -72,33 +72,6 @@ public class GetAmtPop implements View.OnClickListener {
         lTableLayout.setBackgroundColor(Color.argb(Color.alpha(pBgColor),Color.red(pBgColor),Color.green(pBgColor),Color.blue(pBgColor)));
 
         mWindow.showAtLocation(pParentView, Gravity.TOP, 0, 0);
-
-        // 设置popWindow的显示和消失动画
-        //window.setAnimationStyle(R.style.mypopwindow_anim_style);
-        // 在底部显示
-        //window.showAtLocation(TestAmt.this.findViewById(R.id.start),
-        //      Gravity.BOTTOM, 0, 0);
-
-        // 这里检验popWindow里的button是否可以点击
-        /*Button first = (Button) view.findViewById(R.id.first);
-        first.setOnClickListener(new OnClickListener() {
-
-            @Override
-            public void onClick(View v) {
-
-                System.out.println("第一个按钮被点击了");
-            }
-        });*/
-
-        //popWindow消失监听方法
-        /*window.setOnDismissListener(new OnDismissListener() {
-
-            @Override
-            public void onDismiss() {
-                System.out.println("popWindow消失");
-            }
-        });*/
-
     }
 
     private void setConlick() {
@@ -172,7 +145,6 @@ public class GetAmtPop implements View.OnClickListener {
 
         } else if (i == R.id.bt_Confirm) {
             mWindow.dismiss();
-
         }
         mEtAmt.setText(mAmt);
     }

@@ -1,9 +1,12 @@
 package activity.user_entry.view;
 
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
+
+
 
 import activity.main_menu.view.MainMenuAty;
 import activity.user_entry.model.UserEntryModel;
@@ -32,7 +35,7 @@ public class UserEntryAty extends BaseActivity implements IUserEntryAty{
 
     @Override
     public void initData() {
-
+        //EventBus.getDefault().register(this);
     }
 
     @Override
@@ -84,5 +87,10 @@ public class UserEntryAty extends BaseActivity implements IUserEntryAty{
     @Override
     public void onUserLoginFail(String pFailMsg) {
         Toast.makeText(this,pFailMsg,Toast.LENGTH_LONG).show();
+    }
+
+
+    public void show(String string){
+        Log.i("vbvb","asdf:"+string);
     }
 }

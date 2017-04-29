@@ -1,0 +1,103 @@
+{
+	"Setting":[
+		{
+		    "Level":0,
+			"Name": "内卡",
+			"ValueType":"Button",
+			"IsOpen":true,
+			"Child":[
+                        {
+                            "Level":1,
+                            "Name": "商户信息设置",
+                            "ValueType":"Button",
+                            "IsOpen":true,
+                            "Value":"",
+                            "Child":[]
+                        },
+                        {
+                            "Level":1,
+                            "Name": "通讯参数设置",
+                            "ValueType":"Button",
+                            "IsOpen":true,
+                            "Value":"",
+                            "Child":[]
+                        },
+                        {
+                            "Level":1,
+                            "Name": "交易功能设置",
+                            "ValueType":"Button",
+                            "IsOpen":true,
+                            "Value":"",
+                            "Child":[]
+                        }
+                    ],
+			"Value":""
+		},
+		{
+		    "Level":0,
+			"Name": "外卡",
+			"ValueType":"Button",
+			"IsOpen":true,
+			"Child":[
+                        {
+                            "Level":1,
+                            "Name": "外卡商户信息设置",
+                            "ValueType":"Button",
+                            "IsOpen":true,
+                            "Value":"",
+                            "Child":[]
+                        },
+                        {
+                            "Level":1,
+                            "Name": "外卡通讯参数设置",
+                            "ValueType":"Button",
+                            "IsOpen":true,
+                            "Value":"",
+                            "Child":[]
+                        },
+                        {
+                            "Level":1,
+                            "Name": "外卡交易功能设置",
+                            "ValueType":"Button",
+                            "IsOpen":true,
+                            "Value":"",
+                            "Child":[]
+                        }
+                    ],
+			"Value":""
+		},
+		{
+		    "Level":0,
+			"Name": "修改管理员密码",
+			"ValueType":"Button",
+			"IsOpen":true,
+			"Child":[
+                         {
+                            "Level":1,
+                             "Name": "修改管理员密码",
+                             "ValueType":"Button",
+                             "IsOpen":true,
+                             "Value":"",
+                             "Child":[]
+                         },
+                         {
+                            "Level":1,
+                             "Name": "修改主管密码",
+                             "ValueType":"Button",
+                             "IsOpen":true,
+                             "Value":"",
+                             "Child":[]
+                         },
+                         {
+                            "Level":1,
+                             "Name": "修改操作员密码",
+                             "ValueType":"Button",
+                             "IsOpen":true,
+                            "Value":"",
+                            "Child":[]
+                         }
+                     ],
+			"Value":""
+		}
+	]
+}
