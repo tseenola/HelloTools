@@ -11,6 +11,8 @@ import com.hello.readcard.model.CardInfoModel;
 import com.hello.readcard.read_card_service.CardReader;
 import com.hello.readcard.read_pwd.PwdReader;
 
+import org.greenrobot.eventbus.EventBus;
+
 
 /**
  * Created by lenovo on 2017/2/24.
@@ -65,6 +67,8 @@ public class ReadCardAty extends Activity implements IReadCardAty {
         Intent lResult = new Intent();
         lResult.putExtra(READ_CARD_RESULT_BUNDLE,lBundle);
         setResult(RESULT_OK,lResult);
+
+        EventBus.getDefault().post(pCardInfoModel);
         this.finish();
         //checkICCard(pCardInfoModel,pPinEncryStr, MsgType.BalanceQuery);
     }

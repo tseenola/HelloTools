@@ -23,18 +23,17 @@ public class Sale2 extends Activity {
         setContentView(R.layout.activity_sale2);
         ButterKnife.bind(this);
 
-
     }
 
     @Override
-    protected void onResume() {
-        super.onResume();
-
+    protected void onDestroy() {
+        super.onDestroy();
     }
 
     public static void launch(Context pContext) {
         pContext.startActivity(new Intent(pContext, Sale2.class));
     }
+
 
 
     @OnClick(R.id.bt_Sale)

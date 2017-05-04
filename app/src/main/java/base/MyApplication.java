@@ -1,12 +1,21 @@
 package base;
 
 import android.app.Activity;
+import android.util.Log;
 
 import com.facebook.stetho.Stetho;
+import com.hello.readcard.model.CardInfoModel;
 import com.urovo.poscommon.models.EmvProvider;
+
+import org.greenrobot.eventbus.EventBus;
+import org.greenrobot.eventbus.Subscribe;
+import org.greenrobot.eventbus.ThreadMode;
 
 import java.util.LinkedList;
 
+import activity.sale2.Process;
+import activity.sale2.SaleReq;
+import base.eventbus_bean.GetAmtFinishMessage;
 import db.bill.DBAppParasBill;
 import db.bill.DBCapkBill;
 import db.bill.DBPosSettingBill;
@@ -23,9 +32,14 @@ import tools.com.hellolibrary.hello_thread.ThreadUtil;
  */
 
 public class MyApplication extends BaseApplication{
+
     private static MyApplication mApp;
     private LinkedList<Activity> mAtyList;
     private Activity mCurActivity;
+    private GetAmtFinishMessage mGetAmtFinishMessage;
+    private CardInfoModel mCardInfoModel;
+    private SaleReq mSaleReq;
+
     public static MyApplication getApp(){
         return mApp;
     }
@@ -35,6 +49,7 @@ public class MyApplication extends BaseApplication{
         L.e("initEnviroment started");
         mApp = this;
         mAtyList = new LinkedList<Activity>();
+        EventBus.getDefault().register(this);
     }
 
     /**
@@ -116,6 +131,7 @@ public class MyApplication extends BaseApplication{
     public void killAppReleaseResource() {
         L.e("killAppReleaseResource  ");
         exitAllActivity(mAtyList);
+        EventBus.getDefault().unregister(this);
         System.exit(0);
     }
 
@@ -138,7 +154,50 @@ public class MyApplication extends BaseApplication{
     public void onActivityDestory(Activity pActivity) {
         L.e("onActivityDestory  ");
         mAtyList.remove(pActivity);
-
     }
 
+    @Subscribe(threadMode = ThreadMode.MAIN)
+    public void onGetAmtFinish(GetAmtFinishMessage pGetAmtFinishMessage){
+        mGetAmtFinishMessage = pGetAmtFinishMessage;
+        Log.i("vbvb","获取到的金额为："+pGetAmtFinishMessage.getAmt());
+        Process.isGetAmtFinish = true;
+    }
+
+    @Subscribe(threadMode = ThreadMode.MAIN)
+    public void onReadCardFinish(CardInfoModel pCardInfoModel){
+        mCardInfoModel = pCardInfoModel;
+        Log.i("vbvb","获取到了刷卡:"+pCardInfoModel.toString());
+        Process.isSwipeCardAndGetCardInfoFinish = true;
+    }
+
+    @Subscribe(threadMode = ThreadMode.MAIN)
+    public void onPackageFinish(SaleReq pSaleReq){
+        mSaleReq = pSaleReq;
+        Log.i("vbvb","发送出去的报文:"+pSaleReq.toString());
+        Process.isPackMsg = true;
+    }
+
+    public SaleReq getSaleReq() {
+        return mSaleReq;
+    }
+
+    public void setSaleReq(SaleReq pSaleReq) {
+        mSaleReq = pSaleReq;
+    }
+
+    public CardInfoModel getCardInfoModel() {
+        return mCardInfoModel;
+    }
+
+    public void setCardInfoModel(CardInfoModel pCardInfoModel) {
+        mCardInfoModel = pCardInfoModel;
+    }
+
+    public GetAmtFinishMessage getGetAmtFinishMessage() {
+        return mGetAmtFinishMessage;
+    }
+
+    public void setGetAmtFinishMessage(GetAmtFinishMessage pGetAmtFinishMessage) {
+        mGetAmtFinishMessage = pGetAmtFinishMessage;
+    }
 }

@@ -1,7 +1,20 @@
 package activity.sale2;
 
 import android.app.Activity;
+import android.content.Intent;
+import android.os.SystemClock;
+import android.util.Log;
 import android.view.View;
+
+import activity.get_amt.GetAmtAty;
+import base.MyApplication;
+import db.bill.DBPosSettingBill;
+import tools.com.hellolibrary.hello_thread.ThreadUtil;
+
+import static activity.sale.view.SaleAty.READ_CARD;
+import static com.hello.readcard.activity.v.ReadCardAty.PINKEY_INDEX;
+import static com.hello.readcard.activity.v.ReadCardAty.SWIPE_CARD_AMT;
+import static com.hello.readcard.activity.v.ReadCardAty.SWIPE_CARD_TIME_OUT;
 
 /**
  * Created by lenovo on 2017/4/24.
@@ -9,7 +22,10 @@ import android.view.View;
  */
 
 public abstract class Process implements OnProcessListener {
-    public static boolean isGetAmtSucc = false;
+    public static boolean isGetAmtFinish = false;
+    public static boolean isSwipeCardAndGetCardInfoFinish = false;
+    public static boolean isPackMsg = false;
+
     protected View mView;
     protected Activity mContext;
 
@@ -18,6 +34,11 @@ public abstract class Process implements OnProcessListener {
         mContext = pContext;
     }
 
+    public void wait(boolean pTag){
+        while (!pTag){
+            SystemClock.sleep(1000);
+        }
+    }
     /**
      * 执行消费流程
      * 1.获取金额
@@ -29,41 +50,65 @@ public abstract class Process implements OnProcessListener {
      * 7.解包
      * 8.检查包
      * 9.打印
+     * @param
      */
     public void actionSale(){
-        new Thread(){
+        ThreadUtil.runFixedService(new Runnable() {
             @Override
             public void run() {
-                super.run();
-                while (true){
-                    getAmt(mView,mContext);
+                getAmt();
 
-                    if (isGetAmtSucc){
-
-                    }
-                    getCardInfo(this);
-                    getPwd(this);
-                    packMsg(this);
+                while (!isGetAmtFinish){
+                    Log.i("vbvb","还在执行获取金额");
+                    SystemClock.sleep(1000);
                 }
+
+                Log.i("vbvb","开始刷卡");
+                swipeCardAndGetCardInfo();
+
+                while (!isSwipeCardAndGetCardInfoFinish){
+                    Log.i("vbvb","还在执行刷卡");
+                    SystemClock.sleep(1000);
+                }
+
+                Log.i("vbvb","开始组包");
+                packMsg();
             }
-        }.start();
-
-
+        },2);
     }
 
     /**
      * 1.获取金额
      * @return
      */
-    public abstract void getAmt(View pView,Activity pContext);
-
+    public void getAmt(){
+        ThreadUtil.runOnUiThread(new Runnable() {
+            @Override
+            public void run() {
+                GetAmtAty.launch(mContext);
+            }
+        });
+    }
 
 
     /**
      * 2.弹出读卡界面等待用于插卡或者挥卡
      * @return
      */
-    public abstract boolean getCardInfo(OnProcessListener pOnProcessListener);
+    public void swipeCardAndGetCardInfo(){
+        ThreadUtil.runOnUiThread(new Runnable() {
+            @Override
+            public void run() {
+                Intent intent = new Intent();
+                intent.putExtra(SWIPE_CARD_TIME_OUT,250);
+                intent.putExtra(SWIPE_CARD_AMT, MyApplication.getApp().getGetAmtFinishMessage().getAmt());
+                intent.putExtra(PINKEY_INDEX, DBPosSettingBill.getPinKeyIndex());
+                intent.setClass(mContext, com.hello.readcard.activity.v.ReadCardAty.class);
+                intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                mContext.startActivityForResult(intent, READ_CARD);
+            }
+        });
+    }
 
     /**
      * 3.弹出密码输入框等待输入密码
@@ -76,40 +121,8 @@ public abstract class Process implements OnProcessListener {
      * 4.组包
      * @return
      */
-    public abstract boolean packMsg(OnProcessListener pOnProcessListener);
+    public abstract void packMsg();
 
 
-    /**
-     * 5.发包
-     * @return
-     */
-    //public abstract boolean sendMsg();
-
-
-    /**
-     * 6.收包
-     * @return
-     */
-    //public abstract byte [] rcvMsg();
-
-
-    /**
-     * 7.解包
-     * @return
-     */
-    //public abstract byte [] unPack();
-
-
-    /**
-     * 8.检查包
-     * @return
-     */
-    //public abstract boolean checkMsg();
-
-    /**
-     * 9.打印
-     * @return
-     */
-    //public abstract boolean print();
 
 }

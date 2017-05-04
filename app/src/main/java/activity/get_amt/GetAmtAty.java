@@ -1,11 +1,17 @@
 package activity.get_amt;
 
 import android.app.Activity;
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+
+import org.greenrobot.eventbus.EventBus;
+
+import activity.sale2.Process;
+import base.eventbus_bean.GetAmtFinishMessage;
 
 /**
  * Created by lenovo on 2017/4/24.
@@ -31,7 +37,10 @@ public class GetAmtAty extends Activity implements View.OnClickListener {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        Process.isGetAmtFinish = false;
+        mAmt = new StringBuilder("");
         View view = View.inflate(this, tools.com.hellolibrary.R.layout.pop_get_amt, null);
+        setContentView(view);
         mEtAmt = (EditText)view.findViewById(tools.com.hellolibrary.R.id.et_Amt);
         mBt0 = (Button)view.findViewById(tools.com.hellolibrary.R.id.bt_0);
         mBt1 = (Button)view.findViewById(tools.com.hellolibrary.R.id.bt_1);
@@ -116,11 +125,21 @@ public class GetAmtAty extends Activity implements View.OnClickListener {
             mAmt.deleteCharAt(mAmt.length() - 1);
 
         } else if (i == tools.com.hellolibrary.R.id.bt_Confirm) {
-            Intent lIntent = new Intent();
-            lIntent.putExtra("amt",mEtAmt.getText().toString().trim());
-            setResult(0,lIntent);
+            GetAmtFinishMessage lMessageEvent = new GetAmtFinishMessage();
+            lMessageEvent.setAmt(String.valueOf(mAmt));
+            lMessageEvent.setGetAmtSucc(true);
+            EventBus.getDefault().post(lMessageEvent);
             this.finish();
         }
         mEtAmt.setText(mAmt);
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+    }
+
+    public static void launch(Context pContext) {
+        pContext.startActivity(new Intent(pContext, GetAmtAty.class));
     }
 }

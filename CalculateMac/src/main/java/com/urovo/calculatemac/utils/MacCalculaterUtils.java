@@ -21,4 +21,18 @@ public class MacCalculaterUtils {
     public static byte[] getMac(int pMacKeyIndex, int pDataInLen, byte[] pNeedMacDatas,IMacCalculater pIMacCalculater){
         return pIMacCalculater.getMac(pMacKeyIndex,pDataInLen,pNeedMacDatas);
     }
+
+    /**
+     *
+     * @param pKeys mac密钥明文
+     * @param pNeedMacDatas 被计算MAC的数据
+     * @param pIMacCalculater mac算法类，执行具体的mac计算，目前已经提供了一些默认mac算法such as:（{@link com.urovo.calculatemac.MacCalculater_ECB}）
+     *                        如果有自己的mac算法，请实现接口（{@link IMacCalculater}）
+     * @return
+     * @throws Exception
+     */
+    public static byte[] getMac(byte pKeys [],byte[] pNeedMacDatas,IMacCalculater pIMacCalculater) throws Exception {
+        return pIMacCalculater.getMac(pKeys,pNeedMacDatas);
+    }
+
 }

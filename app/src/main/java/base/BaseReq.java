@@ -14,7 +14,7 @@ import com.buildpackage.utils.MsgUtils;
 import com.hello.readcard.enumm.SwipedMode;
 import com.hello.readcard.model.CardInfoModel;
 import com.jniexport.UROPElibJni;
-import com.urovo.calculatemac.MacCalculater_9606;
+import com.urovo.calculatemac.MacCalculaterX9_9;
 import com.urovo.calculatemac.utils.MacCalculaterUtils;
 import com.urovo.poscommon.models.MsgType;
 import com.urovo.poscommon.models.MsgTypeInfo;
@@ -200,7 +200,7 @@ public abstract class BaseReq implements IPosTempTemplet {
         //target = new MacDefCalculater().getMac(DBPosSettingBill.getMacKeyIndex(),finalBinaryBitmap, target);
         if(finalBinaryBitmap.endsWith("1")){
             byte [] lNeedMac = ConvertUtils.hexStringToByte(target);
-            byte [] MacResult = MacCalculaterUtils.getMac(DBPosSettingBill.getMacKeyIndex(),lNeedMac.length,lNeedMac,new MacCalculater_9606());
+            byte [] MacResult = MacCalculaterUtils.getMac(DBPosSettingBill.getMacKeyIndex(),lNeedMac.length,lNeedMac,new MacCalculaterX9_9());
             String MacResultStr = ConvertUtils.bytesToHexString(MacResult);
             target+=MacResultStr;
         }
