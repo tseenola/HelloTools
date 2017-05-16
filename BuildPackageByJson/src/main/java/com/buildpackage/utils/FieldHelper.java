@@ -7,7 +7,7 @@ import android.util.Log;
 import com.buildpackage.modle.Field;
 import com.buildpackage.modle.IField;
 import com.google.gson.Gson;
-import com.urovo.calculatemac.MacCalculater_9606;
+import com.urovo.calculatemac.MacCalculaterX9_9;
 import com.urovo.calculatemac.utils.MacCalculaterUtils;
 
 import java.io.InputStream;
@@ -54,7 +54,7 @@ public class FieldHelper implements IField{
         String binaryBitmap = "";
         String hexBody = "";
         //1.求：1到64域的值
-        for(int i = 0;i<Integer.valueOf(pField.getFieldType());i++){
+        for(int i = 0;i<Integer.valueOf(pField.getFieldType())-1;i++){
             Field.BodiesBean lReqBean = lReqBeanList.get(i);
             //拼接域的值
             hexBody+=lReqBean.getValue();
@@ -67,16 +67,28 @@ public class FieldHelper implements IField{
         }
 
         //2.求：位图
+        if (pField.isIsNeedMac()){
+            binaryBitmap += "1";
+        }else {
+            binaryBitmap += "0";
+        }
         String BitmapHexStr = ConvertUtils.binaryStringToHexString(binaryBitmap);
         pField.getHeaders().get(4).setValue(BitmapHexStr);
 
         //3.求：mac
         if(pField.isIsNeedMac()){
+            if(pField.getMacIndex() == -1){
+                throw new IllegalStateException("ooops!!!\n" +
+                        "检查到MAC的密钥索引为-1，-1是默认密钥索引，但是是不正确的。\n" +
+                        "如果你当前交易需要计算MAC，除了设置IsNeedMac 字段为 true 以外，\n" +
+                        "还需要你设置MAC 索引字段  MacIndex 的值。");
+            }
+            Log.i("vbvb","需要计算MAC的数据："+hexBody);
             byte lNeedCalMacDatas [] = ConvertUtils.hexStringToByte(hexBody);
 
-            byte lMacResult []= MacCalculaterUtils.getMac(pField.getMacIndex(),lNeedCalMacDatas.length,lNeedCalMacDatas,new MacCalculater_9606());
-            BitmapHexStr += ConvertUtils.bytesToHexString(lMacResult);
-            pField.setMacHexStr(BitmapHexStr);
+            byte lMacResult []= MacCalculaterUtils.getMac(pField.getMacIndex(),lNeedCalMacDatas.length,lNeedCalMacDatas, MacCalculaterX9_9.getInstance());
+            pField.setMacHexStr(ConvertUtils.bytesToHexString(lMacResult));
+            Log.i("vbvb","MAC计算的结果："+ConvertUtils.bytesToHexString(lMacResult));
         }
 
         //获取整个头部报文（tpdu+报文头+消息类型+位图）

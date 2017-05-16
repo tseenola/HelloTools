@@ -3,7 +3,7 @@
 	"MsgDes": "",
 	"IsNeedMac":false,
     "MacHexStr": "",
-    "MacIndex":2,
+    "MacIndex":-1,
 	"Headers":[
 		{
 			"Length":4,

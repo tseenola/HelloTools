@@ -200,7 +200,7 @@ public abstract class BaseReq implements IPosTempTemplet {
         //target = new MacDefCalculater().getMac(DBPosSettingBill.getMacKeyIndex(),finalBinaryBitmap, target);
         if(finalBinaryBitmap.endsWith("1")){
             byte [] lNeedMac = ConvertUtils.hexStringToByte(target);
-            byte [] MacResult = MacCalculaterUtils.getMac(DBPosSettingBill.getMacKeyIndex(),lNeedMac.length,lNeedMac,new MacCalculaterX9_9());
+            byte [] MacResult = MacCalculaterUtils.getMac(DBPosSettingBill.getMacKeyIndex(),lNeedMac.length,lNeedMac,MacCalculaterX9_9.getInstance());
             String MacResultStr = ConvertUtils.bytesToHexString(MacResult);
             target+=MacResultStr;
         }

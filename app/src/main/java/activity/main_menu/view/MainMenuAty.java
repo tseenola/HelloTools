@@ -12,7 +12,7 @@ import activity.init_para.view.InitParamAty;
 import activity.key_download.view.KeyDownLoadAty;
 import activity.sale2.Sale2;
 import activity.setting.SettingAty;
-import activity.sign_in.view.SignInAty;
+import activity.sign_in3.SignIn3;
 import butterknife.Bind;
 import butterknife.ButterKnife;
 import db.bill.DBPosSettingBill;
@@ -64,8 +64,9 @@ public class MainMenuAty extends BaseActivity {
                 InitParamAty.launch(this);
                 break;
             case R.id.bt_SignIn:
-                SignInAty.launch(this);
+                //SignInAty.launch(this);
                 //SignInAty2.launch(this);
+                SignIn3.launch(this);
                 break;
             case R.id.bt_QueryBalance:
                 //BalanceAty.launch(this);

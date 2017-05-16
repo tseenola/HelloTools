@@ -45,6 +45,7 @@ public class SaleReq implements IReqTemplete{
         //设置基本信息
         lFieldInfo.setMsgDes("消费");
         lFieldInfo.setIsNeedMac(true);
+        lFieldInfo.setMacIndex(3);
         //设置报文头
         List<Field.HeadersBean> lHeadersBeanList = lFieldInfo.getHeaders();
         lHeadersBeanList.get(1).setValue(DBPosSettingBill.getTpdu());

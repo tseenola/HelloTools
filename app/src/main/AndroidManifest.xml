@@ -69,6 +69,8 @@
         </activity>
 
         <activity android:name="activity.get_amt.GetAmtAty"></activity>
+
+        <activity android:name="activity.sign_in3.SignIn3"></activity>
     </application>
 
 </manifest>

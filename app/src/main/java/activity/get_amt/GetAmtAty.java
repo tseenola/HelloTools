@@ -10,7 +10,8 @@ import android.widget.EditText;
 
 import org.greenrobot.eventbus.EventBus;
 
-import activity.sale2.Process;
+import java.util.regex.Pattern;
+
 import base.eventbus_bean.GetAmtFinishMessage;
 
 /**
@@ -34,11 +35,13 @@ public class GetAmtAty extends Activity implements View.OnClickListener {
     Button   mBtDel;
     Button   mBtConfirm;
     private StringBuilder mAmt;
+    private StringBuilder mAmtFinal;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        Process.isGetAmtFinish = false;
         mAmt = new StringBuilder("");
+        mAmtFinal = new StringBuilder("");
         View view = View.inflate(this, tools.com.hellolibrary.R.layout.pop_get_amt, null);
         setContentView(view);
         mEtAmt = (EditText)view.findViewById(tools.com.hellolibrary.R.id.et_Amt);
@@ -74,56 +77,43 @@ public class GetAmtAty extends Activity implements View.OnClickListener {
 
     @Override
     public void onClick(View view) {
-        if(mAmt.length()<=0&&(view.getId()== tools.com.hellolibrary.R.id.bt_Dot||view.getId()== tools.com.hellolibrary.R.id.bt_Del)){
-            return;
-        }
-        int z= mAmt.length()-mAmt.indexOf(".");
-        if(z>=3&&mAmt.indexOf(".")>=1&&view.getId()!= tools.com.hellolibrary.R.id.bt_Del){
-            return;
-        }
-        if(mEtAmt.getText().toString().trim().startsWith("0")&&view.getId()== tools.com.hellolibrary.R.id.bt_0){
-            return;
-        }
-        if (mEtAmt.getText().toString().endsWith(".")&&view.getId()== tools.com.hellolibrary.R.id.bt_Dot){
-            return;
-        }
         int i = view.getId();
         if (i == tools.com.hellolibrary.R.id.bt_1) {
             mAmt.append("1");
-
+            checkAmt();
         } else if (i == tools.com.hellolibrary.R.id.bt_2) {
             mAmt.append("2");
-
+            checkAmt();
         } else if (i == tools.com.hellolibrary.R.id.bt_3) {
             mAmt.append("3");
-
+            checkAmt();
         } else if (i == tools.com.hellolibrary.R.id.bt_4) {
             mAmt.append("4");
-
+            checkAmt();
         } else if (i == tools.com.hellolibrary.R.id.bt_5) {
             mAmt.append("5");
-
+            checkAmt();
         } else if (i == tools.com.hellolibrary.R.id.bt_6) {
             mAmt.append("6");
-
+            checkAmt();
         } else if (i == tools.com.hellolibrary.R.id.bt_7) {
             mAmt.append("7");
-
+            checkAmt();
         } else if (i == tools.com.hellolibrary.R.id.bt_8) {
             mAmt.append("8");
-
+            checkAmt();
         } else if (i == tools.com.hellolibrary.R.id.bt_9) {
             mAmt.append("9");
-
+            checkAmt();
         } else if (i == tools.com.hellolibrary.R.id.bt_Dot) {
             mAmt.append(".");
-
+            checkAmt();
         } else if (i == tools.com.hellolibrary.R.id.bt_0) {
             mAmt.append("0");
-
+            checkAmt();
         } else if (i == tools.com.hellolibrary.R.id.bt_Del) {
             mAmt.deleteCharAt(mAmt.length() - 1);
-
+            checkAmt();
         } else if (i == tools.com.hellolibrary.R.id.bt_Confirm) {
             GetAmtFinishMessage lMessageEvent = new GetAmtFinishMessage();
             lMessageEvent.setAmt(String.valueOf(mAmt));
@@ -131,7 +121,18 @@ public class GetAmtAty extends Activity implements View.OnClickListener {
             EventBus.getDefault().post(lMessageEvent);
             this.finish();
         }
-        mEtAmt.setText(mAmt);
+
+    }
+
+    public void checkAmt(){
+        if (Pattern.matches("[0-9]+\\.?[0-9]{0,2}",mAmt)){
+            mAmtFinal = mAmt;
+        }else if (mAmt.length()>1){
+            mAmtFinal = mAmt.deleteCharAt(mAmt.length()-1);
+        }else {
+            mAmtFinal = new StringBuilder("");
+        }
+        mEtAmt.setText(mAmtFinal);
     }
 
     @Override
@@ -142,4 +143,6 @@ public class GetAmtAty extends Activity implements View.OnClickListener {
     public static void launch(Context pContext) {
         pContext.startActivity(new Intent(pContext, GetAmtAty.class));
     }
+
+
 }

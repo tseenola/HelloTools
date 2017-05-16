@@ -57,7 +57,7 @@
 		{
 			"keyIndex": 1,
 			"parmName": "sTermId",
-			"parmValue": "B5488001",
+			"parmValue": "B5488002",
 			"parmMemo": "终端号"
 		},
 		{
@@ -87,7 +87,7 @@
 		{
 			"keyIndex": 1,
 			"parmName": "sTPDU",
-			"parmValue": "6000080000",
+			"parmValue": "6000030000",
 			"parmMemo": "TPDU"
 		},
 		{

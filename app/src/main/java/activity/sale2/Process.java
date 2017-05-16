@@ -39,8 +39,30 @@ public abstract class Process implements OnProcessListener {
             SystemClock.sleep(1000);
         }
     }
+
     /**
-     * 执行消费流程
+     * 签到的流程
+     * 1.组包
+     * 2.发包
+     * 3.组包
+     * 4.发包
+     * 5.收包
+     * 6.解包
+     * 7.检查包
+     *
+     */
+    public void actionSignIn(){
+        ThreadUtil.runFixedService(new Runnable() {
+            @Override
+            public void run() {
+                Log.i("vbvb","开始组包");
+                packMsg();
+            }
+        },1);
+    }
+
+    /**
+     * 消费的流程
      * 1.获取金额
      * 2.弹出读卡界面等待用于插卡或者挥卡
      * 3.弹出密码输入框等待输入密码
@@ -85,6 +107,7 @@ public abstract class Process implements OnProcessListener {
         ThreadUtil.runOnUiThread(new Runnable() {
             @Override
             public void run() {
+                Process.isGetAmtFinish = false;
                 GetAmtAty.launch(mContext);
             }
         });
@@ -114,7 +137,7 @@ public abstract class Process implements OnProcessListener {
      * 3.弹出密码输入框等待输入密码
      * @return
      */
-    public abstract boolean getPwd(OnProcessListener pOnProcessListener);
+
 
 
     /**

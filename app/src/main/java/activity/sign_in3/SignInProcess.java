@@ -1,30 +1,29 @@
-package activity.sale2;
+package activity.sign_in3;
 
 import android.app.Activity;
 import android.view.View;
 
 import org.greenrobot.eventbus.EventBus;
 
+import activity.sale2.Process;
+
 /**
- * Created by lenovo on 2017/4/24.
+ * Created by lenovo on 2017/5/9.
  * 描述：
  */
 
-public class SaleProcess extends DefProcessImpl{
-
-
-    public SaleProcess(View pView, Activity pContext) {
+public class SignInProcess extends Process{
+    public SignInProcess(View pView, Activity pContext) {
         super(pView, pContext);
     }
 
-
     @Override
     public void packMsg() {
-        SaleReq lSaleReq = new SaleReq(mContext);
+        SignReq3 lSaleReq = new SignReq3();
         lSaleReq.getHexStrMsg();
         EventBus.getDefault().post(lSaleReq);
-    }
 
+    }
 
     @Override
     public boolean onProcessFinish(Object pO) {
